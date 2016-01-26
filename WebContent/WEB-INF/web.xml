@@ -11,6 +11,10 @@
 		<servlet-name>RegServlet</servlet-name>
 		<servlet-class>servlet.RegServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ExitServlet</servlet-name>
+		<servlet-class>servlet.ExitServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -20,5 +24,12 @@
 		<servlet-name>RegServlet</servlet-name>
 		<url-pattern>/RegServlet</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>ExitServlet</servlet-name>
+		<url-pattern>/ExitServlet</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

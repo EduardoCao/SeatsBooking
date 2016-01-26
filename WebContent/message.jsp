@@ -49,7 +49,7 @@
 						</table>
 						<%								
 							}else{
-								out.println("<br>对不起，您还没有登录！");
+								out.println("<br>请登录！");
 							}
 					    	
 						%>
