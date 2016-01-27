@@ -1,17 +1,18 @@
-<%@ page language="java" contentType="text/html" pageEncoding="GBK"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>ÓÃ»§µÇÂ¼</title>
+    <title>ç”¨æˆ·ç™»å½•</title>
  <!--    <link rel="stylesheet" type="text/css" href="images/styles.css"> -->
     <script type="text/javascript">
     	function login(form){
         	if(form.studentnum.value == ""){
-        		alert("ÓÃ»§Ãû²»ÄÜÎª¿Õ£¡");
+        		alert("ç”¨æˆ·åä¸èƒ½ä¸ºç©ºï¼");
         		return false;
         	}
         	if(form.password.value == ""){
-        		alert("ÃÜÂë²»ÄÜÎª¿Õ£¡");
+        		alert("å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
         		return false;
         	}
     	}
@@ -20,38 +21,38 @@
   
   <body>
   <div align="center">
-  <div class="top">ÓÃ»§µÇÂ¼</div>
+  <div class="top">ç”¨æˆ·ç™»å½•</div>
 	  <div align="left">
 		  	<div class="div1">
 		  		
 		  		<div class="bottom">
 					<div class="div2">
 				  		<ul>
-				  			<!-- <li><a href="reg.jsp">ÓÃ»§×¢²á</a></li> -->
-				  			<li><a href="login.jsp">ÓÃ»§µÇÂ¼</a></li>
-				  			<li><a href="message.jsp">µ±Ç°ÓÃ»§</a></li>
-				  			<li><a href="ExitServlet">ÓÃ»§ÍË³ö</a></li>
+				  			<!-- <li><a href="reg.jsp">ç”¨æˆ·æ³¨å†Œ</a></li> -->
+				  			<li><a href="login.jsp">ç”¨æˆ·ç™»å½•</a></li>
+				  			<li><a href="message.jsp">å½“å‰ç”¨æˆ·</a></li>
+				  			<li><a href="ExitServlet">ç”¨æˆ·é€€å‡º</a></li>
 				  		</ul>
 				  	</div>
 				  	 <div class="div3"> 
 					    <form action="LoginServlet" method="post" onSubmit="return login(this);">
 						    <table align="center" width="300" border="0" class="tb1">
 						    	<tr>
-						    		<td align="right">ÓÃ»§Ãû£º</td>
+						    		<td align="right">ç”¨æˆ·åï¼š</td>
 						    		<td>
 						    			<input type="text" name="studentnum">
 						    		</td>
 						    	</tr>
 						    	<tr>
-						    		<td align="right">ÃÜ Âë£º</td>
+						    		<td align="right">å¯† ç ï¼š</td>
 						    		<td>
 						    			<input type="password" name="password">
 						    		</td>
 						    	</tr>
 						    	<tr>
 						    		<td colspan="2" align="center" height="50">
-						    			<input type="submit" value="µÇ Â¼">
-						    			<input type="reset" value="ÖØ ÖÃ">
+						    			<input type="submit" value="ç™» å½•">
+						    			<input type="reset" value="é‡ ç½®">
 						    		</td>
 						    	</tr>
 						    </table>

@@ -1,29 +1,30 @@
-<%@ page language="java" contentType="text/html" pageEncoding="GBK"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>ÓÃ»§×¢²á</title>
+    <title>ç”¨æˆ·æ³¨å†Œ</title>
 <!--     	<link rel="stylesheet" type="text/css" href="images/styles.css"> -->
         <script type="text/javascript">
 	    	function reg(form){
 	        	if(form.studentnum.value == ""){
-	        		alert("Ñ§ÉúÖ¤ºÅ²»ÄÜÎª¿Õ£¡");
+	        		alert("å­¦ç”Ÿè¯å·ä¸èƒ½ä¸ºç©ºï¼");
 	        		return false;
 	        	}
 	        	if(form.password.value == ""){
-	        		alert("ÃÜÂë²»ÄÜÎª¿Õ£¡");
+	        		alert("å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 	        		return false;
 	        	}
 	        	if(form.repassword.value == ""){
-	        		alert("È·ÈÏÃÜÂë²»ÄÜÎª¿Õ£¡");
+	        		alert("ç¡®è®¤å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 	        		return false;
 	        	}
 	        	if(form.password.value != form.repassword.value){
-	        		alert("Á½´ÎÃÜÂëÊäÈë²»Ò»ÖÂ£¡");
+	        		alert("ä¸¤æ¬¡å¯†ç è¾“å…¥ä¸ä¸€è‡´ï¼");
 	        		return false;
 	        	}
 	        	if(form.email.value == ""){
-	        		alert("µç×ÓÓÊÏä²»ÄÜÎª¿Õ£¡");
+	        		alert("ç”µå­é‚®ç®±ä¸èƒ½ä¸ºç©ºï¼");
 	        		return false;
 	        	}
 
@@ -33,60 +34,60 @@
   
   <body>
 <div align="center">
-  <div class="top">ÓÃ»§×¢²á</div>
+  <div class="top">ç”¨æˆ·æ³¨å†Œ</div>
 	  <div align="left">
 		  	<div class="div1">
 		  		
 		  		<div class="bottom">
 					<div class="div2">
 				  		<ul>
-				  			<li><a href="reg.jsp">ÓÃ»§×¢²á</a></li>
-				  			<li><a href="login.jsp">ÓÃ»§µÇÂ¼</a></li>
-				  			<li><a href="message.jsp">µ±Ç°ÓÃ»§</a></li>
-				  			<li><a href="ExitServlet">ÓÃ»§ÍË³ö</a></li>
+				  			<li><a href="reg.jsp">ç”¨æˆ·æ³¨å†Œ</a></li>
+				  			<li><a href="login.jsp">ç”¨æˆ·ç™»å½•</a></li>
+				  			<li><a href="message.jsp">å½“å‰ç”¨æˆ·</a></li>
+				  			<li><a href="ExitServlet">ç”¨æˆ·é€€å‡º</a></li>
 				  		</ul>
 				  	</div>
 				  	 <div class="div3"> 
 					    <form action="RegServlet" method="post" onsubmit="return reg(this);">
 						    <table align="center" width="450" border="0">
 						    	<tr>
-						    		<td align="right">Ñ§ÉúÖ¤ºÅ£º</td>
+						    		<td align="right">å­¦ç”Ÿè¯å·ï¼š</td>
 						    		<td>
 						    			<input type="text" name="studentnum">
 						    		</td>
 						    	</tr>
 						    	<tr>
-						    		<td align="right">ÃÜ Âë£º</td>
+						    		<td align="right">å¯† ç ï¼š</td>
 						    		<td>
 						    			<input type="password" name="password">
 						    		</td>
 						    	</tr>
 						    	<tr>
-						    		<td align="right">È·ÈÏÃÜÂë£º</td>
+						    		<td align="right">ç¡®è®¤å¯†ç ï¼š</td>
 						    		<td>
 						    			<input type="password" name="repassword">
 						    		</td>
 						    	</tr>
 
 						    	<tr>
-						    		<td align="right">µç×ÓÓÊÏä£º</td>
+						    		<td align="right">ç”µå­é‚®ç®±ï¼š</td>
 						    		<td>
 						    			<input type="text" name="email">
 						    		</td>
 						    	</tr>
 						    	<tr>
-						    		<td align="right">ÓÃ»§Àà±ğ£º</td>
+						    		<td align="right">ç”¨æˆ·ç±»åˆ«ï¼š</td>
 						    		<td>
 						    			<select name="userType">
-						    				<option selected value = "1"> ½ÌÊ¦ </option>
-						    				<option selected value = "0"> Ñ§Éú </option>
+						    				<option selected value = "1"> æ•™å¸ˆ </option>
+						    				<option selected value = "0"> å­¦ç”Ÿ </option>
 						    			</select>
 						    		</td>
 						    	</tr>
 						    	<tr>
 						    		<td colspan="2" align="center">
-						    			<input type="submit" value="×¢ ²á">
-						    			<input type="reset" value="ÖØ ÖÃ">
+						    			<input type="submit" value="æ³¨ å†Œ">
+						    			<input type="reset" value="é‡ ç½®">
 						    		</td>
 						    	</tr>
 						    </table>
