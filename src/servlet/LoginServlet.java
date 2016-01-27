@@ -17,10 +17,23 @@ public class LoginServlet extends HttpServlet{
 		String password = request.getParameter("password");
 		UserDao userDao = new UserDao();
 		User user = userDao.login(studentnum, password);
+		
 		if (user != null)
 		{
+			int userType = userDao.checkUserType(studentnum, password);
 			request.getSession().setAttribute("user", user);
-			request.getRequestDispatcher("message.jsp").forward(request, response);
+			if (userType == 2)
+			{		
+				request.getRequestDispatcher("admin_message.jsp").forward(request, response);
+			}
+			if (userType == 1)
+			{
+				request.getRequestDispatcher("teacher_message.jsp").forward(request, response);
+			}
+			if (userType == 0)
+			{
+				request.getRequestDispatcher("student_message.jsp").forward(request, response);
+			}
 		}
 		else
 		{

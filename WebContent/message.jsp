@@ -16,7 +16,7 @@
 		  		<div class="bottom">
 					<div class="div2">
 				  		<ul>
-				  			<li><a href="reg.jsp">用户注册</a></li>
+				  			<!-- <li><a href="reg.jsp">用户注册</a></li> -->
 				  			<li><a href="login.jsp">用户登录</a></li>
 				  			<li><a href="message.jsp">当前用户</a></li>
 				  			<li><a href="ExitServlet">用户退出</a></li>
@@ -38,8 +38,9 @@
 						<table align="center" width="350" border="1" height="200" bordercolor="#E8F4CC">
 							<tr>
 					    		<td align="center" colspan="2">
+					    			当前用户：
 					    			<span style="font-weight: bold;font-size: 18px;"><%=user.getStudentnum() %></span>
-					    			登录成功！
+					    			
 					    		</td>
 					    	</tr>
 					    	<tr>

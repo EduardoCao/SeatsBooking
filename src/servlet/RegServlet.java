@@ -18,6 +18,7 @@ public class RegServlet extends HttpServlet{
 		String studentnum = request.getParameter("studentnum");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
+		String userType = request.getParameter("userType");
 		
 		UserDao userDao = new UserDao();
 		if (studentnum != null && !studentnum.isEmpty())
@@ -28,7 +29,7 @@ public class RegServlet extends HttpServlet{
 				user.setStudentnum(studentnum);
 				user.setPassword(password);
 				user.setEmail(email);
-				
+				user.setUserType(Integer.parseInt(userType));
 				userDao.saveUser(user);
 				request.setAttribute("info", "Congratulation! Registration succeed!");
 				

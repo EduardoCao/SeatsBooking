@@ -26,6 +26,7 @@
 	        		alert("电子邮箱不能为空！");
 	        		return false;
 	        	}
+
 	    	}
 	    </script>
   </head>
@@ -71,6 +72,15 @@
 						    		<td align="right">电子邮箱：</td>
 						    		<td>
 						    			<input type="text" name="email">
+						    		</td>
+						    	</tr>
+						    	<tr>
+						    		<td align="right">用户类别：</td>
+						    		<td>
+						    			<select name="userType">
+						    				<option selected value = "1"> 教师 </option>
+						    				<option selected value = "0"> 学生 </option>
+						    			</select>
 						    		</td>
 						    	</tr>
 						    	<tr>

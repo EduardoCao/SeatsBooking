@@ -11,7 +11,9 @@
     </h1>  
     <br>  
     <div align="center">
-    <font size="6"><a href="login.jsp"><font color="#0000ff"> 欢迎！ </font>  
+    <img src="./pic/book.jpg" width="400" height="200" />
+    <br>
+    <font size="6"><a href="login.jsp"><font color="#0000ff">欢迎！</font>  
     </a></font>
 </body>
 </html>
