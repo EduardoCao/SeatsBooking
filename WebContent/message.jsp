@@ -22,6 +22,13 @@
 				  			<li><a href="ExitServlet">用户退出</a></li>
 				  		</ul>
 				  	</div>
+				  	<script language=javascript>
+							String info = (String)request.getAttribute("info");
+					    	// 如果提示信息不为空，则输出提示信息
+							if(info != null){
+								alert(info);
+							}
+					</script>
 				  	 <div class="div3"> 
 					    <% 
 					    	// 获取提示信息
@@ -29,7 +36,9 @@
 					    	// 如果提示信息不为空，则输出提示信息
 							if(info != null){
 								out.println(info);
-							}
+							} 
+
+
 					    	// 获取登录的用户信息
 							User user = (User)session.getAttribute("user");
 					    	// 判断用户是否登录
