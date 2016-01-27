@@ -23,6 +23,20 @@ public class ConnectDB {
 		
 		return conn;
 	}
+	public static Connection getConnectionSeat()
+	{
+		Connection conn = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/seat_db";
+			conn = DriverManager.getConnection(url, "root", "root");
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
 	public static void closeConnection(Connection conn)
 	{
 		if(conn != null)
