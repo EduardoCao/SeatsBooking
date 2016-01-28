@@ -24,7 +24,7 @@ public class InfoServlet extends HttpServlet{
 		User user = (User)session.getAttribute("user");
 		System.out.println(user.getStudentnum());
 		ArrayList<String> onesSeat = seatDao.getOnesSeats(user.getStudentnum());
-		request.getSession().setAttribute("user", user);
+		//request.getSession().setAttribute("user", user);
 		request.getSession().setAttribute("onesSeats", onesSeat);
 		request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
 	}

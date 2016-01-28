@@ -32,6 +32,19 @@
 			//session.invalidate(); 
 	%>
 		<a href="login.jsp">请登录！</a>
+		<br>
+		
+		 <%
+    	// 获取提示信息
+		String info = (String)request.getAttribute("info");
+    	// 如果提示信息不为空，则输出提示信息
+		if(info != null){
+			%>
+			提示信息:<%=info%>
+		<%
+		}
+    	%>
+		
 		<div id="div" style="display: none" >
 	<%
 		}
@@ -40,6 +53,7 @@
 	%>
 		当前用户：<%=user.getStudentnum() %>
 		<li><a href="student_message.jsp">学生界面</a></li>
+		
 	<% 
 		}
 		else if (user.getUserType() == 1)
@@ -49,23 +63,20 @@
 		<li><a href="teacher_message.jsp">教师界面</a></li>
 	<% 
 		}
+		else if (user.getUserType() == 2)
+		{
 	%>
-				  	<script language=javascript>
-							String info = (String)request.getAttribute("info");
-					    	// 如果提示信息不为空，则输出提示信息
-							if(info != null){
-								alert(info);
-							}
-					</script>
+		当前用户：<%=user.getStudentnum() %>
+		<li><a href="teacher_message.jsp">管理员界面</a></li>
+	<% 
+		}
+	%>
+				  	 <br>
+				  	 <br>
 				  	 <div class="div3"> 
 				  	 
 					    <% 
-					    	// 获取提示信息
-							String info = (String)request.getAttribute("info");
-					    	// 如果提示信息不为空，则输出提示信息
-							if(info != null){
-								out.println(info);
-							} 
+
 
 
 					    	// 判断用户是否登录
@@ -87,8 +98,20 @@
 						</table>
 						<%								
 							}
-					    	
-						%>
+					    %>
+		<%
+    	// 获取提示信息
+		String info = (String)request.getAttribute("info");
+    	// 如果提示信息不为空，则输出提示信息
+		if(info != null){
+			//System.out.print(info);
+			%>
+			提示信息:<%=info%>
+		<%
+		}
+    	%>
+					
+						
 				  	 </div>
 				</div>
 		  	</div>

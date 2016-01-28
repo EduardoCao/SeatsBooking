@@ -14,6 +14,25 @@
 	  <div align="left">
 		  	<div class="div1">
 		  		
+	<% 
+		User user = (User)session.getAttribute("user");
+	    // 判断用户是否登录
+		if(user == null){
+			user = new User();
+			user.setStudentnum(null);
+			//session.invalidate(); 
+	%>
+		<a href="login.jsp">请登录！</a>
+		<div id="div" style="display: none" >
+	<%
+		}
+		else
+		{
+	%>
+		当前用户：<%=user.getStudentnum() %>
+	<% 
+		}
+	%>
 		  		<div class="bottom">
 					<div class="div2">
 				  		<ul>

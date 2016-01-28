@@ -68,7 +68,7 @@ public class UserDao {
 				user.setStudentnum(rs.getString("studentnum"));
 				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));
-				
+				user.setUserType(rs.getInt("userType"));
 			}
 			rs.close();
 			ps.close();
