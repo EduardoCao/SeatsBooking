@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,14 +31,28 @@ public class BookServlet extends HttpServlet {
 					request.getSession().setAttribute("info", info);
 					request.getRequestDispatcher("./message.jsp").forward(request, response);
 				}
+				if (bookseat == null || bookdate == null)
+				{
+					String info = "Please try to book the seat again!";
+					request.getSession().setAttribute("info", info);
+					request.getRequestDispatcher("./message.jsp").forward(request, response);
+				}
+				
 				SeatDao seatDao = new SeatDao();
-//				
-//				Seats[] seats = new Seats[10];
-//				
-//				seats = seatDao.getSeats(bookdate);
-//						
-//				request.getSession().setAttribute("seats", seats);
-//				request.getSession().setAttribute("bookdate", bookdate);		
-				request.getRequestDispatcher("./message.jsp").forward(request, response);
+				
+				String user = seatDao.bookSeat(owner , bookdate , bookseat);
+				System.out.println(user);
+				if (user == null)
+				{
+					request.getSession().setAttribute("info", "Please book again!");
+					request.getRequestDispatcher("./message.jsp").forward(request, response);
+				}
+				else
+				{
+					ArrayList<String> onesSeat = seatDao.getOnesSeats(user);
+					request.getSession().setAttribute("owner", user);
+					request.getSession().setAttribute("onesSeats", onesSeat);
+					request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
+				}
 			}
 }

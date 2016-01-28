@@ -23,6 +23,33 @@
 				  			<li><a href="ExitServlet">用户退出</a></li>
 				  		</ul>
 				  	</div>
+	<% 
+		User user = (User)session.getAttribute("user");
+	    // 判断用户是否登录
+		if(user == null){
+			user = new User();
+			user.setStudentnum(null);
+			//session.invalidate(); 
+	%>
+		<a href="login.jsp">请登录！</a>
+		<div id="div" style="display: none" >
+	<%
+		}
+		else if (user.getUserType() == 0)
+		{
+	%>
+		当前用户：<%=user.getStudentnum() %>
+		<li><a href="student_message.jsp">学生界面</a></li>
+	<% 
+		}
+		else if (user.getUserType() == 1)
+		{
+	%>
+		当前用户：<%=user.getStudentnum() %>
+		<li><a href="teacher_message.jsp">教师界面</a></li>
+	<% 
+		}
+	%>
 				  	<script language=javascript>
 							String info = (String)request.getAttribute("info");
 					    	// 如果提示信息不为空，则输出提示信息
@@ -41,8 +68,6 @@
 							} 
 
 
-					    	// 获取登录的用户信息
-							User user = (User)session.getAttribute("user");
 					    	// 判断用户是否登录
 							if(user != null){
 						%>
@@ -61,8 +86,6 @@
 					    	</tr>
 						</table>
 						<%								
-							}else{
-								out.println("<br>请登录！");
 							}
 					    	
 						%>

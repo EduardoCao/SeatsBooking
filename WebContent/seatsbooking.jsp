@@ -20,6 +20,7 @@
 		if(user == null){
 			user = new User();
 			user.setStudentnum(null);
+			//session.invalidate(); 
 	%>
 		<a href="login.jsp">请登录！</a>
 		<div id="div" style="display: none" >
@@ -76,15 +77,15 @@
 		<tr>
     		<td align="center" colspan="2">
     			 第<%=ddate + "" %>天 
-    			 <input type = 'hidden' name = "bookdate" value = <%=ddate %>>
+    			 <input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
     			  <input type = 'hidden' name = "owner" value = <%=user.getStudentnum() %>>
     			 <br>
     			 座位0是否被占用：
-    			 <input type = "radio" name = "seat" id = '00' value = '00'>    </input>
-    			 <input type = "radio" name = "seat" id = '01' value = '01'>    </input>
-    			 <input type = "radio" name = "seat" id = '02' value = '02'>    </input>
-    			 <input type = "radio" name = "seat" id = '03' value = '03'>    </input>
-    			 <input type = "radio" name = "seat" id = '04' value = '04'>    </input>
+    			 <input type = "radio" name = "seat" id = '00' value = '0_0'>    </input>
+    			 <input type = "radio" name = "seat" id = '01' value = '0_1'>    </input>
+    			 <input type = "radio" name = "seat" id = '02' value = '0_2'>    </input>
+    			 <input type = "radio" name = "seat" id = '03' value = '0_3'>    </input>
+    			 <input type = "radio" name = "seat" id = '04' value = '0_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[0].getPeroid0()%>
@@ -100,11 +101,11 @@
 				</script>
  				<br>
  				座位1是否被占用：
-    			 <input type = "radio" name = "seat" id = '10' value = '10'>    </input>
-    			 <input type = "radio" name = "seat" id = '11' value = '11'>    </input>
-    			 <input type = "radio" name = "seat" id = '12' value = '12'>    </input>
-    			 <input type = "radio" name = "seat" id = '13' value = '13'>    </input>
-    			 <input type = "radio" name = "seat" id = '14' value = '14'>    </input>
+    			 <input type = "radio" name = "seat" id = '10' value = '1_0'>    </input>
+    			 <input type = "radio" name = "seat" id = '11' value = '1_1'>    </input>
+    			 <input type = "radio" name = "seat" id = '12' value = '1_2'>    </input>
+    			 <input type = "radio" name = "seat" id = '13' value = '1_3'>    </input>
+    			 <input type = "radio" name = "seat" id = '14' value = '1_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[1].getPeroid0()%>
@@ -120,11 +121,11 @@
 				</script>
  				 <br>
  				座位2是否被占用：
-     			<input type = "radio" name = "seat" id = '20' value = '20'>    </input>
-    			<input type = "radio" name = "seat" id = '21' value = '21'>    </input>
-    			<input type = "radio" name = "seat" id = '22' value = '22'>    </input>
-    			<input type = "radio" name = "seat" id = '23' value = '23'>    </input>
-    			<input type = "radio" name = "seat" id = '24' value = '24'>    </input>
+     			<input type = "radio" name = "seat" id = '20' value = '2_0'>    </input>
+    			<input type = "radio" name = "seat" id = '21' value = '2_1'>    </input>
+    			<input type = "radio" name = "seat" id = '22' value = '2_2'>    </input>
+    			<input type = "radio" name = "seat" id = '23' value = '2_3'>    </input>
+    			<input type = "radio" name = "seat" id = '24' value = '2_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[2].getPeroid0()%>
@@ -140,11 +141,11 @@
 				</script>
  				 <br>
  				座位3是否被占用：
-     			<input type = "radio" name = "seat" id = '30' value = '30'>    </input>
-    			<input type = "radio" name = "seat" id = '31' value = '31'>    </input>
-    			<input type = "radio" name = "seat" id = '32' value = '32'>    </input>
-    			<input type = "radio" name = "seat" id = '33' value = '33'>    </input>
-    			<input type = "radio" name = "seat" id = '34' value = '34'>    </input>
+     			<input type = "radio" name = "seat" id = '30' value = '3_0'>    </input>
+    			<input type = "radio" name = "seat" id = '31' value = '3_1'>    </input>
+    			<input type = "radio" name = "seat" id = '32' value = '3_2'>    </input>
+    			<input type = "radio" name = "seat" id = '33' value = '3_3'>    </input>
+    			<input type = "radio" name = "seat" id = '34' value = '3_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[3].getPeroid0()%>
@@ -160,11 +161,11 @@
 				</script>
  				 <br>
  				座位4是否被占用：
-     			<input type = "radio" name = "seat" id = '40' value = '40'>    </input>
-    			<input type = "radio" name = "seat" id = '41' value = '41'>    </input>
-    			<input type = "radio" name = "seat" id = '42' value = '42'>    </input>
-    			<input type = "radio" name = "seat" id = '43' value = '43'>    </input>
-    			<input type = "radio" name = "seat" id = '44' value = '44'>    </input>
+     			<input type = "radio" name = "seat" id = '40' value = '4_0'>    </input>
+    			<input type = "radio" name = "seat" id = '41' value = '4_1'>    </input>
+    			<input type = "radio" name = "seat" id = '42' value = '4_2'>    </input>
+    			<input type = "radio" name = "seat" id = '43' value = '4_3'>    </input>
+    			<input type = "radio" name = "seat" id = '44' value = '4_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[4].getPeroid0()%>
@@ -180,11 +181,11 @@
 				</script>
  				 <br>
  				座位5是否被占用：
-     			<input type = "radio" name = "seat" id = '50' value = '50'>    </input>
-    			<input type = "radio" name = "seat" id = '51' value = '51'>    </input>
-    			<input type = "radio" name = "seat" id = '52' value = '52'>    </input>
-    			<input type = "radio" name = "seat" id = '53' value = '53'>    </input>
-    			<input type = "radio" name = "seat" id = '54' value = '54'>    </input>
+     			<input type = "radio" name = "seat" id = '50' value = '5_0'>    </input>
+    			<input type = "radio" name = "seat" id = '51' value = '5_1'>    </input>
+    			<input type = "radio" name = "seat" id = '52' value = '5_2'>    </input>
+    			<input type = "radio" name = "seat" id = '53' value = '5_3'>    </input>
+    			<input type = "radio" name = "seat" id = '54' value = '5_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[5].getPeroid0()%>
@@ -200,11 +201,11 @@
 				</script>
  				 <br>
  				座位6是否被占用：
-     			<input type = "radio" name = "seat" id = '60' value = '60'>    </input>
-    			<input type = "radio" name = "seat" id = '61' value = '61'>    </input>
-    			<input type = "radio" name = "seat" id = '62' value = '62'>    </input>
-    			<input type = "radio" name = "seat" id = '63' value = '63'>    </input>
-    			<input type = "radio" name = "seat" id = '64' value = '64'>    </input>
+     			<input type = "radio" name = "seat" id = '60' value = '6_0'>    </input>
+    			<input type = "radio" name = "seat" id = '61' value = '6_1'>    </input>
+    			<input type = "radio" name = "seat" id = '62' value = '6_2'>    </input>
+    			<input type = "radio" name = "seat" id = '63' value = '6_3'>    </input>
+    			<input type = "radio" name = "seat" id = '64' value = '6_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[6].getPeroid0()%>
@@ -220,11 +221,11 @@
 				</script>
  				 <br>
  				座位7是否被占用：
-     			<input type = "radio" name = "seat" id = '70' value = '70'>    </input>
-    			<input type = "radio" name = "seat" id = '71' value = '71'>    </input>
-    			<input type = "radio" name = "seat" id = '72' value = '72'>    </input>
-    			<input type = "radio" name = "seat" id = '73' value = '73'>    </input>
-    			<input type = "radio" name = "seat" id = '74' value = '74'>    </input>
+     			<input type = "radio" name = "seat" id = '70' value = '7_0'>    </input>
+    			<input type = "radio" name = "seat" id = '71' value = '7_1'>    </input>
+    			<input type = "radio" name = "seat" id = '72' value = '7_2'>    </input>
+    			<input type = "radio" name = "seat" id = '73' value = '7_3'>    </input>
+    			<input type = "radio" name = "seat" id = '74' value = '7_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[7].getPeroid0()%>
@@ -240,11 +241,11 @@
 				</script>
  				 <br>
  				座位8是否被占用：
-     			<input type = "radio" name = "seat" id = '80' value = '80'>    </input>
-    			<input type = "radio" name = "seat" id = '81' value = '81'>    </input>
-    			<input type = "radio" name = "seat" id = '82' value = '82'>    </input>
-    			<input type = "radio" name = "seat" id = '83' value = '83'>    </input>
-    			<input type = "radio" name = "seat" id = '84' value = '84'>    </input>
+     			<input type = "radio" name = "seat" id = '80' value = '8_0'>    </input>
+    			<input type = "radio" name = "seat" id = '81' value = '8_1'>    </input>
+    			<input type = "radio" name = "seat" id = '82' value = '8_2'>    </input>
+    			<input type = "radio" name = "seat" id = '83' value = '8_3'>    </input>
+    			<input type = "radio" name = "seat" id = '84' value = '8_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[8].getPeroid0()%>
@@ -260,11 +261,11 @@
 				</script>
  				 <br>
  				座位9是否被占用：
-     			<input type = "radio" name = "seat" id = '90' value = '90'>    </input>
-    			<input type = "radio" name = "seat" id = '91' value = '91'>    </input>
-    			<input type = "radio" name = "seat" id = '92' value = '92'>    </input>
-    			<input type = "radio" name = "seat" id = '93' value = '93'>    </input>
-    			<input type = "radio" name = "seat" id = '94' value = '94'>    </input>
+     			<input type = "radio" name = "seat" id = '90' value = '9_0'>    </input>
+    			<input type = "radio" name = "seat" id = '91' value = '9_1'>    </input>
+    			<input type = "radio" name = "seat" id = '92' value = '9_2'>    </input>
+    			<input type = "radio" name = "seat" id = '93' value = '9_3'>    </input>
+    			<input type = "radio" name = "seat" id = '94' value = '9_4'>    </input>
     			 
 				<script>
 				var tag0 = <%=seats[9].getPeroid0()%>
