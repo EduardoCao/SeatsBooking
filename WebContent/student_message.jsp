@@ -33,6 +33,7 @@
 		  		
 					<div class="div5">
 				  		<ul>
+				  			
 				  			<a href="./seatsbooking.jsp">座位预定</a>
 				  			<br>
 				  			<a href="seatsinfo.jsp">查看预定</a>
