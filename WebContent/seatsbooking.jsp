@@ -79,6 +79,8 @@
     			 第<%=ddate + "" %>天 
     			 <input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
     			  <input type = 'hidden' name = "owner" value = <%=user.getStudentnum() %>>
+    			  
+    			  
     			 <br>
     			 座位0是否被占用：
     			 <input type = "radio" name = "seat" id = '00' value = '0_0'>    </input>
@@ -99,6 +101,8 @@
 				var tag4 = <%=seats[0].getPeroid4()%>
 				document.getElementById("04").disabled = tag4;
 				</script>
+				
+				
  				<br>
  				座位1是否被占用：
     			 <input type = "radio" name = "seat" id = '10' value = '1_0'>    </input>
