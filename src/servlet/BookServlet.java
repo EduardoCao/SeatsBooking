@@ -27,7 +27,7 @@ public class BookServlet extends HttpServlet {
 				String bookseat = request.getParameter("seat");
 				User user = (User)session.getAttribute("user");
 				String owner = user.getStudentnum();
-				System.out.println(owner + " " + bookdate + " "  + bookseat);
+				//System.out.println(owner + " " + bookdate + " "  + bookseat);
 				
 				if (owner == null)
 				{
@@ -54,8 +54,10 @@ public class BookServlet extends HttpServlet {
 				else
 				{
 					ArrayList<String> onesSeat = seatDao.getOnesSeats(bookeduser);
+					request.getSession().setAttribute("seats" , null);
 					request.getSession().setAttribute("onesSeats", onesSeat);
 					request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
+					
 				}
 			}
 }

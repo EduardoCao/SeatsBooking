@@ -51,6 +51,22 @@ public class UserDao {
 			ConnectDB.closeConnection(conn);
 		}
 	}
+	public void changePw(User user , String pw)
+	{
+		Connection conn = ConnectDB.getConnection();
+		String sql = "update user_table set password = '" + pw + "' where studentnum = '" + user.getStudentnum() + "'";
+		
+		try{
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			ps.close();
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			ConnectDB.closeConnection(conn);
+		}
+	}
 	public User login(String studentnum , String password)
 	{
 		User user = null;

@@ -9,12 +9,7 @@
 	</head>
 
 	<body>
-  <div align="center">
-  <div class="top">Teacher</div>
-	  <div align="left">
-		  	<div class="div1">
-		  		
-	<% 
+		<% 
 		User user = (User)session.getAttribute("user");
 	    // 判断用户是否登录
 		if(user == null){
@@ -26,6 +21,14 @@
 		<div id="div" style="display: none" >
 	<%
 		}
+		else if(user.getUserType() != 1)
+		{
+	%>
+		您无权查看教师页面。
+		<a href="message.jsp"> back </a>
+		<div id="div" style="display: none" >
+	 <% 
+		}
 		else
 		{
 	%>
@@ -33,6 +36,12 @@
 	<% 
 		}
 	%>
+  <div align="center">
+  <div class="top">Teacher</div>
+	  <div align="left">
+		  	<div class="div1">
+		  		
+
 		  		<div class="bottom">
 					<div class="div2">
 				  		<ul>

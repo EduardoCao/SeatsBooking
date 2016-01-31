@@ -10,6 +10,34 @@
 	</head>
 
 	<body>
+	<% 
+		User user = (User)session.getAttribute("user");
+	    // 判断用户是否登录
+		if(user == null){
+			user = new User();
+			user.setStudentnum(null);
+			//session.invalidate(); 
+	%>
+		<a href="login.jsp">请登录！</a>
+		<div id="div" style="display: none" >
+	
+	<%
+		}
+		else if (  user.getUserType() != 0) 
+		{
+	%>
+		您无权查看学生页面。
+		<a href="message.jsp"> back </a>
+		<div id="div" style="display: none" >
+	<% 
+		}	
+		else 
+		{
+	%>
+		当前用户：<%=user.getStudentnum() %>
+	<% 
+		}
+	%>
   <div align="center">
   <div class="top">Student</div>
 	  <div align="left">
@@ -29,26 +57,7 @@
 		  	</div>
 	  </div>
 	  <div align="center">
-		 
-	<% 
-		User user = (User)session.getAttribute("user");
-	    // 判断用户是否登录
-		if(user == null){
-			user = new User();
-			user.setStudentnum(null);
-			//session.invalidate(); 
-	%>
-		<a href="login.jsp">请登录！</a>
-		<div id="div" style="display: none" >
-	<%
-		}
-		else
-		{
-	%>
-		当前用户：<%=user.getStudentnum() %>
-	<% 
-		}
-	%>
+
 					<div class="div5">
 				  		<ul>
 				  			<a href="./seatsbooking.jsp">座位预定</a>

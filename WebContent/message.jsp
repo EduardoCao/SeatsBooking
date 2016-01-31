@@ -9,20 +9,6 @@
 	</head>
 
 	<body>
-  <div align="center">
-  <div class="top">提示信息</div>
-	  <div align="left">
-		  	<div class="div1">
-		  		
-		  		<div class="bottom">
-					<div class="div2">
-				  		<ul>
-				  			<!-- <li><a href="reg.jsp">用户注册</a></li> -->
-				  			<li><a href="login.jsp">用户登录</a></li>
-				  			<li><a href="message.jsp">当前用户</a></li>
-				  			<li><a href="ExitServlet">用户退出</a></li>
-				  		</ul>
-				  	</div>
 	<% 
 		User user = (User)session.getAttribute("user");
 	    // 判断用户是否登录
@@ -44,7 +30,6 @@
 		<%
 		}
     	%>
-		
 		<div id="div" style="display: none" >
 	<%
 		}
@@ -71,6 +56,21 @@
 	<% 
 		}
 	%>
+  <div align="center">
+  <div class="top">提示信息</div>
+	  <div align="left">
+		  	<div class="div1">
+		  		
+		  		<div class="bottom">
+					<div class="div2">
+				  		<ul>
+				  			<li><a href="changepw.jsp">修改密码</a></li>
+				  			<li><a href="login.jsp">用户登录</a></li>
+				  			<li><a href="message.jsp">当前用户</a></li>
+				  			<li><a href="ExitServlet">用户退出</a></li>
+				  		</ul>
+				  	</div>
+
 				  	 <br>
 				  	 <br>
 				  	 <div class="div3"> 

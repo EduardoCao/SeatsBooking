@@ -10,12 +10,7 @@
 </head>
 <body>
 SEATS INFO
-<li><a href="login.jsp">用户登录</a></li>
-<li><a href="message.jsp">当前用户</a></li>
-<li><a href="ExitServlet">用户退出</a></li>
-
-
-	<% 
+<% 
 		User user = (User)session.getAttribute("user");
 	    // 判断用户是否登录
 		if(user == null){
@@ -25,23 +20,31 @@ SEATS INFO
 	%>
 		<a href="login.jsp">请登录！</a>
 		<div id="div" style="display: none" >
+	
 	<%
 		}
-		else if (user.getUserType() == 0)
+		else if (  user.getUserType() != 0) 
+		{
+	%>
+		您无权查看个人座位预定页面。
+		<a href="message.jsp"> back </a>
+		<div id="div" style="display: none" >
+	<% 
+		}	
+		else 
 		{
 	%>
 		当前用户：<%=user.getStudentnum() %>
 		<li><a href="student_message.jsp">学生界面</a></li>
 	<% 
 		}
-		else if (user.getUserType() == 1)
-		{
 	%>
-		当前用户：<%=user.getStudentnum() %>
-		<li><a href="teacher_message.jsp">教师界面</a></li>
-	<% 
-		}
-	%>
+<li><a href="login.jsp">用户登录</a></li>
+<li><a href="message.jsp">当前用户</a></li>
+<li><a href="ExitServlet">用户退出</a></li>
+
+
+
 <%
 	ArrayList<String> seats = (ArrayList<String>)session.getAttribute("onesSeats");
 	for (int i = 0 ; i < seats.size() ; i ++)

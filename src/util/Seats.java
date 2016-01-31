@@ -1,11 +1,11 @@
 package util;
 
 public class Seats {
-	private boolean peroid0 ;
-	private boolean peroid1 ;
-	private boolean peroid2 ;
-	private boolean peroid3 ;
-	private boolean peroid4 ;
+	private int peroid0 ;
+	private int peroid1 ;
+	private int peroid2 ;
+	private int peroid3 ;
+	private int peroid4 ;
 	private String ownerPeroid0;
 	private String ownerPeroid1;
 	private String ownerPeroid2;
@@ -18,34 +18,34 @@ public class Seats {
 	public void setSeatsType(int seatsType) {
 		this.seatsType = seatsType;
 	}
-	public boolean getPeroid0() {
+	public int getPeroid0() {
 		return peroid0;
 	}
-	public void setPeroid0(boolean peroid0) {
+	public void setPeroid0(int peroid0) {
 		this.peroid0 = peroid0;
 	}
-	public boolean getPeroid1() {
+	public int getPeroid1() {
 		return peroid1;
 	}
-	public void setPeroid1(boolean peroid1) {
+	public void setPeroid1(int peroid1) {
 		this.peroid1 = peroid1;
 	}
-	public boolean getPeroid2() {
+	public int getPeroid2() {
 		return peroid2;
 	}
-	public void setPeroid2(boolean peroid2) {
+	public void setPeroid2(int peroid2) {
 		this.peroid2 = peroid2;
 	}
-	public boolean getPeroid3() {
+	public int getPeroid3() {
 		return peroid3;
 	}
-	public void setPeroid3(boolean peroid3) {
+	public void setPeroid3(int peroid3) {
 		this.peroid3 = peroid3;
 	}
-	public boolean getPeroid4() {
+	public int getPeroid4() {
 		return peroid4;
 	}
-	public void setPeroid4(boolean peroid4) {
+	public void setPeroid4(int peroid4) {
 		this.peroid4 = peroid4;
 	}
 	public String getOwnerPeroid0() {

@@ -8,6 +8,34 @@
 	</head>
 
 	<body>
+	  	<% 
+		User user = (User)session.getAttribute("user");
+	    // 判断用户是否登录
+		if(user == null){
+			user = new User();
+			user.setStudentnum(null);
+			//session.invalidate(); 
+	%>
+		<a href="login.jsp">请登录！</a>
+		<div id="div" style="display: none" >
+	
+	<%
+		}
+		else if (  user.getUserType() != 2) 
+		{
+	%>
+		您无权查看管理员页面。
+		<a href="message.jsp"> back </a>
+		<div id="div" style="display: none" >
+	<% 
+		}	
+		else 
+		{
+	%>
+		当前用户：<%=user.getStudentnum() %>
+	<% 
+		}
+	%>
   <div align="center">
   <div class="top">Administrator</div>
 	  <div align="left">

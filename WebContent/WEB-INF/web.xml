@@ -27,6 +27,10 @@
 		<servlet-name>InfoServlet</servlet-name>
 		<servlet-class>servlet.InfoServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ChangepwServlet</servlet-name>
+		<servlet-class>servlet.ChangepwServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -52,6 +56,11 @@
 		<servlet-name>InfoServlet</servlet-name>
 		<url-pattern>/InfoServlet</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChangepwServlet</servlet-name>
+		<url-pattern>/ChangepwServlet</url-pattern>
+	</servlet-mapping>
+
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

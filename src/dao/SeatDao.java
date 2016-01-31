@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import util.Seats;
-import util.User;
 
 public class SeatDao {
 	public Seats[] getSeats(String date)
@@ -23,12 +22,11 @@ public class SeatDao {
 			if(rs.next())
 			{
 				seats[i] = new Seats();
-				seats[i].setPeroid0(rs.getBoolean("period0"));
-				seats[i].setPeroid1(rs.getBoolean("period1"));
-				seats[i].setPeroid2(rs.getBoolean("period2"));
-				seats[i].setPeroid3(rs.getBoolean("period3"));
-				seats[i].setPeroid4(rs.getBoolean("period4"));
-				
+				seats[i].setPeroid0(rs.getInt("period0"));
+				seats[i].setPeroid1(rs.getInt("period1"));
+				seats[i].setPeroid2(rs.getInt("period2"));
+				seats[i].setPeroid3(rs.getInt("period3"));
+				seats[i].setPeroid4(rs.getInt("period4"));
 			}
 			rs.close();
 			ps.close();
@@ -58,17 +56,17 @@ public class SeatDao {
 			Seats seats = new Seats();
 			if(rs.next())
 			{
-				seats.setPeroid0(rs.getBoolean("period0"));
-				seats.setPeroid1(rs.getBoolean("period1"));
-				seats.setPeroid2(rs.getBoolean("period2"));
-				seats.setPeroid3(rs.getBoolean("period3"));
-				seats.setPeroid4(rs.getBoolean("period4"));
+				seats.setPeroid0(rs.getInt("period0"));
+				seats.setPeroid1(rs.getInt("period1"));
+				seats.setPeroid2(rs.getInt("period2"));
+				seats.setPeroid3(rs.getInt("period3"));
+				seats.setPeroid4(rs.getInt("period4"));
 			}
-			if ((period.equals("0") && !seats.getPeroid0())||(period.equals("1") && !seats.getPeroid1())||(period.equals("2") && !seats.getPeroid2())||(period.equals("3") && !seats.getPeroid3())||(period.equals("4") && !seats.getPeroid4()))
+			if ((period.equals("0") && seats.getPeroid0() == 0)||(period.equals("1") && seats.getPeroid1() == 0)||(period.equals("2") && seats.getPeroid2() == 0)||(period.equals("3") && seats.getPeroid3() == 0)||(period.equals("4") && seats.getPeroid4() == 0))
 			{
 				sql = "update seat_table_" + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setBoolean(1, true);
+				ps.setInt(1, 1);
 				ps.setString(2, owner);
 				ps.setInt(3, Integer.parseInt(seatnum));
 				ps.executeUpdate();
