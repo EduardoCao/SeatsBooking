@@ -44,16 +44,16 @@ public class BookServlet extends HttpServlet {
 				
 				SeatDao seatDao = new SeatDao();
 				
-				String bookeduser = seatDao.bookSeat(owner , bookdate , bookseat);
-				//System.out.println(bookeduser);
-				if (bookeduser == null)
+				String info = seatDao.bookSeat(owner , bookdate , bookseat);
+				System.out.println(info);
+				if (!info.equals("Success"))
 				{
-					request.setAttribute("info", "The seat has been taken. Please book again!");
+					request.setAttribute("info", info);
 					request.getRequestDispatcher("./message.jsp").forward(request, response);
 				}
 				else
 				{
-					ArrayList<String> onesSeat = seatDao.getOnesSeats(bookeduser);
+					ArrayList<String> onesSeat = seatDao.getOnesSeats(owner);
 					request.getSession().setAttribute("seats" , null);
 					request.getSession().setAttribute("onesSeats", onesSeat);
 					request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);

@@ -3,11 +3,27 @@ import time
 
 workspace = '/Users/Eduardo' # \! pwd
 
+def makeUserTables():
+	try:
+		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
+		cur = conn.cursor()
+		cur.execute('drop database if exists db_test')
+		cur.execute('create database if not exists db_test')
+		conn.select_db('db_test')
+		cur.execute('create table user_table( studentnum varchar(20) , password varchar(30) , email varchar(30) , userType int )')		
+		cur.execute("insert into user_table values( 'admin' , 'admin0' , 'admin@163.com' , 2  )")		
+
+		conn.commit()
+		cur.close()
+		conn.close()
+	except MySQLdb.Error, e:
+		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+
 def makeSeatTables():
 	try:
 		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
 		cur = conn.cursor()
-		cur.execute('drop database seat_db')
+		cur.execute('drop database if exists seat_db')
 		cur.execute('create database if not exists seat_db')
 		conn.select_db('seat_db')
 		for j in xrange(0 , 7):
@@ -26,20 +42,31 @@ def makeSeatTable0Events():
 		cur = conn.cursor()
 		conn.select_db('seat_db')
 
-		cur.execute("drop event if exists timeout_period0")
-		cur.execute("create event timeout_period0 on schedule every 1 minute do update seat_table_0 set period0 = 2 where curtime() > '07:00'")
+		for i in xrange(0 , 5):
+			time = ""
+			time1 = ""
+			if i == 0 :
+				time = "07"
+				time1 = "10"
+			if i == 1 : 
+				time = "09"
+				time1 = "12"
+			if i == 2 : 
+				time = "12"
+				time1 = "15"
+			if i == 3 :
+				time = "14"
+				time1 = "17"
+			if i == 4 :
+				time = "18"
+				time1 = "21"
+			cur.execute("drop event if exists timeout_period" + str(i))
+			cur.execute("create event timeout_period" + str(i) +" on schedule every 1 minute do update seat_table_0 set period" + str(i) + " = 2 where curtime() > '" + str(time)+":00'")
 
-		cur.execute("drop event if exists timeout_period1")
-		cur.execute("create event timeout_period1 on schedule every 1 minute do update seat_table_0 set period1 = 2 where curtime() > '09:00'")
+			cur.execute("drop event if exists timeout_ownerPeriod" + str(i))
+			cur.execute("create event timeout_ownerPeriod"+ str(i) + " on schedule every 1 minute do update seat_table_0 set ownerPeriod" + str(i) +" = NULL where curtime() > '" + str(time1) +" :00'")
 
-		cur.execute("drop event if exists timeout_period2")
-		cur.execute("create event timeout_period2 on schedule every 1 minute do update seat_table_0 set period2 = 2 where curtime() > '12:00'")
-
-		cur.execute("drop event if exists timeout_period3")
-		cur.execute("create event timeout_period3 on schedule every 1 minute do update seat_table_0 set period3 = 2 where curtime() > '14:00'")
-
-		cur.execute("drop event if exists timeout_period4")
-		cur.execute("create event timeout_period4 on schedule every 1 minute do update seat_table_0 set period4 = 2 where curtime() > '18:00'")
+			
 		conn.commit()
 		cur.close()
 		conn.close()
@@ -78,7 +105,8 @@ def dayUpdateEvents():
 		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
 
 if __name__ == '__main__':
+	#makeUserTables()
 	#makeSeatTables()
-	#makeSeatTable0Events()
-	dayUpdateEvents()
+	makeSeatTable0Events()
+	#dayUpdateEvents()
 

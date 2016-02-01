@@ -52,7 +52,7 @@
 		{
 	%>
 		当前用户：<%=user.getStudentnum() %>
-		<li><a href="teacher_message.jsp">管理员界面</a></li>
+		<li><a href="admin_message.jsp">管理员界面</a></li>
 	<% 
 		}
 	%>

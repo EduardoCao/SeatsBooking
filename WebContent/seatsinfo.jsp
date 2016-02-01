@@ -43,26 +43,51 @@ SEATS INFO
 <li><a href="message.jsp">当前用户</a></li>
 <li><a href="ExitServlet">用户退出</a></li>
 
-
-
+<div class="div3"> 
+<form action="DeleteServlet" method="post" onSubmit="return login(this);">
 <%
-	ArrayList<String> seats = (ArrayList<String>)session.getAttribute("onesSeats");
-	for (int i = 0 ; i < seats.size() ; i ++)
+	ArrayList<String> onesseats = (ArrayList<String>)session.getAttribute("onesSeats");
+	if (onesseats != null && onesseats.size() > 0)
+	{
+	for (int i = 0 ; i < onesseats.size() ; i ++)
 	{
 %>
 		<table align="center" width="300" border="1" height="50" bordercolor="#E8F4CC">
 			<tr>
 	    		<td align="center" colspan="2">
 	    			
-	    			<span style="font-weight: bold;font-size: 18px;"><%=seats.get(i) %></span>
+	    			<span style="font-weight: bold;font-size: 18px;">
+	    			<%=onesseats.get(i) %>
+	    			<input type = "radio" name = "delete" id = <%=i %> value = <%=i %>>
+	    			</span>
 	    			
 	    		</td>
 	    	</tr>
 		</table>
 <%
 	}
+	}
 %>
 
-
+		
+		<%
+		if (onesseats == null || onesseats.size() == 0)
+		{
+		%>
+		<div id="table" style="display: none" >
+		<%
+		}
+		%>
+		<table align="center" width="300" border="0" class="tb1">
+		<tr>
+				<td colspan="2" align="center" height="50">
+					<input type="submit" value="删 除">
+					<input type="reset" value="重 置">
+				</td>
+		</tr>
+		</table>
+		
+</form>
+</div>
 </body>
 </html>
