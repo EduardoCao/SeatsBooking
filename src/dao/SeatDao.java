@@ -89,6 +89,12 @@ public class SeatDao {
 				ps.close();
 				return "Cannot book more than 3 days!";
 			}
+			if(check.containsKey(bookdate) && check.get(bookdate).size() == 2)
+			{
+				rs.close();
+				ps.close();
+				return "Cannot book more than 2 period in a day!";
+			}
 			if (check.containsKey(bookdate) && check.get(bookdate).contains(period))
 			{
 				rs.close();

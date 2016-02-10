@@ -44,7 +44,6 @@
 		  		<div class="bottom">
 					<div class="div2">
 				  		<ul>
-				  			<li><a href="reg.jsp">用户注册</a></li>
 				  			<li><a href="login.jsp">用户登录</a></li>
 				  			<li><a href="message.jsp">当前用户</a></li>
 				  			<li><a href="ExitServlet">用户退出</a></li>
@@ -53,6 +52,23 @@
 
 				</div>
 		  	</div>
+	  </div>
+	  	  <div align="center">
+
+					<div class="div5">
+				  		<ul>
+
+				  			<a href="./adminuser.jsp">管理用户</a>
+				  			<br>
+				  			<a href="./AdminSeatServlet">个人座位预定</a>
+				  			<br>
+				  			<a href="./AdminGroupServlet">团体预定</a>
+
+				  		</ul>
+				  	</div>
+
+		  	
+	  </div>
 	  </div>
 	</body>
 </html>

@@ -71,7 +71,7 @@
 		  		<div class="bottom">
 					<div class="div2">
 				  		<ul>
-				  			<li><a href="reg.jsp">用户注册</a></li>
+<!-- 				  			<li><a href="reg.jsp">用户注册</a></li> -->
 				  			<li><a href="login.jsp">用户登录</a></li>
 				  			<li><a href="message.jsp">当前用户</a></li>
 				  			<li><a href="ExitServlet">用户退出</a></li>
