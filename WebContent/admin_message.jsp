@@ -60,9 +60,11 @@
 
 				  			<a href="./adminuser.jsp">管理用户</a>
 				  			<br>
-				  			<a href="./AdminSeatServlet">个人座位预定</a>
+				  			<a href="./adminseat.jsp">个人座位预定</a>
 				  			<br>
-				  			<a href="./AdminGroupServlet">团体预定</a>
+				  			<a href="./admingroup.jsp">团体预定</a>
+				  			<br>
+				  			<a href="./adminsetaccess.jsp">管理时间段开放权限</a>
 
 				  		</ul>
 				  	</div>

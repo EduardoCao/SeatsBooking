@@ -1,7 +1,7 @@
 import MySQLdb
 import time
 
-workspace = '/Users/Eduardo' # \! pwd
+#workspace = '/Users/Eduardo' # \! pwd
 
 def makeUserTables():
 	try:
@@ -119,9 +119,14 @@ def dayUpdateEvents():
 		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
 
 if __name__ == '__main__':
-	#makeUserTables()
+	print "makeUserTables..."
+	makeUserTables()
+	print "makeCloseUserTables"
 	makeCloseUserTables()
-	# makeSeatTables()
-	# makeSeatTable0Events()
-	# dayUpdateEvents()
+	print "makeSeatTables()"
+	makeSeatTables()
+	print "makeSeatTable0Events"
+	makeSeatTable0Events()
+	print "dayUpdateEvents"
+	dayUpdateEvents()
 
