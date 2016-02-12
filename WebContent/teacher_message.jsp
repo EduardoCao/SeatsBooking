@@ -21,7 +21,7 @@
 		<div id="div" style="display: none" >
 	<%
 		}
-		else if(user.getUserType() != 1)
+		else if(user.getUserType() != 1 && user.getUserType() != -2)
 		{
 	%>
 		您无权查看教师页面。

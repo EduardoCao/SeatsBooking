@@ -23,15 +23,20 @@ public class LoginServlet extends HttpServlet{
 			int userType = userDao.checkUserType(studentnum, password);
 			request.getSession().invalidate();
 			request.getSession().setAttribute("user", user);
+//			if (userType < 0)
+//			{		
+//				request.setAttribute("info",  "You have been banned!");
+//				request.getRequestDispatcher("message.jsp").forward(request, response);
+//			}
 			if (userType == 2)
 			{		
 				request.getRequestDispatcher("admin_message.jsp").forward(request, response);
 			}
-			if (userType == 1)
+			if (userType == 1 || userType == -2)
 			{
 				request.getRequestDispatcher("teacher_message.jsp").forward(request, response);
 			}
-			if (userType == 0)
+			if (userType == 0 || userType == -1)
 			{
 				request.getRequestDispatcher("student_message.jsp").forward(request, response);
 			}

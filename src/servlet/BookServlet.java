@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.SeatDao;
+import dao.UserDao;
 import util.User;
 
 
@@ -27,37 +28,47 @@ public class BookServlet extends HttpServlet {
 				String bookseat = request.getParameter("seat");
 				User user = (User)session.getAttribute("user");
 				String owner = user.getStudentnum();
+				String pw = user.getPassword();
+				UserDao userDao = new UserDao();
+				int userType = userDao.checkUserType(owner,pw);
+				if(userType < 0)
+				{
+					request.setAttribute("info", "You have been banned!");
+					request.getRequestDispatcher("./message.jsp").forward(request, response);
+				}
 				//System.out.println(owner + " " + bookdate + " "  + bookseat);
-				
-				if (owner == null)
-				{
-					String info = "Please login first!";
-					request.setAttribute("info", info);
-					request.getRequestDispatcher("./message.jsp").forward(request, response);
-				}
-				if (bookseat == null || bookdate == null)
-				{
-					String info = "Please try to book the seat again!";
-					request.setAttribute("info", info);
-					request.getRequestDispatcher("./message.jsp").forward(request, response);
-				}
-				
-				SeatDao seatDao = new SeatDao();
-				
-				String info = seatDao.bookSeat(owner , bookdate , bookseat);
-				System.out.println(info);
-				if (!info.equals("Success"))
-				{
-					request.setAttribute("info", info);
-					request.getRequestDispatcher("./message.jsp").forward(request, response);
-				}
 				else
 				{
-					ArrayList<String> onesSeat = seatDao.getOnesSeats(owner);
-					request.getSession().setAttribute("seats" , null);
-					request.getSession().setAttribute("onesSeats", onesSeat);
-					request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
+					if (owner == null)
+					{
+						String info = "Please login first!";
+						request.setAttribute("info", info);
+						request.getRequestDispatcher("./message.jsp").forward(request, response);
+					}
+					if (bookseat == null || bookdate == null)
+					{
+						String info = "Please try to book the seat again!";
+						request.setAttribute("info", info);
+						request.getRequestDispatcher("./message.jsp").forward(request, response);
+					}
 					
+					SeatDao seatDao = new SeatDao();
+					
+					String info = seatDao.bookSeat(owner , bookdate , bookseat);
+					//System.out.println(info);
+					if (!info.equals("Success"))
+					{
+						request.setAttribute("info", info);
+						request.getRequestDispatcher("./message.jsp").forward(request, response);
+					}
+					else
+					{
+						ArrayList<String> onesSeat = seatDao.getOnesSeats(owner);
+						request.getSession().setAttribute("seats" , null);
+						request.getSession().setAttribute("onesSeats", onesSeat);
+						request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
+						
+					}
 				}
 			}
 }

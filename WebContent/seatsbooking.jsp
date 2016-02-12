@@ -27,6 +27,14 @@
 	
 	<%
 		}
+		else if (  user.getUserType() == -1) 
+		{
+	%>
+		您已经被管理员限制权限。
+		<a href="message.jsp">back</a>
+		<div id="div" style="display: none" >
+	<% 
+		}	
 		else if (  user.getUserType() != 0) 
 		{
 	%>

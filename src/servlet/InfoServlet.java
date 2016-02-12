@@ -22,7 +22,7 @@ public class InfoServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		SeatDao seatDao = new SeatDao();
 		User user = (User)session.getAttribute("user");
-		System.out.println(user.getStudentnum());
+		//System.out.println(user.getStudentnum());
 		ArrayList<String> onesSeat = seatDao.getOnesSeats(user.getStudentnum());
 		//request.getSession().setAttribute("user", user);
 		request.getSession().setAttribute("onesSeats", onesSeat);

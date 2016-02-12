@@ -19,6 +19,20 @@ def makeUserTables():
 	except MySQLdb.Error, e:
 		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
 
+def makeCloseUserTables():
+	try:
+		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
+		cur = conn.cursor()
+		conn.select_db('db_test')
+		cur.execute('drop table close_user_table');
+		cur.execute('create table if not exists close_user_table(studentnum varchar(20) , closetime varchar(12) )')
+		cur.execute("insert into close_user_table values( 'aa' , '2015-12-31' )")
+		conn.commit()
+		cur.close()
+		conn.close()
+	except MySQLdb.Error, e:
+		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+
 def makeSeatTables():
 	try:
 		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
@@ -80,7 +94,7 @@ def dayUpdateEvents():
 		conn.select_db('seat_db')
 
 		cur.execute("drop event if exists backuptodayevent")
-		cur.execute("create event backuptodayevent on schedule every 1 day starts '2016-02-01 00:00:00' do select * into outfile '"+  workspace + "/sqldatabc/" + time.strftime("%d_%m_%y") + ".log' from seat_table_0")
+		#cur.execute("create event backuptodayevent on schedule every 1 day starts '2016-02-01 00:00:00' do select * into outfile '"+  workspace + "/sqldatabc/" + time.strftime("%d_%m_%y") + ".log' from seat_table_0")
 		
 
 		cur.execute("drop event if exists move0_bcevent")
@@ -94,9 +108,9 @@ def dayUpdateEvents():
 
  		insertstr = ""
  		for j in xrange(0,10):
- 			insertstr += "insert into seat_table_6 values( '"+ str(j) +"' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL , '0');"
+ 			insertstr += " insert into seat_table_6 values( '"+ str(j) +"' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL , '0');"
 		cur.execute("drop event if exists deal6event")
-		cur.execute("create event deal6event on schedule every 1 day starts '2016-02-01 00:00:45' do begin drop table seat_table_6; create table seat_table_6 ( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20) , seatsType int) ; "+ insertstr +"end")
+		cur.execute("create event deal6event on schedule every 1 day starts '2016-02-01 00:00:45' do begin drop table seat_table_6; create table seat_table_6 ( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20) , seatsType int) ; "+ insertstr +" end")
 		
 		conn.commit()
 		cur.close()
@@ -106,7 +120,8 @@ def dayUpdateEvents():
 
 if __name__ == '__main__':
 	#makeUserTables()
-	#makeSeatTables()
-	makeSeatTable0Events()
-	#dayUpdateEvents()
+	makeCloseUserTables()
+	# makeSeatTables()
+	# makeSeatTable0Events()
+	# dayUpdateEvents()
 

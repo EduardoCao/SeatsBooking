@@ -23,7 +23,7 @@ SEATS INFO
 	
 	<%
 		}
-		else if (  user.getUserType() != 0) 
+		else if (  user.getUserType() != 0 &&  user.getUserType() != -1) 
 		{
 	%>
 		您无权查看个人座位预定页面。

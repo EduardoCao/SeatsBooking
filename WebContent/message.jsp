@@ -33,7 +33,7 @@
 		<div id="div" style="display: none" >
 	<%
 		}
-		else if (user.getUserType() == 0)
+		else if (user.getUserType() == 0 || user.getUserType() == -1)
 		{
 	%>
 		当前用户：<%=user.getStudentnum() %>
@@ -41,7 +41,7 @@
 		
 	<% 
 		}
-		else if (user.getUserType() == 1)
+		else if (user.getUserType() == 1 || user.getUserType() ==  -2)
 		{
 	%>
 		当前用户：<%=user.getStudentnum() %>
