@@ -292,6 +292,99 @@ public class SeatDao {
 		}
 		return result;
 	}
+	public ArrayList<String> getSeatAccess() {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		Connection conn = ConnectDB.getConnectionSeat();
+		try{
+			PreparedStatement ps = null;
+			ResultSet rs = null ;
+			for (int i = 0 ; i < 7 ; i ++)
+			{
+				String sql = "select * from seat_table_" + i + " where seatnum = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, 0);
+				rs = ps.executeQuery();
+				if(rs.next())
+				{
+					for(int j = 0 ; j < 5 ; j ++)
+					{
+						int period = rs.getInt("period"+j);
+						if (period == 0 || period == 1)
+						{
+							String tmp =  i + "_" + j +"_" + 0;
+							result.add(tmp);
+						}
+						else if(period == 2)
+						{
+							String tmp =  i + "_" + j +"_" + 2;
+							result.add(tmp);
+						}
+						else if(period == 3)
+						{
+							String tmp =  i + "_" + j +"_" + 3;
+							result.add(tmp);
+						}
+					}
+				}	
+			}
+			rs.close();
+			ps.close();
+			
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}finally
+		{
+			ConnectDB.closeConnection(conn);
+		}
+		return result;
+	}
+	public int closeSeat(String day, String period , String seatType) {
+		// TODO Auto-generated method stub
+		
+		Connection conn = ConnectDB.getConnectionSeat();
+		try{
+			PreparedStatement ps = null;
+			String sql = "update seat_table_" + day + " set period" + period + " = ?, ownerPeriod" + period + " = ?";
+			
+			ps = conn.prepareStatement(sql);
+			if (seatType.equals("0") || seatType.equals("1"))
+			{
+				ps.setInt(1, 3);
+				ps.setString(2, null);
+				ps.executeUpdate();
+				ps.close();
+				ConnectDB.closeConnection(conn);
+				return 0;
+			}
+			else if(seatType.equals("2"))
+			{
+				ps.close();
+				ConnectDB.closeConnection(conn);
+				return 2;
+			}
+			else if(seatType.equals("3"))
+			{
+				ps.setInt(1, 0);
+				ps.setString(2, null);
+				ps.executeUpdate();
+				ps.close();
+				ConnectDB.closeConnection(conn);
+				return 0;
+			}
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			ConnectDB.closeConnection(conn);
+			return -1;
+		}
+		return -1;
+		
+	}
 	
 	
 }

@@ -55,6 +55,18 @@
 		<servlet-name>CheckCloseUserServlet</servlet-name>
 		<servlet-class>servlet.CheckCloseUserServlet</servlet-class>
 	</servlet>
+    <servlet>
+        <servlet-name>SetAccessServlet</servlet-name>
+        <servlet-class>servlet.SetAccessServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClosePeriodServlet</servlet-name>
+        <servlet-class>servlet.ClosePeriodServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OpenPeriodServlet</servlet-name>
+        <servlet-class>servlet.OpenPeriodServlet</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -108,6 +120,18 @@
 		<servlet-name>CheckCloseUserServlet</servlet-name>
 		<url-pattern>/CheckCloseUserServlet</url-pattern>
 	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetAccessServlet</servlet-name>
+        <url-pattern>/SetAccessServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClosePeriodServlet</servlet-name>
+        <url-pattern>/ClosePeriodServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OpenPeriodServlet</servlet-name>
+        <url-pattern>/OpenPeriodServlet</url-pattern>
+    </servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

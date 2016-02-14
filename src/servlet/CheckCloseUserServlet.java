@@ -27,7 +27,15 @@ public class CheckCloseUserServlet extends HttpServlet{
 	{
 		HashMap <String , String> ct = (HashMap<String, String>) request.getSession().getAttribute("closetime");
 		ArrayList<User> showallusers = (ArrayList<User>) request.getSession().getAttribute("showallusers");
-		
+		if(ct.size() == 0)
+		{
+			UserDao userDao = new UserDao();
+    		showallusers = userDao.showAllUsers();
+    		request.getSession().setAttribute("showallusers", showallusers);
+    		request.getRequestDispatcher("admindealuser.jsp").forward(request, response);
+		}
+		else
+		{
 		Iterator iter = ct.entrySet().iterator();
 		while (iter.hasNext()) {
 			HashMap.Entry entry = (HashMap.Entry) iter.next();
@@ -81,6 +89,7 @@ public class CheckCloseUserServlet extends HttpServlet{
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
+		}
 		}
 		
 	}

@@ -120,6 +120,12 @@
     			 	已过时
     			 	<%
     			 	}
+    			 	else if(seats[0].getPeroid0() == 3)
+    			 	{
+    			 	%>
+    			 	关闭时间段
+    			 	<%
+    			 	}
     			 	%>
     			 	
     			 </input>
@@ -141,6 +147,12 @@
     			 	{
     			 	%>
     			 	已过时
+    			 	<%
+    			 	}
+    			 	else if(seats[0].getPeroid1() == 3)
+    			 	{
+    			 	%>
+    			 	关闭时间段
     			 	<%
     			 	}
     			 	%>
@@ -165,6 +177,12 @@
     			 	已过时
     			 	<%
     			 	}
+    			 	else if(seats[0].getPeroid2() == 3)
+    			 	{
+    			 	%>
+    			 	关闭时间段
+    			 	<%
+    			 	}
     			 	%>
     			 </input>
     			 <input type = "radio" name = "seat" id = '03' value = '0_3'>  
@@ -187,6 +205,12 @@
     			 	已过时
     			 	<%
     			 	}
+    			 	else if(seats[0].getPeroid3() == 3)
+    			 	{
+    			 	%>
+    			 	关闭时间段
+    			 	<%
+    			 	}
     			 	%>
 				 </input>
     			 <input type = "radio" name = "seat" id = '04' value = '0_4'>  
@@ -207,6 +231,12 @@
     			 	{
     			 	%>
     			 	已过时
+    			 	<%
+    			 	}
+    			 	else if(seats[0].getPeroid4() == 3)
+    			 	{
+    			 	%>
+    			 	关闭时间段
     			 	<%
     			 	}
     			 	%>

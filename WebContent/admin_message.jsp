@@ -64,7 +64,7 @@
 				  			<br>
 				  			<a href="./admingroup.jsp">团体预定</a>
 				  			<br>
-				  			<a href="./adminsetaccess.jsp">管理时间段开放权限</a>
+				  			<a href="./SetAccessServlet">管理时间段开放权限</a>
 
 				  		</ul>
 				  	</div>
