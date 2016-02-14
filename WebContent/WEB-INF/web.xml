@@ -67,6 +67,18 @@
         <servlet-name>OpenPeriodServlet</servlet-name>
         <servlet-class>servlet.OpenPeriodServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PersonalSeatsServlet</servlet-name>
+        <servlet-class>servlet.PersonalSeatsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DelSeatServlet</servlet-name>
+        <servlet-class>servlet.DelSeatServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSeatServlet</servlet-name>
+        <servlet-class>servlet.AddSeatServlet</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -132,6 +144,19 @@
         <servlet-name>OpenPeriodServlet</servlet-name>
         <url-pattern>/OpenPeriodServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PersonalSeatsServlet</servlet-name>
+        <url-pattern>/PersonalSeatsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DelSeatServlet</servlet-name>
+        <url-pattern>/DelSeatServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSeatServlet</servlet-name>
+        <url-pattern>/AddSeatServlet</url-pattern>
+    </servlet-mapping>
+
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

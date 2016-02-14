@@ -28,6 +28,11 @@ public class SeatDao {
 				seats[i].setPeroid2(rs.getInt("period2"));
 				seats[i].setPeroid3(rs.getInt("period3"));
 				seats[i].setPeroid4(rs.getInt("period4"));
+				seats[i].setOwnerPeroid0(rs.getString("ownerPeriod0"));
+				seats[i].setOwnerPeroid1(rs.getString("ownerPeriod1"));
+				seats[i].setOwnerPeroid2(rs.getString("ownerPeriod2"));
+				seats[i].setOwnerPeroid3(rs.getString("ownerPeriod3"));
+				seats[i].setOwnerPeroid4(rs.getString("ownerPeriod4"));
 			}
 			rs.close();
 			ps.close();
@@ -157,7 +162,7 @@ public class SeatDao {
 			}
 			if (period.equals("0"))
 			{
-				if (seats.getOwnerPeroid0().equals(owner) && seats.getPeroid0() == 1)
+				if (seats.getOwnerPeroid0() != null && seats.getOwnerPeroid0().equals(owner) && seats.getPeroid0() == 1)
 				{
 					sql = "update seat_table_" + bookdate + " set period0" + " = ? , ownerPeriod0" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
@@ -173,7 +178,7 @@ public class SeatDao {
 			}
 			else if(period.equals("1"))
 			{
-				if (seats.getOwnerPeroid1().equals(owner) && seats.getPeroid1() == 1)
+				if (seats.getOwnerPeroid1() != null && seats.getOwnerPeroid1().equals(owner) && seats.getPeroid1() == 1)
 				{
 					sql = "update seat_table_" + bookdate + " set period1" + " = ? , ownerPeriod1" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
@@ -189,7 +194,7 @@ public class SeatDao {
 			}
 			else if(period.equals("2"))
 			{
-				if (seats.getOwnerPeroid2().equals(owner) && seats.getPeroid2() == 1)
+				if (seats.getOwnerPeroid2() != null && seats.getOwnerPeroid2().equals(owner) && seats.getPeroid2() == 1)
 				{
 					sql = "update seat_table_" + bookdate + " set period2" + " = ? , ownerPeriod2" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
@@ -205,7 +210,7 @@ public class SeatDao {
 				}
 			}else if(period.equals("3"))
 			{
-				if (seats.getOwnerPeroid3().equals(owner) && seats.getPeroid3() == 1)
+				if (seats.getOwnerPeroid3() != null && seats.getOwnerPeroid3().equals(owner) && seats.getPeroid3() == 1)
 				{
 					sql = "update seat_table_" + bookdate + " set period3" + " = ? , ownerPeriod3" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
@@ -221,7 +226,7 @@ public class SeatDao {
 				}
 			}else if(period.equals("4"))
 			{
-				if (seats.getOwnerPeroid4().equals(owner) && seats.getPeroid4() == 1)
+				if (seats.getOwnerPeroid4() != null && seats.getOwnerPeroid4().equals(owner) && seats.getPeroid4() == 1)
 				{
 					sql = "update seat_table_" + bookdate + " set period4" + " = ? , ownerPeriod4" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
@@ -384,6 +389,52 @@ public class SeatDao {
 		}
 		return -1;
 		
+	}
+	public boolean deleteSeat(String bookdate, int seatnum, int periodnum , int periodori) {
+		// TODO Auto-generated method stub
+		Connection conn = ConnectDB.getConnectionSeat();
+		try{
+			PreparedStatement ps = null;
+			String sql = "update seat_table_" + bookdate + " set period" + periodnum + " = ? , ownerPeriod"+periodnum + " = ? where seatnum = ?";
+			
+			ps = conn.prepareStatement(sql);
+			if (periodori == 0 || periodori == 1)
+			{
+				ps.setInt(1, 0);
+				ps.setString(2, null);
+				ps.setInt(3, seatnum);
+				ps.executeUpdate();
+				ps.close();
+				ConnectDB.closeConnection(conn);
+			}
+			else if(periodori == 2)
+			{
+				ps.setInt(1, 2);
+				ps.setString(2, null);
+				ps.setInt(3, seatnum);
+				ps.executeUpdate();
+				ps.close();
+				ConnectDB.closeConnection(conn);
+			}
+			else if(periodori == 3)
+			{
+
+				ps.close();
+				ConnectDB.closeConnection(conn);
+				return false;
+			}
+			else
+			{
+				return false;
+			}
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			ConnectDB.closeConnection(conn);
+			return false;
+		}
+		return true;
 	}
 	
 	

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -285,7 +287,14 @@ public class UserDao {
 		}finally{
 			ConnectDB.closeConnection(conn);
 		}
+		Collections.sort(res, new Comparator(){
+			public int compare(Object o1 , Object o2)
+			{
+				return ((User)o1).getStudentnum().compareTo(((User)o2).getStudentnum());
+			}
+		});
 		return res;
 	}
+
 	
 }
