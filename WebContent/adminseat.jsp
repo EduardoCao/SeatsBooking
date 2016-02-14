@@ -219,7 +219,7 @@ if(seats != null){
   		<td align="center" colspan="2">
   			<span style="font-weight: bold;font-size: 18px;">
 		<% 
-		if(seats[i].getPeroid0() == 0)
+		if(seats[i].getPeroid0() == 0 || (seats[i].getPeroid0() == 2 && seats[i].getOwnerPeroid0() == null))
 		{
 		
 %>
@@ -230,7 +230,7 @@ if(seats != null){
   			<br>
   		<%
   		}
-		if(seats[i].getPeroid1() == 0)
+		if(seats[i].getPeroid1() == 0 || (seats[i].getPeroid1() == 2 && seats[i].getOwnerPeroid1() == null))
 		{
 		%>
 		
@@ -239,7 +239,7 @@ if(seats != null){
   			<br>
   		<%
 		}
-		if(seats[i].getPeroid2() == 0)
+		if(seats[i].getPeroid2() == 0 || (seats[i].getPeroid2() == 2 && seats[i].getOwnerPeroid2() == null))
 		{
   		%>
   			
@@ -248,7 +248,7 @@ if(seats != null){
   			<br>
   	<%
 		}
-		if(seats[i].getPeroid3() == 0)
+		if(seats[i].getPeroid3() == 0 || (seats[i].getPeroid3() == 2 && seats[i].getOwnerPeroid3() == null))
 		{
   	%>
   			<%="seat" + i + " period3"  + " " + seats[i].getPeroid3() + " " + seats[i].getOwnerPeroid3()%>
@@ -256,7 +256,7 @@ if(seats != null){
   			<br>
   		<%
 		}
-		if(seats[i].getPeroid4() == 0)
+		if(seats[i].getPeroid4() == 0 || (seats[i].getPeroid4() == 2 && seats[i].getOwnerPeroid4() == null))
 		{
   		%>
   			<%="seat" + i + " period4"  + " " + seats[i].getPeroid4() + " " + seats[i].getOwnerPeroid4()%>

@@ -136,6 +136,90 @@ public class SeatDao {
 		}
 		return "Success";
 	}
+	public String bookSeatbyAdmin(String owner , String bookdate , String bookseat , int periodori)
+	{
+		
+		String seatnum = bookseat.split("_")[0];
+		String period = bookseat.split("_")[1];
+		Connection conn = ConnectDB.getConnectionSeat();
+		try{
+			
+			String sql = "select * from seat_table_" + bookdate + " where seatnum = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(seatnum));
+			ResultSet rs = ps.executeQuery();
+			Seats seats = new Seats();
+			if(rs.next())
+			{
+				seats.setPeroid0(rs.getInt("period0"));
+				seats.setPeroid1(rs.getInt("period1"));
+				seats.setPeroid2(rs.getInt("period2"));
+				seats.setPeroid3(rs.getInt("period3"));
+				seats.setPeroid4(rs.getInt("period4"));
+			}
+			ArrayList<String> onesseats = getOnesSeats(owner);
+			HashMap<String , ArrayList<String>> check = new HashMap< String , ArrayList<String>>();
+			for (int i = 0 ; i < onesseats.size() ; i ++)
+			{
+				String cur = onesseats.get(i);
+				String checkday = cur.trim().split(" ")[0].substring(3);
+				String checkperiod = cur.trim().split(" ")[2].substring(6);
+				if(check.containsKey(checkday))
+				{
+					ArrayList<String> tmp = check.get(checkday);
+					tmp.add(checkperiod);
+					check.put(checkday, tmp);
+				}
+				else
+				{
+					ArrayList<String> tmp = new ArrayList<String>();
+					tmp.add(checkperiod);
+					check.put(checkday, tmp);
+				}
+			}
+			if(!check.containsKey(bookdate) && check.size() == 3)
+			{
+				rs.close();
+				ps.close();
+				return "Cannot book more than 3 days!";
+			}
+			if(check.containsKey(bookdate) && check.get(bookdate).size() == 2)
+			{
+				rs.close();
+				ps.close();
+				return "Cannot book more than 2 period in a day!";
+			}
+			if (check.containsKey(bookdate) && check.get(bookdate).contains(period))
+			{
+				rs.close();
+				ps.close();
+				return "Cannot book two same periods in a day!";
+			}
+		
+				sql = "update seat_table_" + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ?";
+				ps = conn.prepareStatement(sql);
+				if(periodori == 0)
+					ps.setInt(1, 1);
+				else if(periodori == 2)
+					ps.setInt(1, 2);
+				ps.setString(2, owner);
+				ps.setInt(3, Integer.parseInt(seatnum));
+				ps.executeUpdate();
+				
+			rs.close();
+			ps.close();
+			
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			return "Error";
+		}finally
+		{
+			ConnectDB.closeConnection(conn);
+		}
+		return "Success";
+	}
 	public boolean deleteSeat(String owner , String bookdate , String seatnum , String period)
 	{
 		

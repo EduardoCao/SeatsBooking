@@ -48,11 +48,11 @@ public class AddSeatServlet extends HttpServlet{
 						int seatnum = Integer.parseInt(delete.split("_")[0]);
 						int periodnum = Integer.parseInt(delete.split("_")[1]);
 						int periodori = Integer.parseInt(delete.split("_")[2]);
-						if(periodori == 0)
+						if(periodori == 0 || periodori == 2)
 						{
 							SeatDao seatDao = new SeatDao();
 							String bookseat = seatnum + "_" + periodnum;
-							String bookres = seatDao.bookSeat(bookuser, bookdate, bookseat);
+							String bookres = seatDao.bookSeatbyAdmin(bookuser, bookdate, bookseat , periodori);
 							if(bookres.equals("Success"))
 							{
 								
