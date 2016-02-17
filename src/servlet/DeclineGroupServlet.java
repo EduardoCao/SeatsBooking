@@ -39,7 +39,7 @@ public class DeclineGroupServlet extends HttpServlet{
 	 	GroupSeatDao groupseatDao = new GroupSeatDao();
 	 	if (!flag.equals("0"))
 	 	{
-	 		request.setAttribute("info",  "cannot decline this group seat");
+	 		request.setAttribute("info",  "Cannot decline this group seat!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 	}
 	 	else
@@ -47,18 +47,23 @@ public class DeclineGroupServlet extends HttpServlet{
 	 		int tag = groupseatDao.declineGroup(studentnum , bookdate , seat , period);
 	 		if(tag == -4)
 	 		{
-	 			request.setAttribute("info",  "this group seat have been taken");
+	 			request.setAttribute("info",  "Cannot decline this group seat!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "this group cannot be proved");
+	 			request.setAttribute("info",  "Cannot decline this group seat!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)
 	 		{
-	 			request.setAttribute("info",  "OK! This group is declined!");
-	 			request.getRequestDispatcher("message.jsp").forward(request, response);
+//	 			request.setAttribute("info",  "OK! This group is declined!");
+//	 			request.getRequestDispatcher("message.jsp").forward(request, response);
+	 			GroupSeatDao groupSeatDao = new GroupSeatDao();
+	 			allGroupInfo = new ArrayList<String>();
+	 			allGroupInfo = groupSeatDao.getAllGroupInfo();
+	 			request.getSession().setAttribute("allGroupInfo", allGroupInfo);
+	 			request.getRequestDispatcher("./admingroupinfo.jsp").forward(request, response);
 	 		}
 	 		
 	 	}

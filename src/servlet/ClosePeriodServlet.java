@@ -48,8 +48,11 @@ public class ClosePeriodServlet extends HttpServlet{
 				int tag2 = groupseatDao.closeSeat(day , period , seatType);
 				if(tag == 0 && tag2 == 0)
 				{
-					request.setAttribute("info",  "OK! Close this period!");
-					request.getRequestDispatcher("message.jsp").forward(request, response);
+//					request.setAttribute("info",  "OK! Close this period!");
+//					request.getRequestDispatcher("message.jsp").forward(request, response);
+					ArrayList<String> seatAccess = seatDao.getSeatAccess();
+					request.getSession().setAttribute("seataccess" , seatAccess);
+					request.getRequestDispatcher("./adminsetaccess.jsp").forward(request, response);
 				}
 				else if(tag == 2 && tag2 == 2)
 				{

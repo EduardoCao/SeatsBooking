@@ -28,7 +28,6 @@ public class AdminDelGroupServlet extends HttpServlet {
 		else
 		{
 		int delete = Integer.parseInt(request.getParameter("deletegroup"));
-
 		ArrayList<String> allGroupInfo = new ArrayList<String>();
 	 	allGroupInfo = (ArrayList<String>) request.getSession().getAttribute("allGroupInfo");
 	 	String args[] = allGroupInfo.get(delete).split("##");
@@ -41,7 +40,7 @@ public class AdminDelGroupServlet extends HttpServlet {
 	 	GroupSeatDao groupseatDao = new GroupSeatDao();
 	 	if (!flag.equals("1"))
 	 	{
-	 		request.setAttribute("info",  "cannot delete this group seat");
+	 		request.setAttribute("info",  "Cannot delete this group seat!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 	}
 	 	else
@@ -49,12 +48,12 @@ public class AdminDelGroupServlet extends HttpServlet {
 	 		int tag = groupseatDao.adminDelGroup(studentnum , bookdate , seat , period );
 	 		if(tag == -4)
 	 		{
-	 			request.setAttribute("info",  "this group seat have been deleted");
+	 			request.setAttribute("info",  "This group seat have been deleted！");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "this group cannot be deleted");
+	 			request.setAttribute("info",  "This group cannot be deleted!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)

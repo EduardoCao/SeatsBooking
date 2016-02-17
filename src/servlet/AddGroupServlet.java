@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +36,7 @@ public class AddGroupServlet extends HttpServlet{
 			int tag = groupseatDao.addGroup(bookuser, bookdate, seat, period) ;
 			if(tag == -4)
 	 		{
-	 			request.setAttribute("info",  "Sorry, the group seat haven't been added successfully...");
+	 			request.setAttribute("info",  "Sorry, the group seat haven been taken already! Please try other group seats!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == -2)
@@ -45,8 +46,13 @@ public class AddGroupServlet extends HttpServlet{
 	 		}
 	 		else if(tag == 0)
 	 		{
-	 			request.setAttribute("info",  "OK! This group seat is added!");
-	 			request.getRequestDispatcher("message.jsp").forward(request, response);
+	 			//request.setAttribute("info",  "OK! This group seat is added!");
+	 			//request.getRequestDispatcher("message.jsp").forward(request, response);
+	 			GroupSeatDao groupSeatDao = new GroupSeatDao();
+	 			ArrayList<String> allGroupInfo = new ArrayList<String>();
+	 			allGroupInfo = groupSeatDao.getAllGroupInfo();
+	 			request.getSession().setAttribute("allGroupInfo", allGroupInfo);
+	 			request.getRequestDispatcher("./admingroupinfo.jsp").forward(request, response);
 	 		}
 		}
 	}

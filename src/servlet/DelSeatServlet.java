@@ -26,14 +26,14 @@ public class DelSeatServlet extends HttpServlet{
 		String delete = request.getParameter("delSeat");
 		if(delete == null)
 		{
-			request.setAttribute("info",  "delete seat error!");
+			request.setAttribute("info",  "Delete seat error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
 		{
 			if(delete.split("_").length != 3 || delete.split("_")[0] == null || delete.split("_")[1] == null || delete.split("_")[2] == null )
 			{
-				request.setAttribute("info",  "delete seat error!");
+				request.setAttribute("info",  "Delete seat error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else

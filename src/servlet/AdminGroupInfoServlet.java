@@ -24,14 +24,31 @@ public class AdminGroupInfoServlet extends HttpServlet{
 	{
 		GroupSeatDao groupSeatDao = new GroupSeatDao();
 		String bookdate = request.getParameter("bookdate");
-		Seats[] seats = new Seats[2];
-		seats = groupSeatDao.getGroupSeats(bookdate);
-		UserDao userDao = new UserDao();
-		ArrayList<User> showallusers = userDao.showAllUsers();
-		request.getSession().setAttribute("showallusers", showallusers);
-		request.getSession().setAttribute("groupseats", seats);
-		request.getSession().setAttribute("bookdate", bookdate);
-		request.getRequestDispatcher("./adminaddgroup.jsp").forward(request, response);
+		if(bookdate == null)
+		{
+			request.setAttribute("info",  "Error, please try again later!");
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+		}
+		else
+		{
+			Seats[] seats = new Seats[2];
+			seats = groupSeatDao.getGroupSeats(bookdate);
+			if(seats == null)
+			{
+				request.setAttribute("info",  "Error, please try again later!");
+				request.getRequestDispatcher("message.jsp").forward(request, response);
+			}
+			else
+			{
+				UserDao userDao = new UserDao();
+				ArrayList<User> showallusers = userDao.showAllUsers();
+				request.getSession().setAttribute("showallusers", showallusers);
+				request.getSession().setAttribute("groupseats", seats);
+				request.getSession().setAttribute("bookdate", bookdate);
+				request.getRequestDispatcher("./adminaddgroup.jsp").forward(request, response);
+			}
+		}
 	}
+	
 
 }

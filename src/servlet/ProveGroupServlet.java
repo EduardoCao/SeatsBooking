@@ -39,7 +39,7 @@ public class ProveGroupServlet extends HttpServlet{
 	 	GroupSeatDao groupseatDao = new GroupSeatDao();
 	 	if (!flag.equals("0"))
 	 	{
-	 		request.setAttribute("info",  "cannot prove this group seat");
+	 		request.setAttribute("info",  "Cannot prove this group seat");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 	}
 	 	else
@@ -47,18 +47,21 @@ public class ProveGroupServlet extends HttpServlet{
 	 		int tag = groupseatDao.proveGroup(studentnum , bookdate , seat , period);
 	 		if(tag == -4)
 	 		{
-	 			request.setAttribute("info",  "this group seat have been taken");
+	 			request.setAttribute("info",  "Cannot prove this group seat for this group seat have been taken");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "this group cannot be proved");
+	 			request.setAttribute("info",  "Cannot prove this group seat!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)
 	 		{
-	 			request.setAttribute("info",  "OK! This group seat is proved");
-	 			request.getRequestDispatcher("message.jsp").forward(request, response);
+	 			GroupSeatDao groupSeatDao = new GroupSeatDao();
+	 			allGroupInfo = new ArrayList<String>();
+	 			allGroupInfo = groupSeatDao.getAllGroupInfo();
+	 			request.getSession().setAttribute("allGroupInfo", allGroupInfo);
+	 			request.getRequestDispatcher("./admingroupinfo.jsp").forward(request, response);
 	 		}
 	 		
 	 	}

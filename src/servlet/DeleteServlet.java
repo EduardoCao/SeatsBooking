@@ -25,7 +25,7 @@ public class DeleteServlet extends HttpServlet{
 				String delete = request.getParameter("delete");
 				if(delete == null)
 				{
-					request.setAttribute("info",  "delete seats error!");
+					request.setAttribute("info",  "Delete seats error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				else
@@ -39,7 +39,7 @@ public class DeleteServlet extends HttpServlet{
 					User user = (User) request.getSession().getAttribute("user");
 					if(onesseats.size() == 0 || user == null)
 					{
-						request.setAttribute("info",  "delete seats error!");
+						request.setAttribute("info",  "Delete seats error!");
 						request.getRequestDispatcher("message.jsp").forward(request, response);
 					}
 					else

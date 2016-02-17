@@ -99,6 +99,7 @@
 						<%								
 							}
 					    %>
+		<table align="center" width="350" border="1" height="200" bordercolor="#E8F4CC">
 		<%
     	// 获取提示信息
 		String info = (String)request.getAttribute("info");
@@ -110,7 +111,7 @@
 		<%
 		}
     	%>
-					
+		</table>
 						
 				  	 </div>
 				</div>

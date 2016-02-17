@@ -113,6 +113,8 @@
 	}
 	}
 %>
+<br>
+<br>
 </table>
 <div align="center">
 		已被拒绝（被拒绝信息保留一天）
@@ -157,5 +159,8 @@
 </form>
 
 <a href="message.jsp">back</a>
+<br>
+<a href="GroupInfoServlet">查看结果</a>
+
 </body>
 </html>

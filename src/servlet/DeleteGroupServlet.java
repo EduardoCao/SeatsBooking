@@ -23,7 +23,7 @@ public class DeleteGroupServlet extends HttpServlet{
 		String delete = request.getParameter("deletegroup");
 		if(delete == null)
 		{
-			request.setAttribute("info",  "delete seats error!");
+			request.setAttribute("info",  "Delete seats error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -50,7 +50,7 @@ public class DeleteGroupServlet extends HttpServlet{
 				}
 				else if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == -1)
 				{
-					request.setAttribute("info",  "delete this group seat error!");
+					request.setAttribute("info",  "Delete this group seat error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 			}
@@ -64,7 +64,7 @@ public class DeleteGroupServlet extends HttpServlet{
 					
 					if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == -1)
 					{
-						request.setAttribute("info",  "delete this group seat error!");
+						request.setAttribute("info",  "Delete this group seat error!");
 						request.getRequestDispatcher("message.jsp").forward(request, response);
 					}
 					else
@@ -75,7 +75,7 @@ public class DeleteGroupServlet extends HttpServlet{
 				}
 				else
 				{
-					request.setAttribute("info",  "delete this reserved group seat error!");
+					request.setAttribute("info",  "Delete this reserved group seat error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 			}
