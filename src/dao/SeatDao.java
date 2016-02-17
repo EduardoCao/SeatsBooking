@@ -49,7 +49,8 @@ public class SeatDao {
 	}
 	public String bookSeat(String owner , String bookdate , String bookseat)
 	{
-		
+		if (bookseat != null)
+		{
 		String seatnum = bookseat.split("_")[0];
 		String period = bookseat.split("_")[1];
 		Connection conn = ConnectDB.getConnectionSeat();
@@ -135,6 +136,11 @@ public class SeatDao {
 			ConnectDB.closeConnection(conn);
 		}
 		return "Success";
+		}
+		else
+		{
+			return "Book seat error";
+		}
 	}
 	public String bookSeatbyAdmin(String owner , String bookdate , String bookseat , int periodori)
 	{

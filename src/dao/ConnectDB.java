@@ -49,6 +49,20 @@ public class ConnectDB {
 			}
 		}
 	}
+	public static Connection getConnectionGroupSeat()
+	{
+		Connection conn = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/group_seat_db";
+			conn = DriverManager.getConnection(url, "root", "root");
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
 
 	
 }

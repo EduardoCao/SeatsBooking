@@ -44,7 +44,12 @@ SEATS INFO
 <li><a href="ExitServlet">用户退出</a></li>
 
 <div class="div3"> 
+
 <form action="DeleteServlet" method="post" onSubmit="return login(this);">
+
+<div align="center">
+	个人座位
+</div>
 <%
 	ArrayList<String> onesseats = (ArrayList<String>)session.getAttribute("onesSeats");
 	if (onesseats != null && onesseats.size() > 0)

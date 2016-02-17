@@ -60,9 +60,14 @@
 
 					<div class="div5">
 				  		<ul>
-				  			<a href="./seatsbooking.jsp">座位预定</a>
+				  			<a href="./seatsbooking.jsp">个人座位预定</a>
 				  			<br>
-				  			<a href="InfoServlet">查看预定</a>
+				  			<a href="./groupbooking.jsp">集体座位预定</a>
+				  			<br>
+				  			<a href="InfoServlet">查看个人座位预定</a>
+				  			<br>
+				  			<a href="GroupInfoServlet">查看集体座位预定</a>
+				  			<br>
 
 				  		</ul>
 				  	</div>

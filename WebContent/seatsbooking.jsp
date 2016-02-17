@@ -39,6 +39,7 @@
 		{
 	%>
 		您无权查看该页面，仅可由学生预定座位。
+		<a href="message.jsp">back</a>
 		<div id="div" style="display: none" >
 	<% 
 		}	

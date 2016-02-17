@@ -79,6 +79,22 @@
         <servlet-name>AddSeatServlet</servlet-name>
         <servlet-class>servlet.AddSeatServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GroupSeatsServlet</servlet-name>
+        <servlet-class>servlet.GroupSeatsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupBookServlet</servlet-name>
+        <servlet-class>servlet.GroupBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupInfoServlet</servlet-name>
+        <servlet-class>servlet.GroupInfoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteGroupServlet</servlet-name>
+        <servlet-class>servlet.DeleteGroupServlet</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -155,6 +171,22 @@
     <servlet-mapping>
         <servlet-name>AddSeatServlet</servlet-name>
         <url-pattern>/AddSeatServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupSeatsServlet</servlet-name>
+        <url-pattern>/GroupSeatsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupBookServlet</servlet-name>
+        <url-pattern>/GroupBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupInfoServlet</servlet-name>
+        <url-pattern>/GroupInfoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteGroupServlet</servlet-name>
+        <url-pattern>/DeleteGroupServlet</url-pattern>
     </servlet-mapping>
 
 

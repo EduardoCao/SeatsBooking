@@ -78,7 +78,7 @@
 	%>
 	<div align="center">
 	<form action="./DelSeatServlet" method="post" onsubmit="return reg(this);">
-	<table align="center" width="50" border="1" height="40" bordercolor="#E8F4CC">
+	<table align="center" width="80" border="1" height="40" bordercolor="#E8F4CC">
 		<tr>
     		<td align="center" colspan="2">
     			 第<%=ddate + "" %>天 

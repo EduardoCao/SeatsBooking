@@ -11,13 +11,7 @@ public class Seats {
 	private String ownerPeroid2;
 	private String ownerPeroid3;
 	private String ownerPeroid4;
-	private int seatsType ;
-	public int getSeatsType() {
-		return seatsType;
-	}
-	public void setSeatsType(int seatsType) {
-		this.seatsType = seatsType;
-	}
+
 	public int getPeroid0() {
 		return peroid0;
 	}
