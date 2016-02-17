@@ -95,6 +95,30 @@
         <servlet-name>DeleteGroupServlet</servlet-name>
         <servlet-class>servlet.DeleteGroupServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminGroupServlet</servlet-name>
+        <servlet-class>servlet.AdminGroupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProveGroupServlet</servlet-name>
+        <servlet-class>servlet.ProveGroupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeclineGroupServlet</servlet-name>
+        <servlet-class>servlet.DeclineGroupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDelGroupServlet</servlet-name>
+        <servlet-class>servlet.AdminDelGroupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminGroupInfoServlet</servlet-name>
+        <servlet-class>servlet.AdminGroupInfoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddGroupServlet</servlet-name>
+        <servlet-class>servlet.AddGroupServlet</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -187,6 +211,30 @@
     <servlet-mapping>
         <servlet-name>DeleteGroupServlet</servlet-name>
         <url-pattern>/DeleteGroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminGroupServlet</servlet-name>
+        <url-pattern>/AdminGroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProveGroupServlet</servlet-name>
+        <url-pattern>/ProveGroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeclineGroupServlet</servlet-name>
+        <url-pattern>/DeclineGroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDelGroupServlet</servlet-name>
+        <url-pattern>/AdminDelGroupServlet</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>AdminGroupInfoServlet</servlet-name>
+        <url-pattern>/AdminGroupInfoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddGroupServlet</servlet-name>
+        <url-pattern>/AddGroupServlet</url-pattern>
     </servlet-mapping>
 
 

@@ -64,10 +64,8 @@ public class GroupBookServlet extends HttpServlet{
 			}
 			else if(tag == 0)
 			{
-				ArrayList<String> onesGroupInfo = new ArrayList<String>();
-				onesGroupInfo = groupSeatDao.getOnesGroupInfo(user.getStudentnum());
-				request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
-				request.getRequestDispatcher("groupseatsinfo.jsp").forward(request, response);
+				request.setAttribute("info",  "OK! Book the seat!");
+				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 		}
 	}

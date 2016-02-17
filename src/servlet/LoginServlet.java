@@ -21,7 +21,6 @@ public class LoginServlet extends HttpServlet{
 		if (user != null)
 		{
 			int userType = userDao.checkUserType(studentnum, password);
-			request.getSession().invalidate();
 			request.getSession().setAttribute("user", user);
 //			if (userType < 0)
 //			{		

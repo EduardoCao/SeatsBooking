@@ -44,9 +44,8 @@ public class OpenUserServlet extends HttpServlet{
 				UserDao userDao = new UserDao();
 				if(userDao.closeUser(studentnum, userType))
 				{
-					showallusers = userDao.showAllUsers();
-					request.getSession().setAttribute("showallusers", showallusers);
-					request.getRequestDispatcher("admindealuser.jsp").forward(request, response);
+					request.setAttribute("info",  "OK! Open this user!");
+					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				else
 				{

@@ -120,6 +120,35 @@ public class UserDao {
 		{
 			ConnectDB.closeConnection(connSeat);
 		}
+		Connection connGroupSeat = ConnectDB.getConnectionGroupSeat();
+		try{	
+			for (int i = 0 ; i < 7 ; i ++)
+			{
+				for (int j = 0 ; j < 5 ; j ++)
+				{
+					String sql2 = "update group_seat_table_"+ i + " set period" + j + " = 0, ownerPeriod"+j + " = ? where ownerPeriod" + j + " = ?";
+					PreparedStatement ps = connGroupSeat.prepareStatement(sql2);
+					ps.setString(1, null);
+					ps.setString(2, studentnum);
+					ps.executeUpdate();
+					ps.close();
+					
+				}
+			}
+			String sql2 = "delete from reason_table where studentnum = ?";
+			PreparedStatement ps = connGroupSeat.prepareStatement(sql2);
+			ps.setString(1, studentnum);
+			ps.executeUpdate();
+			ps.close();
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		finally
+		{
+			ConnectDB.closeConnection(connGroupSeat);
+		}
 		return true;
 	}
 	public boolean closeUser(String studentnum , int userType)

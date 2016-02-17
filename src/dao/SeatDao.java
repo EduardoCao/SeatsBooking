@@ -446,7 +446,7 @@ public class SeatDao {
 			String sql = "update seat_table_" + day + " set period" + period + " = ?, ownerPeriod" + period + " = ?";
 			
 			ps = conn.prepareStatement(sql);
-			if (seatType.equals("0") || seatType.equals("1"))
+			if (seatType.equals("0") || seatType.equals("1") || seatType.equals("2"))
 			{
 				ps.setInt(1, 3);
 				ps.setString(2, null);
@@ -455,12 +455,12 @@ public class SeatDao {
 				ConnectDB.closeConnection(conn);
 				return 0;
 			}
-			else if(seatType.equals("2"))
-			{
-				ps.close();
-				ConnectDB.closeConnection(conn);
-				return 2;
-			}
+//			else if(seatType.equals("2"))
+//			{
+//				ps.close();
+//				ConnectDB.closeConnection(conn);
+//				return 2;
+//			}
 			else if(seatType.equals("3"))
 			{
 				ps.setInt(1, 0);

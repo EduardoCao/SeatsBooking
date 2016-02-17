@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.GroupSeatDao;
 import dao.SeatDao;
 
 
@@ -42,20 +43,22 @@ public class ClosePeriodServlet extends HttpServlet{
 			else
 			{
 				SeatDao seatDao = new SeatDao();
-				if(seatDao.closeSeat(day , period , seatType) == 0)
+				int tag = seatDao.closeSeat(day , period , seatType);
+				GroupSeatDao groupseatDao = new GroupSeatDao();
+				int tag2 = groupseatDao.closeSeat(day , period , seatType);
+				if(tag == 0 && tag2 == 0)
 				{
-					ArrayList<String> seatAccess = seatDao.getSeatAccess();
-					request.getSession().setAttribute("seataccess" , seatAccess);
-					request.getRequestDispatcher("./adminsetaccess.jsp").forward(request, response);
+					request.setAttribute("info",  "OK! Close this period!");
+					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
-				else if(seatDao.closeSeat(day , period , seatType) == 2)
+				else if(tag == 2 && tag2 == 2)
 				{
 					request.setAttribute("info",  "Cannot close timeout period!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				else
 				{
-					request.setAttribute("info",  "Cannot close this period!");
+					request.setAttribute("info",  "Close this period error! Please check!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				

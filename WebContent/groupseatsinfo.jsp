@@ -115,7 +115,7 @@
 %>
 </table>
 <div align="center">
-		已被拒绝
+		已被拒绝（被拒绝信息保留一天）
 </div>
 <table align="center" width="1000" border="1" height="50" bordercolor="#E8F4CC">
 <%
@@ -155,5 +155,7 @@
 		</tr>
 		</table>
 </form>
+
+<a href="message.jsp">back</a>
 </body>
 </html>
