@@ -42,6 +42,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">教室预定系统</a>
+          
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" action="LoginServlet" method="post" onSubmit="return login(this)">
