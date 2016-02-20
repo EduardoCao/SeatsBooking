@@ -1,12 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="util.User" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page language="java" contentType="text/html; charset=gb2312"
+    pageEncoding="UTF-8"
+    import="util.User"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <title>用户注册</title>
-<!--     	<link rel="stylesheet" type="text/css" href="images/styles.css"> -->
-        <script type="text/javascript">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>用户注册-教室预定系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+            <script type="text/javascript">
 	    	function reg(form){
 	        	if(form.studentnum.value == ""){
 	        		alert("学生证号不能为空！");
@@ -31,100 +47,160 @@
 
 	    	}
 	    </script>
-  </head>
-  
-  <body>
-  	<% 
-		User user = (User)session.getAttribute("user");
-	    // 判断用户是否登录
-		if(user == null){
-			user = new User();
-			user.setStudentnum(null);
-			//session.invalidate(); 
-	%>
-		<a href="login.jsp">请登录！</a>
-		<div id="div" style="display: none" >
-	
-	<%
-		}
-		else if (  user.getUserType() != 2) 
-		{
-	%>
-		您无权查看该页面，仅可由管理员注册用户。
-		<a href="message.jsp"> back</a>
-		<div id="div" style="display: none" >
-	<% 
-		}	
-		else 
-		{
-	%>
-		当前用户：<%=user.getStudentnum() %>
-	<% 
-		}
-	%>
-  
-<div align="center">
-  <div class="top">用户注册</div>
-	  <div align="left">
-		  	<div class="div1">
-		  		
-		  		<div class="bottom">
-					<div class="div2">
-				  		<ul>
-<!-- 				  			<li><a href="reg.jsp">用户注册</a></li> -->
-				  			<li><a href="login.jsp">用户登录</a></li>
-				  			<li><a href="message.jsp">当前用户</a></li>
-				  			<li><a href="ExitServlet">用户退出</a></li>
-				  		</ul>
-				  	</div>
-				  	 <div class="div3"> 
-					    <form action="RegServlet" method="post" onsubmit="return reg(this);">
-						    <table align="center" width="450" border="0">
-						    	<tr>
-						    		<td align="right">学生证号：</td>
-						    		<td>
-						    			<input type="text" name="studentnum">
-						    		</td>
-						    	</tr>
-						    	<tr>
-						    		<td align="right">密 码：</td>
-						    		<td>
-						    			<input type="password" name="password">
-						    		</td>
-						    	</tr>
-						    	<tr>
-						    		<td align="right">确认密码：</td>
-						    		<td>
-						    			<input type="password" name="repassword">
-						    		</td>
-						    	</tr>
 
-						    	<tr>
-						    		<td align="right">电子邮箱：</td>
-						    		<td>
-						    			<input type="text" name="email">
-						    		</td>
-						    	</tr>
-						    	<tr>
-						    		<td align="right">用户类别：</td>
-						    		<td>
-						    			<select name="userType">
-						    				<option selected value = "1"> 教师 </option>
-						    				<option selected value = "0"> 学生 </option>
-						    			</select>
-						    		</td>
-						    	</tr>
-						    	<tr>
-						    		<td colspan="2" align="center">
-						    			<input type="submit" value="注 册">
-						    			<input type="reset" value="重 置">
-						    		</td>
-						    	</tr>
-						    </table>
-					    </form>
-				  	 </div>
-				</div>
-		  	</div>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+	<% 
+		User user = (User)session.getAttribute("user");
+	%>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">教室预定系统</a>
+          
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
+          <ul class="nav navbar-nav">
+            <li><a href="./admin_message.jsp">管理员界面</a></li>
+          </ul>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <%if (user != null) { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
+              <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+              <%} else { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
+              <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
+              <%} %>
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <p>一段描述</p>
+        </div>
+      </div>
+
+	<br>
+
+	<div id="content">
+	  <div class="container">
+	    <form action="RegServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
+	      <div class="row">
+	        <h1 style="text-align:center; height:60px">注册</h1>
+	      </div>
+	      <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 register">
+	            <div class="form-group">
+	              <label for="username" class="col-sm-3 control-label">学生证号：</label>
+	              <div class="col-sm-8">
+	                <div class="input-group">
+	                <input type="text" class="form-control" name="studentnum" placeholder="请输入学生证号">
+	               <div class="input-group-addon">
+	               <span class="glyphicon glyphicon-user"></span>
+	               </div>
+	             </div>
+	            </div>
+	            </div>
+	            <div class="form-group">
+	              <label for="password" class="col-sm-3 control-label">密码：</label>
+	              <div class="col-sm-8">
+	                <div class="input-group">
+	                <input type="password" class="form-control" name="password" placeholder="请输入密码">
+	               <div class="input-group-addon">
+	               <span class="glyphicon glyphicon-lock"></span>
+	               </div>
+	             </div>
+	            </div>
+	            </div>
+	            <div class="form-group">
+	              <label for="chkpwd" class="col-sm-3 control-label">确认密码：</label>
+	              <div class="col-sm-8">
+	                <div class="input-group">
+	                <input type="password" class="form-control" name="repassword" placeholder="请确认密码">
+	               <div class="input-group-addon">
+	               <span class="glyphicon glyphicon-exclamation-sign"></span>
+	               </div>
+	             </div>
+	            </div>
+	            </div>
+	            <div class="form-group">
+	              <label for="email" class="col-sm-3 control-label">电子邮箱：</label>
+	              <div class="col-sm-8">
+	                <div class="input-group">
+	                <input type="text" class="form-control" name="email" placeholder="请输入有效邮箱">
+	               <div class="input-group-addon">
+	               <span class="glyphicon glyphicon-envelope"></span>
+	               </div>
+	             </div>
+	            </div>
+	            </div>
+	            <div class="form-group">
+	              <label for="authcode" class="col-sm-3 control-label">用户类别：</label>
+	              <div class="col-sm-5">
+	                <div class="input-group">
+	                  <select class = "form-control" name="userType">
+						<option selected value = "1"> 教师 </option>
+						<option selected value = "0"> 学生 </option>
+					  </select>
+	            	</div>
+	              </div>
+
+	            </div>
+	    <div class="row">
+	        <div class="col-md-3 col-md-offset-3 col-xs-12">
+	            <button type="reset" class="btn btn-default btn-block"><b> &nbsp; &nbsp; 清空 &nbsp;&nbsp;</b>
+	              <span class="glyphicon glyphicon-remove"></span></button>
+	        </div>
+	        <div class="col-md-3 col-xs-12">
+	            <button type="submit" class="btn btn-info btn-block"><b>&nbsp;&nbsp; 提交 &nbsp;&nbsp;</b>
+	            <span class="glyphicon glyphicon-arrow-right"></span></button>
+	        </div>
+	      </div>
+	    </form>
 	  </div>
+	</div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p align="center">&copy; 版权所有 教研院</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
