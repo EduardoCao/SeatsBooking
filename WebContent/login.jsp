@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=gb2312"
     pageEncoding="UTF-8"
-     import="java.util.List"%>
+    import="util.User"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>教室预定系统</title>
+    <title>登录-教室预定系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@
   </head>
 
   <body>
-
+	<div>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -42,44 +42,55 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">教室预定系统</a>
-          
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" action="LoginServlet" method="post" onSubmit="return login(this)">
+        
+		<div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text"  placeholder="用户名" class="form-control" name="studentnum">
+            	<a style="font-size:22px;color:gray;font-weight:bold">登录页</a>
             </div>
-            <div class="form-group">
-              <input type="password" placeholder="密码" class="form-control" name="password">
-            </div>
-            <button type="submit" class="btn btn-success">登录</button>
           </form>
-        </div><!--/.navbar-collapse -->
+        </div><!--/.navbar-collapse -->        
+        
       </div>
     </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>你好</h1>
-        <p>欢迎使用教研院教室预订系统</p>
-        <a class="btn btn-primary btn-lg" href="message.jsp" role="button">当前用户 &raquo;</a> &nbsp;
-        <a class="btn btn-primary btn-lg" href="ExitServlet" role="button">登出 &raquo;</a>
-      </div>
     </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <p>一段描述</p>
-        </div>
-      </div>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="container" style="width:300px"]>
+
+      <form class="form-signin" action="LoginServlet" method="post" onSubmit="return login(this)">
+        <h2 class="form-signin-heading"> </h2>
+        <h2 class="form-signin-heading"> </h2>
+        <h2 class="form-signin-heading"> </h2>
+        <br>
+        <br><br>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="text"  placeholder="用户名" class="form-control" name="studentnum">
+        <label for="inputPassword"  class="sr-only">Password</label>
+        <input type="password" placeholder="密码" class="form-control" name="password">
+        <%
+	    	// 获取提示信息
+			String info = (String)request.getAttribute("info");
+	    	// 如果提示信息不为空，则输出提示信息
+			if(info != null){
+		%>
+		<p>提示信息:<%=info%></p>
+		<%} else {%>
+        <br>
+        <%} %>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      </form>
+
+    </div>
+    
+
+    <div class="container" style="position:fixed; bottom:0px;">
 
       <hr>
 
-      <footer>
-        <p>&copy; 版权所有 教研院</p>
+      <footer >
+        <p align="center">&copy; 版权所有 教研院 2016</p>
       </footer>
     </div> <!-- /container -->
 

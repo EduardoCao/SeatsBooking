@@ -22,7 +22,7 @@ public class ExitServlet extends HttpServlet {
 			session.removeAttribute("user");
 			request.setAttribute("info", user.getStudentnum() + " exits successfully!");
 		}
-		request.getRequestDispatcher("message.jsp").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 				
 	}
 	

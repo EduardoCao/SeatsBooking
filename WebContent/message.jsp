@@ -1,121 +1,124 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="util.User" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page language="java" contentType="text/html; charset=gb2312"
+    pageEncoding="UTF-8"
+    import="util.User"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<title>提示信息</title>
-		<link rel="stylesheet" type="text/css" href="images/styles.css">
-	</head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-	<body>
+    <title>用户信息-教室预定系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
 	<% 
 		User user = (User)session.getAttribute("user");
-	    // 判断用户是否登录
-		if(user == null){
-			user = new User();
-			user.setStudentnum(null);
-			//session.invalidate(); 
 	%>
-		<a href="login.jsp">请登录！</a>
-		<br>
-		
-		 <%
-    	// 获取提示信息
-		String info = (String)request.getAttribute("info");
-    	// 如果提示信息不为空，则输出提示信息
-		if(info != null){
-			%>
-			提示信息:<%=info%>
-		<%
-		}
-    	%>
-		<div id="div" style="display: none" >
-	<%
-		}
-		else if (user.getUserType() == 0 || user.getUserType() == -1)
-		{
-	%>
-		当前用户：<%=user.getStudentnum() %>
-		<li><a href="student_message.jsp">学生界面</a></li>
-		
-	<% 
-		}
-		else if (user.getUserType() == 1 || user.getUserType() ==  -2)
-		{
-	%>
-		当前用户：<%=user.getStudentnum() %>
-		<li><a href="teacher_message.jsp">教师界面</a></li>
-	<% 
-		}
-		else if (user.getUserType() == 2)
-		{
-	%>
-		当前用户：<%=user.getStudentnum() %>
-		<li><a href="admin_message.jsp">管理员界面</a></li>
-	<% 
-		}
-	%>
-  <div align="center">
-  <div class="top">提示信息</div>
-	  <div align="left">
-		  	<div class="div1">
-		  		
-		  		<div class="bottom">
-					<div class="div2">
-				  		<ul>
-				  			<li><a href="changepw.jsp">修改密码</a></li>
-				  			<li><a href="login.jsp">用户登录</a></li>
-				  			<li><a href="message.jsp">当前用户</a></li>
-				  			<li><a href="ExitServlet">用户退出</a></li>
-				  		</ul>
-				  	</div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">教室预定系统</a>
+          
+        </div>
+        
+        <%
+        if (user != null) { 
+        	String tag = "";
+        	String ref = "";
+        	if (user.getUserType() == 0 || user.getUserType() == -1) {
+        		tag = "学生界面";
+        		ref = "./student_message.jsp";
+        	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
+        		tag = "教师界面";
+        		ref = "./teacher_message.jsp";
+        	} else {
+        		tag = "管理员界面";
+        		ref = "./admin_message.jsp";
+        	}
+        		
+       	%>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
+          <ul class="nav navbar-nav">
+            <li><a href="<%=ref%>"><%=tag %></a></li>
+            <li><a href="changepw.jsp">修改密码</a></li>
+          </ul>
+        </div>
+        
+        <%} %>
+        
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <%if (user != null) { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
+              <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+              <%} else { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
+              <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
+              <%} %>
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
 
-				  	 <br>
-				  	 <br>
-				  	 <div class="div3"> 
-				  	 
-					    <% 
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>你好</h1>
+        <p>欢迎使用教研院教室预订系统</p>
+        <a class="btn btn-primary btn-lg" href="ExitServlet" role="button">登出 &raquo;</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <p>一段描述</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 版权所有 教研院</p>
+      </footer>
+    </div> <!-- /container -->
 
 
-
-					    	// 判断用户是否登录
-							if(user != null){
-						%>
-						
-						<table align="center" width="350" border="1" height="200" bordercolor="#E8F4CC">
-							<tr>
-					    		<td align="center" colspan="2">
-					    			当前用户：
-					    			<span style="font-weight: bold;font-size: 18px;"><%=user.getStudentnum() %></span>
-					    			
-					    		</td>
-					    	</tr>
-					    	<tr>
-					    		<td align="right">电子邮箱：</td>
-					    		<td><%=user.getEmail()%></td>
-					    	</tr>
-						</table>
-						<%								
-							}
-					    %>
-		<table align="center" width="350" border="1" height="200" bordercolor="#E8F4CC">
-		<%
-    	// 获取提示信息
-		String info = (String)request.getAttribute("info");
-    	// 如果提示信息不为空，则输出提示信息
-		if(info != null){
-			//System.out.print(info);
-			%>
-			提示信息:<%=info%>
-		<%
-		}
-    	%>
-		</table>
-						
-				  	 </div>
-				</div>
-		  	</div>
-	  </div>
-	</body>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

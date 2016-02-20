@@ -27,15 +27,15 @@ public class LoginServlet extends HttpServlet{
 //				request.setAttribute("info",  "You have been banned!");
 //				request.getRequestDispatcher("message.jsp").forward(request, response);
 //			}
-			if (userType == 2)
-			{		
+			if (userType == 2) // 管理员类型
+			{
 				request.getRequestDispatcher("admin_message.jsp").forward(request, response);
 			}
-			if (userType == 1 || userType == -2)
+			if (userType == 1 || userType == -2) // 老师类型
 			{
 				request.getRequestDispatcher("teacher_message.jsp").forward(request, response);
 			}
-			if (userType == 0 || userType == -1)
+			if (userType == 0 || userType == -1) // 学生
 			{
 				request.getRequestDispatcher("student_message.jsp").forward(request, response);
 			}
@@ -43,8 +43,8 @@ public class LoginServlet extends HttpServlet{
 		else
 		{
 			request.getSession().setAttribute("user", user);
-			request.setAttribute("info", "The student number or the password is wrong!");
-			request.getRequestDispatcher("message.jsp").forward(request, response);
+			request.setAttribute("info", "用户名或密码错误，请重新输入");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 			
 		}
 		
