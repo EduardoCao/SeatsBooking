@@ -57,32 +57,49 @@
     </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="container" style="width:300px"]>
-
-      <form class="form-signin" action="LoginServlet" method="post" onSubmit="return login(this)">
-        <h2 class="form-signin-heading"> </h2>
-        <h2 class="form-signin-heading"> </h2>
-        <h2 class="form-signin-heading"> </h2>
-        <br>
-        <br><br>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text"  placeholder="用户名" class="form-control" name="studentnum">
-        <label for="inputPassword"  class="sr-only">Password</label>
-        <input type="password" placeholder="密码" class="form-control" name="password">
-        <%
-	    	// 获取提示信息
-			String info = (String)request.getAttribute("info");
-	    	// 如果提示信息不为空，则输出提示信息
-			if(info != null){
-		%>
-		<p>提示信息:<%=info%></p>
-		<%} else {%>
-        <br>
-        <%} %>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-      </form>
-
-    </div>
+<br><br><br>
+<div id="content">
+	  <div class="container">
+	    <form action="LoginServlet" method="post" onSubmit="return login(this)" class="form-horizontal">
+	      <div class="row">
+	        <h1 style="text-align:center; height:60px">登录</h1>
+	      </div>
+	      <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 register">
+	            <div class="form-group">
+	              <label for="username" class="col-sm-3 control-label">用户名：</label>
+	              <div class="col-sm-8">
+	                <div class="input-group">
+	                <input type="text" class="form-control" name="studentnum" placeholder="请输入用户名">
+	               <div class="input-group-addon">
+	               <span class="glyphicon glyphicon-user"></span>
+	               </div>
+	             </div>
+	            </div>
+	            </div>
+	            <div class="form-group">
+	              <label for="password" class="col-sm-3 control-label">密码：</label>
+	              <div class="col-sm-8">
+	                <div class="input-group">
+	                <input type="password" class="form-control" name="password" placeholder="请输入密码">
+	               <div class="input-group-addon">
+	               <span class="glyphicon glyphicon-lock"></span>
+	               </div>
+	             </div>
+	            </div>
+	            </div>
+	    <div class="row">
+	        <div class="col-md-3 col-md-offset-3 col-xs-12">
+	            <button type="reset" class="btn btn-default btn-block"><b> &nbsp; &nbsp; 清空 &nbsp;&nbsp;</b>
+	              <span class="glyphicon glyphicon-remove"></span></button>
+	        </div>
+	        <div class="col-md-3 col-xs-12">
+	            <button type="submit" class="btn btn-info btn-block"><b>&nbsp;&nbsp; 提交 &nbsp;&nbsp;</b>
+	            <span class="glyphicon glyphicon-arrow-right"></span></button>
+	        </div>
+	      </div>
+	    </form>
+	  </div>
+	</div>
     
 
     <div class="container" style="position:fixed; bottom:0px;">
