@@ -20,6 +20,7 @@ public class ExitServlet extends HttpServlet {
 		if(user != null)
 		{
 			session.removeAttribute("user");
+			session.invalidate();
 			request.setAttribute("info", user.getStudentnum() + " exits successfully!");
 		}
 		request.getRequestDispatcher("index.jsp").forward(request, response);
