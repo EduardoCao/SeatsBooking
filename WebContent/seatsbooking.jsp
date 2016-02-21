@@ -1,62 +1,105 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ page import="java.util.*"%>
-<%@ page import="java.text.*"%>
+<%@ page language="java" contentType="text/html; charset=gb2312"
+    pageEncoding="UTF-8"
+    import="util.User"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="util.Seats" %>
-<%@ page import="util.User" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SeatsBooking</title>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
+    <title>显示用户-教室预定系统</title>
 
-<body>
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
 	<% 
 		User user = (User)session.getAttribute("user");
-	    // 判断用户是否登录
-		if(user == null){
-			user = new User();
-			user.setStudentnum(null);
-			//session.invalidate(); 
 	%>
-		<a href="login.jsp">请登录！</a>
-		<div id="div" style="display: none" >
-	
-	<%
-		}
-		else if (  user.getUserType() == -1) 
-		{
-	%>
-		您已经被管理员限制权限。
-		<a href="message.jsp">back</a>
-		<div id="div" style="display: none" >
-	<% 
-		}	
-		else if (  user.getUserType() != 0) 
-		{
-	%>
-		您无权查看该页面，仅可由学生预定座位。
-		<a href="message.jsp">back</a>
-		<div id="div" style="display: none" >
-	<% 
-		}	
-		else 
-		{
-	%>
-		当前用户：<%=user.getStudentnum() %>
-	<% 
-		}
-	%>
-  	 <div class="div3"> 
-	    <form action="./SeatsServlet" method="post" onsubmit="return reg(this);">
-		    <table align="center" width="450" border="0">
-		    	
-		    		<td align="right">日期：</td>
-		    		<td>
-		    			<select name="bookdate">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">教室预定系统</a>
+          
+        </div>
+        
+        <%
+        if (user != null) { 
+        	String tag = "";
+        	String ref = "";
+        	if (user.getUserType() == 0 || user.getUserType() == -1) {
+        		tag = "学生界面";
+        		ref = "./student_message.jsp";
+        	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
+        		tag = "教师界面";
+        		ref = "./teacher_message.jsp";
+        	} else {
+        		tag = "管理员界面";
+        		ref = "./admin_message.jsp";
+        	}
+        		
+       	%>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./seatsbooking.jsp">个人座位预定</a></li>
+            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
+            <li><a href="./InfoServlet">查看个人座位预定</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+          </ul>
+        </div>
+        
+        <%} %>
+        
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <%if (user != null) { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
+              <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+              <%} else { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
+              <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
+              <%} %>
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+        <br><br><br>
+    <div class="container">
+    <form action="./SeatsServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
+	            <div class="form-group">
+	              <label for="authcode" class="col-sm-3 control-label" style="width:100px;">日期：</label>
+	              <div class="col-sm-5">
+	                <div class="input-group">
+	                  <select class = "form-control" name="bookdate">
 		    				<option selected value = "6"> 第七天 </option>
 		    				<option selected value = "5"> 第六天 </option>
 		    				<option selected value = "4"> 第五天 </option>
@@ -64,20 +107,17 @@
 		    				<option selected value = "2"> 第三天 </option>
 		    				<option selected value = "1"> 第二天 </option>
 		    				<option selected value = "0"> 今天 </option>
-		    			</select>
-		    			
-		    		</td>
+					  </select>
+	            	</div>
+	              </div>
+	              </div>
+	              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	              <input type="submit" class="btn btn-success" value="查 询">
+		          <input type="reset" class="btn btn-success" value="重 置">
+	 </form>	
+	            </div>
 
-		    	</tr>
-		    	<tr>
-		    		<td colspan="2" align="center">
-		    			<input type="submit" value="查 询">
-		    			<input type="reset" value="重 置">
-		    		</td>
-		    	</tr>
-		    </table>
-	    </form>
-  	 </div>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
   	 <%
  	 Seats[] seats = new Seats[10];
   	 seats = (Seats[])session.getAttribute("seats");
@@ -89,1330 +129,293 @@
   	}
 	if(seats != null){ 
 	%>
+    <div class="container">
+    <form action="./BookServlet" method="post" onsubmit="return reg(this);">
+
+    <h1>个人座位预订</h1>
+
+		<table class="table table-striped">
+		   <thead>
+		      <tr>
+		      	 <th align="right">座位号</th>
+		      	 <th >时间段0</th>
+		         <th>时间段1</th>
+		         <th>时间段2</th>
+		         <th>时间段3</th>
+		         <th>时间段4</th>
+		      </tr>
+		   </thead>
+		   <tbody>
+		   
+<%
 	
-	<form action="./BookServlet" method="post" onsubmit="return reg(this);">
-	<table align="center" width="650" border="1" height="400" bordercolor="#E8F4CC">
-		<tr>
-    		<td align="center" colspan="2">
-    			 第<%=ddate + "" %>天 
-    			 <input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
-    			  <input type = 'hidden' name = "owner" value = <%=user.getStudentnum() %>>
-    			  
-    			  
-    			 <br>
-    			 座位0是否被占用：
-    			 <input type = "radio" name = "seat" id = '00' value = '0_0'>  
-    			 	<%
-    			 	if (seats[0].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[0].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[0].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	else if(seats[0].getPeroid0() == 3)
-    			 	{
-    			 	%>
-    			 	关闭时间段
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '01' value = '0_1'> 
-    			 <%
-    			 	if (seats[0].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[0].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[0].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	else if(seats[0].getPeroid1() == 3)
-    			 	{
-    			 	%>
-    			 	关闭时间段
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '02' value = '0_2'>  
-    			 <%
-    			 	if (seats[0].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[0].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[0].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	else if(seats[0].getPeroid2() == 3)
-    			 	{
-    			 	%>
-    			 	关闭时间段
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '03' value = '0_3'>  
-				<%
-    			 	if (seats[0].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[0].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[0].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	else if(seats[0].getPeroid3() == 3)
-    			 	{
-    			 	%>
-    			 	关闭时间段
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '04' value = '0_4'>  
-    			 <%
-    			 	if (seats[0].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[0].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[0].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	else if(seats[0].getPeroid4() == 3)
-    			 	{
-    			 	%>
-    			 	关闭时间段
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[0].getPeroid0()%>
-				if(tag0 > 0)
-					document.getElementById("00").disabled = true;
-				
-				var tag1 = <%=seats[0].getPeroid1()%>
-				if(tag1 > 0)
-					document.getElementById("01").disabled = true;
-				
-				var tag2 = <%=seats[0].getPeroid2()%>
-				if(tag2 > 0)
-					document.getElementById("02").disabled = true;
-				
-				var tag3 = <%=seats[0].getPeroid3()%>
-				if(tag3 > 0)
-					document.getElementById("03").disabled = true;
-				
-				var tag4 = <%=seats[0].getPeroid4()%>
-				if(tag4 > 0)
-					document.getElementById("04").disabled = true;
-				</script>
-				
-				
- 				<br>
- 				座位1是否被占用：
-    			 <input type = "radio" name = "seat" id = '10' value = '1_0'>  
-    			 	<%
-    			 	if (seats[1].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[1].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[1].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '11' value = '1_1'> 
-    			 <%
-    			 	if (seats[1].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[1].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[1].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '12' value = '1_2'>  
-    			 <%
-    			 	if (seats[1].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[1].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[1].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '13' value = '1_3'>  
-				<%
-    			 	if (seats[1].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[1].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[1].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '14' value = '1_4'>  
-    			 <%
-    			 	if (seats[1].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[1].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[1].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[1].getPeroid0()%>
-				document.getElementById("10").disabled = tag0;
-				var tag1 = <%=seats[1].getPeroid1()%>
-				document.getElementById("11").disabled = tag1;
-				var tag2 = <%=seats[1].getPeroid2()%>
-				document.getElementById("12").disabled = tag2;
-				var tag3 = <%=seats[1].getPeroid3()%>
-				document.getElementById("13").disabled = tag3;
-				var tag4 = <%=seats[1].getPeroid4()%>
-				document.getElementById("14").disabled = tag4;
-				</script>
- 				 <br>
- 				座位2是否被占用：
-     			<input type = "radio" name = "seat" id = '20' value = '2_0'>  
-    			 	<%
-    			 	if (seats[2].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[2].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[2].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '21' value = '2_1'> 
-    			 <%
-    			 	if (seats[2].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[2].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[2].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '22' value = '2_2'>  
-    			 <%
-    			 	if (seats[2].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[2].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[2].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '23' value = '2_3'>  
-				<%
-    			 	if (seats[2].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[2].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[2].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '24' value = '2_4'>  
-    			 <%
-    			 	if (seats[2].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[2].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[2].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[2].getPeroid0()%>
-				document.getElementById("20").disabled = tag0;
-				var tag1 = <%=seats[2].getPeroid1()%>
-				document.getElementById("21").disabled = tag1;
-				var tag2 = <%=seats[2].getPeroid2()%>
-				document.getElementById("22").disabled = tag2;
-				var tag3 = <%=seats[2].getPeroid3()%>
-				document.getElementById("23").disabled = tag3;
-				var tag4 = <%=seats[2].getPeroid4()%>
-				document.getElementById("24").disabled = tag4;
-				</script>
- 				 <br>
- 				座位3是否被占用：
-     			<input type = "radio" name = "seat" id = '30' value = '3_0'>  
-    			 	<%
-    			 	if (seats[3].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[3].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[3].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '31' value = '3_1'> 
-    			 <%
-    			 	if (seats[3].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[3].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[3].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '32' value = '3_2'>  
-    			 <%
-    			 	if (seats[3].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[3].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[3].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '33' value = '3_3'>  
-				<%
-    			 	if (seats[3].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[3].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[3].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '34' value = '3_4'>  
-    			 <%
-    			 	if (seats[3].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[3].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[3].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[3].getPeroid0()%>
-				document.getElementById("30").disabled = tag0;
-				var tag1 = <%=seats[3].getPeroid1()%>
-				document.getElementById("31").disabled = tag1;
-				var tag2 = <%=seats[3].getPeroid2()%>
-				document.getElementById("32").disabled = tag2;
-				var tag3 = <%=seats[3].getPeroid3()%>
-				document.getElementById("33").disabled = tag3;
-				var tag4 = <%=seats[3].getPeroid4()%>
-				document.getElementById("34").disabled = tag4;
-				</script>
- 				 <br>
- 				座位4是否被占用：
-     			<input type = "radio" name = "seat" id = '40' value = '4_0'>  
-    			 	<%
-    			 	if (seats[4].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[4].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[4].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '41' value = '4_1'> 
-    			 <%
-    			 	if (seats[4].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[4].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[4].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '42' value = '4_2'>  
-    			 <%
-    			 	if (seats[4].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[4].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[4].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '43' value = '4_3'>  
-				<%
-    			 	if (seats[4].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[4].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[4].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '44' value = '4_4'>  
-    			 <%
-    			 	if (seats[4].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[4].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[4].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[4].getPeroid0()%>
-				document.getElementById("40").disabled = tag0;
-				var tag1 = <%=seats[4].getPeroid1()%>
-				document.getElementById("41").disabled = tag1;
-				var tag2 = <%=seats[4].getPeroid2()%>
-				document.getElementById("42").disabled = tag2;
-				var tag3 = <%=seats[4].getPeroid3()%>
-				document.getElementById("43").disabled = tag3;
-				var tag4 = <%=seats[4].getPeroid4()%>
-				document.getElementById("44").disabled = tag4;
-				</script>
- 				 <br>
- 				座位5是否被占用：
-     			<input type = "radio" name = "seat" id = '50' value = '5_0'>  
-    			 	<%
-    			 	if (seats[5].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[5].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[5].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '51' value = '5_1'> 
-    			 <%
-    			 	if (seats[5].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[5].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[5].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '52' value = '5_2'>  
-    			 <%
-    			 	if (seats[5].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[5].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[5].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '53' value = '5_3'>  
-				<%
-    			 	if (seats[5].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[5].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[5].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '54' value = '5_4'>  
-    			 <%
-    			 	if (seats[5].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[5].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[5].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[5].getPeroid0()%>
-				document.getElementById("50").disabled = tag0;
-				var tag1 = <%=seats[5].getPeroid1()%>
-				document.getElementById("51").disabled = tag1;
-				var tag2 = <%=seats[5].getPeroid2()%>
-				document.getElementById("52").disabled = tag2;
-				var tag3 = <%=seats[5].getPeroid3()%>
-				document.getElementById("53").disabled = tag3;
-				var tag4 = <%=seats[5].getPeroid4()%>
-				document.getElementById("54").disabled = tag4;
-				</script>
- 				 <br>
- 				座位6是否被占用：
-     			<input type = "radio" name = "seat" id = '60' value = '6_0'>  
-    			 	<%
-    			 	if (seats[6].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[6].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[6].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '61' value = '6_1'> 
-    			 <%
-    			 	if (seats[6].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[6].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[6].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '62' value = '6_2'>  
-    			 <%
-    			 	if (seats[6].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[6].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[6].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '63' value = '6_3'>  
-				<%
-    			 	if (seats[6].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[6].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[6].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '64' value = '6_4'>  
-    			 <%
-    			 	if (seats[6].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[6].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[6].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[6].getPeroid0()%>
-				document.getElementById("60").disabled = tag0;
-				var tag1 = <%=seats[6].getPeroid1()%>
-				document.getElementById("61").disabled = tag1;
-				var tag2 = <%=seats[6].getPeroid2()%>
-				document.getElementById("62").disabled = tag2;
-				var tag3 = <%=seats[6].getPeroid3()%>
-				document.getElementById("63").disabled = tag3;
-				var tag4 = <%=seats[6].getPeroid4()%>
-				document.getElementById("64").disabled = tag4;
-				</script>
- 				 <br>
- 				座位7是否被占用：
-     			<input type = "radio" name = "seat" id = '70' value = '7_0'>  
-    			 	<%
-    			 	if (seats[7].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[7].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[7].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '71' value = '7_1'> 
-    			 <%
-    			 	if (seats[7].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[7].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[7].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '72' value = '7_2'>  
-    			 <%
-    			 	if (seats[7].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[7].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[7].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '73' value = '7_3'>  
-				<%
-    			 	if (seats[7].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[7].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[7].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '74' value = '7_4'>  
-    			 <%
-    			 	if (seats[7].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[7].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[7].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[7].getPeroid0()%>
-				document.getElementById("70").disabled = tag0;
-				var tag1 = <%=seats[7].getPeroid1()%>
-				document.getElementById("71").disabled = tag1;
-				var tag2 = <%=seats[7].getPeroid2()%>
-				document.getElementById("72").disabled = tag2;
-				var tag3 = <%=seats[7].getPeroid3()%>
-				document.getElementById("73").disabled = tag3;
-				var tag4 = <%=seats[7].getPeroid4()%>
-				document.getElementById("74").disabled = tag4;
-				</script>
- 				 <br>
- 				座位8是否被占用：
-     			<input type = "radio" name = "seat" id = '80' value = '8_0'>  
-    			 	<%
-    			 	if (seats[8].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[8].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[8].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '81' value = '8_1'> 
-    			 <%
-    			 	if (seats[8].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[8].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[8].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '82' value = '8_2'>  
-    			 <%
-    			 	if (seats[8].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[8].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[8].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '83' value = '8_3'>  
-				<%
-    			 	if (seats[8].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[8].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[8].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '84' value = '8_4'>  
-    			 <%
-    			 	if (seats[8].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[8].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[8].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[8].getPeroid0()%>
-				document.getElementById("80").disabled = tag0;
-				var tag1 = <%=seats[8].getPeroid1()%>
-				document.getElementById("81").disabled = tag1;
-				var tag2 = <%=seats[8].getPeroid2()%>
-				document.getElementById("82").disabled = tag2;
-				var tag3 = <%=seats[8].getPeroid3()%>
-				document.getElementById("83").disabled = tag3;
-				var tag4 = <%=seats[8].getPeroid4()%>
-				document.getElementById("84").disabled = tag4;
-				</script>
- 				 <br>
- 				座位9是否被占用：
-     			<input type = "radio" name = "seat" id = '90' value = '9_0'>  
-    			 	<%
-    			 	if (seats[9].getPeroid0() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[9].getPeroid0() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[9].getPeroid0() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 	
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '91' value = '9_1'> 
-    			 <%
-    			 	if (seats[9].getPeroid1() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[9].getPeroid1() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[9].getPeroid1() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '92' value = '9_2'>  
-    			 <%
-    			 	if (seats[9].getPeroid2() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[9].getPeroid2() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[9].getPeroid2() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			 </input>
-    			 <input type = "radio" name = "seat" id = '93' value = '9_3'>  
-				<%
-    			 	if (seats[9].getPeroid3() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[9].getPeroid3() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[9].getPeroid3() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-				 </input>
-    			 <input type = "radio" name = "seat" id = '94' value = '9_4'>  
-    			 <%
-    			 	if (seats[9].getPeroid4() == 0)
-    			 	{	
-    			 	%>
-    			 	可预约
-    			 	<%
-    			 	}
-    			 	else if (seats[9].getPeroid4() == 1)
-    			 	{
-    			 	%>
-    			 	已占用  
-    			 	<%
-					}
-    			 	else if(seats[9].getPeroid4() == 2)
-    			 	{
-    			 	%>
-    			 	已过时
-    			 	<%
-    			 	}
-    			 	%>
-    			  </input>
-    			 
-				<script>
-				var tag0 = <%=seats[9].getPeroid0()%>
-				document.getElementById("90").disabled = tag0;
-				var tag1 = <%=seats[9].getPeroid1()%>
-				document.getElementById("91").disabled = tag1;
-				var tag2 = <%=seats[9].getPeroid2()%>
-				document.getElementById("92").disabled = tag2;
-				var tag3 = <%=seats[9].getPeroid3()%>
-				document.getElementById("93").disabled = tag3;
-				var tag4 = <%=seats[9].getPeroid4()%>
-				document.getElementById("94").disabled = tag4;
-				</script>
-				<br>
-   				<input type="submit" value="提 交">
-   				<input type="reset" value="重 置">
 
-    		</td>
-    	</tr>
+	for (int i = 0 ; i < 10 ; i ++)
+	{
+%>
+		      <tr>
+		      	<td><%="座位"+i %></td>
+ 
+	    			 	<%
+	    			 	int x = 0;
+	    			 	if (seats[i].getPeroid0() == 0)
+	    			 	{	
+	    			 	%>
+		  				<td bgcolor="green">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								<%=i %>可预约
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid0() == 1)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								<%=i %>已占用 
+							</input>
+		  				</td>
+	    			 	<%
+						}
+	    			 	else if(seats[i].getPeroid0() == 2)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								<%=i %>已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if(seats[i].getPeroid0() == 3)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								<%=i %>关闭时间段
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	%>
 
-	</table>
-	</form>
-	<%
-	} 
-	%>
-	<a href="message.jsp">back</a> 
-	</div>
-</body>
+
+	  				
+ 
+	    			 	<%
+	    			 	x = 1;
+	    			 	if (seats[i].getPeroid1() == 0)
+	    			 	{	
+	    			 	%>
+		  				<td bgcolor="green">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								可预约
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid1() == 1)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								已占用 
+							</input>
+		  				</td>
+	    			 	<%
+						}
+	    			 	else if(seats[i].getPeroid1() == 2)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if(seats[i].getPeroid1() == 3)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								关闭时间段
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	%>
+	    			 	
+	    			 	
+	    			 	<%
+	    			 	x = 2;
+	    			 	if (seats[i].getPeroid2() == 0)
+	    			 	{	
+	    			 	%>
+		  				<td bgcolor="green">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								可预约
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid2() == 1)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								已占用 
+							</input>
+		  				</td>
+	    			 	<%
+						}
+	    			 	else if(seats[i].getPeroid2() == 2)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if(seats[i].getPeroid2() == 3)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								关闭时间段
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	%>
+	    			 	
+	    			 	
+	    			 	<%
+	    			 	x = 3;
+	    			 	if (seats[i].getPeroid3() == 0)
+	    			 	{	
+	    			 	%>
+		  				<td bgcolor="green">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								可预约
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid3() == 1)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								已占用 
+							</input>
+		  				</td>
+	    			 	<%
+						}
+	    			 	else if(seats[i].getPeroid3() == 2)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if(seats[i].getPeroid3() == 3)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								关闭时间段
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	%>
+	    			 	
+	    			 	
+	    			 	<%
+	    			 	x = 4;
+	    			 	if (seats[i].getPeroid4() == 0)
+	    			 	{	
+	    			 	%>
+		  				<td bgcolor="green">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								可预约
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid4() == 1)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								已占用 
+							</input>
+		  				</td>
+	    			 	<%
+						}
+	    			 	else if(seats[i].getPeroid4() == 2)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if(seats[i].getPeroid4() == 3)
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+								关闭时间段
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	%>
+
+
+		      </tr>
+ <%
+ }%>
+		   </tbody>
+		</table>
+		
+		<input type="submit" class="btn btn-success" value="提 交">
+		<input type="reset" class="btn btn-success" value="重 置">
+		</form>
+	  </div>
+	  <%} %>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 版权所有 教研院</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
