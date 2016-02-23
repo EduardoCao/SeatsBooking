@@ -26,7 +26,7 @@ def makeCloseUserTables():
 		conn.select_db('db_test')
 		cur.execute('drop table close_user_table');
 		cur.execute('create table if not exists close_user_table(studentnum varchar(20) , closetime varchar(12) )')
-		cur.execute("insert into close_user_table values( 'aa' , '2015-12-31' )")
+		#cur.execute("insert into close_user_table values( 'aa' , '2015-12-31' )")
 		conn.commit()
 		cur.close()
 		conn.close()
@@ -38,7 +38,7 @@ def makeReasonTables():
 		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
 		cur = conn.cursor()
 		conn.select_db('group_seat_db')
-		cur.execute('drop table reason_table');
+		#cur.execute('drop table reason_table');
 		cur.execute('create table if not exists reason_table(seat_period varchar(6) , studentnum varchar(20) , bookdate int , reason varchar(100) COLLATE utf8_unicode_ci NOT NULL, flag int) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci')
 		conn.commit()
 		cur.close()
@@ -232,8 +232,8 @@ if __name__ == '__main__':
 	# print "makeUserTables..."
 	# makeUserTables()
 
-	# print "makeCloseUserTables..."
-	# makeCloseUserTables()
+	print "makeCloseUserTables..."
+	makeCloseUserTables()
 
 	# print "makeSeatTables..."
 	# makeSeatTables()
