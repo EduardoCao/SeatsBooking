@@ -27,6 +27,7 @@ public class AdminGroupInfoServlet extends HttpServlet{
 		if(bookdate == null)
 		{
 			request.setAttribute("info",  "Error, please try again later!");
+			System.out.println("1!!info: " + "Error, please try again later!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -36,6 +37,7 @@ public class AdminGroupInfoServlet extends HttpServlet{
 			if(seats == null)
 			{
 				request.setAttribute("info",  "Error, please try again later!");
+				System.out.println("2!!info: " + "Error, please try again later!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else

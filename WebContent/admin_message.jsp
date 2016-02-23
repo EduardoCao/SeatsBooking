@@ -1,76 +1,106 @@
-<%@ page language="java" contentType="text/html" pageEncoding="GBK"%>
-<%@ page import="util.User" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page language="java" contentType="text/html; charset=gb2312"
+    pageEncoding="UTF-8"
+    import="util.User"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<title>Administration</title>
-		<link rel="stylesheet" type="text/css" href="images/styles.css">
-	</head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-	<body>
-	  	<% 
+    <title>管理员界面-教室预定系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+	<% 
 		User user = (User)session.getAttribute("user");
-	    // �ж��û��Ƿ��¼
-		if(user == null){
-			user = new User();
-			user.setStudentnum(null);
-			//session.invalidate(); 
 	%>
-		<a href="login.jsp">���¼��</a>
-		<div id="div" style="display: none" >
-	
-	<%
-		}
-		else if (  user.getUserType() != 2) 
-		{
-	%>
-		����Ȩ�鿴����Աҳ�档
-		<a href="message.jsp"> back </a>
-		<div id="div" style="display: none" >
-	<% 
-		}	
-		else 
-		{
-	%>
-		��ǰ�û���<%=user.getStudentnum() %>
-	<% 
-		}
-	%>
-  <div align="center">
-  <div class="top">Administrator</div>
-	  <div align="left">
-		  	<div class="div1">
-		  		
-		  		<div class="bottom">
-					<div class="div2">
-				  		<ul>
-				  			<li><a href="login.jsp">�û���¼</a></li>
-				  			<li><a href="message.jsp">��ǰ�û�</a></li>
-				  			<li><a href="ExitServlet">�û��˳�</a></li>
-				  		</ul>
-				  	</div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">教室预定系统</a>
+          
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
+          <ul class="nav navbar-nav">
+            <li><a href="./adminuser.jsp">管理用户</a></li>
+            <li><a href="./adminseat.jsp">个人座位预定</a></li>
+            <li><a href="./admingroup.jsp">团体预定</a></li>
+            <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
+          </ul>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <%if (user != null) { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
+              <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+              <%} else { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
+              <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
+              <%} %>
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
 
-				</div>
-		  	</div>
-	  </div>
-	  	  <div align="center">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>你好</h1>
+        <p>欢迎使用教研院教室预订系统</p>
+        <a class="btn btn-primary btn-lg" href="ExitServlet" role="button">登出 &raquo;</a>
+      </div>
+    </div>
 
-					<div class="div5">
-				  		<ul>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <p>一段描述</p>
+        </div>
+      </div>
 
-				  			<a href="./adminuser.jsp">�����û�</a>
-				  			<br>
-				  			<a href="./adminseat.jsp">������λԤ��</a>
-				  			<br>
-				  			<a href="./admingroup.jsp">����Ԥ��</a>
-				  			<br>
-				  			<a href="./SetAccessServlet">����ʱ��ο���Ȩ��</a>
+      <hr>
 
-				  		</ul>
-				  	</div>
+      <footer>
+        <p>&copy; 版权所有 教研院</p>
+      </footer>
+    </div> <!-- /container -->
 
-		  	
-	  </div>
-	  </div>
-	</body>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

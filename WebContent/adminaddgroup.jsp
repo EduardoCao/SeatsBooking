@@ -1,50 +1,103 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="util.User" %>
-<%@ page import="util.Seats" %>
+<%@ page language="java" contentType="text/html; charset=gb2312"
+    pageEncoding="UTF-8"
+    import="util.User"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="util.Seats" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>add group</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-<% 
+    <title>显示用户-教室预定系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+	<% 
 		User user = (User)session.getAttribute("user");
-	    // 判断用户是否登录
-		if(user == null){
-			user = new User();
-			user.setStudentnum(null);
-%>
-		<a href="login.jsp">请登录！</a>
-		<div id="div" style="display: none" >
-	
-	<%
-		}
-		else if (  user.getUserType() != 2) 
-		{
 	%>
-		您无权查看管理员页面。
-		<a href="message.jsp"> back </a>
-		<div id="div" style="display: none" >
-	<% 
-		}	
-		else 
-		{
-	%>
-		当前用户：<%=user.getStudentnum() %>
-	<% 
-		}
-	%>
-<div class="div3"> 
-	    <form action="./AdminGroupInfoServlet" method="post" onsubmit="return reg(this);">
-		    <table align="center" width="450" border="0">
-		    	
-		    		<td align="right">日期：</td>
-		    		<td>
-		    			<select name="bookdate">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">教室预定系统</a>
+          
+        </div>
+        
+        <%
+        if (user != null) { 
+        	String tag = "";
+        	String ref = "";
+        	if (user.getUserType() == 0 || user.getUserType() == -1) {
+        		tag = "学生界面";
+        		ref = "./student_message.jsp";
+        	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
+        		tag = "教师界面";
+        		ref = "./teacher_message.jsp";
+        	} else {
+        		tag = "管理员界面";
+        		ref = "./admin_message.jsp";
+        	}
+        		
+       	%>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
+          <ul class="nav navbar-nav">
+            <li><a href="<%=ref%>"><%=tag %></a></li>
+            <li><a href="changepw.jsp">修改密码</a></li>
+          </ul>
+        </div>
+        
+        <%} %>
+        
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <%if (user != null) { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
+              <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+              <%} else { %>
+              <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
+              <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
+              <%} %>
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+        <br><br><br>
+    <div class="container">
+    <form action="./AdminGroupInfoServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
+	            <div class="form-group">
+	              <label for="authcode" class="col-sm-3 control-label" style="width:100px;">查询日期：</label>
+	              <div class="col-sm-5">
+	                <div class="input-group">
+	                  <select class = "form-control" name="bookdate">
 		    				<option selected value = "6"> 第七天 </option>
 		    				<option selected value = "5"> 第六天 </option>
 		    				<option selected value = "4"> 第五天 </option>
@@ -52,20 +105,18 @@
 		    				<option selected value = "2"> 第三天 </option>
 		    				<option selected value = "1"> 第二天 </option>
 		    				<option selected value = "0"> 今天 </option>
-		    			</select>
-		    			
-		    		</td>
+					  </select>
+	            	</div>
+	              </div>
+	              </div>
+	              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	              <input type="submit" class="btn btn-success" value="查 询">
+		          <input type="reset" class="btn btn-success" value="重 置">
+	 </form>	
+	            </div>
 
-		    	</tr>
-		    	<tr>
-		    		<td colspan="2" align="center">
-		    			<input type="submit" value="查 询">
-		    			<input type="reset" value="重 置">
-		    		</td>
-		    	</tr>
-		    </table>
-	    </form>
-  	 </div>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    
 <%
  	 Seats[] seats = new Seats[2];
   	 seats = (Seats[])session.getAttribute("groupseats");
@@ -77,24 +128,19 @@
   	}
 
 if(seats != null){ 
-%>
-<div align="center">
-		添加团体座位的预定
-</div>
-<table align="center" width="80" border="1" height="40" bordercolor="#E8F4CC">
-		<tr>
-    		<td align="center" colspan="2">
-    			 第<%=ddate + "" %>天 
-    			 <input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
-    		</td>
-    	</tr>
-    </table>
-<div align="center">
-<form action="./AddGroupServlet" method="post" onsubmit="return reg(this);">
-<table align="center" width="300" border="1" height="50" bordercolor="#E8F4CC">
-<td align="right">用户：</td>
-   		<td>
-   			<select name="bookuser">
+%>    
+
+    <div class="container">
+	<form action="./AddGroupServlet" method="post" onsubmit="return reg(this);" >
+	
+    <div ><h1>添加团体座位预定</h1></div>
+    
+    
+	<div class="form-group" style="float:left;">
+	              <label for="authcode" class="col-sm-3 control-label" style="width:200px;font-size:19px" >用户：</label>
+	              <div class="col-sm-5">
+	                <div class="input-group">
+   			<select name="bookuser" class = "form-control" style="width:100px;">
    			<%
    			ArrayList<User> showallusers = (ArrayList<User>)session.getAttribute("showallusers");
    			for (int j = 0 ; j < showallusers.size() ; j ++)
@@ -110,96 +156,135 @@ if(seats != null){
    			}
    			%>
    			</select>
-   			
-   		</td>
-<%
+	            	</div>
+	              </div>
+	              </div>
 
-	for (int i = 0 ; i < seats.length ; i ++)
-	{
-		%>
-		<tr>
-  		<td align="center" colspan="2">
-  			<span style="font-weight: bold;font-size: 18px;">
-		<% 
-		if(seats[i].getPeroid0() == 0 || (seats[i].getPeroid0() == 2 && seats[i].getOwnerPeroid0() == null))
-		{
-		
-%>
-		
-  			
-  			<%="seat" + i + " period0"  + " " + seats[i].getPeroid0() + " " + seats[i].getOwnerPeroid0()%>
-  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
-  			<br>
-  		<%
-  		}
-		if(seats[i].getPeroid1() == 0 || (seats[i].getPeroid1() == 2 && seats[i].getOwnerPeroid1() == null))
-		{
-		%>
-		
-  			<%="seat" + i + " period1"  + " " + seats[i].getPeroid1() + " " + seats[i].getOwnerPeroid1()%>
-  			<input type = "radio" name = "addGroup" id = <%=i + "_1" %> value = <%=i + "_1" %>>
-  			<br>
-  		<%
-		}
-		if(seats[i].getPeroid2() == 0 || (seats[i].getPeroid2() == 2 && seats[i].getOwnerPeroid2() == null))
-		{
-  		%>
-  			
-  			<%="seat" + i + " period2"  + " " + seats[i].getPeroid2() + " " + seats[i].getOwnerPeroid2()%>
-  			<input type = "radio" name = "addGroup" id = <%=i + "_2" %> value = <%=i + "_2" %>>
-  			<br>
-  	<%
-		}
-		if(seats[i].getPeroid3() == 0 || (seats[i].getPeroid3() == 2 && seats[i].getOwnerPeroid3() == null))
-		{
-  	%>
-  			<%="seat" + i + " period3"  + " " + seats[i].getPeroid3() + " " + seats[i].getOwnerPeroid3()%>
-  			<input type = "radio" name = "addGroup" id = <%=i + "_3" %> value = <%=i + "_3" %>>
-  			<br>
-  		<%
-		}
-		if(seats[i].getPeroid4() == 0 || (seats[i].getPeroid4() == 2 && seats[i].getOwnerPeroid4() == null))
-		{
-  		%>
-  			<%="seat" + i + " period4"  + " " + seats[i].getPeroid4() + " " + seats[i].getOwnerPeroid4()%>
-  			<input type = "radio" name = "addGroup" id = <%=i + "_4" %> value = <%=i + "_4" %>>
-  			<br>
-  			<%
-		}
-  			%>
-  			</span>
-  		</td>
-<%
-		
-	
-	}
-%>
-</table>
+		<table class="table table-striped">
+		   <thead>
+		      <tr>
+		      	 <th align="right">座位号</th>
+		      	 <th >时间段0</th>
+		         <th>时间段1</th>
+		         <th>时间段2</th>
+		         <th>时间段3</th>
+		         <th>时间段4</th>
+		      </tr>
+		   </thead>
+		   <tbody>
+			    <%
 
-<%
-		if (seats == null || seats.length == 0)
-		{
-		%>
-		<div id="table" style="display: none" >
-		<%
-		}
-		%>
-		<table align="center" width="300" border="0" class="tb1">
-		<tr>
-				<td colspan="2" align="center" height="50">
-					<input type="submit" value="添加用户预定">
-					<input type="reset" value="重 置">
-				</td>
-		</tr>
+				for (int i = 0 ; i < seats.length ; i ++)
+				{
+				%>
+				
+				<tr>
+				
+				<td><%="座位"+i%></td>
+				<%
+	  			if (seats[i].getPeroid0() == 0 || (seats[i].getPeroid0() == 2 && seats[i].getOwnerPeroid0() == null))
+	  			{
+		  			%>
+		  			<td bgcolor="green"><span>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			可预约</span></td>
+		  			<%
+	  			} else {
+	  				%><td bgcolor="yellow">被占用</td><%
+	  			}
+	  			%>
+				
+				
+								<%
+	  			if (seats[i].getPeroid1() == 0 || (seats[i].getPeroid1() == 2 && seats[i].getOwnerPeroid1() == null))
+	  			{
+		  			%>
+		  			<td bgcolor="green"><span>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			可预约</span></td>
+		  			<%
+	  			} else {
+	  				%><td bgcolor="yellow">被占用</td><%
+	  			}
+	  			%>
+				
+				
+								<%
+	  			if (seats[i].getPeroid2() == 0 || (seats[i].getPeroid2() == 2 && seats[i].getOwnerPeroid2() == null))
+	  			{
+		  			%>
+		  			<td bgcolor="green"><span>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			可预约</span></td>
+		  			<%
+	  			} else {
+	  				%><td bgcolor="yellow">被占用</td><%
+	  			}
+	  			%>
+				
+				
+								<%
+	  			if (seats[i].getPeroid3() == 0 || (seats[i].getPeroid3() == 2 && seats[i].getOwnerPeroid3() == null))
+	  			{
+		  			%>
+		  			<td bgcolor="green"><span>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			可预约</span></td>
+		  			<%
+	  			} else {
+	  				%><td bgcolor="yellow">被占用</td><%
+	  			}
+	  			%>
+				
+				
+								<%
+	  			if (seats[i].getPeroid4() == 0 || (seats[i].getPeroid4() == 2 && seats[i].getOwnerPeroid4() == null))
+	  			{
+		  			%>
+		  			<td bgcolor="green"><span>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			可预约</span></td>
+		  			<%
+	  			} else {
+	  				%><td bgcolor="yellow">被占用</td><%
+	  			}
+	  			%>
+				
+				</tr>
+				 <%} %>
+				
+		   </tbody>
 		</table>
-			
+		
+		<input type="submit" class="btn btn-success" value="添加预订">
+		<input type="reset" class="btn btn-success" value="重 置">
+		</form>
 	  </div>
+	  <%  }%>
 
-</form>
 
-	<%
-	}
-	%>
-<a href="admin_message.jsp"> back </a>
-</body>
+	  
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 版权所有 教研院</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
