@@ -137,6 +137,9 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
+		         第<%=ddate + "" %>天 
+    			 <input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
+    			 <input type = 'hidden' name = "owner" value = <%=user.getStudentnum() %>>
 		      	 <th align="right">座位号</th>
 		      	 <th >时间段0</th>
 		         <th>时间段1</th>
@@ -163,7 +166,7 @@
 	    			 	%>
 		  				<td bgcolor="green">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
-								<%=i %>可预约
+								可预约
 							</input>
 		  				</td>
 	    			 	<%
@@ -173,7 +176,7 @@
 	    			 	%>
 		  				<td bgcolor="yellow">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
-								<%=i %>已占用 
+								已占用 
 							</input>
 		  				</td>
 	    			 	<%
@@ -183,7 +186,7 @@
 	    			 	%>
 		  				<td bgcolor="yellow">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
-								<%=i %>已过时
+								已过时
 							</input>
 		  				</td>
 	    			 	<%
@@ -193,7 +196,7 @@
 	    			 	%>
 		  				<td bgcolor="yellow">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
-								<%=i %>关闭时间段
+								关闭时间段
 							</input>
 		  				</td>
 	    			 	<%

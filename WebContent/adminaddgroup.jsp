@@ -200,7 +200,7 @@ if(seats != null){
 	  			{
 		  			%>
 		  			<td bgcolor="green"><span>
-		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_1" %> value = <%=i + "_1" %>>
 		  			可预约</span></td>
 		  			<%
 	  			} else {
@@ -214,7 +214,7 @@ if(seats != null){
 	  			{
 		  			%>
 		  			<td bgcolor="green"><span>
-		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_2" %> value = <%=i + "_2" %>>
 		  			可预约</span></td>
 		  			<%
 	  			} else {
@@ -228,7 +228,7 @@ if(seats != null){
 	  			{
 		  			%>
 		  			<td bgcolor="green"><span>
-		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_3" %> value = <%=i + "_3" %>>
 		  			可预约</span></td>
 		  			<%
 	  			} else {
@@ -242,7 +242,7 @@ if(seats != null){
 	  			{
 		  			%>
 		  			<td bgcolor="green"><span>
-		  			<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
+		  			<input type = "radio" name = "addGroup" id = <%=i + "_4" %> value = <%=i + "_4" %>>
 		  			可预约</span></td>
 		  			<%
 	  			} else {

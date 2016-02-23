@@ -119,14 +119,14 @@
 				%>
 		   
 		      <tr>
-		      	 <td align="center"><input type = "radio" name = "closeSeat" id = <%=seataccess.get(i) %> value = <%=i %>></td>
+		      	 <td align="center"><input type = "radio" name = "closeSeat" id = <%=seataccess.get(i) %> value = <%=seataccess.get(i) %>></td>
 		         <td><%=seataccess.get(i)%></td>
 		      </tr>
 		      <%} } }%>
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="删 除">
+		<input type="submit" class="btn btn-success" value="关 闭">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>

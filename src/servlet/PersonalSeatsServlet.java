@@ -23,7 +23,7 @@ public class PersonalSeatsServlet extends HttpServlet{
 			throws ServletException, IOException
 			{
 				String bookdate = request.getParameter("bookdate");
-
+				//System.out.println(bookdate);
 				
 				SeatDao seatDao = new SeatDao();
 				

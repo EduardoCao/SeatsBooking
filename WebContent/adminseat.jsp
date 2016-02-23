@@ -138,7 +138,7 @@
     <form action="./DelSeatServlet" method="post" onsubmit="return reg(this);">
 
     <h1>取消个人座位预订</h1>
-
+		<input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
@@ -177,7 +177,7 @@
 	  			if( seats[i].getOwnerPeroid1() != null )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><span><input type = "radio" name = "delSeat" id = <%=i + "_0" %> value = <%=i + "_0_" + seats[i].getPeroid1()  %>>
+		  			<td bgcolor="yellow"><span><input type = "radio" name = "delSeat" id = <%=i + "_1" %> value = <%=i + "_1_" + seats[i].getPeroid1()  %>>
 		  			<%=seats[i].getOwnerPeroid1() %></span></td>
 		  			<%
 	  			} else {
@@ -189,7 +189,7 @@
 	  			if( seats[i].getOwnerPeroid2() != null )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><span><input type = "radio" name = "delSeat" id = <%=i + "_0" %> value = <%=i + "_0_" + seats[i].getPeroid2()  %>>
+		  			<td bgcolor="yellow"><span><input type = "radio" name = "delSeat" id = <%=i + "_2" %> value = <%=i + "_2_" + seats[i].getPeroid2()  %>>
 		  			<%=seats[i].getOwnerPeroid2() %></span></td>
 		  			<%
 	  			} else {
@@ -201,7 +201,7 @@
 	  			if( seats[i].getOwnerPeroid3() != null )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><span><input type = "radio" name = "delSeat" id = <%=i + "_0" %> value = <%=i + "_0_" + seats[i].getPeroid3()  %>>
+		  			<td bgcolor="yellow"><span><input type = "radio" name = "delSeat" id = <%=i + "_3" %> value = <%=i + "_3_" + seats[i].getPeroid3()  %>>
 		  			<%=seats[i].getOwnerPeroid3() %></span></td>
 		  			<%
 	  			} else {
@@ -213,7 +213,7 @@
 	  			if( seats[i].getOwnerPeroid4() != null )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><span><input type = "radio" name = "delSeat" id = <%=i + "_0" %> value = <%=i + "_0_" + seats[i].getPeroid4()  %>>
+		  			<td bgcolor="yellow"><span><input type = "radio" name = "delSeat" id = <%=i + "_4" %> value = <%=i + "_4_" + seats[i].getPeroid4()  %>>
 		  			<%=seats[i].getOwnerPeroid4() %></span></td>
 		  			<%
 	  			} else {
@@ -233,6 +233,7 @@
 <% 
 if(seats != null) { 
 %>
+	<input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
     <div class="container">
     <form action="./AddSeatServlet" method="post" onsubmit="return reg(this);">
     <div style="float:left;"><h1>添加个人座位预订</h1></div>
@@ -304,7 +305,7 @@ if(seats != null) {
 		   {
            %>
   		   <td bgcolor="green">
-  		   <input type = "radio" name = "addSeat" id = <%=i + "_0" %> value = <%=i + "_0_" + seats[i].getPeroid0()  %>>
+  		   <input type = "radio" name = "addSeat" id = <%=i + "_1" %> value = <%=i + "_1_" + seats[i].getPeroid1()  %>>
   		   可选
   		   </td>
   		   <%
@@ -320,7 +321,7 @@ if(seats != null) {
 		   {
            %>
   		   <td bgcolor="green">
-  		   <input type = "radio" name = "addSeat" id = <%=i + "_0" %> value = <%=i + "_0_" + seats[i].getPeroid0()  %>>
+  		   <input type = "radio" name = "addSeat" id = <%=i + "_2" %> value = <%=i + "_2_" + seats[i].getPeroid2()  %>>
   		   可选
   		   </td>
   		   <%
@@ -336,7 +337,7 @@ if(seats != null) {
 		   {
            %>
   		   <td bgcolor="green">
-  		   <input type = "radio" name = "addSeat" id = <%=i + "_0" %> value = <%=i + "_0_" + seats[i].getPeroid0()  %>>
+  		   <input type = "radio" name = "addSeat" id = <%=i + "_3" %> value = <%=i + "_3_" + seats[i].getPeroid3()  %>>
   		   可选
   		   </td>
   		   <%
@@ -352,7 +353,7 @@ if(seats != null) {
 		   {
            %>
   		   <td bgcolor="green">
-  		   <input type = "radio" name = "addSeat" id = <%=i + "_0" %> value = <%=i + "_0_" + seats[i].getPeroid0()  %>>
+  		   <input type = "radio" name = "addSeat" id = <%=i + "_4" %> value = <%=i + "_4_" + seats[i].getPeroid4()  %>>
   		   可选
   		   </td>
   		   <%

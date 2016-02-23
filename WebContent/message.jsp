@@ -94,9 +94,14 @@
         <h1>你好</h1>
         <p>欢迎使用教研院教室预订系统</p>
         <%
-        String Info = (String)session.getAttribute("info");
+        String info = (String)request.getAttribute("info");
+    	if(info != null)
+    	{
         %>
-        <p>info <%=Info %></p>
+        <p>info : <%=info %></p>
+        <%
+    	}
+        %>
         <a class="btn btn-primary btn-lg" href="ExitServlet" role="button">登出 &raquo;</a>
       </div>
     </div>

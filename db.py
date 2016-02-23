@@ -38,7 +38,7 @@ def makeReasonTables():
 		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
 		cur = conn.cursor()
 		conn.select_db('group_seat_db')
-		#cur.execute('drop table reason_table');
+		cur.execute('drop table reason_table');
 		cur.execute('create table if not exists reason_table(seat_period varchar(6) , studentnum varchar(20) , bookdate int , reason varchar(100) COLLATE utf8_unicode_ci NOT NULL, flag int) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci')
 		conn.commit()
 		cur.close()
@@ -232,29 +232,29 @@ if __name__ == '__main__':
 	# print "makeUserTables..."
 	# makeUserTables()
 
-	print "makeCloseUserTables..."
-	makeCloseUserTables()
+	# print "makeCloseUserTables..."
+	# makeCloseUserTables()
 
-	print "makeSeatTables..."
-	makeSeatTables()
+	# print "makeSeatTables..."
+	# makeSeatTables()
 
-	# print "makeReasonTables..."
-	# makeReasonTables()
+	print "makeReasonTables..."
+	makeReasonTables()
 
 	# print "makeGroupSeatTables..."
 	# makeGroupSeatTables()
 
-	print "makeSeatTable0Events"
-	makeSeatTable0Events()
+	# print "makeSeatTable0Events"
+	# makeSeatTable0Events()
 
 	# print "makeGroupSeatTable0Events"
 	# makeGroupSeatTable0Events()
 
-	print "dayUpdateEvents"
-	dayUpdateEvents()
+	# print "dayUpdateEvents"
+	# dayUpdateEvents()
 
 	# print "groupDayUpdateEvents"
 	# groupDayUpdateEvents()
 
-	# print "reasonDayUpdateEvents..."
-	# reasonDayUpdateEvents()
+	print "reasonDayUpdateEvents..."
+	reasonDayUpdateEvents()
