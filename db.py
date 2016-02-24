@@ -38,7 +38,7 @@ def makeReasonTables():
 		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
 		cur = conn.cursor()
 		conn.select_db('group_seat_db')
-		cur.execute('drop table reason_table');
+		#cur.execute('drop table reason_table');
 		cur.execute('create table if not exists reason_table(seat_period varchar(6) , studentnum varchar(20) , bookdate int , reason varchar(100) COLLATE utf8_unicode_ci NOT NULL, flag int) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci')
 		conn.commit()
 		cur.close()
@@ -161,22 +161,53 @@ def dayUpdateEvents():
 		#cur.execute("drop event if exists backuptodayevent")
 		#cur.execute("create event backuptodayevent on schedule every 1 day starts '2016-02-01 00:00:00' do select * into outfile '"+  workspace + "/sqldatabc/" + time.strftime("%d_%m_%y") + ".log' from seat_table_0")
 		
-
-		cur.execute("drop event if exists move0_bcevent")
-		cur.execute("create event move0_bcevent on schedule every 1 day starts '2016-02-01 00:00:02' do begin drop table if exists seat_table_backup; create table seat_table_backup( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_backup select * from seat_table_0 ; end")
+		sql = "create event move_day on schedule every 1 day starts '2016-02-01 01:22:00' do begin drop \
+table if exists seat_table_backup; create table seat_table_backup( seatnum int , period0 int , \
+period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 \
+varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); \
+insert into seat_table_backup select * from seat_table_0 ; \
+drop table if exists seat_table_0; \
+create table seat_table_0( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+ period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+ ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_0 select * from seat_table_1 ;\
+drop table if exists seat_table_1; \
+create table seat_table_1( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+ period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+ ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_1 select * from seat_table_2 ;\
+ drop table if exists seat_table_2; \
+create table seat_table_2( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+ period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+ ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_2 select * from seat_table_3 ;\
+ drop table if exists seat_table_3; \
+create table seat_table_3( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+ period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+ ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_3 select * from seat_table_4 ;\
+ drop table if exists seat_table_4; \
+create table seat_table_4( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+ period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+ ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_4 select * from seat_table_5 ;\
+ drop table if exists seat_table_5; \
+create table seat_table_5( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+ period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+ ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_5 select * from seat_table_6 ;\
+drop table if exists seat_table_6; \
+create table seat_table_6( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+ period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+ ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20));  \
+ insert into seat_table_6 values( '0' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '1' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '2' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '3' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '4' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '5' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '6' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '7' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '8' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+ insert into seat_table_6 values( '9' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL );end"
 		
-		for i in xrange(0,6):
-			cur.execute("drop event if exists move"+ str(i+1) +"_" + str(i) + "event")
-			second = (i * 2)
-			second = second + 3
- 			cur.execute("create event move"+str(i+1) + "_" + str(i) + "event on schedule every 1 day starts '2016-02-01 00:00:" + str(second) + "' do begin drop table if exists seat_table_"+ str(i) +"; create table seat_table_"+ str(i) +"( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_"+ str(i)+" select * from seat_table_"+ str(i+1)+" ; end")
+		cur.execute("drop event if exists move_day")
+		cur.execute(sql)
 
- 		insertstr = ""
- 		for j in xrange(0,10):
- 			insertstr += " insert into seat_table_6 values( '"+ str(j) +"' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL );"
-		cur.execute("drop event if exists deal6event")
-		cur.execute("create event deal6event on schedule every 1 day starts '2016-02-01 00:00:15' do begin drop table seat_table_6; create table seat_table_6 ( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)) ; "+ insertstr +" end")
-		
 		conn.commit()
 		cur.close()
 		conn.close()
@@ -238,11 +269,11 @@ if __name__ == '__main__':
 	# print "makeSeatTables..."
 	# makeSeatTables()
 
-	print "makeReasonTables..."
-	makeReasonTables()
-
 	# print "makeGroupSeatTables..."
 	# makeGroupSeatTables()
+
+	# print "makeReasonTables..."
+	# makeReasonTables()
 
 	# print "makeSeatTable0Events"
 	# makeSeatTable0Events()
@@ -250,11 +281,11 @@ if __name__ == '__main__':
 	# print "makeGroupSeatTable0Events"
 	# makeGroupSeatTable0Events()
 
-	# print "dayUpdateEvents"
-	# dayUpdateEvents()
+	print "dayUpdateEvents"
+	dayUpdateEvents()
 
 	# print "groupDayUpdateEvents"
-	# groupDayUpdateEvents()
+	# # groupDayUpdateEvents()
 
-	print "reasonDayUpdateEvents..."
-	reasonDayUpdateEvents()
+	# print "reasonDayUpdateEvents..."
+	# reasonDayUpdateEvents()
