@@ -83,7 +83,11 @@
        	%>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
           <ul class="nav navbar-nav">
-            <li><a href="<%=ref%>"><%=tag %></a></li>
+            <li><a href="./adminuser.jsp">管理用户</a></li>
+            <li><a href="./adminseat.jsp">个人座位预定</a></li>
+            <li><a href="./admingroup.jsp">团体预定</a></li>
+            <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
+            <li class ="active"><a href="changepw.jsp">修改密码</a></li>
           </ul>
         </div>
         <%} %>
