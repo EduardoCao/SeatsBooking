@@ -144,7 +144,7 @@
   	  ddate = Integer.parseInt(date);
   	 ddate += 1;
   	}
-	if(seats != null && seats[0] != null && seats[1] != null){ 
+	if(seats != null && seats[0] != null && seats[1] != null) { 
 	%>
 
     <div class="container">
