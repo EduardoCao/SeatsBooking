@@ -184,7 +184,7 @@
     			 	if (seats[i].getPeroid0() == 0)
     			 	{	
     			 	%>
-    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>0' value = '<%=i %>>_0'>可预约</td>
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>0' value = '<%=i %>_0'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid0() == 1)
@@ -211,7 +211,7 @@
     			 	if (seats[i].getPeroid1() == 0)
     			 	{	
     			 	%>
-    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>1' value = '<%=i %>>_1'>可预约</td>
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>1' value = '<%=i %>_1'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid1() == 1)
@@ -238,7 +238,7 @@
     			 	if (seats[i].getPeroid2() == 0)
     			 	{	
     			 	%>
-    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>2' value = '<%=i %>>_2'>可预约</td>
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>2' value = '<%=i %>_2'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid2() == 1)
@@ -265,7 +265,7 @@
     			 	if (seats[i].getPeroid3() == 0)
     			 	{	
     			 	%>
-    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>3' value = '<%=i %>>_3'>可预约</td>
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>3' value = '<%=i %>_3'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid3() == 1)
@@ -292,7 +292,7 @@
     			 	if (seats[i].getPeroid4() == 0)
     			 	{	
     			 	%>
-    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>4' value = '<%=i %>>_4'>可预约</td>
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>4' value = '<%=i %>_4'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid4() == 1)
