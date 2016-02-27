@@ -83,11 +83,31 @@
        	%>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
           <ul class="nav navbar-nav">
+          <%
+          if (user.getUserType() == 0 || user.getUserType() == -1) {
+          %>
+            <li><a href="./seatsbooking.jsp">个人座位预定</a></li>
+            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
+            <li><a href="./InfoServlet">查看个人座位预定</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+            <li class ="active"><a href="changepw.jsp">修改密码</a></li>
+          <%
+          } else if (user.getUserType() == 1 || user.getUserType() == -2) { 
+          %>
+            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+            <li class ="active"><a href="changepw.jsp">修改密码</a></li>
+          <%
+          } else {
+          %>
             <li><a href="./adminuser.jsp">管理用户</a></li>
             <li><a href="./adminseat.jsp">个人座位预定</a></li>
             <li><a href="./admingroup.jsp">团体预定</a></li>
             <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
             <li class ="active"><a href="changepw.jsp">修改密码</a></li>
+          <%
+          }
+          %>
           </ul>
         </div>
         <%} %>
