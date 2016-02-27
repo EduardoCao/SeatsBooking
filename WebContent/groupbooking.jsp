@@ -110,7 +110,7 @@
     </nav>
         <br><br><br>
     <div class="container">
-    <form action="./GroupSeatsServlet" method="post" onsubmit="return reg(this);">
+    <form action="./GroupSeatsServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
 	            <div class="form-group">
 	              <label for="authcode" class="col-sm-3 control-label" style="width:100px;">查询日期：</label>
 	              <div class="col-sm-5">
@@ -362,7 +362,10 @@
 				</script>
 		   </tbody>
 		</table>
-		
+		  <div class="form-group">
+		    <label for="name">申请原因：</label>
+		    <textarea name = "reason" class="form-control" rows="3"></textarea>
+		  </div>
 		<input type="submit" class="btn btn-success" value="提 交">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
