@@ -278,23 +278,23 @@ if __name__ == '__main__':
 	# print "makeCloseUserTables..."
 	# makeCloseUserTables()
 
-	print "makeSeatTables..."
-	makeSeatTables()
+	# print "makeSeatTables..."
+	# makeSeatTables()
 
-	print "makeGroupSeatTables..."
-	makeGroupSeatTables()
+	# print "makeGroupSeatTables..."
+	# makeGroupSeatTables()
 
 	print "makeReasonTables..."
 	makeReasonTables()
 
-	print "makeSeatTable0Events"
-	makeSeatTable0Events()
+	# print "makeSeatTable0Events"
+	# makeSeatTable0Events()
 
-	print "makeGroupSeatTable0Events"
-	makeGroupSeatTable0Events()
+	# print "makeGroupSeatTable0Events"
+	# makeGroupSeatTable0Events()
 
-	print "dayUpdateEvents"
-	dayUpdateEvents()
+	# print "dayUpdateEvents"
+	# dayUpdateEvents()
 
 	print "groupDayUpdateEvents"
 	groupDayUpdateEvents()
