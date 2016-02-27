@@ -96,8 +96,12 @@
           <form class="navbar-form navbar-right">
             <div class="form-group">
               <%if (user != null) { %>
-              <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
-              <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+              <div style="float:right;">
+                  <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
+                  <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+                  &nbsp;
+	              <button type="button" onclick="javascript:location.href='./ExitServlet'" class="btn btn-success">退出登录</button>
+	          </div>
               <%} else { %>
               <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
               <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
@@ -119,12 +123,12 @@
 	      </div>
 	      <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 register">
 	            <div class="form-group">
-	              <label for="username" class="col-sm-3 control-label">密码：</label>
+	              <label for="password" class="col-sm-3 control-label">密码：</label>
 	              <div class="col-sm-8">
 	                <div class="input-group">
-	                <input input type="password" name="password" class="form-control" placeholder="请输入密码">
+	                <input type="password" class="form-control" name="password" placeholder="请输入密码">
 	               <div class="input-group-addon">
-	               <span class="glyphicon glyphicon-user"></span>
+	               <span class="glyphicon glyphicon-lock"></span>
 	               </div>
 	             </div>
 	            </div>

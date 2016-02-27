@@ -58,8 +58,13 @@
           <form class="navbar-form navbar-right">
             <div class="form-group">
               <%if (user != null) { %>
-              <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
-              <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+
+              <div style="float:right;">
+                  <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
+                  <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+                  &nbsp;
+	              <button type="button" onclick="javascript:location.href='./ExitServlet'" class="btn btn-success">退出登录</button>
+	          </div>
               <%} else { %>
               <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
               <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>

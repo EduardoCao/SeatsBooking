@@ -67,8 +67,9 @@
        	%>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
           <ul class="nav navbar-nav">
-            <li><a href="<%=ref%>"><%=tag %></a></li>
-            <li><a href="changepw.jsp">修改密码</a></li>
+            <li><a href="./admin_message.jsp">管理员界面</a></li>
+            <li><a href="./reg.jsp">用户注册</a></li>
+            <li class="active"><a href="./AdminUserServlet">用户状态</a></li>
           </ul>
         </div>
         
@@ -78,8 +79,13 @@
           <form class="navbar-form navbar-right">
             <div class="form-group">
               <%if (user != null) { %>
-              <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
-              <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+
+              <div style="float:right;">
+                  <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
+                  <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
+                  &nbsp;
+	              <button type="button" onclick="javascript:location.href='./ExitServlet'" class="btn btn-success">退出登录</button>
+	          </div>
               <%} else { %>
               <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
               <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
