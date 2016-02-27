@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="util.Seats" %>
+<%@ page import="util.DateManager" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -111,7 +112,9 @@
 		   <thead>
 		      <tr>
 		      	 <th align="right">选择</th>
-		      	 <th >预订信息</th>
+		      	 <th >预订日期</th>
+		      	 <th>座位号</th>
+		      	 <th>时间段</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -125,7 +128,19 @@
 %>
 			<tr>
 	    		<td><input type = "radio" name = "delete" id = <%=i %> value = <%=i %>></td>
-	    		<td><%=onesseats.get(i) %></td>
+	    		<%
+	    		String s = onesseats.get(i);
+	    		String[] slist = s.split(" ");
+	    		String days = slist[0].substring(3, 4);
+	    		int day = Integer.valueOf(days);
+	    		String seats = slist[1].substring(7, 8);
+	    		int seat = Integer.valueOf(seats);
+	    		String times = slist[2].substring(6, 7);
+	    		int time = Integer.valueOf(times);
+	    		%>
+	    		<td><%=DateManager.getFormatDate(day) %></td>
+	    		<td><%=seat %></td>
+	    		<td><%=time %></td>
 	    	</tr>
 	    <%}}%>
 		</table>
