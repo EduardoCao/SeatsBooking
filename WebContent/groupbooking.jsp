@@ -131,7 +131,7 @@
 	              <input type="submit" class="btn btn-success" value="查 询">
 		          <input type="reset" class="btn btn-success" value="重 置">
 	 </form>	
-	            </div>
+	 </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     
@@ -175,155 +175,141 @@
 				<tr>
 				
 				<td><%="座位"+i%></td>
-				<td>
-				<input type = "radio" name = "groupSeat" id = '00' value = '0_0'>  
+				  
 				<%
     			 	if (seats[i].getPeroid0() == 0)
     			 	{	
     			 	%>
-    			 	可预约
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>0' value = '<%=i %>>_0'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid0() == 1)
     			 	{
     			 	%>
-    			 	已占用  
+    			 	<td bgcolor="yellow">已占用</td>  
     			 	<%
 					}
     			 	else if(seats[i].getPeroid0() == 2)
     			 	{
     			 	%>
-    			 	已过时
+    			 	<td bgcolor="yellow">已过时</td>
     			 	<%
     			 	}
     			 	else if(seats[i].getPeroid0() == 3)
     			 	{
     			 	%>
-    			 	关闭时间段
+    			 	<td bgcolor="yellow">关闭时间段</td>
     			 	<%
     			 	}
     			 	%>
-				</td>
 				
-								<td>
-				<input type = "radio" name = "groupSeat" id = '00' value = '0_0'>  
 				<%
     			 	if (seats[i].getPeroid1() == 0)
     			 	{	
     			 	%>
-    			 	可预约
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>1' value = '<%=i %>>_1'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid1() == 1)
     			 	{
     			 	%>
-    			 	已占用  
+    			 	<td bgcolor="yellow">已占用</td>  
     			 	<%
 					}
     			 	else if(seats[i].getPeroid1() == 2)
     			 	{
     			 	%>
-    			 	已过时
+    			 	<td bgcolor="yellow">已过时</td>
     			 	<%
     			 	}
     			 	else if(seats[i].getPeroid1() == 3)
     			 	{
     			 	%>
-    			 	关闭时间段
+    			 	<td bgcolor="yellow">关闭时间段</td>
     			 	<%
     			 	}
     			 	%>
-				</td>
 				
-								<td>
-				<input type = "radio" name = "groupSeat" id = '00' value = '0_0'>  
 				<%
     			 	if (seats[i].getPeroid2() == 0)
     			 	{	
     			 	%>
-    			 	可预约
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>2' value = '<%=i %>>_2'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid2() == 1)
     			 	{
     			 	%>
-    			 	已占用  
+    			 	<td bgcolor="yellow">已占用</td>  
     			 	<%
 					}
     			 	else if(seats[i].getPeroid2() == 2)
     			 	{
     			 	%>
-    			 	已过时
+    			 	<td bgcolor="yellow">已过时</td>
     			 	<%
     			 	}
     			 	else if(seats[i].getPeroid2() == 3)
     			 	{
     			 	%>
-    			 	关闭时间段
+    			 	<td bgcolor="yellow">关闭时间段</td>
     			 	<%
     			 	}
     			 	%>
-				</td>
 				
-								<td>
-				<input type = "radio" name = "groupSeat" id = '00' value = '0_0'>  
 				<%
     			 	if (seats[i].getPeroid3() == 0)
     			 	{	
     			 	%>
-    			 	可预约
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>3' value = '<%=i %>>_3'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid3() == 1)
     			 	{
     			 	%>
-    			 	已占用  
+    			 	<td bgcolor="yellow">已占用</td>  
     			 	<%
 					}
     			 	else if(seats[i].getPeroid3() == 2)
     			 	{
     			 	%>
-    			 	已过时
+    			 	<td bgcolor="yellow">已过时</td>
     			 	<%
     			 	}
     			 	else if(seats[i].getPeroid3() == 3)
     			 	{
     			 	%>
-    			 	关闭时间段
+    			 	<td bgcolor="yellow">关闭时间段</td>
     			 	<%
     			 	}
     			 	%>
-				</td>
 				
-								<td>
-				<input type = "radio" name = "groupSeat" id = '00' value = '0_0'>  
 				<%
     			 	if (seats[i].getPeroid4() == 0)
     			 	{	
     			 	%>
-    			 	可预约
+    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>>4' value = '<%=i %>>_4'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid4() == 1)
     			 	{
     			 	%>
-    			 	已占用  
+    			 	<td bgcolor="yellow">已占用</td>  
     			 	<%
 					}
     			 	else if(seats[i].getPeroid4() == 2)
     			 	{
     			 	%>
-    			 	已过时
+    			 	<td bgcolor="yellow">已过时</td>
     			 	<%
     			 	}
     			 	else if(seats[i].getPeroid4() == 3)
     			 	{
     			 	%>
-    			 	关闭时间段
+    			 	<td bgcolor="yellow">关闭时间段</td>
     			 	<%
     			 	}
     			 	%>
-				</td>
 				
 				</tr>
 				 <%} %>
