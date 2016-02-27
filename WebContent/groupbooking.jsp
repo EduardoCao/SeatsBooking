@@ -162,11 +162,11 @@
 		   <thead>
 		      <tr>
 		      	 <th align="right">座位号</th>
-		      	 <th >时间段0</th>
-		         <th>时间段1</th>
-		         <th>时间段2</th>
-		         <th>时间段3</th>
-		         <th>时间段4</th>
+		      	 <th ><%=DateManager.getPeroid(0) %></th>
+		         <th><%=DateManager.getPeroid(1) %></th>
+		         <th><%=DateManager.getPeroid(2) %></th>
+		         <th><%=DateManager.getPeroid(3) %></th>
+		         <th><%=DateManager.getPeroid(4) %></th>
 		      </tr>
 		   </thead>
 		   <tbody>
