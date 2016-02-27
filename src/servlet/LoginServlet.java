@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet{
 		
 		if (user != null)
 		{
+			request.setAttribute("info", null);
 			int userType = userDao.checkUserType(studentnum, password);
 			request.getSession().setAttribute("user", user);
 //			if (userType < 0)

@@ -87,6 +87,12 @@
 	             </div>
 	            </div>
 	            </div>
+	    <%
+	    String info = (String)request.getAttribute("info");
+	    if (info != null) {
+	    %>
+	    <p align="center"><%=info %></p>
+	    <%} %>
 	    <div class="row">
 	        <div class="col-md-3 col-md-offset-3 col-xs-12">
 	            <button type="reset" class="btn btn-default btn-block"><b> &nbsp; &nbsp; 清空 &nbsp;&nbsp;</b>

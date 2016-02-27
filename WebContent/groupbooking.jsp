@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=gb2312"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="util.User"%>
 <%@ page import="java.util.ArrayList" %>
@@ -7,12 +7,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" href="../../favicon.ico">
 
     <title>显示用户-教室预定系统</title>
@@ -149,7 +149,7 @@
 
     <div class="container">
 	<form action="./GroupBookServlet" method="post" onsubmit="return reg(this);">
-	
+	<input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
     <div ><h1>团体座位预定</h1></div>
     
     

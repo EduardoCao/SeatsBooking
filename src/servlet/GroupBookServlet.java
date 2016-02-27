@@ -24,7 +24,9 @@ public class GroupBookServlet extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		String bookdate = request.getParameter("bookdate");
 		String groupSeat = request.getParameter("groupSeat");
-		String reason = request.getParameter("reason");
+		String reason = new String(request.getParameter("reason").getBytes(
+				"ISO-8859-1"), "UTF-8");
+		System.out.println("reason: " + reason + "; bookdate: " + bookdate);
 		User user = (User) request.getSession().getAttribute("user");
 		
 		if(bookdate == null) 
