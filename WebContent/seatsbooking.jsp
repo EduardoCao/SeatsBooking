@@ -145,7 +145,6 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
-		         第<%=ddate + "" %>天 
     			 <input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
     			 <input type = 'hidden' name = "owner" value = <%=user.getStudentnum() %>>
 		      	 <th align="right">座位号</th>

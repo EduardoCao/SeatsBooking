@@ -101,6 +101,7 @@
 		      <th>日期</th>
 		      <th>座位</th>
 		      <th>时间段</th>
+		      <th>申请原因</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -141,6 +142,7 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
+		      <th>选择</th>
 		      <th>日期</th>
 		      <th>座位</th>
 		      <th>时间段</th>
@@ -158,7 +160,8 @@
 		{
 %>
 			
-					<tr>
+			<tr>
+			    <td><input type = "radio" name = "deletegroup" id = <%=i %> value = <%=i %>></td>
 	    		<td>
 	    			
 	    			<%=onesGroupInfo.get(i) %>

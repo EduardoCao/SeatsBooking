@@ -140,7 +140,7 @@
 	    		%>
 	    		<td><%=DateManager.getFormatDate(day) %></td>
 	    		<td><%=seat %></td>
-	    		<td><%=time %></td>
+	    		<td><%=DateManager.getPeroid(time) %></td>
 	    	</tr>
 	    <%}}%>
 		</table>
