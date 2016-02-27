@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="util.Seats" %>
+<%@ page import="util.DateManager" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -116,13 +117,13 @@
 	              <div class="col-sm-5">
 	                <div class="input-group">
 	                  <select class = "form-control" name="bookdate">
-		    				<option selected value = "6"> 第七天 </option>
-		    				<option selected value = "5"> 第六天 </option>
-		    				<option selected value = "4"> 第五天 </option>
-		    				<option selected value = "3"> 第四天 </option>
-		    				<option selected value = "2"> 第三天 </option>
-		    				<option selected value = "1"> 第二天 </option>
-		    				<option selected value = "0"> 今天 </option>
+		    				<option selected value = "6"> <%=DateManager.getFormatDate(6) %> </option>
+		    				<option selected value = "5"> <%=DateManager.getFormatDate(5) %> </option>
+		    				<option selected value = "4"> <%=DateManager.getFormatDate(4) %> </option>
+		    				<option selected value = "3"> <%=DateManager.getFormatDate(3) %> </option>
+		    				<option selected value = "2"> <%=DateManager.getFormatDate(2) %> </option>
+		    				<option selected value = "1"> <%=DateManager.getFormatDate(1) %> </option>
+		    				<option selected value = "0"> <%=DateManager.getFormatDate(0) %> </option>
 					  </select>
 	            	</div>
 	              </div>
@@ -150,7 +151,10 @@
     <div class="container">
 	<form action="./GroupBookServlet" method="post" onsubmit="return reg(this);">
 	<input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
-    <div ><h1>团体座位预定</h1></div>
+	<%
+	int a = Integer.valueOf((String)session.getAttribute("bookdate"));
+	%>
+    <div ><h1>团体座位预定&nbsp;<%=DateManager.getFormatDate(a) %></h1></div>
     
     
 
