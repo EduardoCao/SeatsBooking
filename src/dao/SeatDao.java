@@ -93,19 +93,19 @@ public class SeatDao {
 			{
 				rs.close();
 				ps.close();
-				return "Cannot book more than 3 days!";
+				return "亲，不能太贪心哦，不能预定超过三天的座位哦~ Cannot book more than 3 days!";
 			}
 			if(check.containsKey(bookdate) && check.get(bookdate).size() == 2)
 			{
 				rs.close();
 				ps.close();
-				return "Cannot book more than 2 period in a day!";
+				return "亲，不能太贪心哦，同一天最多只能预定两个时间段哦~ Cannot book more than 2 period in a day!";
 			}
 			if (check.containsKey(bookdate) && check.get(bookdate).contains(period))
 			{
 				rs.close();
 				ps.close();
-				return "Cannot book two same periods in a day!";
+				return "亲，一天内同一个时间段只能预定一个哦~ Cannot book two same periods in a day!";
 			}
 			if ((period.equals("0") && seats.getPeroid0() == 0)||(period.equals("1") && seats.getPeroid1() == 0)||(period.equals("2") && seats.getPeroid2() == 0)||(period.equals("3") && seats.getPeroid3() == 0)||(period.equals("4") && seats.getPeroid4() == 0))
 			{
@@ -121,7 +121,7 @@ public class SeatDao {
 			{
 				rs.close();
 				ps.close();
-				return "Error";
+				return "这个座位刚刚被人抢了呢 :( Error.";
 			}
 			rs.close();
 			ps.close();
@@ -139,7 +139,7 @@ public class SeatDao {
 		}
 		else
 		{
-			return "Book seat error";
+			return "这个座位刚刚被人抢了呢 :( Book seat error";
 		}
 	}
 	public String bookSeatbyAdmin(String owner , String bookdate , String bookseat , int periodori)
@@ -187,19 +187,19 @@ public class SeatDao {
 			{
 				rs.close();
 				ps.close();
-				return "Cannot book more than 3 days!";
+			return "亲，最多为他预定三天的座位哦~ Cannot book more than 3 days!";
 			}
 			if(check.containsKey(bookdate) && check.get(bookdate).size() == 2)
 			{
 				rs.close();
 				ps.close();
-				return "Cannot book more than 2 period in a day!";
+				return "亲，一天之内最多预定两个时间段哦~ Cannot book more than 2 period in a day!";
 			}
 			if (check.containsKey(bookdate) && check.get(bookdate).contains(period))
 			{
 				rs.close();
 				ps.close();
-				return "Cannot book two same periods in a day!";
+				return "同一时间段只能预定一个哦~ Cannot book two same periods in a day!";
 			}
 		
 				sql = "update seat_table_" + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ? and period" + period + " != ? and period" + period + " != ?";
@@ -212,8 +212,12 @@ public class SeatDao {
 				ps.setInt(3, Integer.parseInt(seatnum));
 				ps.setInt(4, 3);
 				ps.setInt(5, 1);
-				ps.executeUpdate();
-				
+				//ps.executeUpdate();
+				if (ps.executeUpdate() == 0)
+				{
+					ps.close();	
+					return "亲，这个座位刚刚被人抢了哦~ This seat is taken.";
+				}
 			rs.close();
 			ps.close();
 			
@@ -221,7 +225,7 @@ public class SeatDao {
 		}catch (Exception e)
 		{
 			e.printStackTrace();
-			return "Error";
+			return ":( 重新试一试吧！Error.";
 		}finally
 		{
 			ConnectDB.closeConnection(conn);
