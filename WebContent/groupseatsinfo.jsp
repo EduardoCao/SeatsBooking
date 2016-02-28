@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     import="util.User"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="util.DateManager" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -98,10 +99,10 @@
 		   <thead>
 		      <tr>
 		      <th>选择</th>
-		      <th>日期</th>
-		      <th>座位</th>
-		      <th>时间段</th>
-		      <th>申请原因</th>
+		  	  <th>日期</th>
+		  	  <th>座位号</th>
+		  	  <th>时间段</th>
+		  	  <th>申请理由</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -116,13 +117,20 @@
 		{
 %>
 			
-					<tr>
+				<tr>
 				<td><input type = "radio" name = "deletegroup" id = <%=i %> value = <%=i %>></td>
-	    		<td>
-	    			
-	    			<%=onesGroupInfo.get(i) %>
-	    			
-	    		</td>
+	    		<%
+	    		String str = onesGroupInfo.get(i);
+	    		String[] list = str.split("##");
+	    		int bookd = Integer.valueOf(list[1].substring(list[1].length()-1, list[1].length()));
+	    		String seats = list[2].substring(5, list[2].length());
+	    		int per = Integer.valueOf(list[3].substring(7, 8));
+	    		String reason = list[4].substring(7, list[4].length());
+	    		%>
+	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=seats %></td>
+	    		<td><%=DateManager.getPeroid(per) %>
+	    		<td><%=reason %></td>
 	    	</tr>
 			
 			
@@ -130,22 +138,19 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="删 除">
-		<input type="reset" class="btn btn-success" value="重 置">
-		</form>
 	  </div>
 	  
     <div class="container">
-    <form action="ProveGroupServlet" method="post" onSubmit="return login(this);">
     <h1>待审批</h1>
 
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
 		      <th>选择</th>
-		      <th>日期</th>
-		      <th>座位</th>
-		      <th>时间段</th>
+		  	  <th>日期</th>
+		  	  <th>座位号</th>
+		  	  <th>时间段</th>
+		  	  <th>申请理由</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -160,13 +165,20 @@
 		{
 %>
 			
-			<tr>
-			    <td><input type = "radio" name = "deletegroup" id = <%=i %> value = <%=i %>></td>
-	    		<td>
-	    			
-	    			<%=onesGroupInfo.get(i) %>
-	    			
-	    		</td>
+				<tr>
+				<td><input type = "radio" name = "deletegroup" id = <%=i %> value = <%=i %>></td>
+	    		<%
+	    		String str = onesGroupInfo.get(i);
+	    		String[] list = str.split("##");
+	    		int bookd = Integer.valueOf(list[1].substring(list[1].length()-1, list[1].length()));
+	    		String seats = list[2].substring(5, list[2].length());
+	    		int per = Integer.valueOf(list[3].substring(7, 8));
+	    		String reason = list[4].substring(7, list[4].length());
+	    		%>
+	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=seats %></td>
+	    		<td><%=DateManager.getPeroid(per) %>
+	    		<td><%=reason %></td>
 	    	</tr>
 			
 			
@@ -174,19 +186,18 @@
 		   </tbody>
 		</table>
 		
-		</form>
 	  </div>
 	  
     <div class="container">
-    <form action="DeclineGroupServlet" method="post" onSubmit="return login(this);">
     <h1>被拒绝</h1>
 
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
-		      <th>日期</th>
-		      <th>座位</th>
-		      <th>时间段</th>
+		  	  <th>日期</th>
+		  	  <th>座位号</th>
+		  	  <th>时间段</th>
+		  	  <th>申请理由</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -201,10 +212,19 @@
 		{
 %>
 			
-		<tr>
-	    		<td>
-	    			<%=onesGroupInfo.get(i) %>
-	    		</td>
+				<tr>
+	    		<%
+	    		String str = onesGroupInfo.get(i);
+	    		String[] list = str.split("##");
+	    		int bookd = Integer.valueOf(list[1].substring(list[1].length()-1, list[1].length()));
+	    		String seats = list[2].substring(5, list[2].length());
+	    		int per = Integer.valueOf(list[3].substring(7, 8));
+	    		String reason = list[4].substring(7, list[4].length());
+	    		%>
+	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=seats %></td>
+	    		<td><%=DateManager.getPeroid(per) %>
+	    		<td><%=reason %></td>
 	    	</tr>
 			
 			
@@ -212,7 +232,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="拒 绝">
+		<input type="submit" class="btn btn-success" value="删 除">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>	  
