@@ -72,7 +72,10 @@ public class DeleteGroupServlet extends HttpServlet{
 					else
 					{
 						request.setAttribute("info",  "OK! This group seat is deleted!");
-						request.getRequestDispatcher("message.jsp").forward(request, response);
+						GroupSeatDao groupSeatDao = new GroupSeatDao();
+						onesGroupInfo = groupSeatDao.getOnesGroupInfo(studentnum);
+						request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
+						request.getRequestDispatcher("./groupseatsinfo.jsp").forward(request, response);
 					}
 					
 				}
