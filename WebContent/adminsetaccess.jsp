@@ -149,6 +149,53 @@
 		</form>
 	  </div>
 	  
+	  
+    <div class="container">
+    <form action="OpenPeriodServlet" method="post" onSubmit="return login(this);">
+    <h1>开启时间段</h1>
+
+		<table class="table table-striped">
+		   <thead>
+		      <tr>
+		      	 <th>选择</th>
+		      	 <th >日期</th>
+		      	 <td>时间段</td>
+		      </tr>
+		   </thead>
+		   <tbody>
+<%
+	//ArrayList<String> seataccess = (ArrayList<String>)session.getAttribute("seataccess");
+	int tmp1 = 0;
+	if (seataccess != null && seataccess.size() > 0)
+	{
+		
+	for (int i = 0 ; i < seataccess.size() ; i ++)
+	{
+		if(seataccess.get(i).split("_")[2].equals("3"))
+		{
+			tmp1 = tmp1 + 1;
+%>
+		      <tr>
+		        <td><input type = "radio" name = "openSeat" id = <%=seataccess.get(i) %> value = <%=seataccess.get(i) %>></td>
+		         <%
+		         String str = seataccess.get(i);
+		         str = str.trim();
+		         String[] list = str.split("_");
+		         int bd = Integer.valueOf(list[0]);
+		         int pe = Integer.valueOf(list[1]);
+		         %>
+		         <td><%=DateManager.getFormatDate(bd) %></td>
+		         <td><%=DateManager.getPeroid(pe) %></td>
+		      </tr>
+		      <%} } }%>
+		   </tbody>
+		</table>
+		
+		<input type="submit" class="btn btn-success" value="开 启">
+		<input type="reset" class="btn btn-success" value="重 置">
+		</form>
+	  </div>
+	  
 	 
 	  
     <div class="container">
