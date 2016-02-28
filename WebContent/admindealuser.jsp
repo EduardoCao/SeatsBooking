@@ -215,7 +215,12 @@
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
-
+	<br><br>
+	<div class = "container">
+	 <form action="CheckCloseUserServlet" method="post" onSubmit="return login(this);">
+ 	<input type="button" name="checkclose" class="btn btn-success" value="检查禁足是否到期" onclick="form.submit()">
+ </form>
+	</div>
 	  
     <div class="container">
       <!-- Example row of columns -->
