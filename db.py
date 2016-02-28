@@ -105,10 +105,10 @@ def makeSeatTable0Events():
 				time = "18"
 				time1 = "21"
 			cur.execute("drop event if exists timeout_period" + str(i))
-			cur.execute("create event timeout_period" + str(i) +" on schedule every 1 minute do update seat_table_0 set period" + str(i) + " = 2 where curtime() > '" + str(time)+":00'")
+			cur.execute("create event timeout_period" + str(i) +" on schedule every 10 second do update seat_table_0 set period" + str(i) + " = 2 where curtime() > '" + str(time)+":00' and period" + str(i) +" != 3")
 
 			cur.execute("drop event if exists timeout_ownerPeriod" + str(i))
-			cur.execute("create event timeout_ownerPeriod"+ str(i) + " on schedule every 1 minute do update seat_table_0 set ownerPeriod" + str(i) +" = NULL where curtime() > '" + str(time1) +" :00'")
+			cur.execute("create event timeout_ownerPeriod"+ str(i) + " on schedule every 10 second do update seat_table_0 set ownerPeriod" + str(i) +" = NULL where curtime() > '" + str(time1) +" :00' and period" + str(i) +" != 3")
 
 			
 		conn.commit()
@@ -141,10 +141,10 @@ def makeGroupSeatTable0Events():
 				time = "18"
 				time1 = "21"
 			cur.execute("drop event if exists group_timeout_period" + str(i))
-			cur.execute("create event group_timeout_period" + str(i) +" on schedule every 1 minute do update group_seat_table_0 set period" + str(i) + " = 2 where curtime() > '" + str(time)+":00'")
+			cur.execute("create event group_timeout_period" + str(i) +" on schedule every 10 second do update group_seat_table_0 set period" + str(i) + " = 2 where curtime() > '" + str(time)+":00' and period" + str(i) +" != 3")
 
 			cur.execute("drop event if exists group_timeout_ownerPeriod" + str(i))
-			cur.execute("create event group_timeout_ownerPeriod"+ str(i) + " on schedule every 1 minute do update group_seat_table_0 set ownerPeriod" + str(i) +" = NULL where curtime() > '" + str(time1) +" :00'")
+			cur.execute("create event group_timeout_ownerPeriod"+ str(i) + " on schedule every 10 second do update group_seat_table_0 set ownerPeriod" + str(i) +" = NULL where curtime() > '" + str(time1) +" :00' and period" + str(i) +" != 3")
 
 			
 		conn.commit()
