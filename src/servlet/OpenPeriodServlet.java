@@ -51,6 +51,9 @@ public class OpenPeriodServlet extends HttpServlet{
 //					request.getRequestDispatcher("message.jsp").forward(request, response);
 					ArrayList<String> seatAccess = seatDao.getSeatAccess();
 					request.getSession().setAttribute("seataccess" , seatAccess);
+					request.getSession().removeAttribute("seats");
+					request.getSession().removeAttribute("allGroupInfo");
+					request.getSession().removeAttribute("groupseats");
 					request.getRequestDispatcher("./adminsetaccess.jsp").forward(request, response);
 				}
 				else if(tag == 2 && tag2 == 2)

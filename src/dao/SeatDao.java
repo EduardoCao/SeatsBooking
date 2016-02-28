@@ -202,7 +202,7 @@ public class SeatDao {
 				return "Cannot book two same periods in a day!";
 			}
 		
-				sql = "update seat_table_" + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ?";
+				sql = "update seat_table_" + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ? and period" + period + " != ? and period" + period + " != ?";
 				ps = conn.prepareStatement(sql);
 				if(periodori == 0)
 					ps.setInt(1, 1);
@@ -210,6 +210,8 @@ public class SeatDao {
 					ps.setInt(1, 2);
 				ps.setString(2, owner);
 				ps.setInt(3, Integer.parseInt(seatnum));
+				ps.setInt(4, 3);
+				ps.setInt(5, 1);
 				ps.executeUpdate();
 				
 			rs.close();
