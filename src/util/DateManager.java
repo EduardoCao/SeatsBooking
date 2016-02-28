@@ -29,7 +29,7 @@ public class DateManager {
 		} else if (i == 1) {
 			return "10:00-12:00";
 		} else if (i == 2) {
-			return "12:00-15:00";
+			return "13:00-15:00";
 		} else if (i==3) {
 			return "15:00-17:00";
 		} else if (i == 4) {

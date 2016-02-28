@@ -63,7 +63,7 @@ public class AdminDelGroupServlet extends HttpServlet {
 	 			allGroupInfo = groupSeatDao.getAllGroupInfo();
 	 			request.getSession().setAttribute("allGroupInfo", allGroupInfo);
 	 			request.setAttribute("info",  "OK! This group deleted!");
-	 			request.getRequestDispatcher("message.jsp").forward(request, response);
+	 			request.getRequestDispatcher("admingroupinfo.jsp").forward(request, response);
 	 		}
 	 	}
 		}

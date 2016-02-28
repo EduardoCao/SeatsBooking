@@ -131,7 +131,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="删 除">
+		<input type="submit" class="btn btn-success" value="删 除" onclick="if(!confirm('确定删除？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
@@ -171,7 +171,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="禁 足">
+		<input type="submit" class="btn btn-success" value="禁 足" onclick="if(!confirm('确定关该用户禁闭？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
@@ -213,7 +213,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="解 禁">
+		<input type="submit" class="btn btn-success" value="解 禁" onclick="if(!confirm('确定解禁该用户？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
