@@ -70,7 +70,7 @@ public class DeleteGroupServlet extends HttpServlet{
 					else
 					{
 						request.setAttribute("info",  "OK! This group seat is deleted!");
-						request.getRequestDispatcher("message.jsp").forward(request, response);
+						request.getRequestDispatcher("groupbooking.jsp").forward(request, response);
 					}
 				}
 				else
