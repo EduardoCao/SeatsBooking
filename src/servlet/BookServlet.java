@@ -47,7 +47,7 @@ public class BookServlet extends HttpServlet {
 					}
 					if (bookseat == null || bookdate == null)
 					{
-						String info = "亲，登录超时了，请重新登录！Please try to book the seat again!";
+						String info = "亲，别急，还没选择好预定哪天的哪个座位呢！Please try to book the seat again!";
 						request.setAttribute("info", info);
 						request.getRequestDispatcher("./message.jsp").forward(request, response);
 					}

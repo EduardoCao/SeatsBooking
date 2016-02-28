@@ -22,7 +22,7 @@ public class AdminDelGroupServlet extends HttpServlet {
 	{
 		if(request.getParameter("deletegroup") == null)
 		{
-			request.setAttribute("info",  "亲，登录超时了哦，请重新登录试试吧~ Delete error.");
+			request.setAttribute("info",  "亲，别急，还没选择删除哪个座位呢~ Delete error.");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else

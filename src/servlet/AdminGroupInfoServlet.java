@@ -26,7 +26,7 @@ public class AdminGroupInfoServlet extends HttpServlet{
 		String bookdate = request.getParameter("bookdate");
 		if(bookdate == null)
 		{
-			request.setAttribute("info",  "亲，登录超时了呢，重新登录试试吧！Error, please try again later!");
+			request.setAttribute("info",  "亲，好像出错了呢，重新登录试试吧！Error, please try again later!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else

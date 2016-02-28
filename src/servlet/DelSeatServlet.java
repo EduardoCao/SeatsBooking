@@ -26,14 +26,14 @@ public class DelSeatServlet extends HttpServlet{
 		String delete = request.getParameter("delSeat");
 		if(delete == null)
 		{
-			request.setAttribute("info",  "Delete seat error!");
+			request.setAttribute("info",  "亲，还没指定删哪个座位呢~ Delete seat error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
 		{
 			if(delete.split("_").length != 3 || delete.split("_")[0] == null || delete.split("_")[1] == null || delete.split("_")[2] == null )
 			{
-				request.setAttribute("info",  "Delete seat error!");
+				request.setAttribute("info",  "亲，删这个座位有点错误，重新试试看！ Delete seat error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else
@@ -52,7 +52,7 @@ public class DelSeatServlet extends HttpServlet{
 				}
 				else
 				{
-					request.setAttribute("info",  "Cannot delete this seat!");
+					request.setAttribute("info",  "亲，这个座位可能已经被删了呢~重新试试吧~ Cannot delete this seat!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				

@@ -24,7 +24,7 @@ public class AddSeatServlet extends HttpServlet{
 				String bookdate = (String) request.getSession().getAttribute("bookdate");
 				if(delete == null|| bookuser == null)
 				{
-					request.setAttribute("info",  "亲，登录超时了哦，请重新登录试试~ Add seat error!");
+					request.setAttribute("info",  "亲，没有指定给谁，添加什么时候的座位呢！请重试~ Add seat error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				else
@@ -63,7 +63,7 @@ public class AddSeatServlet extends HttpServlet{
 							}
 							else
 							{
-								request.setAttribute("info",  "亲，这个座位刚刚被别人占了哦，请试试其他的座位吧~ " + bookres );
+								request.setAttribute("info",   bookres );
 								request.getRequestDispatcher("message.jsp").forward(request, response);
 							}
 						}

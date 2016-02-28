@@ -25,7 +25,7 @@ public class DeleteServlet extends HttpServlet{
 				String delete = request.getParameter("delete");
 				if(delete == null)
 				{
-					request.setAttribute("info",  "Delete seats error!");
+					request.setAttribute("info",  "亲，别急，还没说好删哪个座位呢~ Delete seats error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				else
@@ -39,7 +39,7 @@ public class DeleteServlet extends HttpServlet{
 					User user = (User) request.getSession().getAttribute("user");
 					if(onesseats.size() == 0 || user == null)
 					{
-						request.setAttribute("info",  "Delete seats error!");
+						request.setAttribute("info",  "其实已经没的可删了，重新试试看~ Delete seats error!");
 						request.getRequestDispatcher("message.jsp").forward(request, response);
 					}
 					else
@@ -59,7 +59,7 @@ public class DeleteServlet extends HttpServlet{
 						}
 						else
 						{
-							request.setAttribute("info",  "Cannot delete this seat!");
+							request.setAttribute("info",  "亲，这个座位好像已经删了呢~或者时间段开始不足一小时不能删除了呢~重新查看一下吧~ Cannot delete this seat!");
 							request.getRequestDispatcher("message.jsp").forward(request, response);
 						}
 						

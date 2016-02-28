@@ -25,7 +25,7 @@ public class AddGroupServlet extends HttpServlet{
 		if (bookuser == null || add == null || add.split("_").length != 2 || bookdate == null)
 		{
 			
-			request.setAttribute("info", "亲，登录超时了哦，请重新登录，重新来过~ Add group seat by admin error, please try again...");
+			request.setAttribute("info", "亲，没有指定清楚为谁，添加哪个座位呢，请重新来过~ Add group seat by admin error, please try again...");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else

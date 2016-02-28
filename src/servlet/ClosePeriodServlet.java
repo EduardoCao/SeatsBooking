@@ -25,7 +25,7 @@ public class ClosePeriodServlet extends HttpServlet{
 		String close = request.getParameter("closeSeat");
 		if(close == null)
 		{
-			request.setAttribute("info",  "close period error!");
+			request.setAttribute("info",  "亲，别急，还没选择好关哪一段时间段呢~ Close period error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -37,7 +37,7 @@ public class ClosePeriodServlet extends HttpServlet{
 			
 			if(day == null || period == null)
 			{
-				request.setAttribute("info",  "close period error!");
+				request.setAttribute("info",  "亲，好像出了点问题，请重新来过试一试~ Close period error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else
@@ -59,12 +59,12 @@ public class ClosePeriodServlet extends HttpServlet{
 				}
 				else if(tag == 2 && tag2 == 2)
 				{
-					request.setAttribute("info",  "Cannot close timeout period!");
+					request.setAttribute("info",  "这个时间段已经过去了呢，放过它吧~ Cannot close timeout period!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				else
 				{
-					request.setAttribute("info",  "Close this period error! Please check!");
+					request.setAttribute("info",  "关闭时间段错了哦，请重试~ Close this period error! Please check!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				

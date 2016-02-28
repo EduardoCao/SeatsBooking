@@ -21,7 +21,7 @@ public class DeclineGroupServlet extends HttpServlet{
 	{
 		if(request.getParameter("declinegroup") == null)
 		{
-			request.setAttribute("info",  "decline group seat error");
+			request.setAttribute("info",  "亲，还没指定拒绝哪个申请呢~别急，慢慢来！ Decline group seat error");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -39,7 +39,7 @@ public class DeclineGroupServlet extends HttpServlet{
 	 	GroupSeatDao groupseatDao = new GroupSeatDao();
 	 	if (!flag.equals("0"))
 	 	{
-	 		request.setAttribute("info",  "Cannot decline this group seat!");
+	 		request.setAttribute("info",  "这个申请已经不需要审批了呢~ Cannot decline this group seat!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 	}
 	 	else
@@ -52,7 +52,7 @@ public class DeclineGroupServlet extends HttpServlet{
 	 		}
 	 		else if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "Cannot decline this group seat!");
+	 			request.setAttribute("info",  "拒绝失败了呢:(重新试试看 Cannot decline this group seat!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)

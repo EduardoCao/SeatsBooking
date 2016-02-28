@@ -26,7 +26,7 @@ public class CloseUserServlet extends HttpServlet{
 		String close = request.getParameter("closeUser");
 		if(close == null)
 		{
-			request.setAttribute("info",  "close user error!");
+			request.setAttribute("info",  "亲，还没有指定关哪个不听话的童鞋呢！请重新选择~ Close user error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -37,7 +37,7 @@ public class CloseUserServlet extends HttpServlet{
 			int userType = showallusers.get(closenum).getUserType();
 			if(studentnum == null)
 			{
-				request.setAttribute("info",  "close user error!");
+				request.setAttribute("info",  "亲，没有找到这个不听话的同学的禁闭呢！请重新选择~ Close user error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else
@@ -54,7 +54,7 @@ public class CloseUserServlet extends HttpServlet{
 				}
 				else
 				{
-					request.setAttribute("info",  "Cannot close this user!");
+					request.setAttribute("info",  "这个同学没有被成功关禁闭，请稍后重试~ Cannot close this user!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				

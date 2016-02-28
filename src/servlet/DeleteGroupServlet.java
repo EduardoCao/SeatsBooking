@@ -23,7 +23,7 @@ public class DeleteGroupServlet extends HttpServlet{
 		String delete = request.getParameter("deletegroup");
 		if(delete == null)
 		{
-			request.setAttribute("info",  "Delete seats error!");
+			request.setAttribute("info",  "亲，别急，还没指定删除哪个座位呢~ Delete seats error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -52,37 +52,29 @@ public class DeleteGroupServlet extends HttpServlet{
 					request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
 					request.getRequestDispatcher("groupseatsinfo.jsp").forward(request, response);
 				}
-				else if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == -1)
+				else
 				{
-					request.setAttribute("info",  "Delete this group seat error!");
+					request.setAttribute("info",  "亲，对不起，这个座位好像已经删了呢~ Delete this group seat error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 			}
 			else if(flag.equals("1"))
 			{
 				GroupSeatDao groupseatDao = new GroupSeatDao();
-				if(groupseatDao.delReservedSeat(user.getStudentnum() , bookdate , seatnum , period) == 0)
+				int tag = groupseatDao.delReservedSeat(user.getStudentnum() , bookdate , seatnum , period);
+				if(tag == 0)
 				{
-				
 					String studentnum = user.getStudentnum();
+					request.setAttribute("info",  "OK! This group seat is deleted!");
+					GroupSeatDao groupSeatDao = new GroupSeatDao();
+					onesGroupInfo = groupSeatDao.getOnesGroupInfo(studentnum);
+					request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
+					request.getRequestDispatcher("groupseatsinfo.jsp").forward(request, response);
 					
-					if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == -1)
-					{
-						request.setAttribute("info",  "Delete this group seat error!");
-						request.getRequestDispatcher("message.jsp").forward(request, response);
-					}
-					else
-					{
-						request.setAttribute("info",  "OK! This group seat is deleted!");
-						GroupSeatDao groupSeatDao = new GroupSeatDao();
-						onesGroupInfo = groupSeatDao.getOnesGroupInfo(studentnum);
-						request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
-						request.getRequestDispatcher("groupseatsinfo.jsp").forward(request, response);
-					}
 				}
 				else
 				{
-					request.setAttribute("info",  "Delete this reserved group seat error!");
+					request.setAttribute("info",  "亲，这个座位删除的时候出了点错误，请重新试一下吧~可能是这个座位已经被管理员删除了，也可能是离时间段开始不足一小时不允许删除了哦~ Delete this reserved group seat error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 			}
