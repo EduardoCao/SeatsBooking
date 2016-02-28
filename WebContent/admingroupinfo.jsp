@@ -221,7 +221,7 @@
 			
 					<tr>
 						<td>
-	    					<input type = "radio" name = "provegroup" id = <%=i %> value = <%=i %>>
+	    					<input type = "radio" name = "declinegroup" id = <%=i %> value = <%=i %>>
 	    				</td>
 	    		<%
 	    		String str = allGroupInfo.get(i);

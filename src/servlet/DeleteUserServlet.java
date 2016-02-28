@@ -43,6 +43,8 @@ public class DeleteUserServlet extends HttpServlet{
 				UserDao userDao = new UserDao();
 				if(userDao.deleteUser(studentnum))
 				{
+					ArrayList<User> showallusers = userDao.showAllUsers();
+					request.getSession().setAttribute("showallusers" , showallusers);
 					request.setAttribute("info",  "OK! Delete the user: " + studentnum + " !");
 					request.getRequestDispatcher("admindealuser.jsp").forward(request, response);
 				}
