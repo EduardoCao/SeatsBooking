@@ -187,6 +187,7 @@
 		      	 <th >用户名</th>
 		         <th>邮箱</th>
 		         <th>id</th>
+		         <th>关闭时间</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -206,6 +207,7 @@
 		         <td><%=showallusers.get(i).getStudentnum() %></td>
 		         <td><%=showallusers.get(i).getEmail() %></td>
 		         <td><%=showallusers.get(i).getUserType() %></td>
+		         <td><%=closetime.get(showallusers.get(i).getStudentnum()) %></td>
 		      </tr>
 		      <%} }} %>
 		   </tbody>
