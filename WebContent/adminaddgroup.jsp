@@ -43,12 +43,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+          <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
           <a class="navbar-brand hidden-sm" href="./index.jsp">教室预订系统</a>
         </div>
         <%
