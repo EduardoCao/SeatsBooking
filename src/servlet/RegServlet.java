@@ -31,11 +31,11 @@ public class RegServlet extends HttpServlet{
 				user.setEmail(email);
 				user.setUserType(Integer.parseInt(userType));
 				userDao.saveUser(user);
-				request.setAttribute("info", "Congratulation! Registration succeed!");
+				request.setAttribute("info", "恭喜你！成功注册！Congratulation! Registration succeed!");
 				
 			}else
 			{
-				request.setAttribute("info", "Sorry, the studentnum is oppucied!" );
+				request.setAttribute("info", "哎哎哎，这个用户名已经存在了呦喂！Sorry, the studentnum is oppucied!" );
 			}
 		}
 		

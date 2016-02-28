@@ -30,22 +30,22 @@ public class GroupBookServlet extends HttpServlet{
 		
 		if(bookdate == null) 
 		{
-			request.setAttribute("info",  "bookdate error!");
+			request.setAttribute("info",  "亲，别急呀，还没说好订哪一天的座位呢~ Bookdate error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else if(user.getUserType() < 0)
 		{
-			request.setAttribute("info",  "You cannot book for you have been banned for 2 weeks!");
+			request.setAttribute("info",  "你因为不听话被管理员关禁闭两周，去找管理员求情吧~ You cannot book for you have been banned for 2 weeks!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else if(groupSeat == null)
 		{
-			request.setAttribute("info",  "groupSeat error!");
+			request.setAttribute("info",  "亲，你还没告诉我订哪个座位呢~ GroupSeat error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else if(reason == null)
 		{
-			request.setAttribute("info",  "reason error!");
+			request.setAttribute("info",  "亲，申请的理由也要写哦~ Reason error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -55,17 +55,17 @@ public class GroupBookServlet extends HttpServlet{
 			int tag = groupSeatDao.reserveGroupSeat(groupSeat, user.getStudentnum(), Integer.parseInt(bookdate) , reason, 0);
 			if(tag == 1)
 			{
-				request.setAttribute("info",  "You have been booking the same seat already. Please wait...");
+				request.setAttribute("info",  "亲，你已经申请了同一时间段的座位了，正在审批，不要着急哦~ You have been booking the same seat already. Please wait...");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else if(tag == 2)
 			{
-				request.setAttribute("info",  "You have got this seat already.");
+				request.setAttribute("info",  "亲，你已经预定好了这个时间段的座位了呢！！ You have got this seat already.");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else if(tag == -1)
 			{
-				request.setAttribute("info",  "Book error!");
+				request.setAttribute("info",  "亲，出了点错:( 重新试一下~ Book error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else if(tag == 0)

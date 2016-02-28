@@ -21,7 +21,7 @@ public class ProveGroupServlet extends HttpServlet{
 	{
 		if(request.getParameter("provegroup") == null)
 		{
-			request.setAttribute("info",  "Prove group seat error");
+			request.setAttribute("info",  "亲，还没指定好批准哪一个申请呢~ Prove group seat error");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -39,7 +39,7 @@ public class ProveGroupServlet extends HttpServlet{
 	 	GroupSeatDao groupseatDao = new GroupSeatDao();
 	 	if (!flag.equals("0"))
 	 	{
-	 		request.setAttribute("info",  "Cannot prove this group seat");
+	 		request.setAttribute("info",  "亲，这个申请已经不需要审批了呢~ Cannot prove this group seat");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 	}
 	 	else
@@ -47,12 +47,12 @@ public class ProveGroupServlet extends HttpServlet{
 	 		int tag = groupseatDao.proveGroup(studentnum , bookdate , seat , period);
 	 		if(tag == -4)
 	 		{
-	 			request.setAttribute("info",  "Cannot prove this group seat for this group seat have been taken or the time period is passed!");
+	 			request.setAttribute("info",  "亲，这个座位好像被别人抢了，或者因为时间段已经超时了~ Cannot prove this group seat for this group seat have been taken or the time period is passed!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "Cannot prove this group seat!");
+	 			request.setAttribute("info",  "亲，这个座位并没有被成功批准~请重试~ Cannot prove this group seat!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)

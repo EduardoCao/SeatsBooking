@@ -24,7 +24,7 @@ public class OpenPeriodServlet extends HttpServlet{
 		String close = request.getParameter("openSeat");
 		if(close == null)
 		{
-			request.setAttribute("info",  "open period error!");
+			request.setAttribute("info",  "亲，还没说好打开哪一个时间段呢~ Open period error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -36,7 +36,7 @@ public class OpenPeriodServlet extends HttpServlet{
 			
 			if(day == null || period == null)
 			{
-				request.setAttribute("info",  "open period error!");
+				request.setAttribute("info",  "亲，出了点错:( 请重试一下~ open period error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else
@@ -58,12 +58,12 @@ public class OpenPeriodServlet extends HttpServlet{
 				}
 				else if(tag == 2 && tag2 == 2)
 				{
-					request.setAttribute("info",  "Cannot open timeout period!");
+					request.setAttribute("info",  "这个时间段已经超时~ Cannot open timeout period!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				else
 				{
-					request.setAttribute("info",  "Cannot open this period!");
+					request.setAttribute("info",  "这个时间段并不能被打开，请重试~ Cannot open this period!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 			}

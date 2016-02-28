@@ -25,7 +25,7 @@ public class OpenUserServlet extends HttpServlet{
 		String close = request.getParameter("openUser");
 		if(close == null)
 		{
-			request.setAttribute("info",  "open user error!");
+			request.setAttribute("info",  "亲，还没说好解放哪个同学呢~ Open user error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -36,7 +36,7 @@ public class OpenUserServlet extends HttpServlet{
 			int userType =  showallusers.get(closenum).getUserType();
 			if(studentnum == null)
 			{
-				request.setAttribute("info",  "open user error!");
+				request.setAttribute("info",  "亲，这个同学不存在呢，请重试~ Open user error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 			else
@@ -53,7 +53,7 @@ public class OpenUserServlet extends HttpServlet{
 				}
 				else
 				{
-					request.setAttribute("info",  "Cannot open this user!");
+					request.setAttribute("info",  "亲，出了点错，请重试:( Cannot open this user!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				
