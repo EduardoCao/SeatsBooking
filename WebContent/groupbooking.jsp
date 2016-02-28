@@ -351,7 +351,7 @@
 		   </tbody>
 		</table>
 		  <div class="form-group">
-		    <label for="name">申请原因：</label>
+		    <label for="name">申请原因(100字以内)：</label>
 		    <textarea name = "reason" class="form-control" rows="3"></textarea>
 		  </div>
 		<input type="submit" class="btn btn-success" value="提 交" onclick="if(!confirm('确定提交申请？'))return false;">
