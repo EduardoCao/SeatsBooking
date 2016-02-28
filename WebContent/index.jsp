@@ -51,7 +51,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
       <div class="container">
         <h1>你好</h1>
         <p>欢迎使用教研院教室预订系统</p>
