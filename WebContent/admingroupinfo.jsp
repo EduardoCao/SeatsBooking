@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     import="util.User"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="util.DateManager" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -85,6 +86,12 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
+		      <th>选择</th>
+		  	  <th>学生</th>
+		  	  <th>日期</th>
+		  	  <th>座位号</th>
+		  	  <th>时间段</th>
+		  	  <th>申请理由</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -100,13 +107,23 @@
 			%>
 			
 					<tr>
-	    		<td align="center" colspan="2">
+	    		<td>
 	    			<input type = "radio" name = "deletegroup" id = <%=i %> value = <%=i %>>
-	    			<span style="font-weight: bold;font-size: 18px;">
-	    			<%=allGroupInfo.get(i)%>
-	    			</span>
-	    			
 	    		</td>
+	    		<%
+	    		String str = allGroupInfo.get(i);
+	    		String[] list = str.split("##");
+	    		String users = list[1].substring(11, list[1].length());
+	    		int bookd = Integer.valueOf(list[2].substring(list[2].length()-1, list[2].length()));
+	    		String seats = list[3].substring(5, list[3].length());
+	    		int per = Integer.valueOf(list[4].substring(7, 8));
+	    		String reason = list[5].substring(7, list[5].length());
+	    		%>
+	    		<td><%=users %></td>
+	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=seats %></td>
+	    		<td><%=DateManager.getPeroid(per) %>
+	    		<td><%=reason %></td>
 	    	</tr>
 			
 			
@@ -126,6 +143,12 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
+			  <th>选择</th>
+		  	  <th>学生</th>
+		  	  <th>日期</th>
+		  	  <th>座位号</th>
+		  	  <th>时间段</th>
+		  	  <th>申请理由</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -141,15 +164,23 @@
 	%>
 			
 					<tr>
-						<td align="center" colspan="2">
-	    			
-	    					<span style="font-weight: bold;font-size: 18px;">
+						<td>
 	    					<input type = "radio" name = "provegroup" id = <%=i %> value = <%=i %>>
-	    					<%=allGroupInfo.get(i)%>
-	    					
-	    					</span>
-	    				
 	    				</td>
+	    		<%
+	    		String str = allGroupInfo.get(i);
+	    		String[] list = str.split("##");
+	    		String users = list[1].substring(11, list[1].length());
+	    		int bookd = Integer.valueOf(list[2].substring(list[2].length()-1, list[2].length()));
+	    		String seats = list[3].substring(5, list[3].length());
+	    		int per = Integer.valueOf(list[4].substring(7, 8));
+	    		String reason = list[5].substring(7, list[5].length());
+	    		%>
+	    		<td><%=users %></td>
+	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=seats %></td>
+	    		<td><%=DateManager.getPeroid(per) %>
+	    		<td><%=reason %></td>
 	    	</tr>
 			
 			
@@ -169,6 +200,11 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
+		  	  <th>学生</th>
+		  	  <th>日期</th>
+		  	  <th>座位号</th>
+		  	  <th>时间段</th>
+		  	  <th>申请理由</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -183,16 +219,24 @@
 			{
 	%>
 			
-		<tr>
-	    		<td align="center" colspan="2">
-	    			
-	    			<span style="font-weight: bold;font-size: 18px;">
-	    			<input type = "radio" name = "declinegroup" id = <%=i %> value = <%=i %>>
-	    			<%=allGroupInfo.get(i)%>
-	    			
-	    			</span>
-	    			
-	    		</td>
+					<tr>
+						<td>
+	    					<input type = "radio" name = "provegroup" id = <%=i %> value = <%=i %>>
+	    				</td>
+	    		<%
+	    		String str = allGroupInfo.get(i);
+	    		String[] list = str.split("##");
+	    		String users = list[1].substring(11, list[1].length());
+	    		int bookd = Integer.valueOf(list[2].substring(list[2].length()-1, list[2].length()));
+	    		String seats = list[3].substring(5, list[3].length());
+	    		int per = Integer.valueOf(list[4].substring(7, 8));
+	    		String reason = list[5].substring(7, list[5].length());
+	    		%>
+	    		<td><%=users %></td>
+	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=seats %></td>
+	    		<td><%=DateManager.getPeroid(per) %>
+	    		<td><%=reason %></td>
 	    	</tr>
 			
 			
