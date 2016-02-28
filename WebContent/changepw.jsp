@@ -86,6 +86,7 @@
           <%
           if (user.getUserType() == 0 || user.getUserType() == -1) {
           %>
+          	<li><a href="<%=ref%>"><%=tag %></a></li>
             <li><a href="./seatsbooking.jsp">个人座位预定</a></li>
             <li><a href="./groupbooking.jsp">集体座位预定</a></li>
             <li><a href="./InfoServlet">查看个人座位预定</a></li>
@@ -94,6 +95,7 @@
           <%
           } else if (user.getUserType() == 1 || user.getUserType() == -2) { 
           %>
+            <li><a href="<%=ref%>"><%=tag %></a></li>
             <li><a href="./groupbooking.jsp">集体座位预定</a></li>
             <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
             <li class ="active"><a href="changepw.jsp">修改密码</a></li>

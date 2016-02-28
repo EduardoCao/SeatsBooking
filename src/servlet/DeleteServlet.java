@@ -48,6 +48,7 @@ public class DeleteServlet extends HttpServlet{
 						SeatDao seatDao = new SeatDao();
 						if(seatDao.deleteSeat(user.getStudentnum(), bookdate, seatnum, period))
 						{
+
 							Seats[] seats = new Seats[10];
 							seats = seatDao.getSeats(bookdate);
 							request.getSession().setAttribute("seats", seats);
