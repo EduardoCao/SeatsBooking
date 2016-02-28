@@ -179,7 +179,7 @@
 	              <span class="glyphicon glyphicon-remove"></span></button>
 	        </div>
 	        <div class="col-md-3 col-xs-12">
-	            <button type="submit" class="btn btn-info btn-block"><b>&nbsp;&nbsp; 提交 &nbsp;&nbsp;</b>
+	            <button type="submit" class="btn btn-info btn-block" onclick="if(!confirm('确定注册？'))return false;"><b>&nbsp;&nbsp; 提交 &nbsp;&nbsp;</b>
 	            <span class="glyphicon glyphicon-arrow-right"></span></button>
 	        </div>
 	      </div>

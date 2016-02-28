@@ -188,7 +188,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="批 准">
+		<input type="submit" class="btn btn-success" value="批 准" onclick="if(!confirm('确定批准该申请？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
@@ -244,7 +244,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="拒 绝">
+		<input type="submit" class="btn btn-success" value="拒 绝" onclick="if(!confirm('确定拒绝该申请？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>	  

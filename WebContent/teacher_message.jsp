@@ -78,7 +78,7 @@
       <div class="container">
         <h1>你好</h1>
         <p>欢迎使用教研院教室预订系统</p>
-        <a class="btn btn-primary btn-lg" href="ExitServlet" role="button">登出 &raquo;</a>
+        <a class="btn btn-primary btn-lg" href="ExitServlet" role="button" onclick="if(!confirm('确定退出？'))return false;">登出 &raquo;</a>
       </div>
     </div>
 

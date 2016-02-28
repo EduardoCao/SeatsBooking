@@ -400,7 +400,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="提 交">
+		<input type="submit" class="btn btn-success" value="提 交" onclick="if(!confirm('确定预订该座位？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>

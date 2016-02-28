@@ -422,7 +422,7 @@ if(seats != null) {
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="添加用户预定">
+		<input type="submit" class="btn btn-success" value="添加用户预定" onclick="if(!confirm('确定添加该座位？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>

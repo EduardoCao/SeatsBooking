@@ -299,7 +299,7 @@ if(seats != null){
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="添加预订">
+		<input type="submit" class="btn btn-success" value="添加预订" onclick="if(!confirm('确定添加？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>

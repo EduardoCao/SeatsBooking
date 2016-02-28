@@ -144,7 +144,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="关 闭">
+		<input type="submit" class="btn btn-success" value="关 闭" onclick="if(!confirm('确定关闭该时间段？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
@@ -191,7 +191,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="开 启">
+		<input type="submit" class="btn btn-success" value="开 启" onclick="if(!confirm('确定开启该时间段？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
