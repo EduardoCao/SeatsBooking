@@ -182,7 +182,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
 		  				</td>
@@ -192,7 +192,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
 		  				</td>
@@ -202,7 +202,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								关闭时间段
 							</input>
 		  				</td>
@@ -229,7 +229,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
 		  				</td>
@@ -239,7 +239,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
 		  				</td>
@@ -249,7 +249,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								关闭时间段
 							</input>
 		  				</td>
@@ -274,7 +274,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
 		  				</td>
@@ -284,7 +284,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
 		  				</td>
@@ -294,7 +294,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								关闭时间段
 							</input>
 		  				</td>
@@ -319,7 +319,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
 		  				</td>
@@ -329,7 +329,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
 		  				</td>
@@ -339,7 +339,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								关闭时间段
 							</input>
 		  				</td>
@@ -364,7 +364,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
 		  				</td>
@@ -374,7 +374,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
 		  				</td>
@@ -384,7 +384,7 @@
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
-							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
+							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> --%> 
 								关闭时间段
 							</input>
 		  				</td>
