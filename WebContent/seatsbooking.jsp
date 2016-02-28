@@ -64,8 +64,7 @@
         	} else {
         		tag = "管理员界面";
         		ref = "./admin_message.jsp";
-        	}
-        		
+        	}	
        	%>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
           <ul class="nav navbar-nav">

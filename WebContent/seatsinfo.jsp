@@ -32,16 +32,7 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script language="javascript">
-    	function firm()
-    	{
-    		if(confirm("确认删除"))
-    		{
-    			location.href="./seatsbooking.jsp";
-    		}
-    		
-    	}
-    </script>
+
   </head>
 
   <body>
@@ -116,7 +107,6 @@
 
     <div class="container">
     <form action="DeleteServlet" method="post" onSubmit="">
-
     <h1>个人座位预订</h1>
 
 		<table class="table table-striped">
@@ -157,7 +147,7 @@
 		</table>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="删 除">
+		<input type="submit" class="btn btn-success" value="删 除" onclick="if(!confirm('确定删除？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>

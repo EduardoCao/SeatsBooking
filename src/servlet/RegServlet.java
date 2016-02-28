@@ -38,6 +38,7 @@ public class RegServlet extends HttpServlet{
 				request.setAttribute("info", "Sorry, the studentnum is oppucied!" );
 			}
 		}
-		request.getRequestDispatcher("message.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("AdminUserServlet").forward(request, response);
 	}
 }	

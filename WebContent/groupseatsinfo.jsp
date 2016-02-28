@@ -252,7 +252,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="删 除">
+		<input type="submit" class="btn btn-success" value="删 除" onclick="if(!confirm('确定删除？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>	  

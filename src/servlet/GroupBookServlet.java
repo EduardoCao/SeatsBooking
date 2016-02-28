@@ -33,6 +33,11 @@ public class GroupBookServlet extends HttpServlet{
 			request.setAttribute("info",  "bookdate error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
+		else if(user.getUserType() < 0)
+		{
+			request.setAttribute("info",  "You cannot book for you have been banned for 2 weeks!");
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+		}
 		else if(groupSeat == null)
 		{
 			request.setAttribute("info",  "groupSeat error!");

@@ -52,8 +52,10 @@ public class DeleteServlet extends HttpServlet{
 							Seats[] seats = new Seats[10];
 							seats = seatDao.getSeats(bookdate);
 							request.getSession().setAttribute("seats", seats);
+							ArrayList<String> onesSeat = seatDao.getOnesSeats(user.getStudentnum());
+							request.getSession().setAttribute("onesSeats", onesSeat);
 							//request.setAttribute("info",  "OK! Delete this seat!");
-							request.getRequestDispatcher("seatsbooking.jsp").forward(request, response);
+							request.getRequestDispatcher("seatsinfo.jsp").forward(request, response);
 						}
 						else
 						{

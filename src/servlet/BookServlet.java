@@ -33,7 +33,7 @@ public class BookServlet extends HttpServlet {
 				int userType = userDao.checkUserType(owner,pw);
 				if(userType < 0)
 				{
-					request.setAttribute("info", "You have been banned!");
+					request.setAttribute("info", "You cannot book for you have been banned for 2 weeks!");
 					request.getRequestDispatcher("./message.jsp").forward(request, response);
 				}
 				//System.out.println(owner + " " + bookdate + " "  + bookseat);

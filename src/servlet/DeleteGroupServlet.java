@@ -46,7 +46,11 @@ public class DeleteGroupServlet extends HttpServlet{
 				if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == 0)
 				{
 					request.setAttribute("info",  "OK! This group seat is deleted!");
-					request.getRequestDispatcher("groupbooking.jsp").forward(request, response);
+					String studentnum = user.getStudentnum();
+					GroupSeatDao groupSeatDao = new GroupSeatDao();
+					onesGroupInfo = groupSeatDao.getOnesGroupInfo(studentnum);
+					request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
+					request.getRequestDispatcher("groupseatsinfo.jsp").forward(request, response);
 				}
 				else if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == -1)
 				{
@@ -70,7 +74,10 @@ public class DeleteGroupServlet extends HttpServlet{
 					else
 					{
 						request.setAttribute("info",  "OK! This group seat is deleted!");
-						request.getRequestDispatcher("groupbooking.jsp").forward(request, response);
+						GroupSeatDao groupSeatDao = new GroupSeatDao();
+						onesGroupInfo = groupSeatDao.getOnesGroupInfo(studentnum);
+						request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
+						request.getRequestDispatcher("groupseatsinfo.jsp").forward(request, response);
 					}
 				}
 				else

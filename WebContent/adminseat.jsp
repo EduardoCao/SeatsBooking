@@ -256,7 +256,7 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="取消预订">
+		<input type="submit" class="btn btn-success" value="取消预订" onclick="if(!confirm('确定取消？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>

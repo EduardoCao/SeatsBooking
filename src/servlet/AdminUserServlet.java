@@ -27,4 +27,10 @@ public class AdminUserServlet extends HttpServlet{
 		request.getSession().setAttribute("closetime", closetime);
 		request.getRequestDispatcher("./admindealuser.jsp").forward(request, response);
 	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+			doGet(request,response);
+			}
 }
