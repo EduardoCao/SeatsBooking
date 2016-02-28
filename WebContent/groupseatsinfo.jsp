@@ -37,76 +37,40 @@
 		User user = (User)session.getAttribute("user");
 	%>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">教室预定系统</a>
-          
+          <a class="navbar-brand hidden-sm" href="./index.jsp">教室预订系统</a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
+        <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
-        <%
-        if (user != null) { 
-        	String tag = "";
-        	String ref = "";
-        	if (user.getUserType() == 0 || user.getUserType() == -1) {
-        		tag = "学生界面";
-        		ref = "./student_message.jsp";
-        	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
-        		tag = "教师界面";
-        		ref = "./teacher_message.jsp";
-        	} else {
-        		tag = "管理员界面";
-        		ref = "./admin_message.jsp";
-        	}
-        
-        		
-       	%>
-          <%
-          if (user.getUserType() == 0 || user.getUserType() == -1) {
-          %>
-          	<li><a href="<%=ref%>"><%=tag %></a></li>
+          	<li><a href="./student_message.jsp">学生界面</a></li>
             <li><a href="./seatsbooking.jsp">个人座位预定</a></li>
             <li><a href="./groupbooking.jsp">集体座位预定</a></li>
             <li><a href="./InfoServlet">查看个人座位预定</a></li>
             <li class="active"><a href="./GroupInfoServlet">查看集体座位预定</a></li>
-          <%
-          } else { 
-          %>
-          	<li><a href="<%=ref%>"><%=tag %></a></li>
-            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
-            <li class="active"><a href="./GroupInfoServlet">查看集体座位预定</a></li>
-          <%
-          }}
-          %>
             <li><a href="changepw.jsp">修改密码</a></li>
           </ul>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <%if (user != null) { %>
-              <div style="float:right;">
-                  <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
-                  <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
-                  &nbsp;
-	              <button type="button" onclick="javascript:location.href='./ExitServlet'" class="btn btn-success">退出登录</button>
-	          </div>
+          <ul class="nav navbar-nav navbar-right hidden-sm">
+          <li>
+          <a>
+          	<%if (user != null) { %>
+			  <%="当前用户：" + user.getStudentnum()%>
               <%} else { %>
-              <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
-              <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
+              <%="尚未登录" %>
               <%} %>
-            </div>
-          </form>
-        </div><!--/.navbar-collapse -->
+          </a>
+          </li>
+          </ul>
+        </div>
       </div>
-    </nav>
+    </div>
 
     <br><br><br>
     <!-- Main jumbotron for a primary marketing message or call to action -->
