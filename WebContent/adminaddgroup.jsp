@@ -190,6 +190,7 @@ if(seats != null){
 				<tr>
 				
 				<td><%="座位"+i%></td>
+				
 				<%
 	  			if (seats[i].getPeroid0() == 0 || (seats[i].getPeroid0() == 2 && seats[i].getOwnerPeroid0() == null))
 	  			{
