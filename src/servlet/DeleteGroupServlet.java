@@ -46,7 +46,7 @@ public class DeleteGroupServlet extends HttpServlet{
 				if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == 0)
 				{
 					request.setAttribute("info",  "OK! This group seat is deleted!");
-					request.getRequestDispatcher("message.jsp").forward(request, response);
+					request.getRequestDispatcher("groupbooking.jsp").forward(request, response);
 				}
 				else if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == -1)
 				{

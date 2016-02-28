@@ -93,7 +93,7 @@
 
     <div class="container">
     <form action="DeleteGroupServlet" method="post" onSubmit="return login(this);">
-    <h1>已经预约成功</h1>
+    <h1>已预约</h1>
 
 		<table class="table table-striped">
 		   <thead>
