@@ -61,15 +61,19 @@ public class DeleteGroupServlet extends HttpServlet{
 			else if(flag.equals("1"))
 			{
 				GroupSeatDao groupseatDao = new GroupSeatDao();
-				int tag = groupseatDao.delReservedSeat(user.getStudentnum() , bookdate , seatnum , period);
-				if(tag == 0)
+				if(groupseatDao.delReservedSeat(user.getStudentnum() , bookdate , seatnum , period) == 0)
 				{
 					String studentnum = user.getStudentnum();
-					request.setAttribute("info",  "OK! This group seat is deleted!");
-					GroupSeatDao groupSeatDao = new GroupSeatDao();
-					onesGroupInfo = groupSeatDao.getOnesGroupInfo(studentnum);
-					request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
-					request.getRequestDispatcher("groupseatsinfo.jsp").forward(request, response);
+					if(groupseatDao.delBookingSeat(user.getStudentnum() , bookdate , seatnum , period) == -1)
+					{
+						request.setAttribute("info",  "亲，删除座位时错了点错哦~ 报告你们的CTO吧~ Delete this group seat error!");
+						request.getRequestDispatcher("message.jsp").forward(request, response);
+					}
+					else
+					{
+						request.setAttribute("info",  "OK! This group seat is deleted!");
+						request.getRequestDispatcher("message.jsp").forward(request, response);
+					}
 					
 				}
 				else
