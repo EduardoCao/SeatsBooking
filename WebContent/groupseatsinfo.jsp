@@ -58,15 +58,17 @@
             <li><a href="changepw.jsp">修改密码</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
-          <li>
-          <a>
           	<%if (user != null) { %>
-			  <%="当前用户：" + user.getStudentnum()%>
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"><%=user.getStudentnum()%></a></li>
+                <li><a href="./ExitServlet">退出</a></li>
+              </ul>
+            </li>
               <%} else { %>
-              <%="尚未登录" %>
+              <li><a><%="尚未登录" %></a></li>
               <%} %>
-          </a>
-          </li>
           </ul>
         </div>
       </div>
