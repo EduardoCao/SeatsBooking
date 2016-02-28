@@ -3,6 +3,7 @@
     import="util.User"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="util.DateManager" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -107,8 +108,9 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
-		      	 <th align="right">选择</th>
-		      	 <th >时间段</th>
+		      	 <th>选择</th>
+		      	 <th >日期</th>
+		      	 <td>时间段</td>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -127,8 +129,16 @@
 				%>
 		   
 		      <tr>
-		      	 <td align="center"><input type = "radio" name = "closeSeat" id = <%=seataccess.get(i) %> value = <%=seataccess.get(i) %>></td>
-		         <td><%=seataccess.get(i)%></td>
+		      	 <td><input type = "radio" name = "closeSeat" id = <%=seataccess.get(i) %> value = <%=seataccess.get(i) %>></td>
+		         <%
+		         String str = seataccess.get(i);
+		         str = str.trim();
+		         String[] list = str.split("_");
+		         int bd = Integer.valueOf(list[0]);
+		         int pe = Integer.valueOf(list[1]);
+		         %>
+		         <td><%=DateManager.getFormatDate(bd) %></td>
+		         <td><%=DateManager.getPeroid(pe) %></td>
 		      </tr>
 		      <%} } }%>
 		   </tbody>
