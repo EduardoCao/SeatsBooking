@@ -119,10 +119,17 @@
 		   <thead>
 		      <tr>
 		      <th>选择</th>
+<<<<<<< Updated upstream
 		  	  <th>日期</th>
 		  	  <th>座位号</th>
 		  	  <th>时间段</th>
 		  	  <th>申请理由</th>
+=======
+		      <th>日期</th>
+		      <th>座位</th>
+		      <th>时间段</th>
+		      <th>申请原因</th>
+>>>>>>> Stashed changes
 		      </tr>
 		   </thead>
 		   <tbody>
