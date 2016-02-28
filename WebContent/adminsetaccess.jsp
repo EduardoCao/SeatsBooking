@@ -108,9 +108,12 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
-		      	 <th>选择</th>
-		      	 <th >日期</th>
-		      	 <td>时间段</td>
+		      	 <th>座位号</th>
+		      	 <th ><%=DateManager.getPeroid(0) %></th>
+		         <th><%=DateManager.getPeroid(1) %></th>
+		         <th><%=DateManager.getPeroid(2) %></th>
+		         <th><%=DateManager.getPeroid(3) %></th>
+		         <th><%=DateManager.getPeroid(4) %></th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -120,27 +123,54 @@
 					int tmp = 0;
 					if (seataccess != null && seataccess.size() > 0)
 					{
-						
+					int row = 0;
 					for (int i = 0 ; i < seataccess.size() ; i ++)
 					{
 						if(!seataccess.get(i).split("_")[2].equals("3"))
 						{
 							tmp += 1;
+						if (i%5 == 0)	 {
 				%>
 		   
-		      <tr>
-		      	 <td><input type = "radio" name = "closeSeat" id = <%=seataccess.get(i) %> value = <%=seataccess.get(i) %>></td>
-		         <%
-		         String str = seataccess.get(i);
-		         str = str.trim();
-		         String[] list = str.split("_");
-		         int bd = Integer.valueOf(list[0]);
-		         int pe = Integer.valueOf(list[1]);
-		         %>
-		         <td><%=DateManager.getFormatDate(bd) %></td>
-		         <td><%=DateManager.getPeroid(pe) %></td>
-		      </tr>
-		      <%} } }%>
+				      <tr>
+				      	 <td><%=DateManager.getFormatDate(row) %></td>
+				      	 
+				         <% 
+				         row ++;
+				         }
+				         String str = seataccess.get(i);
+				         str = str.trim();
+				         String[] list = str.split("_");
+				         int bd = Integer.valueOf(list[0]);
+				         int pe = Integer.valueOf(list[1]); 
+				         %>
+				         <td bgcolor="green"><input type = "radio" name = "closeSeat" id = <%=seataccess.get(i) %> value = <%=seataccess.get(i) %>></td>
+				         <%
+				         if (i % 5 == 4) {
+				         %>
+				         </tr>
+		      <%} }   else {if (i%5 == 0)	 {
+				%>
+		   
+				      <tr>
+				      	 <td><%=DateManager.getFormatDate(row) %></td>
+				      	 
+				         <% 
+				         row ++;
+				         }
+				         String str = seataccess.get(i);
+				         str = str.trim();
+				         String[] list = str.split("_");
+				         int bd = Integer.valueOf(list[0]);
+				         int pe = Integer.valueOf(list[1]); 
+				         %>
+				         <td bgcolor="yellow">已关闭</td>
+				         <%
+				         if (i % 5 == 4) {
+				         %>
+				         </tr>
+		      <%}
+		      } }%>
 		   </tbody>
 		</table>
 		
@@ -187,7 +217,7 @@
 		         <td><%=DateManager.getFormatDate(bd) %></td>
 		         <td><%=DateManager.getPeroid(pe) %></td>
 		      </tr>
-		      <%} } }%>
+		      <%} } } }%>
 		   </tbody>
 		</table>
 		
