@@ -34,45 +34,58 @@
 	<% 
 		User user = (User)session.getAttribute("user");
 	%>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+	
+	
+<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">教室预定系统</a>
-          
+          <a class="navbar-brand hidden-sm" href="./index.jsp">教室预订系统</a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="float:left;">
+        <%
+        if (user != null) { 
+        	String tag = "";
+        	String ref = "";
+        	if (user.getUserType() == 0 || user.getUserType() == -1) {
+        		tag = "学生界面";
+        		ref = "./student_message.jsp";
+        	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
+        		tag = "教师界面";
+        		ref = "./teacher_message.jsp";
+        	} else {
+        		tag = "管理员界面";
+        		ref = "./admin_message.jsp";
+        	}
+        }
+        		
+       	%>
+        <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
             <li><a href="./admin_message.jsp">管理员界面</a></li>
             <li><a href="./reg.jsp">用户注册</a></li>
             <li><a href="./AdminUserServlet">用户状态</a></li>
           </ul>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <%if (user != null) { %>
-
-              <div style="float:right;">
-                  <a style="font-size:22px;color:gray;font-weight:bold">当前用户:</a>
-                  <a style="font-size:22px;color:gray">&nbsp;<%=user.getStudentnum() %></a>
-                  &nbsp;
-	              <button type="button" onclick="javascript:location.href='./ExitServlet'" class="btn btn-success">退出登录</button>
-	          </div>
+          <ul class="nav navbar-nav navbar-right hidden-sm">
+          	<%if (user != null) { %>
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li style="text-align:center;"><a href="#"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
+              </ul>
+            </li>
               <%} else { %>
-              <a style="font-size:22px;color:gray;font-weight:bold">尚未登录</a>
-              <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
+              <li><a><%="尚未登录" %></a></li>
               <%} %>
-            </div>
-          </form>
-        </div><!--/.navbar-collapse -->
+          </ul>
+        </div>
       </div>
-    </nav>
+    </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
