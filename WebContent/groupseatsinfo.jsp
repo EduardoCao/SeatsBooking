@@ -62,8 +62,8 @@
 			<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#"><%=user.getStudentnum()%></a></li>
-                <li><a href="./ExitServlet">退出</a></li>
+                <li style="text-align:center;"><a href="#"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>
               <%} else { %>

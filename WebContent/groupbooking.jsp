@@ -38,6 +38,74 @@
 	<% 
 		User user = (User)session.getAttribute("user");
 	%>
+	
+	
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand hidden-sm" href="./index.jsp">教室预订系统</a>
+        </div>
+        <%
+        if (user != null) { 
+        	String tag = "";
+        	String ref = "";
+        	if (user.getUserType() == 0 || user.getUserType() == -1) {
+        		tag = "学生界面";
+        		ref = "./student_message.jsp";
+        	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
+        		tag = "教师界面";
+        		ref = "./teacher_message.jsp";
+        	} else {
+        		tag = "管理员界面";
+        		ref = "./admin_message.jsp";
+        	}
+        		
+       	%>
+        <div class="navbar-collapse collapse" role="navigation">
+          <ul class="nav navbar-nav">
+<%
+          if (user.getUserType() == 0 || user.getUserType() == -1) {
+          %>
+          	<li><a href="<%=ref%>"><%=tag %></a></li>
+            <li><a href="./seatsbooking.jsp">个人座位预定</a></li>
+            <li class="active"><a href="./groupbooking.jsp">集体座位预定</a></li>
+            <li><a href="./InfoServlet">查看个人座位预定</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+          <%
+          } else { 
+          %>
+          	<li><a href="<%=ref%>"><%=tag %></a></li>
+            <li class="active"><a href="./groupbooking.jsp">集体座位预定</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+          <%
+          } }
+          %>
+            <li><a href="changepw.jsp">修改密码</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-sm">
+          	<%if (user != null) { %>
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li style="text-align:center;"><a href="#"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
+              </ul>
+            </li>
+              <%} else { %>
+              <li><a><%="尚未登录" %></a></li>
+              <%} %>
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+	
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
