@@ -33,7 +33,7 @@ public class BookServlet extends HttpServlet {
 				int userType = userDao.checkUserType(owner,pw);
 				if(userType < 0)
 				{
-					request.setAttribute("info", "You cannot book for you have been banned for 2 weeks!");
+					request.setAttribute("info", "亲爱的同学，由于你之前的违规行为，严格认真的管理员决定关你两周的禁闭哦~ You cannot book for you have been banned for 2 weeks!");
 					request.getRequestDispatcher("./message.jsp").forward(request, response);
 				}
 				//System.out.println(owner + " " + bookdate + " "  + bookseat);
@@ -47,7 +47,7 @@ public class BookServlet extends HttpServlet {
 					}
 					if (bookseat == null || bookdate == null)
 					{
-						String info = "Please try to book the seat again!";
+						String info = "亲，登录超时了，请重新登录！Please try to book the seat again!";
 						request.setAttribute("info", info);
 						request.getRequestDispatcher("./message.jsp").forward(request, response);
 					}

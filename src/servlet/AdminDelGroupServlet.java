@@ -22,7 +22,7 @@ public class AdminDelGroupServlet extends HttpServlet {
 	{
 		if(request.getParameter("deletegroup") == null)
 		{
-			request.setAttribute("info",  "delete error");
+			request.setAttribute("info",  "亲，登录超时了哦，请重新登录试试吧~ Delete error.");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -40,7 +40,7 @@ public class AdminDelGroupServlet extends HttpServlet {
 	 	GroupSeatDao groupseatDao = new GroupSeatDao();
 	 	if (!flag.equals("1"))
 	 	{
-	 		request.setAttribute("info",  "Cannot delete this group seat!");
+	 		request.setAttribute("info",  "亲，这个座位现在没人占用哦，不能删除，稍后试试看吧~ Cannot delete this group seat!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 	}
 	 	else
@@ -48,12 +48,12 @@ public class AdminDelGroupServlet extends HttpServlet {
 	 		int tag = groupseatDao.adminDelGroup(studentnum , bookdate , seat , period );
 	 		if(tag == -4)
 	 		{
-	 			request.setAttribute("info",  "This group seat have been deleted！");
+	 			request.setAttribute("info",  "亲，这个座位的主人已经不要这个座位了，不能删除，稍后试试看吧~ This group seat have been deleted！");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "This group cannot be deleted!");
+	 			request.setAttribute("info",  "亲，这个座位目前没有删除成功，稍后试试看吧~ This group cannot be deleted!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)

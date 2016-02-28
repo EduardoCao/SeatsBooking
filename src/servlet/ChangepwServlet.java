@@ -32,11 +32,11 @@ public class ChangepwServlet extends HttpServlet{
 			{
 				user.setPassword(password);
 				userDao.changePw(user , password);
-				request.setAttribute("info", "Congratulation! Password changed succeed!");
+				request.setAttribute("info", "亲，记住你的密码哦~不过忘了也可以咨询管理员哦~ Congratulation! Password changed succeed!");
 				
 			}else
 			{
-				request.setAttribute("info", "Sorry, please login first!" );
+				request.setAttribute("info", "亲，请先登录！Sorry, please login first!" );
 			}
 		}
 		request.getRequestDispatcher("message.jsp").forward(request, response);

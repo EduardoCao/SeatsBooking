@@ -70,7 +70,7 @@ public class CheckCloseUserServlet extends HttpServlet{
 					}
 					else
 					{
-						request.setAttribute("info",  "Cannot open this user!");
+						request.setAttribute("info",  "亲，这个用户现在不能放出来，重新试试看~ Cannot open this user!");
 						request.getRequestDispatcher("message.jsp").forward(request, response);
 					}
 	            }

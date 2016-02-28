@@ -25,7 +25,7 @@ public class AddGroupServlet extends HttpServlet{
 		if (bookuser == null || add == null || add.split("_").length != 2 || bookdate == null)
 		{
 			
-			request.setAttribute("info", "Add group seat by admin error, please try again...");
+			request.setAttribute("info", "亲，登录超时了哦，请重新登录，重新来过~ Add group seat by admin error, please try again...");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
@@ -36,12 +36,12 @@ public class AddGroupServlet extends HttpServlet{
 			int tag = groupseatDao.addGroup(bookuser, bookdate, seat, period) ;
 			if(tag == -4)
 	 		{
-	 			request.setAttribute("info",  "Sorry, the group seat haven been taken already! Please try other group seats!");
+	 			request.setAttribute("info",  "亲，这个团体座位刚刚被占了哦~再试试别的座位吧！Sorry, the group seat haven been taken already! Please try other group seats!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "Sorry, the group seat haven't been added successfully!");
+	 			request.setAttribute("info",  "亲，这个团体座位没有成功预订上哦，请重试~ Sorry, the group seat haven't been added successfully!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)

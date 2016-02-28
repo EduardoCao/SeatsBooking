@@ -24,7 +24,7 @@ public class AddSeatServlet extends HttpServlet{
 				String bookdate = (String) request.getSession().getAttribute("bookdate");
 				if(delete == null|| bookuser == null)
 				{
-					request.setAttribute("info",  "add seat error!");
+					request.setAttribute("info",  "亲，登录超时了哦，请重新登录试试~ Add seat error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
 				}
 				else
@@ -32,7 +32,7 @@ public class AddSeatServlet extends HttpServlet{
 					UserDao userDao = new UserDao();
 					if(userDao.userIsExist(bookuser))
 					{
-						request.setAttribute("info",  "add seat error , user not exist!");
+						request.setAttribute("info",  "亲，你添加的这个用户不存在~ Add seat error , user not exist!");
 						request.getRequestDispatcher("message.jsp").forward(request, response);
 					}
 					else
@@ -40,7 +40,7 @@ public class AddSeatServlet extends HttpServlet{
 					
 					if(delete.split("_").length != 3 || delete.split("_")[0] == null || delete.split("_")[1] == null || delete.split("_")[2] == null )
 					{
-						request.setAttribute("info",  "add seat error!");
+						request.setAttribute("info",  "亲，添加座位没有成功哦，重新试一下~ Add seat error!");
 						request.getRequestDispatcher("message.jsp").forward(request, response);
 					}
 					else
@@ -63,13 +63,13 @@ public class AddSeatServlet extends HttpServlet{
 							}
 							else
 							{
-								request.setAttribute("info",  bookres);
+								request.setAttribute("info",  "亲，这个座位刚刚被别人占了哦，请试试其他的座位吧~ " + bookres );
 								request.getRequestDispatcher("message.jsp").forward(request, response);
 							}
 						}
 						else
 						{
-							request.setAttribute("info",  "Cannot add this seat, the seat is occupied!");
+							request.setAttribute("info",  "亲，这个座位刚刚被别人占了~试试其他座位吧~ Cannot add this seat, the seat is occupied!");
 							request.getRequestDispatcher("message.jsp").forward(request, response);
 						}
 						

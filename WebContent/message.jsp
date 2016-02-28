@@ -102,7 +102,7 @@
     	if(info != null)
     	{
         %>
-        <p>info : <%=info %></p>
+        <p>友好提示 : <%=info %></p>
         <%
     	}
         %>
