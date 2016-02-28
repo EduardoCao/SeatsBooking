@@ -157,18 +157,15 @@ if(seats != null){
    				if(showallusers.get(j).getUserType() == 0 || showallusers.get(j).getUserType() == 1)
    				{
    			%>
-   				<option selected value = <%=showallusers.get(j).getStudentnum() %>> <%=showallusers.get(j).getStudentnum() %> </option>
-   				
-   			
+   				<option selected value = <%=showallusers.get(j).getStudentnum() %>> <%=showallusers.get(j).getStudentnum() %> </option> 			
    			<%
    				}
    			}
    			%>
    			</select>
 	            	</div>
-	              </div>
-	              </div>
-
+	            	</div>
+	            	</div>
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
@@ -294,7 +291,9 @@ if(seats != null){
 	  			%>
 				
 				</tr>
-				 <%} %>
+				<%
+				}
+			    %>
 				
 		   </tbody>
 		</table>
@@ -303,7 +302,9 @@ if(seats != null){
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
-	  <%  }%>
+	  <%  
+	  }
+	  %>
 
 
 	  
