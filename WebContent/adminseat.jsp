@@ -362,7 +362,7 @@ if(seats != null) {
 		  		<%
 	  			} else if ( seats[i].getPeroid2()==0 ){
 	  				%><td bgcolor="green">
-	  				<input type = "radio" name = "addSeat" id = <%=i + "_2" %> value = <%=i + "_2_" + seats[i].getPeroid1()  %>>
+	  				<input type = "radio" name = "addSeat" id = <%=i + "_2" %> value = <%=i + "_2_" + seats[i].getPeroid2()  %>>
 	  				空闲
 	  				</td><%
 	  			} else if ( seats[i].getPeroid2()==2 ) {

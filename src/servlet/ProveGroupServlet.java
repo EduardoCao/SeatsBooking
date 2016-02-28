@@ -47,7 +47,7 @@ public class ProveGroupServlet extends HttpServlet{
 	 		int tag = groupseatDao.proveGroup(studentnum , bookdate , seat , period);
 	 		if(tag == -4)
 	 		{
-	 			request.setAttribute("info",  "Cannot prove this group seat for this group seat have been taken");
+	 			request.setAttribute("info",  "Cannot prove this group seat for this group seat have been taken or the time period is passed!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == -2)

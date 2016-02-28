@@ -209,11 +209,12 @@ public class GroupSeatDao {
 		Connection conn = ConnectDB.getConnectionGroupSeat();
 		try{
 		
-			String sql = "update group_seat_table_"+ bookdate + " set period"+period+ " = 1 , ownerPeriod"+period+" = ? where seatnum = ? and period"+period +" = ?";
+			String sql = "update group_seat_table_"+ bookdate + " set period"+period+ " = 1 , ownerPeriod"+period+" = ? where seatnum = ? and (period"+period +" = ? or period"+period +" = ?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1 , studentnum);
 			ps.setString(2, seat);
 			ps.setInt(3 , 0);
+			ps.setInt(4 , 2);
 			if (ps.executeUpdate() == 0)
 			{
 				ps.close();	

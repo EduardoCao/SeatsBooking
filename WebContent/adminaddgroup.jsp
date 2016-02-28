@@ -201,7 +201,10 @@ if(seats != null){
 	  				<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
 	  				空闲
 	  				</td><%
-	  			} else if ( seats[i].getPeroid0()==2 ) {
+	  			}else if ( seats[i].getPeroid0()==2 && seats[i].getOwnerPeroid0() != null) {
+	  				%><td bgcolor="yellow"><%=seats[i].getOwnerPeroid0() %></td><%
+	  			} 
+	  			else if ( seats[i].getPeroid0()==2 ) {
 	  				%><td bgcolor="yellow">已过期</td><%
 	  			} else if ( seats[i].getPeroid0()==3 ) {
 	  				%><td bgcolor="yellow">座位被关闭</td><%
@@ -220,7 +223,10 @@ if(seats != null){
 	  				<input type = "radio" name = "addGroup" id = <%=i + "_1" %> value = <%=i + "_1" %>>
 	  				空闲
 	  				</td><%
-	  			} else if ( seats[i].getPeroid1()==2 ) {
+	  			}else if ( seats[i].getPeroid1()==2 && seats[i].getOwnerPeroid1() != null) {
+	  				%><td bgcolor="yellow"><%=seats[i].getOwnerPeroid1() %></td><%
+	  			} 
+	  			else if ( seats[i].getPeroid1()==2 ) {
 	  				%><td bgcolor="yellow">已过期</td><%
 	  			} else if ( seats[i].getPeroid1()==3 ) {
 	  				%><td bgcolor="yellow">座位被关闭</td><%
@@ -239,7 +245,10 @@ if(seats != null){
 	  				<input type = "radio" name = "addGroup" id = <%=i + "_2" %> value = <%=i + "_2" %>>
 	  				空闲
 	  				</td><%
-	  			} else if ( seats[i].getPeroid2()==2 ) {
+	  			}else if ( seats[i].getPeroid2()==2 && seats[i].getOwnerPeroid2() != null) {
+	  				%><td bgcolor="yellow"><%=seats[i].getOwnerPeroid2() %></td><%
+	  			}
+	  			else if ( seats[i].getPeroid2()==2 ) {
 	  				%><td bgcolor="yellow">已过期</td><%
 	  			} else if ( seats[i].getPeroid2()==3 ) {
 	  				%><td bgcolor="yellow">座位被关闭</td><%
