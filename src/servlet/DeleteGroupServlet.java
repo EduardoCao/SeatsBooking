@@ -48,6 +48,7 @@ public class DeleteGroupServlet extends HttpServlet{
 					request.setAttribute("info",  "OK! This group seat is deleted!");
 					String studentnum = user.getStudentnum();
 					GroupSeatDao groupSeatDao = new GroupSeatDao();
+					groupseatDao.delReservedSeat(user.getStudentnum() , bookdate , seatnum , period);
 					onesGroupInfo = groupSeatDao.getOnesGroupInfo(studentnum);
 					request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
 					request.getRequestDispatcher("groupseatsinfo.jsp").forward(request, response);

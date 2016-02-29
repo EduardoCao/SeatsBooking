@@ -229,6 +229,11 @@ public class GroupSeatDao {
 				ps.setString(3, seat+"_" + period);
 				if (ps.executeUpdate() == 0)
 				{
+					sql = "update group_seat_table_"+ bookdate + " set period"+period+ " = 0 , ownerPeriod"+period+" = ? where seatnum = ?";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1 , null);
+					ps.setString(2, seat);
+					ps.executeUpdate();
 					ps.close();	
 					return -2;
 				}
