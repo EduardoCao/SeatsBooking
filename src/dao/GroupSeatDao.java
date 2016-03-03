@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import util.Seats;
 
@@ -185,12 +186,18 @@ public class GroupSeatDao {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next())
 			{
-				String tmp = rs.getInt("flag") + "";
-				tmp += "##studentnum_" + rs.getString("studentnum");
-				tmp += "##bookdate_" + rs.getInt("bookdate") ;
-				tmp += "##seat_" + rs.getString("seat_period").split("_")[0];
+				String tmp = "bookdate_" + rs.getInt("bookdate") ;
+				
 				tmp += "##period_" + rs.getString("seat_period").split("_")[1];
+				
+				tmp += "##studentnum_" + rs.getString("studentnum");
+				
+				tmp += "##seat_" + rs.getString("seat_period").split("_")[0];
+				
 				tmp += "##reason_" + rs.getString("reason");
+				
+				tmp += "##flag_" + rs.getInt("flag");
+				 
 				res.add(tmp);
 			}
 			rs.close();
@@ -203,6 +210,11 @@ public class GroupSeatDao {
 		}
 		
 		ConnectDB.closeConnection(conn);
+		Collections.sort(res); 
+//		for (String s : res)
+//		{
+//			System.out.println(s);
+//		}
 		return res;
 	}
 	public int proveGroup(String studentnum, String bookdate, String seat, String period) {

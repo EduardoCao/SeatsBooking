@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.GroupSeatDao;
+import dao.SeatDao;
 import util.Seats;
 
 public class GroupSeatsServlet extends HttpServlet{
@@ -20,13 +21,21 @@ public class GroupSeatsServlet extends HttpServlet{
 	throws ServletException, IOException
 	{
 		String bookdate = request.getParameter("bookdate");
+		
+		SeatDao seatDao = new SeatDao();
+		
+		Seats[] seats = new Seats[10];
+
+		seats = seatDao.getSeats(bookdate);
+		request.getSession().setAttribute("seats", seats);
+		request.getSession().setAttribute("bookdate", bookdate);
+		
 		GroupSeatDao groupSeatDao = new GroupSeatDao();
 		
-		Seats[] seats = new Seats[2];
+		Seats[] gseats = new Seats[2];
 
-		seats = groupSeatDao.getGroupSeats(bookdate);
-		request.getSession().setAttribute("groupseats", seats);
-		request.getSession().setAttribute("bookdate", bookdate);
+		gseats = groupSeatDao.getGroupSeats(bookdate);
+		request.getSession().setAttribute("groupseats", gseats);
 		request.getRequestDispatcher("./groupbooking.jsp").forward(request, response);
 	}
 
