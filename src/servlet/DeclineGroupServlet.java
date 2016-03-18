@@ -29,7 +29,7 @@ public class DeclineGroupServlet extends HttpServlet{
 		int declinegroup = Integer.parseInt(request.getParameter("declinegroup"));
 		ArrayList<String> allGroupInfo = new ArrayList<String>();
 	 	allGroupInfo = (ArrayList<String>) request.getSession().getAttribute("allGroupInfo");
-	 	String args[] = allGroupInfo.get(provegroup).split("##");
+	 	String args[] = allGroupInfo.get(declinegroup).split("##");
 	 	String flag = args[5].substring(5);
 	 	String studentnum = args[2].substring(11);
 	 	String bookdate = args[0].substring(9);
