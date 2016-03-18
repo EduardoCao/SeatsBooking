@@ -29,13 +29,13 @@ public class DeclineGroupServlet extends HttpServlet{
 		int declinegroup = Integer.parseInt(request.getParameter("declinegroup"));
 		ArrayList<String> allGroupInfo = new ArrayList<String>();
 	 	allGroupInfo = (ArrayList<String>) request.getSession().getAttribute("allGroupInfo");
-	 	String args[] = allGroupInfo.get(declinegroup).split("##");
-	 	String flag = args[0];
-	 	String studentnum = args[1].substring(11);
-	 	String bookdate = args[2].substring(9);
+	 	String args[] = allGroupInfo.get(provegroup).split("##");
+	 	String flag = args[5].substring(5);
+	 	String studentnum = args[2].substring(11);
+	 	String bookdate = args[0].substring(9);
 	 	String seat = args[3].substring(5);
-	 	String period = args[4].substring(7);
-	 	String reason = args[5].substring(7);
+	 	String period = args[1].substring(7);
+	 	String reason = args[4].substring(7);
 	 	GroupSeatDao groupseatDao = new GroupSeatDao();
 	 	if (!flag.equals("0"))
 	 	{
