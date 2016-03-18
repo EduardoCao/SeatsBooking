@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="./img/my.ico" type="image/x-icon" />
 
-    <title>教室预定系统</title>
+    <title>座位预定说明</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -52,28 +52,19 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
+    <div class="jumbotron" style="height:500px;">
       <div class="container">
-        <h1>你好</h1>
+        <h3>个人座位预定说明</h3>
+        
+        <p>欢迎使用教研院教室预订系统</p>
+        
+        <h3>团体座位预定说明</h3>
+        
         <p>欢迎使用教研院教室预订系统</p>
       </div>
     </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>座位预定说明</h2>
-          <p></p>
-          <p><a class="btn btn-default" href="./description.jsp" role="button">View details &raquo;</a></p>
-        </div>
 
-        <div class="col-md-4">
-          <h2>寻求帮助</h2>
-          <p></p>
-          <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
 
       <hr>
 
