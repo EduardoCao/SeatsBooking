@@ -11,7 +11,9 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="./img/my.ico" type="image/x-icon" />
+    <link href="favicon.ico" mce_href="favicon.ico" rel="bookmark" type="image/x-icon" /> 
+	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
+	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
     <title>教室预定系统</title>
 

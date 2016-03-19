@@ -14,7 +14,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="icon" href="../../favicon.ico">
+    <link href="favicon.ico" mce_href="favicon.ico" rel="bookmark" type="image/x-icon" /> 
+	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
+	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
     <title>显示用户-教室预定系统</title>
 
