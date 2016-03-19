@@ -127,6 +127,7 @@
 	  <div class="container">
 	    <form action="RegServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
 	      <div class="row">
+	      <br><br><br>
 	        <h1 style="text-align:center; height:60px">注册</h1>
 	      </div>
 	      <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 register">

@@ -108,9 +108,26 @@
 		<br><br><br>
 		<h1 align="center">您没有权限查看此页面。</h1>
 	<%} %>
-	<div class="container">
-      <hr>
 
+<div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>座位预定说明</h2>
+          <p>内容</p>
+          <p><a class="btn btn-default" href="./description.jsp" role="button">View details &raquo;</a></p>
+        </div>
+
+        <div class="col-md-4">
+          <h2>寻求帮助</h2>
+          <p>内容</p>
+          <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
+        </div>
+        
+
+  	<div class="container">
+      <hr>      
+      </div>
       <footer>
         <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>
