@@ -37,6 +37,7 @@
   <body>
 	<% 
 		User user = (User)session.getAttribute("user");
+    	boolean isAdmin = false;
 	%>
     
     
@@ -85,7 +86,7 @@
         </div>
       </div>
     </div>
-
+<%if (isAdmin) { %>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <br><br><br>
     <div class="container">
@@ -181,7 +182,12 @@
         <div class="col-md-4">
         </div>
       </div>
-
+      </div>
+<%} else  {%>
+<br><br><br>
+<h1 align="center">您没有权限查看此页面。</h1>
+<%} %>
+    <div class="container">
       <hr>
 
       <footer>

@@ -39,6 +39,7 @@
   <body>
 	<% 
 		User user = (User)session.getAttribute("user");
+    		boolean isAdmin = false;
     		%>
     
     
@@ -61,6 +62,7 @@
         	} else {
         		tag = "管理员界面";
         		ref = "./admin_message.jsp";
+        		isAdmin = true;
         	}
         		
        	%>
@@ -88,6 +90,7 @@
     </div>
     
         <br><br><br>
+    <%if (isAdmin) { %>
     <div class="container">
     <form action="./AdminGroupInfoServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
 	            <div class="form-group">
@@ -299,8 +302,12 @@ if(seats != null){
 		</form>
 	  </div>
 	  <%  
-	  }}
+	  }  } else {%>
+	  <h1 align="center">您没有权限查看此页面。</h1>
+	  <%
+	  } }
 	  %>
+
 
 
 	  
