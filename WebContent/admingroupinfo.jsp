@@ -16,7 +16,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>团体座位管理-教室预定系统</title>
+    <title>团体座位管理-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -37,6 +37,7 @@
   <body>
 	<% 
 		User user = (User)session.getAttribute("user");
+    		boolean isAdmin = false;
 	%>
 
     
@@ -59,6 +60,7 @@
         	} else {
         		tag = "管理员界面";
         		ref = "./admin_message.jsp";
+        		isAdmin = true;
         	}
         }
         		
@@ -85,10 +87,10 @@
         </div>
       </div>
     </div>
-
+	
     <br><br><br>
     <!-- Main jumbotron for a primary marketing message or call to action -->
-
+	<%if(isAdmin){ %>
     <div class="container">
     <form action="AdminDelGroupServlet" method="post" onSubmit="return login(this);">
     <h1>已批准</h1>
@@ -222,7 +224,7 @@
       </footer>
     </div> <!-- /container -->
 
-
+<%} %>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

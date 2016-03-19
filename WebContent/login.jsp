@@ -14,7 +14,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>登录-教室预定系统</title>
+    <title>登录-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
       <div class="container">
         <div class="navbar-header">
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
-          <a class="navbar-brand" href="#">教室预定系统</a>
+          <a class="navbar-brand" href="#">教室预订系统</a>
         </div>
         
 		<div id="navbar" class="navbar-collapse collapse">

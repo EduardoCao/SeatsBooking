@@ -18,7 +18,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>显示用户-教室预定系统</title>
+    <title>显示用户-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -39,6 +39,7 @@
   <body>
 	<% 
 		User user = (User)session.getAttribute("user");
+    	boolean isAdmin = false;
 	%>
     
  
@@ -61,9 +62,10 @@
         	} else {
         		tag = "管理员界面";
         		ref = "./admin_message.jsp";
+        		isAdmin = true;
         	}
         }
-        		
+        if(isAdmin){		
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
@@ -604,7 +606,7 @@ if(seats != null) {
       </footer>
     </div> <!-- /container -->
 
-
+<%} %>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

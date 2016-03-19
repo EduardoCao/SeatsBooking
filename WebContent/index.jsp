@@ -76,11 +76,7 @@
           <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
         </div>
         
-        <div class="col-md-4">
-          <h2>其他</h2>
-          <p>内容</p>
-          <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
-        </div>
+
         
       </div>
 

@@ -18,7 +18,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>显示用户-教室预定系统</title>
+    <title>显示用户-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -135,7 +135,7 @@ if(seats != null){
 	<%
 	int a = Integer.valueOf((String)session.getAttribute("bookdate"));
 	%>
-    <div ><h1>添加团体座位预定&nbsp;<%=DateManager.getFormatDate(a) %></h1></div>
+    <div ><h1>添加团体座位预订&nbsp;<%=DateManager.getFormatDate(a) %></h1></div>
     
     
 	<div class="form-group" style="float:left;">

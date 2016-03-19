@@ -14,7 +14,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>学生界面-教室预定系统</title>
+    <title>学生界面-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -65,11 +65,11 @@
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
-            <li><a href="./seatsbooking.jsp">个人座位预定</a></li>
-            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
-            <li><a href="./InfoServlet">查看个人座位预定</a></li>
-            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
-            <li><a href="changepw.jsp">修改密码</a></li>
+            <li><a href="./seatsbooking.jsp">个人座位预订</a></li>
+            <li><a href="./groupbooking.jsp">集体座位预订</a></li>
+            <li><a href="./InfoServlet">查看个人座位预订</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预订</a></li>
+            
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
@@ -77,7 +77,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li style="text-align:center;"><a href="<%=msghref %>"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="changepw.jsp">修改密码</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
+                
               </ul>
             </li>
               <%} else { %>
@@ -92,8 +94,9 @@
     <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
       <div class="container">
         <h1>你好</h1>
+        <br>
         <p>欢迎使用教研院教室预订系统</p>
-        <p>一段描述</p>
+        <!-- <p>一段描述</p> -->
       </div>
     </div>
 
@@ -101,7 +104,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <p>一段描述</p>
+          <!-- <p>一段描述</p> -->
         </div>
       </div>
 
