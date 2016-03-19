@@ -45,7 +45,7 @@
         </div>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
-            <li><a href="./adminuser.jsp">管理用户</a></li>
+            <li><a href="./reg.jsp">管理用户</a></li>
             <li><a href="./adminseat.jsp">个人座位预定</a></li>
             <li><a href="./AdminGroupServlet">团体预定</a></li>
             <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
@@ -69,11 +69,11 @@
     </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
       <div class="container">
         <h1>你好</h1>
-        <p>欢迎使用教研院教室预订系统</p>
-        <a class="btn btn-primary btn-lg" href="ExitServlet" role="button" onclick="if(!confirm('确定退出？'))return false;">登出 &raquo;</a>
+        <p>欢迎进入管理员界面</p>
+        <p>一段描述</p>
       </div>
     </div>
 

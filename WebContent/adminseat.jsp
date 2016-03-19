@@ -67,7 +67,7 @@
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
-            <li><a href="./adminuser.jsp">管理用户</a></li>
+            <li><a href="./reg.jsp">管理用户</a></li>
             <li class = "active"><a href="./adminseat.jsp">个人座位预定</a></li>
             <li><a href="./AdminGroupServlet">团体预定</a></li>
             <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
