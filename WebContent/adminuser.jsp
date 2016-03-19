@@ -43,7 +43,7 @@
       <div class="container">
         <div class="navbar-header">
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
-          <a class="navbar-brand hidden-sm" href="./index.jsp">教室预订系统</a>
+          <a class="navbar-brand hidden-sm" href=#>教室预订系统</a>
         </div>
         <%
         if (user != null) { 
@@ -79,7 +79,7 @@
               </ul>
             </li>
               <%} else { %>
-              <li><a><%="尚未登录" %></a></li>
+              <li><a href="./login.jsp"><%="尚未登录" %></a></li>
               <%} %>
           </ul>
         </div>
@@ -91,7 +91,7 @@
       <div class="container">
         <h1>你好</h1>
         <p>欢迎使用教研院教室预订系统</p>
-        <a class="btn btn-primary btn-lg" href="ExitServlet" role="button">登出 &raquo;</a>
+        <!-- <a class="btn btn-primary btn-lg" href="ExitServlet" role="button">登出 &raquo;</a> -->
       </div>
     </div>
 
@@ -99,7 +99,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <p>一段描述</p>
+         <!--  <p>一段描述</p> -->
         </div>
       </div>
 

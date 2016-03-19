@@ -43,7 +43,7 @@
       <div class="container">
         <div class="navbar-header">
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
-          <a class="navbar-brand hidden-sm" href="./index.jsp">教室预订系统</a>
+          <a class="navbar-brand hidden-sm" href=#>教室预订系统</a>
         </div>
         <%
         if (user != null) { 
@@ -79,7 +79,7 @@
               </ul>
             </li>
               <%} else { %>
-              <li><a><%="尚未登录" %></a></li>
+              <li><a href="./login.jsp"><%="尚未登录" %></a></li>
               <%} %>
           </ul>
         </div>

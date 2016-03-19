@@ -62,9 +62,9 @@
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
-            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
-            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
-			<li><a href="changepw.jsp">修改密码</a></li>
+            <li><a href="./groupbooking.jsp">集体座位预订</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预订</a></li>
+			
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
@@ -72,11 +72,12 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li style="text-align:center;"><a href="#"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="changepw.jsp">修改密码</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>
               <%} else { %>
-              <li><a><%="尚未登录" %></a></li>
+              <li><a href="login.jsp"><%="尚未登录" %></a></li>
               <%} %>
           </ul>
         </div>
@@ -96,7 +97,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <p>一段描述</p>
+         <!--  <p>一段描述</p> -->
         </div>
       </div>
 

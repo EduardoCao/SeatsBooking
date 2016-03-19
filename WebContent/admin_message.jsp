@@ -80,7 +80,7 @@
               </ul>
             </li>
               <%} else { %>
-              <li><a><%="尚未登录" %></a></li>
+              <li><a href="login.jsp"><%="尚未登录" %></a></li>
               <%} %>
           </ul>
         </div>

@@ -15,7 +15,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>座位预定说明</title>
+    <title>座位预订说明</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -41,8 +41,31 @@
       <div class="container">
         <div class="navbar-header">
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
-          <a class="navbar-brand" href="#">教室预定系统</a>
+          <a class="navbar-brand" href=#>教室预订系统</a>
         </div>
+        
+       <%
+        if (user != null) { 
+        	String tag = "";
+        	String ref = "";
+        	if (user.getUserType() == 0 || user.getUserType() == -1) {
+        		tag = "学生界面";
+        		ref = "./student_message.jsp";
+        	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
+        		tag = "教师界面";
+        		ref = "./teacher_message.jsp";
+        	} else {
+        		tag = "管理员界面";
+        		ref = "./admin_message.jsp";
+        	}
+        		
+       	%>
+        <div class="navbar-collapse collapse" role="navigation">
+          <ul class="nav navbar-nav">
+            <li><a href="<%=ref%>"><%=tag %></a></li>
+            
+          </ul>
+                  <%} %>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
@@ -67,11 +90,11 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="height:500px;">
       <div class="container">
-        <h3>个人座位预定说明</h3>
+        <h3>个人座位预订说明</h3>
         
         <p>欢迎使用教研院教室预订系统</p>
         
-        <h3>团体座位预定说明</h3>
+        <h3>团体座位预订说明</h3>
         
         <p>欢迎使用教研院教室预订系统</p>
       </div>

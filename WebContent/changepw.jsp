@@ -62,7 +62,7 @@
       <div class="container">
         <div class="navbar-header">
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
-          <a class="navbar-brand hidden-sm" href="./index.jsp">教室预订系统</a>
+          <a class="navbar-brand hidden-sm" href=#>教室预订系统</a>
         </div>
         <%
         if (user != null) { 
@@ -93,14 +93,14 @@
             <li><a href="./groupbooking.jsp">集体座位预定</a></li>
             <li><a href="./InfoServlet">查看个人座位预定</a></li>
             <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
-            <li class ="active"><a href="changepw.jsp">修改密码</a></li>
+            
           <%
           } else if (user.getUserType() == 1 || user.getUserType() == -2) { 
           %>
             <li><a href="<%=ref%>"><%=tag %></a></li>
             <li><a href="./groupbooking.jsp">集体座位预定</a></li>
             <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
-            <li class ="active"><a href="changepw.jsp">修改密码</a></li>
+            
           <%
           } else {
           %>
@@ -108,7 +108,7 @@
             <li><a href="./adminseat.jsp">个人座位预定</a></li>
             <li><a href="./AdminGroupServlet">团体预定</a></li>
             <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
-            <li class ="active"><a href="changepw.jsp">修改密码</a></li>
+            
           <%
           } }
           %>
@@ -119,11 +119,12 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li style="text-align:center;"><a href="<%=msghref %>"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="changepw.jsp">修改密码</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>
               <%} else { %>
-              <li><a><%="尚未登录" %></a></li>
+              <li><a href="login.jsp"><%="尚未登录" %></a></li>
               <%} %>
           </ul>
         </div>
