@@ -66,13 +66,13 @@
       <div class="row">
         <div class="col-md-4">
           <h2>座位预订说明</h2>
-          <p>内容</p>
+          <!-- <p>内容</p> -->
           <p><a class="btn btn-default" href="./description.jsp" role="button">View details &raquo;</a></p>
         </div>
 
         <div class="col-md-4">
           <h2>寻求帮助</h2>
-          <p>内容</p>
+          <!-- <p>内容</p> -->
           <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
         </div>
         

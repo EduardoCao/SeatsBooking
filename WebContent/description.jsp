@@ -88,7 +88,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron" style="height:500px;">
+    <div class="jumbotron" style="height:800px;">
       <div class="container">
         <h3>个人座位预订说明</h3>
         
