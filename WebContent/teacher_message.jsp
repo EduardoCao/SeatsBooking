@@ -98,7 +98,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>座位预定说明</h2>
+          <h2>座位预订说明</h2>
           <p>内容</p>
           <p><a class="btn btn-default" href="./description.jsp" role="button">View details &raquo;</a></p>
         </div>
@@ -108,7 +108,7 @@
           <p>内容</p>
           <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
         </div>
-        
+</div>        
       <hr>
 
       <footer>

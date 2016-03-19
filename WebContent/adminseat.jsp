@@ -73,7 +73,7 @@
             <li class = "active"><a href="./adminseat.jsp">个人座位预定</a></li>
             <li><a href="./AdminGroupServlet">团体预定</a></li>
             <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
-            <li><a href="changepw.jsp">修改密码</a></li>
+            
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
@@ -81,6 +81,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li style="text-align:center;"><a href="./admin_message.jsp"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="changepw.jsp">修改密码</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>
