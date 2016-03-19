@@ -19,14 +19,14 @@ public class DeclineGroupServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request , HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		if(request.getParameter("declinegroup") == null)
+		if(request.getParameter("provegroup") == null)
 		{
 			request.setAttribute("info",  "亲，还没指定拒绝哪个申请呢~别急，慢慢来！ Decline group seat error");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
 		{
-		int declinegroup = Integer.parseInt(request.getParameter("declinegroup"));
+		int declinegroup = Integer.parseInt(request.getParameter("provegroup"));
 		ArrayList<String> allGroupInfo = new ArrayList<String>();
 	 	allGroupInfo = (ArrayList<String>) request.getSession().getAttribute("allGroupInfo");
 	 	String args[] = allGroupInfo.get(declinegroup).split("##");

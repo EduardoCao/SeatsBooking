@@ -148,8 +148,9 @@
 	  </div>
 	  
     <div class="container">
-    <form action="ProveGroupServlet" method="post" onSubmit="return login(this);">
-    <h1>待审批-批准</h1>
+    <form action="" name="form1" method="post" onSubmit="return login(this);">
+    <br><br><br>
+    <h1>待审批申请</h1>
 
 		<table class="table table-striped">
 		   <thead>
@@ -201,68 +202,11 @@
 			<%}}} %>
 		   </tbody>
 		</table>
-		
-		<input type="submit" class="btn btn-success" value="批 准" onclick="if(!confirm('确定批准该申请？'))return false;">
+		<input type="submit" class="btn btn-success" value="批 准" onclick="form1.action='ProveGroupServlet';form1.submit();if(!confirm('确定批准该申请？'))return false;">
+		<input type="submit" class="btn btn-success" value="拒 绝" onclick="form1.action='DeclineGroupServlet';form1.submit();if(!confirm('确定拒绝该申请？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
-	  
-    <div class="container">
-    <form action="DeclineGroupServlet" method="post" onSubmit="return login(this);">
-    <h1>待审批-拒绝</h1>
-
-		<table class="table table-striped">
-		   <thead>
-		      <tr>
-		  	  <th>学生</th>
-		  	  <th>日期</th>
-		  	  <th>座位号</th>
-		  	  <th>时间段</th>
-		  	  <th>申请理由</th>
-		      </tr>
-		   </thead>
-		   <tbody>
- <%
- 	 //ArrayList<String> allGroupInfo = new ArrayList<String>();
- 	 allGroupInfo = (ArrayList<String>) session.getAttribute("allGroupInfo");
-  	 
-	if(allGroupInfo != null && allGroupInfo.size() > 0){
-		for (int i = 0 ; i < allGroupInfo.size() ; i ++)
-		{
-			String flag = allGroupInfo.get(i).split("##")[5];
-			if(flag.equals("flag_0"))
-			{
-	%>
-			
-					<tr>
-						<td>
-	    					<input type = "radio" name = "declinegroup" id = <%=i %> value = <%=i %>>
-	    				</td>
-	    		<%
-	    		String str = allGroupInfo.get(i);
-	    		String[] list = str.split("##");
-	    		String users = list[2].substring(11, list[2].length());
-	    		int bookd = Integer.valueOf(list[0].substring(list[0].length()-1, list[0].length()));
-	    		String seats = list[3].substring(5, list[3].length());
-	    		int per = Integer.valueOf(list[1].substring(7, 8));
-	    		String reason = list[4].substring(7, list[4].length());
-	    		%>
-	    		<td><%=users %></td>
-	    		<td><%=DateManager.getFormatDate(bookd) %></td>
-	    		<td><%=seats %></td>
-	    		<td><%=DateManager.getPeroid(per) %>
-	    		<td><%=reason %></td>
-	    	</tr>
-			
-			
-			<%}}} %>
-		   </tbody>
-		</table>
-		
-		<input type="submit" class="btn btn-success" value="拒 绝" onclick="if(!confirm('确定拒绝该申请？'))return false;">
-		<input type="reset" class="btn btn-success" value="重 置">
-		</form>
-	  </div>	  
 
     <div class="container">
       <!-- Example row of columns -->
