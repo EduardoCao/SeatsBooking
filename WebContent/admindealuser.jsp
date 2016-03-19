@@ -59,6 +59,7 @@
         		ref = "./teacher_message.jsp";
         	} else {
         		tag = "管理员界面";
+        		isAdmin = true;
         		ref = "./admin_message.jsp";
         	}
         }

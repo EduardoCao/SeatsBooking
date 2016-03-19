@@ -88,6 +88,19 @@ public class UserDao {
 			e.printStackTrace();
 			return false;
 		}
+		
+		sql = "delete from close_user_table where studentnum = ?";
+		try{
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, studentnum);
+			ps.executeUpdate();
+			ps.close();
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 		finally
 		{
 			ConnectDB.closeConnection(conn);
