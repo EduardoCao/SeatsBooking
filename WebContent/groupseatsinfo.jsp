@@ -123,8 +123,8 @@
 	{
 	for (int i = 0 ; i < onesGroupInfo.size() ; i ++)
 	{
-		String flag = onesGroupInfo.get(i).split("##")[0];
-		if (flag.equals("1"))
+		String flag = onesGroupInfo.get(i).split("##")[5];
+		if(flag.equals("flag_1"))
 		{
 %>
 			
@@ -133,9 +133,10 @@
 	    		<%
 	    		String str = onesGroupInfo.get(i);
 	    		String[] list = str.split("##");
-	    		int bookd = Integer.valueOf(list[1].substring(list[1].length()-1, list[1].length()));
-	    		String seats = list[2].substring(5, list[2].length());
-	    		int per = Integer.valueOf(list[3].substring(7, 8));
+	    		String users = list[2].substring(11, list[2].length());
+	    		int bookd = Integer.valueOf(list[0].substring(list[0].length()-1, list[0].length()));
+	    		String seats = list[3].substring(5, list[3].length());
+	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=DateManager.getFormatDate(bookd) %></td>
@@ -175,8 +176,8 @@
 	{
 	for (int i = 0 ; i < onesGroupInfo.size() ; i ++)
 	{
-		String flag = onesGroupInfo.get(i).split("##")[0];
-		if (flag.equals("0"))
+		String flag = onesGroupInfo.get(i).split("##")[5];
+		if(flag.equals("flag_0"))
 		{
 %>
 			
@@ -185,9 +186,10 @@
 	    		<%
 	    		String str = onesGroupInfo.get(i);
 	    		String[] list = str.split("##");
-	    		int bookd = Integer.valueOf(list[1].substring(list[1].length()-1, list[1].length()));
-	    		String seats = list[2].substring(5, list[2].length());
-	    		int per = Integer.valueOf(list[3].substring(7, 8));
+	    		String users = list[2].substring(11, list[2].length());
+	    		int bookd = Integer.valueOf(list[0].substring(list[0].length()-1, list[0].length()));
+	    		String seats = list[3].substring(5, list[3].length());
+	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=DateManager.getFormatDate(bookd) %></td>
@@ -222,8 +224,8 @@
 	{
 	for (int i = 0 ; i < onesGroupInfo.size() ; i ++)
 	{
-		String flag = onesGroupInfo.get(i).split("##")[0];
-		if (flag.equals("-1"))
+		String flag = onesGroupInfo.get(i).split("##")[5];
+		if(flag.equals("flag_-1"))
 		{
 %>
 			
@@ -231,9 +233,10 @@
 	    		<%
 	    		String str = onesGroupInfo.get(i);
 	    		String[] list = str.split("##");
-	    		int bookd = Integer.valueOf(list[1].substring(list[1].length()-1, list[1].length()));
-	    		String seats = list[2].substring(5, list[2].length());
-	    		int per = Integer.valueOf(list[3].substring(7, 8));
+	    		String users = list[2].substring(11, list[2].length());
+	    		int bookd = Integer.valueOf(list[0].substring(list[0].length()-1, list[0].length()));
+	    		String seats = list[3].substring(5, list[3].length());
+	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=DateManager.getFormatDate(bookd) %></td>

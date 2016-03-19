@@ -32,13 +32,17 @@ public class DeleteGroupServlet extends HttpServlet{
 			
 			ArrayList<String> onesGroupInfo = (ArrayList<String>) request.getSession().getAttribute("onesGroupInfo");
 			User user = (User) request.getSession().getAttribute("user");
-			String del = onesGroupInfo.get(deletenum);
-			String[] args = del.trim().split("##");
-			String flag = args[0];
-			String bookdate = args[1].substring(4);
-			String seatnum = args[2].substring(5);
-			String period = args[3].substring(7);
-			String reason = args[4].substring(7);
+
+
+			
+			String args[] = onesGroupInfo.get(deletenum).split("##");
+		 	String flag = args[5].substring(5);
+		 	//String studentnum = args[2].substring(11);
+		 	String bookdate = args[0].substring(9);
+		 	String seatnum = args[3].substring(5);
+		 	String period = args[1].substring(7);
+		 	String reason = args[4].substring(7);
+			
 			//System.out.println(bookdate + " " + seatnum + " " + period + " " + reason);
 			if (flag.equals("0"))
 			{

@@ -41,7 +41,7 @@
       <div class="container">
         <div class="navbar-header">
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
-          <a class="navbar-brand hidden-sm" href="./index.jsp">教室预订系统</a>
+          <a class="navbar-brand hidden-sm" href=#>教室预订系统</a>
         </div>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">

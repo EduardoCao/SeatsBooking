@@ -109,13 +109,18 @@ public class GroupSeatDao {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 			{
-				int flag = rs.getInt("flag");
-				int bookdate = rs.getInt("bookdate");
-				String seat = rs.getString("seat_period").split("_")[0];
-				String period = rs.getString("seat_period").split("_")[1];
-				String reason = rs.getString("reason");
-				String tmp = flag + "##day_" + bookdate + "##seat_" + seat+ "##period_" + period + "##reason_" + reason;
-				//System.out.println(tmp);
+				String tmp = "bookdate_" + rs.getInt("bookdate") ;
+				
+				tmp += "##period_" + rs.getString("seat_period").split("_")[1];
+				
+				tmp += "##studentnum_" + rs.getString("studentnum");
+				
+				tmp += "##seat_" + rs.getString("seat_period").split("_")[0];
+				
+				tmp += "##reason_" + rs.getString("reason");
+				
+				tmp += "##flag_" + rs.getInt("flag");
+				 
 				res.add(tmp);
 			}
 			rs.close();
@@ -129,6 +134,7 @@ public class GroupSeatDao {
 		{
 			ConnectDB.closeConnection(conn);
 		}
+		Collections.sort(res); 
 		return res;
 	}
 	public int delBookingSeat(String studentnum, String bookdate, String seatnum, String period) {

@@ -39,7 +39,7 @@
       <div class="container">
         <div class="navbar-header">
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
-          <a class="navbar-brand" href="#">教室预定系统</a>
+          <a class="navbar-brand" href="#">教室预订系统</a>
         </div>
         
         <div style="float:right;">
