@@ -198,14 +198,7 @@
 	</div>
 
     <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-        </div>
-      </div>
-
       <hr>
-
       <footer>
         <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>

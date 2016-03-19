@@ -53,6 +53,7 @@
   <body>
     <%
     User user = (User)session.getAttribute("user");
+    String msghref="./student_message.jsp";
     %>
 	<div>
 	
@@ -73,9 +74,11 @@
         	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
         		tag = "教师界面";
         		ref = "./teacher_message.jsp";
+        		msghref = "./teacher_message.jsp";
         	} else {
         		tag = "管理员界面";
         		ref = "./admin_message.jsp";
+        		msghref = "admin_message.jsp";
         	}
         
         		
@@ -115,7 +118,7 @@
 			<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li style="text-align:center;"><a href="#"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="<%=msghref %>"><%=user.getStudentnum()%></a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>

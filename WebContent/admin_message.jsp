@@ -35,6 +35,24 @@
   <body>
 	<% 
 		User user = (User)session.getAttribute("user");
+    	boolean isAdmin = false;
+    		if (user != null) { 
+            	String tag = "";
+            	String ref = "";
+            	if (user.getUserType() == 0 || user.getUserType() == -1) {
+            		tag = "学生界面";
+            		ref = "./student_message.jsp";
+            	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
+            		tag = "教师界面";
+            		ref = "./teacher_message.jsp";
+            	} else {
+            		tag = "管理员界面";
+            		ref = "./admin_message.jsp";
+            		isAdmin = true;
+            	}
+    		}
+    	
+        
 	%>
     
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -67,7 +85,7 @@
         </div>
       </div>
     </div>
-
+<%if (isAdmin) { %>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
       <div class="container">
@@ -84,7 +102,12 @@
           <p>一段描述</p>
         </div>
       </div>
-
+      </div>
+	<%} else { %>
+		<br><br><br>
+		<h1 align="center">您没有权限查看此页面。</h1>
+	<%} %>
+	<div class="container">
       <hr>
 
       <footer>
