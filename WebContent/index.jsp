@@ -64,21 +64,28 @@
       <div class="row">
         <div class="col-md-4">
           <h2>座位预定说明</h2>
-          <p></p>
+          <p>内容</p>
           <p><a class="btn btn-default" href="./description.jsp" role="button">View details &raquo;</a></p>
         </div>
 
         <div class="col-md-4">
           <h2>寻求帮助</h2>
-          <p></p>
+          <p>内容</p>
           <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
         </div>
+        
+        <div class="col-md-4">
+          <h2>其他</h2>
+          <p>内容</p>
+          <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
+        </div>
+        
       </div>
 
       <hr>
 
       <footer>
-        <p>&copy; 版权所有 教研院</p>
+        <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>
     </div> <!-- /container -->
 

@@ -176,8 +176,8 @@
 
       <hr>
 
-      <footer >
-        <p align="center">&copy; 版权所有 教研院 2016</p>
+      <footer>
+        <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>
     </div> <!-- /container -->
 

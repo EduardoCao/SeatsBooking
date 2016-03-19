@@ -226,7 +226,7 @@
       <hr>
 
       <footer>
-        <p>&copy; 版权所有 教研院</p>
+        <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>
     </div> <!-- /container -->
 

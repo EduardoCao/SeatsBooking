@@ -87,7 +87,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <br><br><br>
     <div class="container">
-    <form action="DeleteUserServlet" method="post" onSubmit="return login(this);">
+    <form name="form1" action="" method="post" onSubmit="return login(this);">
     <h1>用户列表</h1>
 
 		<table class="table table-striped">
@@ -119,47 +119,8 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="删 除" onclick="if(!confirm('确定删除？'))return false;">
-		<input type="reset" class="btn btn-success" value="重 置">
-		</form>
-	  </div>
-	  
-	  
-    <div class="container">
-    <form action="CloseUserServlet" method="post" onSubmit="return login(this);">
-    <h1>违禁用户关闭</h1>
-
-		<table class="table table-striped">
-		   <thead>
-		      <tr>
-		      	 <th align="right">选择</th>
-		      	 <th >用户名</th>
-		         <th>邮箱</th>
-		         <th>id</th>
-		      </tr>
-		   </thead>
-		   <tbody>
-		   
-		       <%
-					//ArrayList<User> showallusers = (ArrayList<User>)session.getAttribute("showallusers");
-					if (showallusers != null && showallusers.size() > 0)
-					{
-					for (int i = 0 ; i < showallusers.size() ; i ++)
-					{
-						if(showallusers.get(i).getUserType() >= 0){
-				%>
-		   
-		      <tr>
-		      	 <td align="center"><input type = "radio" name = "closeUser" id = <%=i %> value = <%=i %>></td>
-		         <td><%=showallusers.get(i).getStudentnum() %></td>
-		         <td><%=showallusers.get(i).getEmail() %></td>
-		         <td><%=showallusers.get(i).getUserType() %></td>
-		      </tr>
-		      <%} }} %>
-		   </tbody>
-		</table>
-		
-		<input type="submit" class="btn btn-success" value="禁 足" onclick="if(!confirm('确定关该用户禁闭？'))return false;">
+		<input type="submit" class="btn btn-success" value="删 除" onclick="form1.action='DeleteUserServlet';form1.submit();if(!confirm('确定删除？'))return false;">
+		<input type="submit" class="btn btn-success" value="禁 足" onclick="form1.action='CloseUserServlet';form1.submit();if(!confirm('确定禁足？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
@@ -222,7 +183,7 @@
       <hr>
 
       <footer>
-        <p>&copy; 版权所有 教研院</p>
+        <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>
     </div> <!-- /container -->
 

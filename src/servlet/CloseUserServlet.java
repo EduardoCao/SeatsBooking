@@ -23,7 +23,7 @@ public class CloseUserServlet extends HttpServlet{
 			throws ServletException, IOException
 	{
 
-		String close = request.getParameter("closeUser");
+		String close = request.getParameter("delete");
 		if(close == null)
 		{
 			request.setAttribute("info",  "亲，还没有指定关哪个不听话的童鞋呢！请重新选择~ Close user error!");
