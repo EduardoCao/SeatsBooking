@@ -57,6 +57,11 @@ def makeSeatTables():
 			cur.execute('create table seat_table_' + str(j) + '( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20))')
 			for k in xrange( 0 , 10):
 				cur.execute('insert into seat_table_'+ str(j) + " values('" + str(k) + "', 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL )")
+
+		cur.execute('create table seat_table_backup( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20))')
+		for k in xrange( 0 , 10):
+			cur.execute("insert into seat_table_backup values('" + str(k) + "', 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL )")
+
 		conn.commit()
 		cur.close()
 		conn.close()
@@ -92,23 +97,30 @@ def makeSeatTable0Events():
 			if i == 0 :
 				time = "07"
 				time1 = "10"
+
 			if i == 1 : 
 				time = "09"
 				time1 = "12"
+	
 			if i == 2 : 
 				time = "12"
 				time1 = "15"
+
 			if i == 3 :
 				time = "14"
 				time1 = "17"
+
 			if i == 4 :
 				time = "18"
 				time1 = "21"
+
 			cur.execute("drop event if exists timeout_period" + str(i))
 			cur.execute("create event timeout_period" + str(i) +" on schedule every 10 second do update seat_table_0 set period" + str(i) + " = 2 where curtime() > '" + str(time)+":00' and period" + str(i) +" != 3")
 
 			cur.execute("drop event if exists timeout_ownerPeriod" + str(i))
 			cur.execute("create event timeout_ownerPeriod"+ str(i) + " on schedule every 10 second do update seat_table_0 set ownerPeriod" + str(i) +" = NULL where curtime() > '" + str(time1) +" :00' and period" + str(i) +" != 3")
+
+			
 
 			
 		conn.commit()
@@ -125,28 +137,34 @@ def makeGroupSeatTable0Events():
 		for i in xrange(0 , 5):
 			time = ""
 			time1 = ""
+
 			if i == 0 :
 				time = "07"
 				time1 = "10"
+
 			if i == 1 : 
 				time = "09"
 				time1 = "12"
+
 			if i == 2 : 
 				time = "12"
 				time1 = "15"
+
 			if i == 3 :
 				time = "14"
 				time1 = "17"
+
 			if i == 4 :
 				time = "18"
 				time1 = "21"
+
 			cur.execute("drop event if exists group_timeout_period" + str(i))
 			cur.execute("create event group_timeout_period" + str(i) +" on schedule every 10 second do update group_seat_table_0 set period" + str(i) + " = 2 where curtime() > '" + str(time)+":00' and period" + str(i) +" != 3")
 
 			cur.execute("drop event if exists group_timeout_ownerPeriod" + str(i))
 			cur.execute("create event group_timeout_ownerPeriod"+ str(i) + " on schedule every 10 second do update group_seat_table_0 set ownerPeriod" + str(i) +" = NULL where curtime() > '" + str(time1) +" :00' and period" + str(i) +" != 3")
 
-			
+						
 		conn.commit()
 		cur.close()
 		conn.close()
@@ -269,6 +287,62 @@ def groupDayUpdateEvents():
 	except MySQLdb.Error, e:
 		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
 
+def turnOver():
+	try:
+		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
+		cur = conn.cursor()
+		conn.select_db('seat_db')
+ 		sql = "drop table if exists seat_table_backup;"
+ 		#create table seat_table_backup( seatnum int , period0 int , \
+# period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 \
+# varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); \
+# insert into seat_table_backup select * from seat_table_0 ; \
+# drop table if exists seat_table_0; \
+# create table seat_table_0( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+#  period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+#  ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_0 select * from seat_table_1 ;\
+# drop table if exists seat_table_1; \
+# create table seat_table_1( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+#  period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+#  ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_1 select * from seat_table_2 ;\
+#  drop table if exists seat_table_2; \
+# create table seat_table_2( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+#  period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+#  ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_2 select * from seat_table_3 ;\
+#  drop table if exists seat_table_3; \
+# create table seat_table_3( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+#  period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+#  ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_3 select * from seat_table_4 ;\
+#  drop table if exists seat_table_4; \
+# create table seat_table_4( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+#  period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+#  ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_4 select * from seat_table_5 ;\
+#  drop table if exists seat_table_5; \
+# create table seat_table_5( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+#  period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+#  ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20)); insert into seat_table_5 select * from seat_table_6 ;\
+# drop table if exists seat_table_6; \
+# create table seat_table_6( seatnum int , period0 int , period1 int , period2 int , period3 int ,\
+#  period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,\
+#  ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20));  \
+#  insert into seat_table_6 values( '0' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '1' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '2' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '3' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '4' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '5' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '6' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '7' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '8' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL ); \
+#  insert into seat_table_6 values( '9' , 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL );"
+
+		cur.execute(sql)
+		conn.commit()
+		cur.close()
+		conn.close()
+	except MySQLdb.Error, e:
+		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+
 
 if __name__ == '__main__':
 	
@@ -298,3 +372,5 @@ if __name__ == '__main__':
 
 	print "groupDayUpdateEvents"
 	groupDayUpdateEvents()
+
+	#turnOver()
