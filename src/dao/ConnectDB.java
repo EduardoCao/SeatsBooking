@@ -23,12 +23,67 @@ public class ConnectDB {
 		
 		return conn;
 	}
+	public static Connection getConnection_root()
+	{
+		Connection conn = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306";
+			conn = DriverManager.getConnection(url, "root", "root");
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return conn;
+	}
+	public static Connection getUserConnection()
+	{
+		Connection conn = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/userDB";
+			conn = DriverManager.getConnection(url, "root", "root");
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
 	public static Connection getConnectionSeat()
 	{
 		Connection conn = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/seat_db";
+			conn = DriverManager.getConnection(url, "root", "root");
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
+	public static Connection getSeatConnection()
+	{
+		Connection conn = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/seatDB";
+			conn = DriverManager.getConnection(url, "root", "root");
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
+	public static Connection getGroupSeatConnection()
+	{
+		Connection conn = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/groupSeatDB";
 			conn = DriverManager.getConnection(url, "root", "root");
 		}catch (Exception e)
 		{

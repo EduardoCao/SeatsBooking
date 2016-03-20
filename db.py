@@ -7,12 +7,11 @@ def makeUserTables():
 	try:
 		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
 		cur = conn.cursor()
-		cur.execute('drop database if exists db_test')
-		cur.execute('create database if not exists db_test')
-		conn.select_db('db_test')
-		cur.execute('create table user_table( studentnum varchar(20) , password varchar(30) , email varchar(30) , userType int )')		
+		cur.execute('drop database if exists userDB')
+		cur.execute('create database if not exists userDB')
+		conn.select_db('userDB')
+		cur.execute("create table user_table( studentnum varchar(20) ,name varchar(100) COLLATE utf8_unicode_ci NOT NULL , password varchar(30) , email varchar(30) default 'NULL' , userType int )")		
 		cur.execute("insert into user_table values( 'admin' , 'admin0' , 'admin@163.com' , 2  )")		
-
 		conn.commit()
 		cur.close()
 		conn.close()
@@ -23,39 +22,27 @@ def makeCloseUserTables():
 	try:
 		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
 		cur = conn.cursor()
-		conn.select_db('db_test')
+		conn.select_db('userDB')
 		cur.execute('drop table close_user_table');
 		cur.execute('create table if not exists close_user_table(studentnum varchar(20) , closetime varchar(12) )')
-		#cur.execute("insert into close_user_table values( 'aa' , '2015-12-31' )")
 		conn.commit()
 		cur.close()
 		conn.close()
 	except MySQLdb.Error, e:
 		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
 
-def makeReasonTables():
-	try:
-		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
-		cur = conn.cursor()
-		conn.select_db('group_seat_db')
-		cur.execute('drop table if exists reason_table');
-		cur.execute('create table if not exists reason_table(seat_period varchar(6) , studentnum varchar(20) , bookdate int , reason varchar(100) COLLATE utf8_unicode_ci NOT NULL, flag int) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci')
-		conn.commit()
-		cur.close()
-		conn.close()
-	except MySQLdb.Error, e:
-		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+
 
 def makeSeatTables():
 	try:
 		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
 		cur = conn.cursor()
-		cur.execute('drop database if exists seat_db')
-		cur.execute('create database if not exists seat_db')
-		conn.select_db('seat_db')
+		cur.execute('drop database if exists seatDB')
+		cur.execute('create database if not exists seatDB')
+		conn.select_db('seatDB')
 		for j in xrange(0 , 7):
 			cur.execute('create table seat_table_' + str(j) + '( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20))')
-			for k in xrange( 0 , 10):
+			for k in xrange( 0 , 12):
 				cur.execute('insert into seat_table_'+ str(j) + " values('" + str(k) + "', 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL )")
 
 		cur.execute('create table seat_table_backup( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20))')
@@ -79,6 +66,19 @@ def makeGroupSeatTables():
 			cur.execute('create table group_seat_table_' + str(j) + '( seatnum int , period0 int , period1 int , period2 int , period3 int , period4 int , ownerPeriod0 varchar(20) , ownerPeriod1 varchar(20) ,ownerPeriod2 varchar(20) ,ownerPeriod3 varchar(20) ,ownerPeriod4 varchar(20))')
 			for k in xrange( 0 , 2):
 				cur.execute('insert into group_seat_table_'+ str(j) + " values('" + str(k) + "', 0 , 0,  0 , 0, 0 , NULL , NULL , NULL , NULL , NULL )")
+		conn.commit()
+		cur.close()
+		conn.close()
+	except MySQLdb.Error, e:
+		print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+
+def makeReasonTables():
+	try:
+		conn = MySQLdb.connect(host = 'localhost' , user = 'root' , passwd = 'root' , port = 3306 ,charset='utf8')
+		cur = conn.cursor()
+		conn.select_db('group_seat_db')
+		cur.execute('drop table if exists reason_table');
+		cur.execute('create table if not exists reason_table(seat_period varchar(6) , studentnum varchar(20) , bookdate int , reason varchar(100) COLLATE utf8_unicode_ci NOT NULL, flag int) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci')
 		conn.commit()
 		cur.close()
 		conn.close()
