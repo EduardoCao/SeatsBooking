@@ -24,7 +24,7 @@ public class BookServlet extends HttpServlet {
 			throws ServletException, IOException
 			{
 				HttpSession session = request.getSession();
-				String bookdate = request.getParameter("bookdate");
+				String bookdate = (String)session.getAttribute("bookdate");
 				String bookseat = request.getParameter("seat");
 				User user = (User)session.getAttribute("user");
 				String owner = user.getStudentnum();

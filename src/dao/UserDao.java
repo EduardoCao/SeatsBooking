@@ -59,7 +59,7 @@ public class UserDao {
 	}
 	public void changePw(User user , String pw)
 	{
-		Connection conn = ConnectDB.getConnection();
+		Connection conn = ConnectDB.getUserConnection();
 		String sql = "update user_table set password = '" + pw + "' where studentnum = '" + user.getStudentnum() + "'";
 		
 		try{
@@ -252,7 +252,7 @@ public class UserDao {
 	public User login(String studentnum , String password)
 	{
 		User user = null;
-		Connection conn = ConnectDB.getConnection();
+		Connection conn = ConnectDB.getUserConnection();
 		String sql = "select * from user_table where studentnum = ? and password = ?";
 		try{
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -262,7 +262,7 @@ public class UserDao {
 			if(rs.next())
 			{
 				user = new User();
-				//user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
 				user.setStudentnum(rs.getString("studentnum"));
 				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));

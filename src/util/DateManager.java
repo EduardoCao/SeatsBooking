@@ -1,5 +1,6 @@
 package util;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,11 +19,23 @@ public class DateManager {
 		return sdf.format(date);
 	}
 	
+	public static String getFormatCompleteDate(int i) {
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd");
+		calendar.add(Calendar.DAY_OF_YEAR, i);
+		Date date = calendar.getTime();
+		return sdf.format(date);
+	}
 	/**
 	 * 返回时间段的形式化表达
 	 * @param i 时间段编号
 	 * @return
 	 */
+	public static String currentTime() { 
+		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");//设置日期格式
+		return (df.format(new Date()));// new Date()为获取当前系统时间
+		}
+	
 	public static String getPeroid(int i) {
 		if (i == 0) {
 			return "8:00-10:00";
@@ -37,8 +50,17 @@ public class DateManager {
 		}
 		return "时间段";
 	}
-	
+    public static int compareTime(String DATE1, String DATE2) {
+        if (DATE1.compareTo(DATE2) > 0)
+        	return 1;
+        else
+        	return -1;
+        
+    }
 	public static void main(String args[]) {
 		System.out.println(getFormatDate(2));
+		System.out.println(currentTime());
+		System.out.println(compareTime(currentTime(),"00:40:01"));
+		
 	}
 }

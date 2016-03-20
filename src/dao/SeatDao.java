@@ -11,12 +11,12 @@ import util.Seats;
 public class SeatDao {
 	public Seats[] getSeats(String date)
 	{
-		Seats[] seats = new Seats[10];
-		Connection conn = ConnectDB.getConnectionSeat();
+		Seats[] seats = new Seats[12];
+		Connection conn = ConnectDB.getSeatConnection();
 		try{
-		for (int i = 0 ; i < 10 ; i ++)
+		for (int i = 0 ; i < 12 ; i ++)
 		{
-			String sql = "select * from seat_table_" + date + " where seatnum = ?";
+			String sql = "select * from " + date + " where seatnum = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, i);
 			ResultSet rs = ps.executeQuery();
@@ -53,10 +53,10 @@ public class SeatDao {
 		{
 		String seatnum = bookseat.split("_")[0];
 		String period = bookseat.split("_")[1];
-		Connection conn = ConnectDB.getConnectionSeat();
+		Connection conn = ConnectDB.getSeatConnection();
 		try{
 			
-			String sql = "select * from seat_table_" + bookdate + " where seatnum = ?";
+			String sql = "select * from " + bookdate + " where seatnum = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(seatnum));
 			ResultSet rs = ps.executeQuery();
@@ -69,6 +69,7 @@ public class SeatDao {
 				seats.setPeroid3(rs.getInt("period3"));
 				seats.setPeroid4(rs.getInt("period4"));
 			}
+			
 			ArrayList<String> onesseats = getOnesSeats(owner);
 			HashMap<String , ArrayList<String>> check = new HashMap< String , ArrayList<String>>();
 			for (int i = 0 ; i < onesseats.size() ; i ++)
@@ -93,19 +94,19 @@ public class SeatDao {
 			{
 				rs.close();
 				ps.close();
-				return "亲，不能太贪心哦，不能预定超过三天的座位哦~ Cannot book more than 3 days!";
+				return "不能太贪心哦，不能预定超过三天的座位哦~ Cannot book more than 3 days!";
 			}
 			if(check.containsKey(bookdate) && check.get(bookdate).size() == 2)
 			{
 				rs.close();
 				ps.close();
-				return "亲，不能太贪心哦，同一天最多只能预定两个时间段哦~ Cannot book more than 2 period in a day!";
+				return "不能太贪心哦，同一天最多只能预定两个时间段哦~ Cannot book more than 2 period in a day!";
 			}
 			if (check.containsKey(bookdate) && check.get(bookdate).contains(period))
 			{
 				rs.close();
 				ps.close();
-				return "亲，一天内同一个时间段只能预定一个哦~ Cannot book two same periods in a day!";
+				return "一天内同一个时间段只能预定一个哦~ Cannot book two same periods in a day!";
 			}
 			if ((period.equals("0") && seats.getPeroid0() == 0)||(period.equals("1") && seats.getPeroid1() == 0)||(period.equals("2") && seats.getPeroid2() == 0)||(period.equals("3") && seats.getPeroid3() == 0)||(period.equals("4") && seats.getPeroid4() == 0))
 			{

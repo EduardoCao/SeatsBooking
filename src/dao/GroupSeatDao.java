@@ -12,11 +12,11 @@ public class GroupSeatDao {
 	public Seats[] getGroupSeats(String date)
 	{
 		Seats[] seats = new Seats[2];
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 		for (int i = 0 ; i < 2 ; i ++)
 		{
-			String sql = "select * from group_seat_table_" + date + " where seatnum = ?";
+			String sql = "select * from " + date + " where seatnum = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, i);
 			ResultSet rs = ps.executeQuery();

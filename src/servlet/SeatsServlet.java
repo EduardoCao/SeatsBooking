@@ -22,13 +22,16 @@ public class SeatsServlet extends HttpServlet{
 	{
 		String bookdate = request.getParameter("bookdate");
 
+//		System.out.println(bookdate);
 		
 		SeatDao seatDao = new SeatDao();
 		
-		Seats[] seats = new Seats[10];
+		Seats[] seats = new Seats[12];
 
 		seats = seatDao.getSeats(bookdate);
+		
 		request.getSession().setAttribute("seats", seats);
+		
 		request.getSession().setAttribute("bookdate", bookdate);
 		
 		GroupSeatDao groupSeatDao = new GroupSeatDao();

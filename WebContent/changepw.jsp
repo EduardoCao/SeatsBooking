@@ -89,24 +89,24 @@
           if (user.getUserType() == 0 || user.getUserType() == -1) {
           %>
           	<li><a href="<%=ref%>"><%=tag %></a></li>
-            <li><a href="./seatsbooking.jsp">个人座位预定</a></li>
-            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
-            <li><a href="./InfoServlet">查看个人座位预定</a></li>
-            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+            <li><a href="./seatsbooking.jsp">个人座位预订</a></li>
+            <li><a href="./groupbooking.jsp">集体座位预订</a></li>
+            <li><a href="./InfoServlet">查看个人座位预订</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预订</a></li>
             
           <%
           } else if (user.getUserType() == 1 || user.getUserType() == -2) { 
           %>
             <li><a href="<%=ref%>"><%=tag %></a></li>
-            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
-            <li><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+            <li><a href="./groupbooking.jsp">集体座位预订</a></li>
+            <li><a href="./GroupInfoServlet">查看集体座位预订</a></li>
             
           <%
           } else {
           %>
             <li><a href="./reg.jsp">管理用户</a></li>
-            <li><a href="./adminseat.jsp">个人座位预定</a></li>
-            <li><a href="./AdminGroupServlet">团体预定</a></li>
+            <li><a href="./adminseat.jsp">个人座位预订</a></li>
+            <li><a href="./AdminGroupServlet">团体预订</a></li>
             <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
             
           <%

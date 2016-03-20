@@ -12,7 +12,7 @@ import dao.ConnectDB;
 /**
  * 
  * @author Eduardo
- * 更新数据库结构，直接初始化十年日期
+ * 更新数据库结构，直接初始化两年日期
  *
  */
 
@@ -37,22 +37,43 @@ public class DBInit {
 		ConnectDB.closeConnection(conn);
 		return;
 	}
+	public static void createCloseUser()
+	{
+		Connection conn = ConnectDB.getUserConnection();
+		try{
+			String sql = "create table if not exists close_user_table(studentnum varchar(20) , closetime varchar(12) , UNIQUE (studentnum) )";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			ps.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		ConnectDB.closeConnection(conn);
+		return;
+	}
 	public static void createUserTable()
 	{
 		Connection conn = ConnectDB.getUserConnection();
 		try{
-		String sql = "create table if not exists user_table( studentnum varchar(20) ,name varchar(100) COLLATE utf8_unicode_ci NOT NULL , password varchar(30) , email varchar(30) default 'NULL' , userType int , UNIQUE (studentnum) )";
-		PreparedStatement ps = conn.prepareStatement(sql);
+			
+			String sql = "drop table if exists user_table";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.executeUpdate();	
+			
+		sql = "create table if not exists user_table( studentnum varchar(20) ,name varchar(100) COLLATE utf8_unicode_ci NOT NULL , password varchar(30) , email varchar(30) default 'NULL' , userType int , UNIQUE (studentnum) )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+		ps = conn.prepareStatement(sql);
 		ps.executeUpdate();
 		
 		
-//		sql = "insert into user_table values( 'admin' , '尼古拉斯·管理员', 'admin0' , 'ioe_thu@163.com' , 2  )";
-//		ps = conn.prepareStatement(sql);
-//		ps.executeUpdate();
+		sql = "insert into user_table values( 'admin' , '尼古拉斯管理员', 'admin0' , 'ioe_thu@163.com' , 2  )";
+		ps = conn.prepareStatement(sql);
+		ps.executeUpdate();
 		
-//		sql = "insert into user_table values( '2015310580' , '尼古拉斯·测试员', '123' , 'caoyujieboy@163.com' , 0  )";
-//		ps = conn.prepareStatement(sql);
-//		ps.executeUpdate();
+		sql = "insert into user_table values( '2015310580' , '尼古拉斯测试员', '123' , 'caoyujieboy@163.com' , 0  )";
+		ps = conn.prepareStatement(sql);
+		ps.executeUpdate();
 		}
 		catch(Exception e)
 		{
@@ -78,6 +99,28 @@ public class DBInit {
 		}
 		ConnectDB.closeConnection(conn);
 		return;
+	}
+	public static void createReasonTable()
+	{
+		Connection conn = ConnectDB.getGroupSeatConnection();
+		try{
+				String sql = "drop table if exists reason_table";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.executeUpdate();
+				sql = "create table if not exists reason_table (seat varchar(2) , period varchar(2) ,  studentnum varchar(20) , bookdate int , reason varchar(100) COLLATE utf8_unicode_ci NOT NULL, flag int) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+				ps = conn.prepareStatement(sql);
+				ps.executeUpdate();
+
+				ps.close();
+		
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		ConnectDB.closeConnection(conn);
+		return;
+		
 	}
 	public static void createSeatTable()
 	{
@@ -164,35 +207,18 @@ public class DBInit {
 		ConnectDB.closeConnection(conn);
 		return;
 	}
-	public static void getTenYear()
-	{
-		try{
-			Date d1 = new SimpleDateFormat("yyyy-MM-dd").parse("2016-03-20");//定义起始日期
-			Date d2 = new SimpleDateFormat("yyyy-MM-dd").parse("2026-04-01");//定义结束日期
-			Calendar dd = Calendar.getInstance();//定义日期实例
-			dd.setTime(d1);//设置日期起始时间
-			while(dd.getTime().before(d2)){//判断是否到结束日期
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String str = sdf.format(dd.getTime());
-			System.out.println(str);//输出日期结果
-			dd.add(Calendar.DAY_OF_YEAR, 1);
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		getTenYear();
 //		createUserDB();
-//		createUserTable();
+		createUserTable();
 //		createSeatDB();
 //		createSeatTable();
 //		createGroupSeatDB();
 //		createGroupSeatTable();
+//		createCloseUser();
+//		createReasonTable();
 	}
 
 }

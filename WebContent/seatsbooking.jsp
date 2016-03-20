@@ -103,13 +103,13 @@
 	              <div class="col-sm-5">
 	                <div class="input-group">
 	                  <select class = "form-control" name="bookdate">
-		    				<option selected value = "6"> <%=DateManager.getFormatDate(6) %> </option>
-		    				<option selected value = "5"> <%=DateManager.getFormatDate(5) %> </option>
-		    				<option selected value = "4"> <%=DateManager.getFormatDate(4) %> </option>
-		    				<option selected value = "3"> <%=DateManager.getFormatDate(3) %> </option>
-		    				<option selected value = "2"> <%=DateManager.getFormatDate(2) %> </option>
-		    				<option selected value = "1"> <%=DateManager.getFormatDate(1) %> </option>
-		    				<option selected value = "0"> <%=DateManager.getFormatDate(0) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(6) %>> <%=DateManager.getFormatDate(6) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(5) %>> <%=DateManager.getFormatDate(5) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(4) %>> <%=DateManager.getFormatDate(4) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(3) %>> <%=DateManager.getFormatDate(3) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(2) %>> <%=DateManager.getFormatDate(2) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(1) %>> <%=DateManager.getFormatDate(1) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(0) %>> <%=DateManager.getFormatDate(0) %> </option>
 					  </select>
 	            	</div>
 	              </div>
@@ -122,28 +122,25 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
   	 <%
- 	 Seats[] seats = new Seats[10];
+ 	 Seats[] seats = new Seats[12];
   	 seats = (Seats[])session.getAttribute("seats");
   	 String date = (String) session.getAttribute("bookdate");
-  	int ddate = 0;
-  	if(date != null){
-  	  ddate = Integer.parseInt(date);
-  	 ddate += 1;
-  	}
+	 String bookdate = (String) session.getAttribute("bookdate");
+  	 if(date != null)
+  	 {
+	 	date = date.substring(5).replaceAll("_","-");
+  	 }
 	if(seats != null){ 
 	%>
     <div class="container">
     <form action="./BookServlet" method="post" onsubmit="return reg(this);">
-	<%
-	int a = Integer.valueOf((String)session.getAttribute("bookdate"));
-	%>
-    <h1>个人座位预订&nbsp;<%=DateManager.getFormatDate(a) %></h1>
+
+    <h1>个人座位预订&nbsp;<%=date%></h1>
 
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
-    			 <input type = 'hidden' name = "bookdate" value = <%=ddate - 1%>>
-    			 <input type = 'hidden' name = "owner" value = <%=user.getStudentnum() %>>
+
 		      	 <th align="right">座位号</th>
 		      	 <th ><%=DateManager.getPeroid(0) %></th>
 		         <th><%=DateManager.getPeroid(1) %></th>
@@ -157,7 +154,7 @@
 <%
 	
 
-	for (int i = 0 ; i < 10 ; i ++)
+	for (int i = 0 ; i < 12 ; i ++)
 	{
 %>
 		      <tr>
@@ -165,7 +162,17 @@
  
 	    			 	<%
 	    			 	int x = 0;
-	    			 	if (seats[i].getPeroid0() == 0)
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "07:00:00") > 0 )
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid0() == 0)
 	    			 	{	
 	    			 	%>
 		  				<td bgcolor="green">
@@ -185,16 +192,7 @@
 		  				</td>
 	    			 	<%
 						}
-	    			 	else if(seats[i].getPeroid0() == 2)
-	    			 	{
-	    			 	%>
-		  				<td bgcolor="yellow">
-						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
-								已过时
-							</input>
-		  				</td>
-	    			 	<%
-	    			 	}
+	    			 	
 	    			 	else if(seats[i].getPeroid0() == 3)
 	    			 	{
 	    			 	%>
@@ -212,7 +210,17 @@
  
 	    			 	<%
 	    			 	x = 1;
-	    			 	if (seats[i].getPeroid1() == 0)
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "09:00:00") > 0 )
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid1() == 0)
 	    			 	{	
 	    			 	%>
 		  				<td bgcolor="green">
@@ -232,16 +240,7 @@
 		  				</td>
 	    			 	<%
 						}
-	    			 	else if(seats[i].getPeroid1() == 2)
-	    			 	{
-	    			 	%>
-		  				<td bgcolor="yellow">
-							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
-								已过时
-							</input>
-		  				</td>
-	    			 	<%
-	    			 	}
+	    			 	
 	    			 	else if(seats[i].getPeroid1() == 3)
 	    			 	{
 	    			 	%>
@@ -257,7 +256,17 @@
 	    			 	
 	    			 	<%
 	    			 	x = 2;
-	    			 	if (seats[i].getPeroid2() == 0)
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "12:00:00") > 0 )
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid2() == 0)
 	    			 	{	
 	    			 	%>
 		  				<td bgcolor="green">
@@ -277,16 +286,7 @@
 		  				</td>
 	    			 	<%
 						}
-	    			 	else if(seats[i].getPeroid2() == 2)
-	    			 	{
-	    			 	%>
-		  				<td bgcolor="yellow">
-							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
-								已过时
-							</input>
-		  				</td>
-	    			 	<%
-	    			 	}
+	    			 	
 	    			 	else if(seats[i].getPeroid2() == 3)
 	    			 	{
 	    			 	%>
@@ -302,7 +302,17 @@
 	    			 	
 	    			 	<%
 	    			 	x = 3;
-	    			 	if (seats[i].getPeroid3() == 0)
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "14:00:00") > 0 )
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
+	    			 	else if (seats[i].getPeroid3() == 0)
 	    			 	{	
 	    			 	%>
 		  				<td bgcolor="green">
@@ -322,16 +332,6 @@
 		  				</td>
 	    			 	<%
 						}
-	    			 	else if(seats[i].getPeroid3() == 2)
-	    			 	{
-	    			 	%>
-		  				<td bgcolor="yellow">
-							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
-								已过时
-							</input>
-		  				</td>
-	    			 	<%
-	    			 	}
 	    			 	else if(seats[i].getPeroid3() == 3)
 	    			 	{
 	    			 	%>
@@ -347,6 +347,16 @@
 	    			 	
 	    			 	<%
 	    			 	x = 4;
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "18:00:00") > 0 )
+	    			 	{
+	    			 	%>
+		  				<td bgcolor="yellow">
+						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
+								已过时
+							</input>
+		  				</td>
+	    			 	<%
+	    			 	}
 	    			 	if (seats[i].getPeroid4() == 0)
 	    			 	{	
 	    			 	%>
@@ -367,16 +377,6 @@
 		  				</td>
 	    			 	<%
 						}
-	    			 	else if(seats[i].getPeroid4() == 2)
-	    			 	{
-	    			 	%>
-		  				<td bgcolor="yellow">
-							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
-								已过时
-							</input>
-		  				</td>
-	    			 	<%
-	    			 	}
 	    			 	else if(seats[i].getPeroid4() == 3)
 	    			 	{
 	    			 	%>

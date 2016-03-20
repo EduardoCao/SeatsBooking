@@ -36,6 +36,7 @@
 	<% 
 		User user = (User)session.getAttribute("user");
     	String msghref = "./student_message.jsp";
+    	String username = user.getName();
 	%>
 	
 	
@@ -94,6 +95,8 @@
     <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
       <div class="container">
         <h1>你好</h1>
+        <br>
+        <p><%=username %></p>
         <br>
         <p>欢迎使用教研院教室预订系统</p>
         <!-- <p>一段描述</p> -->

@@ -3,6 +3,13 @@ package util;
 public class User {
 	private int id;
 	private String studentnum;
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	private String password;
 	private String email;
 	private int userType;
