@@ -107,7 +107,7 @@ public class DBInit {
 				String sql = "drop table if exists reason_table";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.executeUpdate();
-				sql = "create table if not exists reason_table (seat varchar(2) , period varchar(2) ,  studentnum varchar(20) , bookdate int , reason varchar(100) COLLATE utf8_unicode_ci NOT NULL, flag int) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+				sql = "create table if not exists reason_table (seat varchar(2) , period varchar(2) ,  studentnum varchar(20) , bookdate varchar(12) , reason varchar(100) COLLATE utf8_unicode_ci NOT NULL, flag int) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 				ps = conn.prepareStatement(sql);
 				ps.executeUpdate();
 
@@ -212,7 +212,7 @@ public class DBInit {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		createUserDB();
-		createUserTable();
+//		createUserTable();
 //		createSeatDB();
 //		createSeatTable();
 //		createGroupSeatDB();

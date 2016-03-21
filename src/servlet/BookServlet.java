@@ -23,13 +23,27 @@ public class BookServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request , HttpServletResponse response)
 			throws ServletException, IOException
 			{
+		
+				User user = (User) request.getSession().getAttribute("user");
+				UserDao userDao = new UserDao();
+				if(user == null)
+				{
+					request.setAttribute("info",  "登录超时，请重新登录。Wait time out.");
+					request.getRequestDispatcher("message.jsp").forward(request, response);
+					return ;
+				}
+				if(userDao.userIsExist(user.getStudentnum()))
+				{
+					request.setAttribute("info",  "该用户已经被删除了... User deleted...");
+					request.getRequestDispatcher("message.jsp").forward(request, response);
+					return ;
+				}
 				HttpSession session = request.getSession();
 				String bookdate = (String)session.getAttribute("bookdate");
 				String bookseat = request.getParameter("seat");
-				User user = (User)session.getAttribute("user");
+
 				String owner = user.getStudentnum();
 				String pw = user.getPassword();
-				UserDao userDao = new UserDao();
 				int userType = userDao.checkUserType(owner,pw);
 				if(userType < 0)
 				{

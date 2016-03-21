@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.SeatDao;
+import dao.UserDao;
 import util.User;
 
 public class InfoServlet extends HttpServlet{
@@ -19,9 +20,23 @@ public class InfoServlet extends HttpServlet{
 	public void doGet(HttpServletRequest request , HttpServletResponse response)
 	throws ServletException, IOException
 	{
+		
+		User user = (User) request.getSession().getAttribute("user");
+		UserDao userDao = new UserDao();
+		if(user == null)
+		{
+			request.setAttribute("info",  "登录超时，请重新登录。Wait time out.");
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return ;
+		}
+		if(userDao.userIsExist(user.getStudentnum()))
+		{
+			request.setAttribute("info",  "该用户已经被删除了... User deleted...");
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return ;
+		}
 		HttpSession session = request.getSession();
 		SeatDao seatDao = new SeatDao();
-		User user = (User)session.getAttribute("user");
 		//System.out.println(user.getStudentnum());
 		ArrayList<String> onesSeat = seatDao.getOnesSeats(user.getStudentnum());
 		//request.getSession().setAttribute("user", user);

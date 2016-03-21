@@ -99,6 +99,7 @@
 		      <tr>
 		      	 <th align="right">选择</th>
 		      	 <th >用户名</th>
+		      	 <th >姓名</th>
 		         <th>邮箱</th>
 		         <th>id</th>
 		      </tr>
@@ -116,6 +117,7 @@
 		      <tr>
 		      	 <td align="center"><input type = "radio" name = "delete" id = <%=i %> value = <%=i %>></td>
 		         <td><%=showallusers.get(i).getStudentnum() %></td>
+		         <td><%=showallusers.get(i).getName() %></td>
 		         <td><%=showallusers.get(i).getEmail() %></td>
 		         <td><%=showallusers.get(i).getUserType() %></td>
 		      </tr>
@@ -123,8 +125,8 @@
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="删 除" onclick="form1.action='DeleteUserServlet';form1.submit();if(!confirm('确定删除？'))return false;">
-		<input type="submit" class="btn btn-success" value="禁 足" onclick="form1.action='CloseUserServlet';form1.submit();if(!confirm('确定禁足？'))return false;">
+		<input type="submit" class="btn btn-success" value="删 除" onclick="form1.action='DeleteUserServlet';if(!confirm('确定删除？'))return false;">
+		<input type="submit" class="btn btn-success" value="禁 足" onclick="form1.action='CloseUserServlet';if(!confirm('确定禁足？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>

@@ -127,14 +127,13 @@
 	    		<%
 	    		String s = onesseats.get(i);
 	    		String[] slist = s.split(" ");
-	    		String days = slist[0].substring(3, 4);
-	    		int day = Integer.valueOf(days);
-	    		String seats = slist[1].substring(7, 8);
+	    		String day = slist[0].substring(5).replaceAll("_", "-");
+	    		String seats = slist[1].substring(7);
 	    		int seat = Integer.valueOf(seats);
-	    		String times = slist[2].substring(6, 7);
+	    		String times = slist[2].substring(6);
 	    		int time = Integer.valueOf(times);
 	    		%>
-	    		<td><%=DateManager.getFormatDate(day) %></td>
+	    		<td><%=day %></td>
 	    		<td><%=seat %></td>
 	    		<td><%=DateManager.getPeroid(time) %></td>
 	    	</tr>

@@ -27,7 +27,7 @@ public class PersonalSeatsServlet extends HttpServlet{
 				
 				SeatDao seatDao = new SeatDao();
 				
-				Seats[] seats = new Seats[10];
+				Seats[] seats = new Seats[12];
 
 				seats = seatDao.getSeats(bookdate);
 				request.getSession().setAttribute("seats", seats);

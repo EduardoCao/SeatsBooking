@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.GroupSeatDao;
+import dao.UserDao;
 import util.Seats;
 import util.User;
 
@@ -21,23 +22,40 @@ public class GroupBookServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request , HttpServletResponse response)
 	throws ServletException, IOException
 	{
+		User user = (User) request.getSession().getAttribute("user");
+		UserDao userDao = new UserDao();
+		if(user == null)
+		{
+			request.setAttribute("info",  "登录超时，请重新登录。Wait time out.");
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return ;
+		}
+		if(userDao.userIsExist(user.getStudentnum()))
+		{
+			request.setAttribute("info",  "该用户已经被删除了... User deleted...");
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return ;
+		}
 		request.setCharacterEncoding("UTF-8");
-		String bookdate = request.getParameter("bookdate");
+		String bookdate = (String)request.getSession().getAttribute("bookdate");
 		String groupSeat = request.getParameter("groupSeat");
 		String reason = request.getParameter("reason");
-		System.out.println("reason: " + reason + "; bookdate: " + bookdate);
-		User user = (User) request.getSession().getAttribute("user");
+		//System.out.println("reason: " + reason + "; bookdate: " + bookdate);
+		
+		int userType = userDao.checkUserType(user.getStudentnum() , user.getPassword());
+		if(userType < 0)
+		{
+			request.setAttribute("info", "亲爱的同学，由于你之前的违规行为，严格认真的管理员决定关你两周的禁闭哦~ You cannot book for you have been banned for 2 weeks!");
+			request.getRequestDispatcher("./message.jsp").forward(request, response);
+			return;
+		}
 		
 		if(bookdate == null) 
 		{
 			request.setAttribute("info",  "亲，别急呀，还没说好订哪一天的座位呢~ Bookdate error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
-		else if(user.getUserType() < 0)
-		{
-			request.setAttribute("info",  "你因为不听话被管理员关禁闭两周，去找管理员求情吧~ You cannot book for you have been banned for 2 weeks!");
-			request.getRequestDispatcher("message.jsp").forward(request, response);
-		}
+
 		else if(groupSeat == null)
 		{
 			request.setAttribute("info",  "亲，你还没告诉我订哪个座位呢~ GroupSeat error!");
@@ -52,7 +70,7 @@ public class GroupBookServlet extends HttpServlet{
 		{
 			GroupSeatDao groupSeatDao = new GroupSeatDao();
 			reason = reason.replaceAll("##", "_");
-			int tag = groupSeatDao.reserveGroupSeat(groupSeat, user.getStudentnum(), Integer.parseInt(bookdate) , reason, 0);
+			int tag = groupSeatDao.reserveGroupSeat(groupSeat, user.getStudentnum(), bookdate , reason, 0);
 			if(tag == 1)
 			{
 				request.setAttribute("info",  "亲，你已经申请了同一时间段的座位了，正在审批，不要着急哦~ You have been booking the same seat already. Please wait...");

@@ -67,16 +67,16 @@
           if (user.getUserType() == 0 || user.getUserType() == -1) {
           %>
           	<li><a href="<%=ref%>"><%=tag %></a></li>
-            <li><a href="./seatsbooking.jsp">个人座位预定</a></li>
-            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
-            <li><a href="./InfoServlet">查看个人座位预定</a></li>
-            <li class="active"><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+            <li><a href="./seatsbooking.jsp">个人座位预订</a></li>
+            <li><a href="./groupbooking.jsp">集体座位预订</a></li>
+            <li><a href="./InfoServlet">查看个人座位预订</a></li>
+            <li class="active"><a href="./GroupInfoServlet">查看集体座位预订</a></li>
           <%
           } else { 
           %>
           	<li><a href="<%=ref%>"><%=tag %></a></li>
-            <li><a href="./groupbooking.jsp">集体座位预定</a></li>
-            <li class="active"><a href="./GroupInfoServlet">查看集体座位预定</a></li>
+            <li><a href="./groupbooking.jsp">集体座位预订</a></li>
+            <li class="active"><a href="./GroupInfoServlet">查看集体座位预订</a></li>
           <%
           } }
           %>
@@ -135,12 +135,12 @@
 	    		String str = onesGroupInfo.get(i);
 	    		String[] list = str.split("##");
 	    		String users = list[2].substring(11, list[2].length());
-	    		int bookd = Integer.valueOf(list[0].substring(list[0].length()-1, list[0].length()));
+	    		String bookd = list[0].substring(9).substring(5).replaceAll("_" , "-");
 	    		String seats = list[3].substring(5, list[3].length());
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
-	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=bookd %></td>
 	    		<td><%=seats %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>
@@ -188,12 +188,12 @@
 	    		String str = onesGroupInfo.get(i);
 	    		String[] list = str.split("##");
 	    		String users = list[2].substring(11, list[2].length());
-	    		int bookd = Integer.valueOf(list[0].substring(list[0].length()-1, list[0].length()));
+	    		String bookd = list[0].substring(9).substring(5).replaceAll("_" , "-");
 	    		String seats = list[3].substring(5, list[3].length());
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
-	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=bookd %></td>
 	    		<td><%=seats %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>

@@ -47,22 +47,20 @@ public class CheckCloseUserServlet extends HttpServlet{
 				}
 			}
 			
-			//System.out.println(entry.getKey() + " " + entry.getValue());
 			
 			Date dNow = new Date( );
 		    SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");	    
 			String end = ft.format(dNow);
-	        String begin = entry.getValue().toString();
+	        String begin = entry.getValue().toString().replaceAll("_", "-");
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	        try {
 	            //间隔天数
 	            double days = (double)(sdf.parse(end).getTime()-sdf.parse(begin).getTime())/(double)(24*60*60*1000);
-	            //System.out.println(end + " " + begin + " " + days);
+//	            System.out.println(end + " " + begin + " " + days);
 	            if (days >= 14)
 	            {
 	            	UserDao userDao = new UserDao();
-	            	//System.out.println(u.getStudentnum());
-					if(userDao.closeUser(entry.getKey().toString(), u.getUserType()))
+					if(userDao.openUser(entry.getKey().toString(), u.getUserType()))
 					{
 						showallusers = userDao.showAllUsers();
 						request.getSession().setAttribute("showallusers", showallusers);

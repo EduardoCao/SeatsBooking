@@ -15,11 +15,13 @@ public class RegServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request , HttpServletResponse response)
 	throws ServletException, IOException
 	{
+		request.setCharacterEncoding("UTF-8");
 		String studentnum = request.getParameter("studentnum");
+		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String userType = request.getParameter("userType");
-		
+
 		UserDao userDao = new UserDao();
 		if (studentnum != null && !studentnum.isEmpty())
 		{
@@ -27,6 +29,7 @@ public class RegServlet extends HttpServlet{
 			{
 				User user = new User();
 				user.setStudentnum(studentnum);
+				user.setName(name);
 				user.setPassword(password);
 				user.setEmail(email);
 				user.setUserType(Integer.parseInt(userType));
@@ -36,6 +39,7 @@ public class RegServlet extends HttpServlet{
 			}else
 			{
 				request.setAttribute("info", "哎哎哎，这个用户名已经存在了呦喂！Sorry, the studentnum is oppucied!" );
+				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
 		}
 		

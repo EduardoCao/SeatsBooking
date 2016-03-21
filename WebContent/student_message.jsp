@@ -36,7 +36,10 @@
 	<% 
 		User user = (User)session.getAttribute("user");
     	String msghref = "./student_message.jsp";
-    	String username = user.getName();
+    		String username = "";
+    	if(user!= null){
+    	username = user.getName();
+    	}
 	%>
 	
 	

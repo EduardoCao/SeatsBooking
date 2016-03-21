@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.SeatDao;
 import util.User;
+import util.DateManager;
 import util.Seats;
 
 public class DeleteServlet extends HttpServlet{
@@ -32,10 +33,26 @@ public class DeleteServlet extends HttpServlet{
 				{
 					int deletenum = Integer.parseInt(delete);
 					ArrayList<String> onesseats = (ArrayList<String>) request.getSession().getAttribute("onesSeats");
+					if(deletenum >= onesseats.size())
+					{
+						request.setAttribute("info",  "出错了~ Error!");
+						request.getRequestDispatcher("message.jsp").forward(request, response);
+						return;
+					}
 					String[] args = onesseats.get(deletenum).trim().split(" ");
-					String bookdate = args[0].substring(3);
+					String bookdate = args[0];
 					String seatnum = args[1].substring(7);
 					String period = args[2].substring(6);
+					if(bookdate.equals(DateManager.getFormatCompleteDate(0)))
+					{
+						if(DateManager.compareTime(DateManager.currentTime(), DateManager.getDDL(Integer.parseInt(period))) > 0)
+						{
+							request.setAttribute("info",  "只能在开始前一小时前删除，现在不可删除了哦~ Cannot delete seat in an hour before the period starts!");
+							request.getRequestDispatcher("message.jsp").forward(request, response);
+							return;
+						}
+					}
+					
 					User user = (User) request.getSession().getAttribute("user");
 					if(onesseats.size() == 0 || user == null)
 					{
@@ -44,22 +61,18 @@ public class DeleteServlet extends HttpServlet{
 					}
 					else
 					{
-						System.out.println();
 						SeatDao seatDao = new SeatDao();
 						if(seatDao.deleteSeat(user.getStudentnum(), bookdate, seatnum, period))
 						{
 
-							Seats[] seats = new Seats[10];
-							seats = seatDao.getSeats(bookdate);
-							request.getSession().setAttribute("seats", seats);
+							request.getSession().setAttribute("seats", null);
 							ArrayList<String> onesSeat = seatDao.getOnesSeats(user.getStudentnum());
 							request.getSession().setAttribute("onesSeats", onesSeat);
-							//request.setAttribute("info",  "OK! Delete this seat!");
-							request.getRequestDispatcher("seatsinfo.jsp").forward(request, response);
+							request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
 						}
 						else
 						{
-							request.setAttribute("info",  "亲，这个座位好像已经删了呢~或者时间段开始不足一小时不能删除了呢~重新查看一下吧~ Cannot delete this seat!");
+							request.setAttribute("info",  "亲，这个座位好像已经删了呢~重新查看一下吧~ Cannot delete this seat!");
 							request.getRequestDispatcher("message.jsp").forward(request, response);
 						}
 						

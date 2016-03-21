@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import util.Seats;
+import util.DateManager;
 
 public class SeatDao {
 	public Seats[] getSeats(String date)
@@ -75,7 +76,7 @@ public class SeatDao {
 			for (int i = 0 ; i < onesseats.size() ; i ++)
 			{
 				String cur = onesseats.get(i);
-				String checkday = cur.trim().split(" ")[0].substring(3);
+				String checkday = cur.trim().split(" ")[0];
 				String checkperiod = cur.trim().split(" ")[2].substring(6);
 				if(check.containsKey(checkday))
 				{
@@ -94,23 +95,23 @@ public class SeatDao {
 			{
 				rs.close();
 				ps.close();
-				return "不能太贪心哦，不能预定超过三天的座位哦~ Cannot book more than 3 days!";
+				return "不能太贪心哦，不能预订超过三天的座位哦~ Cannot book more than 3 days!";
 			}
 			if(check.containsKey(bookdate) && check.get(bookdate).size() == 2)
 			{
 				rs.close();
 				ps.close();
-				return "不能太贪心哦，同一天最多只能预定两个时间段哦~ Cannot book more than 2 period in a day!";
+				return "不能太贪心哦，同一天最多只能预订两个时间段哦~ Cannot book more than 2 period in a day!";
 			}
 			if (check.containsKey(bookdate) && check.get(bookdate).contains(period))
 			{
 				rs.close();
 				ps.close();
-				return "一天内同一个时间段只能预定一个哦~ Cannot book two same periods in a day!";
+				return "一天内同一个时间段只能预订一个哦~ Cannot book two same periods in a day!";
 			}
 			if ((period.equals("0") && seats.getPeroid0() == 0)||(period.equals("1") && seats.getPeroid1() == 0)||(period.equals("2") && seats.getPeroid2() == 0)||(period.equals("3") && seats.getPeroid3() == 0)||(period.equals("4") && seats.getPeroid4() == 0))
 			{
-				sql = "update seat_table_" + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ?";
+				sql = "update " + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, 1);
 				ps.setString(2, owner);
@@ -148,10 +149,10 @@ public class SeatDao {
 		
 		String seatnum = bookseat.split("_")[0];
 		String period = bookseat.split("_")[1];
-		Connection conn = ConnectDB.getConnectionSeat();
+		Connection conn = ConnectDB.getSeatConnection();
 		try{
 			
-			String sql = "select * from seat_table_" + bookdate + " where seatnum = ?";
+			String sql = "select * from " + bookdate + " where seatnum = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(seatnum));
 			ResultSet rs = ps.executeQuery();
@@ -169,7 +170,7 @@ public class SeatDao {
 			for (int i = 0 ; i < onesseats.size() ; i ++)
 			{
 				String cur = onesseats.get(i);
-				String checkday = cur.trim().split(" ")[0].substring(3);
+				String checkday = cur.trim().split(" ")[0];
 				String checkperiod = cur.trim().split(" ")[2].substring(6);
 				if(check.containsKey(checkday))
 				{
@@ -203,12 +204,9 @@ public class SeatDao {
 				return "同一时间段只能预定一个哦~ Cannot book two same periods in a day!";
 			}
 		
-				sql = "update seat_table_" + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ? and period" + period + " != ? and period" + period + " != ?";
+				sql = "update " + bookdate + " set period" + period + " = ? , ownerPeriod" + period + "= ? where seatnum = ? and period" + period + " != ? and period" + period + " != ?";
 				ps = conn.prepareStatement(sql);
-				if(periodori == 0)
-					ps.setInt(1, 1);
-				else if(periodori == 2)
-					ps.setInt(1, 2);
+				ps.setInt(1, 1);
 				ps.setString(2, owner);
 				ps.setInt(3, Integer.parseInt(seatnum));
 				ps.setInt(4, 3);
@@ -236,10 +234,10 @@ public class SeatDao {
 	public boolean deleteSeat(String owner , String bookdate , String seatnum , String period)
 	{
 		
-		Connection conn = ConnectDB.getConnectionSeat();
+		Connection conn = ConnectDB.getSeatConnection();
 		try{
 			
-			String sql = "select * from seat_table_" + bookdate + " where seatnum = ?";
+			String sql = "select * from " + bookdate + " where seatnum = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(seatnum));
 			ResultSet rs = ps.executeQuery();
@@ -261,7 +259,7 @@ public class SeatDao {
 			{
 				if (seats.getOwnerPeroid0() != null && seats.getOwnerPeroid0().equals(owner) && seats.getPeroid0() == 1)
 				{
-					sql = "update seat_table_" + bookdate + " set period0" + " = ? , ownerPeriod0" + "= ? where seatnum = ?";
+					sql = "update " + bookdate + " set period0" + " = ? , ownerPeriod0" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
 					ps.setInt(1, 0);
 					ps.setString(2, null);
@@ -277,7 +275,7 @@ public class SeatDao {
 			{
 				if (seats.getOwnerPeroid1() != null && seats.getOwnerPeroid1().equals(owner) && seats.getPeroid1() == 1)
 				{
-					sql = "update seat_table_" + bookdate + " set period1" + " = ? , ownerPeriod1" + "= ? where seatnum = ?";
+					sql = "update " + bookdate + " set period1" + " = ? , ownerPeriod1" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
 					ps.setInt(1, 0);
 					ps.setString(2, null);
@@ -293,7 +291,7 @@ public class SeatDao {
 			{
 				if (seats.getOwnerPeroid2() != null && seats.getOwnerPeroid2().equals(owner) && seats.getPeroid2() == 1)
 				{
-					sql = "update seat_table_" + bookdate + " set period2" + " = ? , ownerPeriod2" + "= ? where seatnum = ?";
+					sql = "update " + bookdate + " set period2" + " = ? , ownerPeriod2" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
 					ps.setInt(1, 0);
 					ps.setString(2, null);
@@ -309,7 +307,7 @@ public class SeatDao {
 			{
 				if (seats.getOwnerPeroid3() != null && seats.getOwnerPeroid3().equals(owner) && seats.getPeroid3() == 1)
 				{
-					sql = "update seat_table_" + bookdate + " set period3" + " = ? , ownerPeriod3" + "= ? where seatnum = ?";
+					sql = "update " + bookdate + " set period3" + " = ? , ownerPeriod3" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
 					ps.setInt(1, 0);
 					ps.setString(2, null);
@@ -325,7 +323,7 @@ public class SeatDao {
 			{
 				if (seats.getOwnerPeroid4() != null && seats.getOwnerPeroid4().equals(owner) && seats.getPeroid4() == 1)
 				{
-					sql = "update seat_table_" + bookdate + " set period4" + " = ? , ownerPeriod4" + "= ? where seatnum = ?";
+					sql = "update " + bookdate + " set period4" + " = ? , ownerPeriod4" + "= ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
 					ps.setInt(1, 0);
 					ps.setString(2, null);
@@ -360,22 +358,47 @@ public class SeatDao {
 	public ArrayList<String> getOnesSeats(String user)
 	{
 		ArrayList<String> result = new ArrayList<String>();
-		Connection conn = ConnectDB.getConnectionSeat();
+		Connection conn = ConnectDB.getSeatConnection();
 		try{
 			PreparedStatement ps = null;
 			ResultSet rs = null ;
+			
 			for (int i = 0 ; i < 7 ; i ++)
 			{
+				String date = DateManager.getFormatCompleteDate(i);
 				for (int j = 0 ; j < 5 ; j ++)
 				{
-					String sql = "select * from seat_table_" + i + " where ownerPeriod" + j + " = ?";
+					if (i == 0)
+					{
+						if (j == 0 && DateManager.compareTime(DateManager.currentTime(),"10:00:00") > 0)
+						{
+							continue;
+						}
+						else if (j == 1 && DateManager.compareTime(DateManager.currentTime(),"12:00:00") > 0)
+						{
+							continue;
+						}
+						else if (j == 2 && DateManager.compareTime(DateManager.currentTime(),"15:00:00") > 0)
+						{
+							continue;
+						}
+						else if (j == 3 && DateManager.compareTime(DateManager.currentTime(),"17:00:00") > 0)
+						{
+							continue;
+						}
+						else if (j == 4 && DateManager.compareTime(DateManager.currentTime(),"21:00:00") > 0)
+						{
+							continue;
+						}
+					}
+					String sql = "select * from " + date + " where ownerPeriod" + j + " = ?";
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, user);
 					rs = ps.executeQuery();
 					while(rs.next())
 					{
 						String seatStr = rs.getString("seatnum");
-						String tmp = "Day" + i + " seatnum" + seatStr + " peroid" + j;
+						String tmp = date + " seatnum" + seatStr + " peroid" + j;
 						result.add(tmp);
 					}
 				}
@@ -489,10 +512,10 @@ public class SeatDao {
 	}
 	public boolean deleteSeat(String bookdate, int seatnum, int periodnum , int periodori) {
 		// TODO Auto-generated method stub
-		Connection conn = ConnectDB.getConnectionSeat();
+		Connection conn = ConnectDB.getSeatConnection();
 		try{
 			PreparedStatement ps = null;
-			String sql = "update seat_table_" + bookdate + " set period" + periodnum + " = ? , ownerPeriod"+periodnum + " = ? where seatnum = ?";
+			String sql = "update " + bookdate + " set period" + periodnum + " = ? , ownerPeriod"+periodnum + " = ? where seatnum = ?";
 			
 			ps = conn.prepareStatement(sql);
 			if (periodori == 0 || periodori == 1)
@@ -504,15 +527,7 @@ public class SeatDao {
 				ps.close();
 				ConnectDB.closeConnection(conn);
 			}
-			else if(periodori == 2)
-			{
-				ps.setInt(1, 2);
-				ps.setString(2, null);
-				ps.setInt(3, seatnum);
-				ps.executeUpdate();
-				ps.close();
-				ConnectDB.closeConnection(conn);
-			}
+			
 			else if(periodori == 3)
 			{
 

@@ -11,13 +11,14 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
+import util.DateManager;
 import util.User;
 public class UserDao {
 	
 	public int checkUserType(String studentnum , String password)
 	{
 		int result = -1;
-		Connection conn = ConnectDB.getConnection();
+		Connection conn = ConnectDB.getUserConnection();
 		String sql = "select * from user_table where studentnum = ?";
 		try{
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -40,14 +41,15 @@ public class UserDao {
 	
 	public void saveUser(User user)
 	{
-		Connection conn = ConnectDB.getConnection();
-		String sql = "insert into user_table(studentnum, password , email , userType) values(?, ?, ?, ?)";
+		Connection conn = ConnectDB.getUserConnection();
+		String sql = "insert into user_table(studentnum,name, password , email , userType) values(?, ?, ?, ?, ?)";
 		try{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getStudentnum());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getEmail());
-			ps.setInt(4, user.getUserType());
+			ps.setString(2, user.getName());
+			ps.setString(3, user.getPassword());
+			ps.setString(4, user.getEmail());
+			ps.setInt(5, user.getUserType());
 			ps.executeUpdate();
 			ps.close();
 		}catch (Exception e)
@@ -75,7 +77,7 @@ public class UserDao {
 	}
 	public boolean deleteUser(String studentnum)
 	{
-		Connection conn = ConnectDB.getConnection();
+		Connection conn = ConnectDB.getUserConnection();
 		String sql = "delete from user_table where studentnum = ?";
 		try{
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -105,18 +107,19 @@ public class UserDao {
 		{
 			ConnectDB.closeConnection(conn);
 		}
-		Connection connSeat = ConnectDB.getConnectionSeat();
+		Connection connSeat = ConnectDB.getSeatConnection();
 		try{	
 			for (int i = 0 ; i < 7 ; i ++)
 			{
 				for (int j = 0 ; j < 5 ; j ++)
 				{
-					String sql2 = "update seat_table_"+ i + " set period" + j + " = 0 where ownerPeriod" + j + " = ?";
+					String date = DateManager.getFormatCompleteDate(i);
+					String sql2 = "update "+ date + " set period" + j + " = 0 where ownerPeriod" + j + " = ?";
 					PreparedStatement ps = connSeat.prepareStatement(sql2);
 					ps.setString(1, studentnum);
 					ps.executeUpdate();
 					ps.close();
-					sql2 = "update seat_table_"+ i + " set ownerPeriod" + j + " = ? where ownerPeriod" + j + " = ?";
+					sql2 = "update "+ date + " set ownerPeriod" + j + " = ? where ownerPeriod" + j + " = ?";
 					ps = connSeat.prepareStatement(sql2);
 					ps.setString(1, null);
 					ps.setString(2, studentnum);
@@ -133,13 +136,14 @@ public class UserDao {
 		{
 			ConnectDB.closeConnection(connSeat);
 		}
-		Connection connGroupSeat = ConnectDB.getConnectionGroupSeat();
+		Connection connGroupSeat = ConnectDB.getGroupSeatConnection();
 		try{	
 			for (int i = 0 ; i < 7 ; i ++)
 			{
 				for (int j = 0 ; j < 5 ; j ++)
 				{
-					String sql2 = "update group_seat_table_"+ i + " set period" + j + " = 0, ownerPeriod"+j + " = ? where ownerPeriod" + j + " = ?";
+					String date = DateManager.getFormatCompleteDate(i);
+					String sql2 = "update "+ date + " set period" + j + " = 0, ownerPeriod"+j + " = ? where ownerPeriod" + j + " = ?";
 					PreparedStatement ps = connGroupSeat.prepareStatement(sql2);
 					ps.setString(1, null);
 					ps.setString(2, studentnum);
@@ -166,48 +170,42 @@ public class UserDao {
 	}
 	public boolean closeUser(String studentnum , int userType)
 	{
-		Connection conn = ConnectDB.getConnection();
+		if (userType < 0)
+			return false;
+		Connection conn = ConnectDB.getUserConnection();
 		try{
 			
-			String sql = "update user_table set userType = ? where studentnum = ?";
+			String sql = "update user_table set userType = ? where studentnum = ? and userType = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
+			int newuserType = userType;
 			if(userType == 0)
-				userType = -1;
-			else if(userType == -1)
-				userType = 0;
+				newuserType = -1;
 			else if(userType == 1)
-				userType = -2;
-			else if(userType == -2)
-				userType = 1;
-			ps.setInt(1, userType);
+				newuserType = -2;
+
+			ps.setInt(1, newuserType);
 			ps.setString(2, studentnum);
-			ps.executeUpdate();
-			ps.close();
-			if(userType < 0)
+			ps.setInt(3, userType);
+			if (ps.executeUpdate() > 0)
 			{
-				sql = "insert into close_user_table value(? , ?)";
-				ps = conn.prepareStatement(sql);
-				ps.setString(1 , studentnum);
-				
-				
-				Date dNow = new Date( );
-			    SimpleDateFormat ft = 
-			      new SimpleDateFormat ("yyyy-MM-dd");
-			    //System.out.println("Current Date: " + ft.format(dNow));
-			    
-			    ps.setString(2 , ft.format(dNow));
-			    
-				ps.executeUpdate();
-				ps.close();
+
+				if(newuserType < 0)
+				{
+					sql = "insert into close_user_table value(? , ?)";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1 , studentnum);
+					
+					String date = DateManager.getFormatCompleteDate(0);
+				    
+				    ps.setString(2 , date);
+				    
+					ps.executeUpdate();
+					ps.close();
+				}
 			}
 			else
-			{
-				sql = "delete from close_user_table where studentnum = ?";
-				ps = conn.prepareStatement(sql);
-				ps.setString(1 , studentnum);			    
-				ps.executeUpdate();
 				ps.close();
-			}
+			
 			
 		}catch (Exception e)
 		{
@@ -220,10 +218,51 @@ public class UserDao {
 		}
 		return true;
 	}
+	
+	public boolean openUser(String studentnum , int userType)
+	{
+		if(userType > 0)
+			return false;
+		Connection conn = ConnectDB.getUserConnection();
+		try{
+			
+			String sql = "update user_table set userType = ? where studentnum = ? and userType = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			int newuserType = userType;
+			if(userType == -1)
+				newuserType = 0;
+			else if(userType == -2)
+				newuserType = 1;
+
+			ps.setInt(1, newuserType);
+			ps.setString(2, studentnum);
+			ps.setInt(3, userType);
+			if(ps.executeUpdate()>0)
+			{
+				sql = "delete from close_user_table where studentnum = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1 , studentnum);			    
+				ps.executeUpdate();
+				ps.close();
+			}
+
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		finally
+		{
+			ConnectDB.closeConnection(conn);
+		}
+		return true;
+	}
+	
 	public HashMap<String , String> closeUserTime ()
 	{
 		HashMap<String , String> hm = new HashMap<String , String>();
-		Connection conn = ConnectDB.getConnection();
+		Connection conn = ConnectDB.getUserConnection();
 		try{
 			
 			String sql = "select * from  close_user_table";
@@ -281,7 +320,10 @@ public class UserDao {
 	}
 	public boolean userIsExist(String username)
 	{
-		Connection conn = ConnectDB.getConnection();
+		/**
+		 *  true this user not exists
+		 */
+		Connection conn = ConnectDB.getUserConnection();
 		String sql = "select * from user_table where studentnum = ?";
 		try{
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -304,7 +346,7 @@ public class UserDao {
 	public ArrayList<User> showAllUsers()
 	{
 		ArrayList<User> res = new ArrayList<User>();
-		Connection conn = ConnectDB.getConnection();
+		Connection conn = ConnectDB.getUserConnection();
 		String sql = "select * from user_table";
 		try{
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -314,7 +356,7 @@ public class UserDao {
 				if(rs.getInt("userType") == 2)
 					continue;
 				User user = new User();
-				//user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
 				user.setStudentnum(rs.getString("studentnum"));
 				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));

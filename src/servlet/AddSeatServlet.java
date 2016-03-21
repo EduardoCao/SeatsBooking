@@ -20,9 +20,9 @@ public class AddSeatServlet extends HttpServlet{
 			throws ServletException, IOException
 			{
 				String bookuser = request.getParameter("bookuser");
-				String delete = request.getParameter("addSeat");
+				String add = request.getParameter("addSeat");
 				String bookdate = (String) request.getSession().getAttribute("bookdate");
-				if(delete == null|| bookuser == null)
+				if(add == null|| bookuser == null)
 				{
 					request.setAttribute("info",  "亲，没有指定给谁，添加什么时候的座位呢！请重试~ Add seat error!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);
@@ -38,17 +38,17 @@ public class AddSeatServlet extends HttpServlet{
 					else
 					{
 					
-					if(delete.split("_").length != 3 || delete.split("_")[0] == null || delete.split("_")[1] == null || delete.split("_")[2] == null )
+					if(add.split("_").length != 3 || add.split("_")[0] == null || add.split("_")[1] == null || add.split("_")[2] == null )
 					{
 						request.setAttribute("info",  "亲，添加座位没有成功哦，重新试一下~ Add seat error!");
 						request.getRequestDispatcher("message.jsp").forward(request, response);
 					}
 					else
 					{
-						int seatnum = Integer.parseInt(delete.split("_")[0]);
-						int periodnum = Integer.parseInt(delete.split("_")[1]);
-						int periodori = Integer.parseInt(delete.split("_")[2]);
-						if(periodori == 0 || periodori == 2)
+						int seatnum = Integer.parseInt(add.split("_")[0]);
+						int periodnum = Integer.parseInt(add.split("_")[1]);
+						int periodori = Integer.parseInt(add.split("_")[2]);
+						if(periodori == 0)
 						{
 							SeatDao seatDao = new SeatDao();
 							String bookseat = seatnum + "_" + periodnum;
@@ -56,7 +56,7 @@ public class AddSeatServlet extends HttpServlet{
 							if(bookres.equals("Success"))
 							{
 								
-								Seats[] seats = new Seats[10];
+								Seats[] seats = new Seats[12];
 								seats = seatDao.getSeats(bookdate);
 								request.getSession().setAttribute("seats", seats);
 								request.getRequestDispatcher("adminseat.jsp").forward(request, response);

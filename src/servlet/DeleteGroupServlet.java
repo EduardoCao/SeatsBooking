@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.GroupSeatDao;
+import util.DateManager;
 import util.User;
 
 public class DeleteGroupServlet extends HttpServlet{
@@ -32,9 +33,6 @@ public class DeleteGroupServlet extends HttpServlet{
 			
 			ArrayList<String> onesGroupInfo = (ArrayList<String>) request.getSession().getAttribute("onesGroupInfo");
 			User user = (User) request.getSession().getAttribute("user");
-
-
-			
 			String args[] = onesGroupInfo.get(deletenum).split("##");
 		 	String flag = args[5].substring(5);
 		 	//String studentnum = args[2].substring(11);
@@ -65,6 +63,15 @@ public class DeleteGroupServlet extends HttpServlet{
 			}
 			else if(flag.equals("1"))
 			{
+				if(bookdate.equals(DateManager.getFormatCompleteDate(0)))
+				{
+					if(DateManager.compareTime(DateManager.currentTime(), DateManager.getDDL(Integer.parseInt(period))) > 0)
+					{
+						request.setAttribute("info",  "只能在开始前一小时以前删除，现在不可删除了哦~ Cannot delete seat in an hour before the period starts!");
+						request.getRequestDispatcher("message.jsp").forward(request, response);
+						return;
+					}
+				}
 				GroupSeatDao groupseatDao = new GroupSeatDao();
 				if(groupseatDao.delReservedSeat(user.getStudentnum() , bookdate , seatnum , period) == 0)
 				{

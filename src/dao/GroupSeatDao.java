@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import util.DateManager;
 import util.Seats;
 
 public class GroupSeatDao {
@@ -47,46 +48,48 @@ public class GroupSeatDao {
 		}
 		return seats;
 	}
-	public int reserveGroupSeat(String seat_period , String studentnum , int bookdate , String reason , int flag)
+	public int reserveGroupSeat(String seat_period , String studentnum , String bookdate , String reason , int flag)
 	{
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 
-			String sql = "select * from reason_table where studentnum = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, studentnum);
-			ResultSet rs = ps.executeQuery();
-			String period = seat_period.split("_")[1];
-			while (rs.next())
-			{
-				if(rs.getInt("bookdate") == bookdate)
+				String sql = "select * from reason_table where studentnum = ?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, studentnum);
+				ResultSet rs = ps.executeQuery();
+				String seat = seat_period.split("_")[0];
+				String period = seat_period.split("_")[1];
+				while (rs.next())
 				{
-				if(rs.getString("seat_period").split("_")[1].equals(period) && rs.getInt("flag") == 0)
-				{
-					ps.close();
-					rs.close();
-					ConnectDB.closeConnection(conn);
-					return 1;
+					if(rs.getString("bookdate").equals(bookdate))
+					{
+						if(rs.getString("period").equals(period) && rs.getInt("flag") == 0)
+						{
+							ps.close();
+							rs.close();
+							ConnectDB.closeConnection(conn);
+							return 1;
+						}
+						else if(rs.getString("period").equals(period) && rs.getInt("flag") == 1)
+						{
+							ps.close();
+							rs.close();
+							ConnectDB.closeConnection(conn);
+							return 2;
+						}
+					}
 				}
-				else if(rs.getString("seat_period").split("_")[1].equals(period) && rs.getInt("flag") == 1)
-				{
-					ps.close();
-					rs.close();
-					ConnectDB.closeConnection(conn);
-					return 2;
-				}
-				}
-			}
-			rs.close();
-			sql = "insert into reason_table values (? , ? , ? , ? , ?)";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, seat_period);
-			ps.setString(2, studentnum);
-			ps.setInt(3, bookdate);
-			ps.setString(4, reason);
-			ps.setInt(5, flag);
-			ps.executeUpdate();
-			ps.close();	
+				rs.close();
+				sql = "insert into reason_table values (? , ? , ? , ? , ? , ?)";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, seat);
+				ps.setString(2, period);
+				ps.setString(3, studentnum);
+				ps.setString(4, bookdate);
+				ps.setString(5, reason);
+				ps.setInt(6, flag);
+				ps.executeUpdate();
+				ps.close();	
 			
 		}catch (Exception e)
 		{
@@ -100,31 +103,63 @@ public class GroupSeatDao {
 	}
 	public ArrayList<String> getOnesGroupInfo(String studentnum) {
 		ArrayList<String> res = new ArrayList<String>();
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
-		
-			String sql = "select * from reason_table where studentnum = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, studentnum);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next())
+			for(int i = 0 ; i < 7 ; i ++)
 			{
-				String tmp = "bookdate_" + rs.getInt("bookdate") ;
-				
-				tmp += "##period_" + rs.getString("seat_period").split("_")[1];
-				
-				tmp += "##studentnum_" + rs.getString("studentnum");
-				
-				tmp += "##seat_" + rs.getString("seat_period").split("_")[0];
-				
-				tmp += "##reason_" + rs.getString("reason");
-				
-				tmp += "##flag_" + rs.getInt("flag");
-				 
-				res.add(tmp);
+				for (int j = 0 ; j < 5 ; j ++)
+				{
+					if (i == 0)
+					{
+						if (j == 0 && DateManager.compareTime(DateManager.currentTime(),"10:00:00") > 0)
+						{
+							continue;
+						}
+						else if (j == 1 && DateManager.compareTime(DateManager.currentTime(),"12:00:00") > 0)
+						{
+							continue;
+						}
+						else if (j == 2 && DateManager.compareTime(DateManager.currentTime(),"15:00:00") > 0)
+						{
+							continue;
+						}
+						else if (j == 3 && DateManager.compareTime(DateManager.currentTime(),"17:00:00") > 0)
+						{
+							continue;
+						}
+						else if (j == 4 && DateManager.compareTime(DateManager.currentTime(),"21:00:00") > 0)
+						{
+							continue;
+						}
+					}
+					String bookdate = DateManager.getFormatCompleteDate(i);
+					String sql = "select * from reason_table where studentnum = ? and bookdate = ? and period = ?";
+					PreparedStatement ps = conn.prepareStatement(sql);
+					ps.setString(1, studentnum);
+					ps.setString( 2 , bookdate);
+					ps.setString( 3 , j + "");
+					ResultSet rs = ps.executeQuery();
+					while (rs.next())
+					{
+						String tmp = "bookdate_" + rs.getString("bookdate");
+						
+						tmp += "##period_" + rs.getString("period");
+						
+						tmp += "##studentnum_" + rs.getString("studentnum");
+						
+						tmp += "##seat_" + rs.getString("seat");
+						
+						tmp += "##reason_" + rs.getString("reason");
+						
+						tmp += "##flag_" + rs.getInt("flag");
+						 
+						res.add(tmp);
+					}
+					
+					rs.close();
+					ps.close();
+				}
 			}
-			rs.close();
-			ps.close();	
 			
 		}catch (Exception e)
 		{
@@ -139,14 +174,15 @@ public class GroupSeatDao {
 	}
 	public int delBookingSeat(String studentnum, String bookdate, String seatnum, String period) {
 		
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 		
-			String sql = "delete from reason_table where studentnum = ? and bookdate = ? and seat_period = ?";
+			String sql = "delete from reason_table where studentnum = ? and bookdate = ? and seat = ? and period = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, studentnum);
-			ps.setInt(2, Integer.parseInt(bookdate));
-			ps.setString(3, seatnum + "_" + period);
+			ps.setString(2, bookdate);
+			ps.setString(3, seatnum );
+			ps.setString(4, period);
 			ps.executeUpdate();
 			ps.close();	
 			
@@ -160,10 +196,10 @@ public class GroupSeatDao {
 		return 0;
 	}
 	public int delReservedSeat(String studentnum, String bookdate, String seatnum, String period) {
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 		
-			String sql = "update group_seat_table_"+ bookdate + " set period" + period + " = ? , ownerPeriod" + period + " = ? where seatnum = ? and ownerPeriod" + period + " = ? ";
+			String sql = "update "+ bookdate + " set period" + period + " = ? , ownerPeriod" + period + " = ? where seatnum = ? and ownerPeriod" + period + " = ? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, 0);
 			ps.setString(2, null);

@@ -162,7 +162,7 @@
  
 	    			 	<%
 	    			 	int x = 0;
-	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "07:00:00") > 0 )
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "07:00:00") > 0 && seats[i].getPeroid0() != 3 )
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
@@ -172,6 +172,7 @@
 		  				</td>
 	    			 	<%
 	    			 	}
+	    			 	
 	    			 	else if (seats[i].getPeroid0() == 0)
 	    			 	{	
 	    			 	%>
@@ -210,7 +211,7 @@
  
 	    			 	<%
 	    			 	x = 1;
-	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "09:00:00") > 0 )
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "09:00:00") > 0 && seats[i].getPeroid1() != 3)
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
@@ -256,7 +257,7 @@
 	    			 	
 	    			 	<%
 	    			 	x = 2;
-	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "12:00:00") > 0 )
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "12:00:00") > 0 && seats[i].getPeroid2() != 3)
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
@@ -302,7 +303,7 @@
 	    			 	
 	    			 	<%
 	    			 	x = 3;
-	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "14:00:00") > 0 )
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "14:00:00") > 0 && seats[i].getPeroid3() != 3)
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
@@ -347,7 +348,7 @@
 	    			 	
 	    			 	<%
 	    			 	x = 4;
-	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "18:00:00") > 0 )
+	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "18:00:00") > 0 && seats[i].getPeroid4() != 3)
 	    			 	{
 	    			 	%>
 		  				<td bgcolor="yellow">
@@ -357,7 +358,7 @@
 		  				</td>
 	    			 	<%
 	    			 	}
-	    			 	if (seats[i].getPeroid4() == 0)
+	    			 	else if (seats[i].getPeroid4() == 0)
 	    			 	{	
 	    			 	%>
 		  				<td bgcolor="green">

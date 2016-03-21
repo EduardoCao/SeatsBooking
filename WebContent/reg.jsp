@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=gb2312"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="util.User"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <meta charset="utf-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
@@ -136,6 +137,19 @@
 	              <div class="col-sm-8">
 	                <div class="input-group">
 	                <input type="text" class="form-control" name="studentnum" placeholder="请输入学生证号">
+	               <div class="input-group-addon">
+	               <span class="glyphicon glyphicon-user"></span>
+	               </div>
+	             </div>
+	            </div>
+	            </div>
+	            
+	            
+	            <div class="form-group">
+	              <label for="name" class="col-sm-3 control-label">姓名：</label>
+	              <div class="col-sm-8">
+	                <div class="input-group">
+	                <input type="text" class="form-control" name="name" placeholder="请输入姓名">
 	               <div class="input-group-addon">
 	               <span class="glyphicon glyphicon-user"></span>
 	               </div>

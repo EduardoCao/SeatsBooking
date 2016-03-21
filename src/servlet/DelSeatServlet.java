@@ -22,7 +22,7 @@ public class DelSeatServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request , HttpServletResponse response)
 	throws ServletException, IOException
 	{
-		String bookdate = request.getParameter("bookdate");
+		String bookdate = (String)request.getSession().getAttribute("bookdate");
 		String delete = request.getParameter("delSeat");
 		if(delete == null)
 		{

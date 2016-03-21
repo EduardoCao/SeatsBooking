@@ -22,18 +22,18 @@ public class OpenUserServlet extends HttpServlet{
 			throws ServletException, IOException
 	{
 
-		String close = request.getParameter("openUser");
-		if(close == null)
+		String open = request.getParameter("openUser");
+		if(open == null)
 		{
 			request.setAttribute("info",  "亲，还没说好解放哪个同学呢~ Open user error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 		else
 		{
-			int closenum = Integer.parseInt(close);
+			int opennum = Integer.parseInt(open);
 			ArrayList<User> showallusers = (ArrayList<User>) request.getSession().getAttribute("showallusers");
-			String studentnum = showallusers.get(closenum).getStudentnum();
-			int userType =  showallusers.get(closenum).getUserType();
+			String studentnum = showallusers.get(opennum).getStudentnum();
+			int userType =  showallusers.get(opennum).getUserType();
 			if(studentnum == null)
 			{
 				request.setAttribute("info",  "亲，这个同学不存在呢，请重试~ Open user error!");
@@ -42,7 +42,7 @@ public class OpenUserServlet extends HttpServlet{
 			else
 			{
 				UserDao userDao = new UserDao();
-				if(userDao.closeUser(studentnum, userType))
+				if(userDao.openUser(studentnum, userType))
 				{
 					showallusers = userDao.showAllUsers();
 					HashMap<String , String> closetime = new HashMap<String , String>();
