@@ -220,7 +220,7 @@ public class GroupSeatDao {
 	public ArrayList<String> getAllGroupInfo() {
 		ArrayList<String> res = new ArrayList<String>();
 		
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 		
 			String sql = "select * from reason_table";
@@ -228,13 +228,13 @@ public class GroupSeatDao {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next())
 			{
-				String tmp = "bookdate_" + rs.getInt("bookdate") ;
+				String tmp = "bookdate_" + rs.getString("bookdate") ;
 				
-				tmp += "##period_" + rs.getString("seat_period").split("_")[1];
+				tmp += "##period_" + rs.getString("period");
 				
 				tmp += "##studentnum_" + rs.getString("studentnum");
 				
-				tmp += "##seat_" + rs.getString("seat_period").split("_")[0];
+				tmp += "##seat_" + rs.getString("seat");
 				
 				tmp += "##reason_" + rs.getString("reason");
 				

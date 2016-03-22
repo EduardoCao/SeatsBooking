@@ -64,6 +64,20 @@ public class DateManager {
 		}
 		return "时间段";
 	}
+	public static String getEndDDL(int i) {
+		if (i == 0) {
+			return "10:00:00";
+		} else if (i == 1) {
+			return "12:00:00";
+		} else if (i == 2) {
+			return "15:00:00";
+		} else if (i==3) {
+			return "17:00:00";
+		} else if (i == 4) {
+			return "21:00:00";
+		}
+		return "时间段";
+	}
     public static int compareTime(String DATE1, String DATE2) {
         if (DATE1.compareTo(DATE2) > 0)
         	return 1;

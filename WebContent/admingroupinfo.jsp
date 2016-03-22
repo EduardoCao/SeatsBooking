@@ -127,13 +127,13 @@
 	    		String str = allGroupInfo.get(i);
 	    		String[] list = str.split("##");
 	    		String users = list[2].substring(11, list[2].length());
-	    		int bookd = Integer.valueOf(list[0].substring(list[0].length()-1, list[0].length()));
+	    		String bookd = list[0].substring(9).replaceAll("_", "-");
 	    		String seats = list[3].substring(5, list[3].length());
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=users %></td>
-	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=bookd %></td>
 	    		<td><%=seats %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>
@@ -187,14 +187,14 @@
 	    		String str = allGroupInfo.get(i);
 	    		String[] list = str.split("##");
 	    		String users = list[2].substring(11, list[2].length());
-	    		int bookd = Integer.valueOf(list[0].substring(list[0].length()-1, list[0].length()));
+	    		String bookd = list[0].substring(9).replaceAll("_", "-");
 	    		String seats = list[3].substring(5, list[3].length());
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		
 	    		%>
 	    		<td><%=users %></td>
-	    		<td><%=DateManager.getFormatDate(bookd) %></td>
+	    		<td><%=bookd %></td>
 	    		<td><%=seats %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>
