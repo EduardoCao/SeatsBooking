@@ -119,6 +119,14 @@
         <servlet-name>AddGroupServlet</servlet-name>
         <servlet-class>servlet.AddGroupServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeNameServlet</servlet-name>
+        <servlet-class>servlet.ChangeNameServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeEmailServlet</servlet-name>
+        <servlet-class>servlet.ChangeEmailServlet</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -236,7 +244,14 @@
         <servlet-name>AddGroupServlet</servlet-name>
         <url-pattern>/AddGroupServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>ChangeNameServlet</servlet-name>
+        <url-pattern>/ChangeNameServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeEmailServlet</servlet-name>
+        <url-pattern>/ChangeEmailServlet</url-pattern>
+    </servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

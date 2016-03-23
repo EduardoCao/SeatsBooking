@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=gb2312"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8"
     import="util.User"%>
 <%@ page import="java.util.ArrayList" %>

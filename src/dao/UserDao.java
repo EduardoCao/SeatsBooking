@@ -75,6 +75,38 @@ public class UserDao {
 			ConnectDB.closeConnection(conn);
 		}
 	}
+	public void changeName(User user , String name)
+	{
+		Connection conn = ConnectDB.getUserConnection();
+		String sql = "update user_table set name = '" + name + "' where studentnum = '" + user.getStudentnum() + "'";
+		
+		try{
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			ps.close();
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			ConnectDB.closeConnection(conn);
+		}
+	}
+	public void changeEmail(User user , String email)
+	{
+		Connection conn = ConnectDB.getUserConnection();
+		String sql = "update user_table set email = '" + email + "' where studentnum = '" + user.getStudentnum() + "'";
+		
+		try{
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			ps.close();
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			ConnectDB.closeConnection(conn);
+		}
+	}
 	public boolean deleteUser(String studentnum)
 	{
 		Connection conn = ConnectDB.getUserConnection();

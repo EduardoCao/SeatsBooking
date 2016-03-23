@@ -32,26 +32,11 @@
     <![endif]-->
             <script type="text/javascript">
 	    	function changepw(form){
-	    		if(form.oripassword.value == ""){
-	        		alert("原密码不能为空！");
+	    		if(form.email.value == ""){
+	        		alert("新邮箱不能为空！");
 	        		return false;
 	        	}
-	    		if(form.oripassword.value != form.userpassword.value){
-	        		alert("原密码错误！");
-	        		return false;
-	        	}
-	        	if(form.password.value == ""){
-	        		alert("密码不能为空！");
-	        		return false;
-	        	}
-	        	if(form.repassword.value == ""){
-	        		alert("确认密码不能为空！");
-	        		return false;
-	        	}
-	        	if(form.password.value != form.repassword.value){
-	        		alert("两次密码输入不一致！");
-	        		return false;
-	        	}
+	    		
 
 	    	}
 	    </script>
@@ -95,9 +80,9 @@
           <ul class="nav navbar-nav">
 
           	<li><a href="<%=ref%>"><%=tag %></a></li>
-            <li class="active"><a href="./changepw.jsp">修改密码</a></li>
+            <li><a href="./changepw.jsp">修改密码</a></li>
             <li><a href="./changename.jsp">修改姓名</a></li>
-            <li><a href="./changeemail.jsp">修改邮箱</a></li>
+            <li class="active"><a href="./changeemail.jsp">修改邮箱</a></li>
             <li><a href="./checkprofile.jsp">查看个人信息</a></li>
             
          
@@ -125,52 +110,31 @@
 <br><br><br>
 <div id="content">
 	  <div class="container">
-	    <form action="ChangepwServlet" method="post" onsubmit="return changepw(this);" class="form-horizontal">
+	    <form action="ChangeEmailServlet" method="post" onsubmit="return changepw(this);" class="form-horizontal">
 	      <div class="row">
-	        <h1 style="text-align:center; height:60px">修改密码</h1>
+	        <h1 style="text-align:center; height:60px">修改邮箱</h1>
 	      </div>
 	      <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 register">
+
 	            <div class="form-group">
-	              <label for="password" class="col-sm-3 control-label">原密码：</label>
+	              <label for="email" class="col-sm-3 control-label">新邮箱：</label>
 	              <div class="col-sm-8">
 	                <div class="input-group">
-	                <input type="password" class="form-control" name="oripassword" placeholder="请输入原密码">
+	                <input type="email" class="form-control" name="email" placeholder="请输入新邮箱">
 	               <div class="input-group-addon">
-	               <span class="glyphicon glyphicon-lock"></span>
+	               <span class="glyphicon glyphicon-envelope"></span>
 	               </div>
 	             </div>
 	            </div>
 	            </div>
-	            <input type="hidden" class="form-control" name="userpassword" value=<%=user.getPassword() %>>
-	            <div class="form-group">
-	              <label for="password" class="col-sm-3 control-label">新密码：</label>
-	              <div class="col-sm-8">
-	                <div class="input-group">
-	                <input type="password" class="form-control" name="password" placeholder="请输入新密码">
-	               <div class="input-group-addon">
-	               <span class="glyphicon glyphicon-lock"></span>
-	               </div>
-	             </div>
-	            </div>
-	            </div>
-	            <div class="form-group">
-	              <label for="password" class="col-sm-3 control-label">确认新密码：</label>
-	              <div class="col-sm-8">
-	                <div class="input-group">
-	                <input type="password" class="form-control" name="repassword" placeholder="请确认新密码">
-	               <div class="input-group-addon">
-	               <span class="glyphicon glyphicon-lock"></span>
-	               </div>
-	             </div>
-	            </div>
-	            </div>
+
 	    <div class="row">
 	        <div class="col-md-3 col-md-offset-3 col-xs-12">
 	            <button type="reset" class="btn btn-default btn-block"><b> &nbsp; &nbsp; 重置 &nbsp;&nbsp;</b>
 	              <span class="glyphicon glyphicon-remove"></span></button>
 	        </div>
 	        <div class="col-md-3 col-xs-12">
-	            <button type="submit" class="btn btn-info btn-block" onclick="if(!confirm('确定修改密码？'))return false;"><b>&nbsp;&nbsp; 提交 &nbsp;&nbsp;</b>
+	            <button type="submit" class="btn btn-info btn-block" onclick="if(!confirm('确定修改邮箱？'))return false;"><b>&nbsp;&nbsp; 提交 &nbsp;&nbsp;</b>
 	            <span class="glyphicon glyphicon-arrow-right"></span></button>
 	        </div>
 	      </div>
