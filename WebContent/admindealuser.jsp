@@ -133,7 +133,7 @@
 	  
     <div class="container">
     <form action="OpenUserServlet" method="post" onSubmit="return login(this);">
-    <h1>放出关禁闭用户</h1>
+    <h1>放出关禁闭用户</h1><p>(注意：关禁闭满两星期的用户会在管理员打开此页面后自动放出)</p>
 
 		<table class="table table-striped">
 		   <thead>
@@ -173,11 +173,11 @@
 		</form>
 	  </div>
 	<br><br>
-	<div class = "container">
+<!-- 	<div class = "container">
 	 <form action="CheckCloseUserServlet" method="post" onSubmit="return login(this);">
  	<input type="button" name="checkclose" class="btn btn-success" value="检查禁足是否到期" onclick="form.submit()">
  </form>
-	</div>
+	</div> -->
 	  
     <div class="container">
       <!-- Example row of columns -->

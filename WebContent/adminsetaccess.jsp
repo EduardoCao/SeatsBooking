@@ -67,6 +67,7 @@
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
+            <li><a href="./admin_message.jsp">管理员页面</a></li>
             <li><a href="./reg.jsp">管理用户</a></li>
             <li><a href="./adminseat.jsp">个人座位预订</a></li>
             <li><a href="./AdminGroupServlet">团体预订</a></li>
@@ -101,7 +102,7 @@
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
-		      	 <th>座位号</th>
+		      	 <th>日期</th>
 		      	 <th ><%=DateManager.getPeroid(0) %></th>
 		         <th><%=DateManager.getPeroid(1) %></th>
 		         <th><%=DateManager.getPeroid(2) %></th>
