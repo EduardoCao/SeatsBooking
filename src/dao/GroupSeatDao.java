@@ -302,7 +302,7 @@ public class GroupSeatDao {
 				tmp += "##reason_" + rs.getString("reason");
 				
 				tmp += "##flag_" + rs.getInt("flag");
-				 
+
 				res.add(tmp);
 			}
 			rs.close();

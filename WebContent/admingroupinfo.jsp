@@ -99,8 +99,8 @@
 		   <thead>
 		      <tr>
 		      <th>选择</th>
-		  	  <th>学生</th>
-		  	 <!--  <th>姓名</th> -->
+		  	  <th>学号</th>
+		  	  <th>姓名</th>
 		  	  <th>日期</th>
 		  	  <th>座位号</th>
 		  	  <th>时间段</th>
@@ -111,7 +111,7 @@
 		    <%
 		 	 ArrayList<String> allGroupInfo = new ArrayList<String>();
 		 	 allGroupInfo = (ArrayList<String>) session.getAttribute("allGroupInfo");
-		  	 
+		 	 ArrayList<User> showallusers = (ArrayList<User>) session.getAttribute("showallusers");
 			if(allGroupInfo != null && allGroupInfo.size() > 0){
 				for (int i = 0 ; i < allGroupInfo.size() ; i ++)
 				{
@@ -127,14 +127,23 @@
 	    		<%
 	    		String str = allGroupInfo.get(i);
 	    		String[] list = str.split("##");
-	    		String users = list[3].substring(11, list[3].length());
+	    		String users = list[3].substring(11, list[3].length()).trim();
+	    		String name = "";		
 	    		String bookd = list[0].substring(9).replaceAll("_", "-");
 	    		String seats = list[2].substring(5, list[2].length());
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
+	    		for (User u : showallusers)
+	    		{
+	    			if (u.getStudentnum().equals(users))
+	    			{
+	    				name = u.getName();
+	    				break;
+	    			}
+	    		}
 	    		%>
 	    		<td><%=users %></td>
-	    		<td><%=users %></td>
+	    		<td><%=name %></td>
 	    		<td><%=bookd %></td>
 	    		<td><%=seats %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
@@ -160,7 +169,8 @@
 		   <thead>
 		      <tr>
 			  <th>选择</th>
-		  	  <th>学生</th>
+		  	  <th>学号</th>
+		  	  <th>姓名</th>
 		  	  <th>日期</th>
 		  	  <th>座位号</th>
 		  	  <th>时间段</th>
@@ -189,13 +199,22 @@
 	    		String str = allGroupInfo.get(i);
 	    		String[] list = str.split("##");
 	    		String users = list[3].substring(11, list[3].length());
+	    		String name = "";
 	    		String bookd = list[0].substring(9).replaceAll("_", "-");
 	    		String seats = list[2].substring(5, list[2].length());
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
-	    		
+	    		for (User u : showallusers)
+	    		{
+	    			if (u.getStudentnum().equals(users))
+	    			{
+	    				name = u.getName();
+	    				break;
+	    			}
+	    		}
 	    		%>
 	    		<td><%=users %></td>
+	    		<td><%=name %></td>
 	    		<td><%=bookd %></td>
 	    		<td><%=seats %></td>
 	    		<td><%=DateManager.getPeroid(per) %>

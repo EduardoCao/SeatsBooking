@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.GroupSeatDao;
+import dao.UserDao;
 import util.User;
 
 public class AdminGroupServlet extends HttpServlet{
@@ -23,6 +24,10 @@ public class AdminGroupServlet extends HttpServlet{
 		GroupSeatDao groupSeatDao = new GroupSeatDao();
 		ArrayList<String> allGroupInfo = new ArrayList<String>();
 		allGroupInfo = groupSeatDao.getAllGroupInfo();
+		UserDao userDao = new UserDao();
+		ArrayList<User> showallusers = userDao.showAllUsers();
+		showallusers = userDao.showAllUsers();
+		request.getSession().setAttribute("showallusers" , showallusers);
 		request.getSession().setAttribute("groupseats", null);
 		request.getSession().setAttribute("allGroupInfo", allGroupInfo);
 		request.getRequestDispatcher("./admingroupinfo.jsp").forward(request, response);

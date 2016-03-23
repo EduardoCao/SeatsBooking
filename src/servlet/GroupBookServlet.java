@@ -40,6 +40,7 @@ public class GroupBookServlet extends HttpServlet{
 		String bookdate = (String)request.getSession().getAttribute("bookdate");
 		String groupSeat = request.getParameter("groupSeat");
 		String reason = request.getParameter("reason");
+		
 		//System.out.println("reason: " + reason + "; bookdate: " + bookdate);
 		
 		int userType = userDao.checkUserType(user.getStudentnum() , user.getPassword());
@@ -54,17 +55,32 @@ public class GroupBookServlet extends HttpServlet{
 		{
 			request.setAttribute("info",  "亲，别急呀，还没说好订哪一天的座位呢~ Bookdate error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return;
 		}
 
 		else if(groupSeat == null)
 		{
 			request.setAttribute("info",  "亲，你还没告诉我订哪个座位呢~ GroupSeat error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return;
 		}
 		else if(reason == null)
 		{
 			request.setAttribute("info",  "亲，申请的理由也要写哦~ Reason error!");
 			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return;
+		}
+		else if(reason.length() == 0)
+		{
+			request.setAttribute("info",  "亲，申请的理由也要写哦~ Reason error!");
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return;
+		}
+		else if(reason.length() > 60)
+		{
+			request.setAttribute("info",  "亲，申请的理由写太长了哦~ Reason too long!");
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return;
 		}
 		else
 		{

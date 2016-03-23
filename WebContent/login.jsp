@@ -63,10 +63,10 @@
 	      </div>
 	      <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 register">
 	            <div class="form-group">
-	              <label for="username" class="col-sm-3 control-label">用户名：</label>
+	              <label for="username" class="col-sm-3 control-label">学号：</label>
 	              <div class="col-sm-8">
 	                <div class="input-group">
-	                <input type="text" class="form-control" name="studentnum" placeholder="请输入用户名">
+	                <input type="text" class="form-control" name="studentnum" placeholder="请输入学号">
 	               <div class="input-group-addon">
 	               <span class="glyphicon glyphicon-user"></span>
 	               </div>
