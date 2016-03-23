@@ -104,8 +104,14 @@
 	  </div>
 	</div>
     
-
-    <div class="container" style="position:fixed; bottom:0px;">
+	<br><br><br><br>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+         <!--  <p>一段描述</p> -->
+        </div>
+      </div>
 
       <hr>
 
