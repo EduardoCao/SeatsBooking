@@ -94,7 +94,10 @@
 <!--         <a class="btn btn-primary btn-lg" href="ExitServlet" role="button">登出 &raquo;</a> -->
       </div>
     </div>
-<%} %>
+<%} else {%>
+	<br><br><br>
+	<h1 align="center">您没有权限查看此页面。</h1>
+	<%} %>
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">

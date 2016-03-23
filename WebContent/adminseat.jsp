@@ -65,7 +65,6 @@
         		isAdmin = true;
         	}
         }
-        if(isAdmin){		
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
@@ -104,6 +103,7 @@
   	}
 %>
         <br><br><br>
+        <%if (isAdmin) { %>
     <div class="container">
     <form action="./PersonalSeatsServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
 	            <div class="form-group">
@@ -154,13 +154,10 @@
 		   </thead>
 		   <tbody>
 		   
-<%
-	
-
-	for (int i = 0 ; i < seats.length ; i ++)
-	{
-		
-%>
+		<%
+			for (int i = 0 ; i < seats.length ; i ++)
+			{
+		%>
 		      <tr>
 		      	<td><%="座位"+i %></td>
 	  			<%
@@ -852,7 +849,9 @@ if(seats != null) {
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
-	  
+	  <%} else { %>
+	<h1 align="center">您没有权限查看此页面。</h1>
+	  <%} %>
 
 	  
     <div class="container">
@@ -869,7 +868,6 @@ if(seats != null) {
       </footer>
     </div> <!-- /container -->
 
-<%} %>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

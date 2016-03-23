@@ -87,8 +87,7 @@
         		isAdmin = true;
         	}
         }
-        if(isAdmin)
-        {
+
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
@@ -113,7 +112,7 @@
       </div>
     </div>
 
-
+	<%if(isAdmin) {%>
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
@@ -214,7 +213,11 @@
 	    </form>
 	  </div>
 	</div>
-
+	</div>
+	<%} else {%>
+	<br><br><br>
+	<h1 align="center">您没有权限查看此页面。</h1>
+	<%} %>
     <div class="container">
       <hr>
       <footer>
@@ -222,7 +225,6 @@
       </footer>
     </div> <!-- /container -->
 
-<%} %>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

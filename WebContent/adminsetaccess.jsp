@@ -63,7 +63,7 @@
         		isAdmin = true;
         	}
         }
-        if (isAdmin){		
+        		
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
@@ -95,6 +95,7 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <br><br><br>
+    <%if (isAdmin){ %>
     <div class="container">
     <form action="ClosePeriodServlet" method="post" onSubmit="return login(this);">
     <h1>关闭时间段</h1>
@@ -251,7 +252,9 @@
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
-	  
+	  <%} else { %>
+	<h1 align="center">您没有权限查看此页面。</h1>
+	  <%} %>
 	 
 	  
     <div class="container">
@@ -268,7 +271,6 @@
       </footer>
     </div> <!-- /container -->
 
-	<%} %>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
