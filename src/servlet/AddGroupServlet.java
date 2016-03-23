@@ -39,6 +39,11 @@ public class AddGroupServlet extends HttpServlet{
 	 			request.setAttribute("info",  "亲，这个团体座位刚刚被占了哦~再试试别的座位吧！Sorry, the group seat haven been taken already! Please try other group seats!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
+			else if(tag == -3)
+	 		{
+	 			request.setAttribute("info",  "该同学已经预订过这一时段的团体座位了，不能重复预订哦~ Sorry, this user has booked a group seat in the same period!");
+				request.getRequestDispatcher("message.jsp").forward(request, response);
+	 		}
 	 		else if(tag == -2)
 	 		{
 	 			request.setAttribute("info",  "亲，这个团体座位没有成功预订上哦，请重试~ Sorry, the group seat haven't been added successfully!");

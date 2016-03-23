@@ -30,11 +30,11 @@ public class OpenPeriodServlet extends HttpServlet{
 		else
 		{
 			
-			String day = close.split("_")[0];
-			String period = close.split("_")[1];
-			String seatType = close.split("_")[2];
+			String bookdate = close.split("#")[0];
+			String period = close.split("#")[1];
+			String seatType = close.split("#")[2];
 			
-			if(day == null || period == null)
+			if(bookdate == null || period == null)
 			{
 				request.setAttribute("info",  "亲，出了点错:( 请重试一下~ open period error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
@@ -42,9 +42,9 @@ public class OpenPeriodServlet extends HttpServlet{
 			else
 			{
 				SeatDao seatDao = new SeatDao();
-				int tag = seatDao.closeSeat(day , period , seatType);
+				int tag = seatDao.closeSeat(bookdate , period , seatType);
 				GroupSeatDao groupseatDao = new GroupSeatDao();
-				int tag2 = groupseatDao.closeSeat(day , period , seatType);
+				int tag2 = groupseatDao.closeSeat(bookdate , period , seatType);
 				if(tag == 0 && tag2 == 0)
 				{
 //					request.setAttribute("info",  "OK! Open this period!");

@@ -41,6 +41,8 @@ public class GroupInfoServlet extends HttpServlet{
 		ArrayList<String> onesGroupInfo = new ArrayList<String>();
 		String studentnum = user.getStudentnum();
 		onesGroupInfo = groupSeatDao.getOnesGroupInfo(studentnum);
+		request.getSession().setAttribute("seats", null);
+		request.getSession().setAttribute("groupseats", null);
 		request.getSession().setAttribute("onesGroupInfo", onesGroupInfo);
 		request.getRequestDispatcher("./groupseatsinfo.jsp").forward(request, response);
 		

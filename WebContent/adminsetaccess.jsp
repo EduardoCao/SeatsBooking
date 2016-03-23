@@ -68,8 +68,8 @@
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
             <li><a href="./reg.jsp">管理用户</a></li>
-            <li><a href="./adminseat.jsp">个人座位预定</a></li>
-            <li><a href="./AdminGroupServlet">团体预定</a></li>
+            <li><a href="./adminseat.jsp">个人座位预订</a></li>
+            <li><a href="./AdminGroupServlet">团体预订</a></li>
             <li class = "active"><a href="./SetAccessServlet">管理时间段开放权限</a></li>
             
           </ul>
@@ -79,7 +79,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li style="text-align:center;"><a href="./admin_message.jsp"><%=user.getStudentnum()%></a></li>
-                <li style="text-align:center;"><a href="changepw.jsp">修改密码</a></li>
+                <li style="text-align:center;"><a href="changepw.jsp">修改个人信息</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>
@@ -119,10 +119,18 @@
 					int row = 0;
 					for (int i = 0 ; i < seataccess.size() ; i ++)
 					{
-						if(!seataccess.get(i).split("_")[2].equals("3"))
+						if(DateManager.compareDate(seataccess.get(i).split("#")[0] , DateManager.getFormatCompleteDate(0)) < 0)
+						{
+							continue;
+						}
+						if(DateManager.compareDate(seataccess.get(i).split("#")[0] , DateManager.getFormatCompleteDate(7)) == 0)
+						{
+							continue;
+						}
+						if(seataccess.get(i).split("#")[2].equals("0"))
 						{
 							tmp += 1;
-						if (i%5 == 0)	 {
+						if (i%5 == 0) {
 				%>
 		   
 				      <tr>
@@ -133,8 +141,8 @@
 				         }
 				         String str = seataccess.get(i);
 				         str = str.trim();
-				         String[] list = str.split("_");
-				         int bd = Integer.valueOf(list[0]);
+				         String[] list = str.split("#");
+				         String bd = list[0];
 				         int pe = Integer.valueOf(list[1]); 
 				         %>
 				         <td bgcolor="green"><input type = "radio" name = "closeSeat" id = <%=seataccess.get(i) %> value = <%=seataccess.get(i) %>></td>
@@ -142,7 +150,31 @@
 				         if (i % 5 == 4) {
 				         %>
 				         </tr>
-		      <%} }   else {if (i%5 == 0)	 {
+		      <%} }   else if(seataccess.get(i).split("#")[2].equals("2"))
+				{
+					tmp += 1;
+				if (i%5 == 0)	 {
+		%>
+ 
+		      <tr>
+		      	 <td><%=DateManager.getFormatDate(row) %></td>
+		      	 
+		         <% 
+		         row ++;
+		         }
+		         String str = seataccess.get(i);
+		         str = str.trim();
+		         String[] list = str.split("#");
+		         String bd = list[0];
+		         int pe = Integer.valueOf(list[1]); 
+		         %>
+		          <td bgcolor="yellow">已过期</td>
+		         <%
+		         if (i % 5 == 4) {
+		         %>
+		         </tr>
+    <%} }      else {
+		    	  if (i%5 == 0)	 {
 				%>
 		   
 				      <tr>
@@ -153,8 +185,8 @@
 				         }
 				         String str = seataccess.get(i);
 				         str = str.trim();
-				         String[] list = str.split("_");
-				         int bd = Integer.valueOf(list[0]);
+				         String[] list = str.split("#");
+				         String bd = list[0];
 				         int pe = Integer.valueOf(list[1]); 
 				         %>
 				         <td bgcolor="yellow">已关闭</td>
@@ -194,7 +226,7 @@
 		
 	for (int i = 0 ; i < seataccess.size() ; i ++)
 	{
-		if(seataccess.get(i).split("_")[2].equals("3"))
+		if(seataccess.get(i).split("#")[2].equals("3"))
 		{
 			tmp1 = tmp1 + 1;
 %>
@@ -203,11 +235,11 @@
 		         <%
 		         String str = seataccess.get(i);
 		         str = str.trim();
-		         String[] list = str.split("_");
-		         int bd = Integer.valueOf(list[0]);
+		         String[] list = str.split("#");
+		         String bd = list[0];
 		         int pe = Integer.valueOf(list[1]);
 		         %>
-		         <td><%=DateManager.getFormatDate(bd) %></td>
+		         <td><%=bd.replaceAll("_" , "-") %></td>
 		         <td><%=DateManager.getPeroid(pe) %></td>
 		      </tr>
 		      <%} } } }%>

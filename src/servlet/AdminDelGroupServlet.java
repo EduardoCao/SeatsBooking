@@ -32,9 +32,9 @@ public class AdminDelGroupServlet extends HttpServlet {
 	 	allGroupInfo = (ArrayList<String>) request.getSession().getAttribute("allGroupInfo");
 	 	String args[] = allGroupInfo.get(delete).split("##");
 	 	String flag = args[5].substring(5);
-	 	String studentnum = args[2].substring(11);
+	 	String studentnum = args[3].substring(11);
 	 	String bookdate = args[0].substring(9);
-	 	String seat = args[3].substring(5);
+	 	String seat = args[2].substring(5);
 	 	String period = args[1].substring(7);
 	 	String reason = args[4].substring(7);
 	 	GroupSeatDao groupseatDao = new GroupSeatDao();

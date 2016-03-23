@@ -55,13 +55,24 @@ public class GroupSeatDao {
 	{
 		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
-
-				String sql = "select * from reason_table where studentnum = ?";
-				PreparedStatement ps = conn.prepareStatement(sql);
-				ps.setString(1, studentnum);
-				ResultSet rs = ps.executeQuery();
 				String seat = seat_period.split("_")[0];
 				String period = seat_period.split("_")[1];
+				String sql = "select * from reason_table where bookdate = ? and period = ? and seat = ? and flag = 1";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, bookdate);
+				ps.setString(2, period);
+				ps.setString(3, seat);
+				ResultSet rs = ps.executeQuery();
+				if(rs.next())
+				{
+					return 3;
+				}
+				
+				sql = "select * from reason_table where studentnum = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, studentnum);
+				rs = ps.executeQuery();
+
 				while (rs.next())
 				{
 					if(rs.getString("bookdate").equals(bookdate))
@@ -284,9 +295,9 @@ public class GroupSeatDao {
 				
 				tmp += "##period_" + rs.getString("period");
 				
-				tmp += "##studentnum_" + rs.getString("studentnum");
-				
 				tmp += "##seat_" + rs.getString("seat");
+				
+				tmp += "##studentnum_" + rs.getString("studentnum");
 				
 				tmp += "##reason_" + rs.getString("reason");
 				
@@ -430,38 +441,63 @@ public class GroupSeatDao {
 	}
 	public int addGroup(String studentnum , String bookdate , String seat , String period)
 	{
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
-		
-			String sql = "update group_seat_table_"+ bookdate + " set period"+period+ " = 1 , ownerPeriod"+period+" = ? where seatnum = ? and period"+period +" != ?";
+			String sql = "select * from reason_table where studentnum = ? and period = ? and bookdate = ? and flag = 1";
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, studentnum);
+			ps.setString(2, period);
+			ps.setString(3, bookdate);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next())
+			{
+				rs.close();
+				ps.close();
+				ConnectDB.closeConnection(conn);
+				return -3;
+			}
+			
+			
+			sql = "update "+ bookdate + " set period"+period+ " = 1 , ownerPeriod"+period+" = ? where seatnum = ? and period"+period +" != ?";
+			ps = conn.prepareStatement(sql);
 			ps.setString(1 , studentnum);
 			ps.setString(2, seat);
 			ps.setInt(3 , 1);
 			if (ps.executeUpdate() == 0)
 			{
 				ps.close();	
+				ConnectDB.closeConnection(conn);
 				return -4;
 			}
 			else
 			{
-				sql = "insert into reason_table values (? , ? , ? , ? , ?)";
+				sql = "insert into reason_table values (? ,?, ? , ? , ? , ?)";
 				ps = conn.prepareStatement(sql);
-				ps.setString(1, seat+"_"+period);
-				ps.setString(2 , studentnum);
-				ps.setInt(3, Integer.parseInt(bookdate));
-				ps.setString(4 , "ADD BY ADMIN");
-				ps.setInt(5, 1);
+				ps.setString(1, seat);
+				ps.setString(2, period);
+				ps.setString(3 , studentnum);
+				ps.setString(4 , bookdate);
+				ps.setString(5 , "ADD BY ADMIN");
+				ps.setInt(6 , 1);
 				if (ps.executeUpdate() == 0)
 				{
 					ps.close();	
+					sql = "update "+ bookdate + " set period"+period+ " = 0 , ownerPeriod"+period+" = ? where seatnum = ? and period"+period +" = ?";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1 , null);
+					ps.setString(2, seat);
+					ps.setInt(3 , 1);
+					ps.executeUpdate();
+					ps.close();	
+					ConnectDB.closeConnection(conn);
 					return -2;
 				}
-				sql = "update reason_table set flag = -1 where bookdate = ? and seat_period = ? and flag = ?";
+				sql = "update reason_table set flag = -1 where bookdate = ? and seat = ? and period = ?  and flag = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1 , Integer.parseInt(bookdate));
-				ps.setString(2, seat+"_" + period);
-				ps.setInt(3 , 0);
+				ps.setString(1 , bookdate);
+				ps.setString(2, seat);
+				ps.setString(3, period);
+				ps.setInt(4 , 0);
 				ps.executeUpdate();
 				ps.close();
 			}
@@ -475,11 +511,11 @@ public class GroupSeatDao {
 		ConnectDB.closeConnection(conn);
 		return 0;
 	}
-	public int closeSeat(String day, String period, String seatType) {
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+	public int closeSeat(String bookdate, String period, String seatType) {
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 			PreparedStatement ps = null;
-			String sql = "update group_seat_table_" + day + " set period" + period + " = ?, ownerPeriod" + period + " = ?";
+			String sql = "update " + bookdate + " set period" + period + " = ?, ownerPeriod" + period + " = ?";
 			
 			ps = conn.prepareStatement(sql);
 			if (seatType.equals("0") || seatType.equals("1") || seatType.equals("2"))
@@ -489,37 +525,16 @@ public class GroupSeatDao {
 				ps.executeUpdate();
 				
 				
-				sql = "update reason_table set flag = -1 where seat_period = ? and flag != -1 ";
+				sql = "update reason_table set flag = -1 where period = ? and bookdate = ? and flag != -1 ";
 				ps = conn.prepareStatement(sql);
-				ps.setString(1, "0_" + period);
-				ps.executeUpdate();
-				sql = "update reason_table set flag = -1 where seat_period = ? and flag != -1 ";
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, "1_" + period);
-				ps.executeUpdate();
-				sql = "update reason_table set flag = -1 where seat_period = ? and flag != -1 ";
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, "2_" + period);
-				ps.executeUpdate();
-				sql = "update reason_table set flag = -1 where seat_period = ? and flag != -1 ";
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, "3_" + period);
-				ps.executeUpdate();
-				sql = "update reason_table set flag = -1 where seat_period = ? and flag != -1 ";
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, "4_" + period);
+				ps.setString(1, period);
+				ps.setString(2, bookdate);
 				ps.executeUpdate();
 				
 				ps.close();
 				ConnectDB.closeConnection(conn);
 				return 0;
 			}
-//			else if(seatType.equals("2"))
-//			{
-//				ps.close();
-//				ConnectDB.closeConnection(conn);
-//				return 2;
-//			}
 			else if(seatType.equals("3"))
 			{
 				ps.setInt(1, 0);

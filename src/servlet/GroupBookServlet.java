@@ -86,6 +86,11 @@ public class GroupBookServlet extends HttpServlet{
 				request.setAttribute("info",  "亲，出了点错:( 重新试一下~ Book error!");
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
+			else if(tag == 3)
+			{
+				request.setAttribute("info",  "这个座位刚刚被人抢了呢，不可预定，刷新试试看！ Group seat taken just now!");
+				request.getRequestDispatcher("message.jsp").forward(request, response);
+			}
 			else if(tag == 0)
 			{
 //				request.setAttribute("info",  "OK! Book the seat!");

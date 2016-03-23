@@ -23,6 +23,7 @@ public class AdminGroupServlet extends HttpServlet{
 		GroupSeatDao groupSeatDao = new GroupSeatDao();
 		ArrayList<String> allGroupInfo = new ArrayList<String>();
 		allGroupInfo = groupSeatDao.getAllGroupInfo();
+		request.getSession().setAttribute("groupseats", null);
 		request.getSession().setAttribute("allGroupInfo", allGroupInfo);
 		request.getRequestDispatcher("./admingroupinfo.jsp").forward(request, response);
 	}

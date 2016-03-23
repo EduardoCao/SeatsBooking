@@ -9,20 +9,7 @@ import java.sql.SQLException;
  *
  */
 public class ConnectDB {
-	public static Connection getConnection()
-	{
-		Connection conn = null;
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/db_test";
-			conn = DriverManager.getConnection(url, "root", "root");
-		}catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return conn;
-	}
+
 	public static Connection getConnection_root()
 	{
 		Connection conn = null;
@@ -50,20 +37,7 @@ public class ConnectDB {
 		
 		return conn;
 	}
-	public static Connection getConnectionSeat()
-	{
-		Connection conn = null;
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/seat_db";
-			conn = DriverManager.getConnection(url, "root", "root");
-		}catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return conn;
-	}
+
 	public static Connection getSeatConnection()
 	{
 		Connection conn = null;
@@ -104,20 +78,5 @@ public class ConnectDB {
 			}
 		}
 	}
-	public static Connection getConnectionGroupSeat()
-	{
-		Connection conn = null;
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/group_seat_db";
-			conn = DriverManager.getConnection(url, "root", "root");
-		}catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return conn;
-	}
-
 	
 }

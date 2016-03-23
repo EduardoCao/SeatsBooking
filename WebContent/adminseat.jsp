@@ -81,7 +81,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li style="text-align:center;"><a href="./admin_message.jsp"><%=user.getStudentnum()%></a></li>
-                <li style="text-align:center;"><a href="changepw.jsp">修改密码</a></li>
+                <li style="text-align:center;"><a href="changepw.jsp">修改个人信息</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>

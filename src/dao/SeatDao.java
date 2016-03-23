@@ -420,13 +420,14 @@ public class SeatDao {
 	public ArrayList<String> getSeatAccess() {
 		ArrayList<String> result = new ArrayList<String>();
 		
-		Connection conn = ConnectDB.getConnectionSeat();
+		Connection conn = ConnectDB.getSeatConnection();
 		try{
 			PreparedStatement ps = null;
 			ResultSet rs = null ;
-			for (int i = 0 ; i < 7 ; i ++)
+			for (int i = 0 ; i < 8 ; i ++)
 			{
-				String sql = "select * from seat_table_" + i + " where seatnum = ?";
+				String bookdate = DateManager.getFormatCompleteDate(i);
+				String sql = "select * from " + bookdate + " where seatnum = ?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, 0);
 				rs = ps.executeQuery();
@@ -435,19 +436,19 @@ public class SeatDao {
 					for(int j = 0 ; j < 5 ; j ++)
 					{
 						int period = rs.getInt("period"+j);
-						if (period == 0 || period == 1)
+						if (i == 0 &&  DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(j)) > 0)
 						{
-							String tmp =  i + "_" + j +"_" + 0;
+							String tmp =  bookdate + "#" + j +"#" + 2;
 							result.add(tmp);
 						}
-						else if(period == 2)
+						else if (period == 0 || period == 1)
 						{
-							String tmp =  i + "_" + j +"_" + 2;
+							String tmp =  bookdate + "#" + j +"#" + 0;
 							result.add(tmp);
 						}
 						else if(period == 3)
 						{
-							String tmp =  i + "_" + j +"_" + 3;
+							String tmp =  bookdate + "#" + j +"#" + 3;
 							result.add(tmp);
 						}
 					}
@@ -467,13 +468,13 @@ public class SeatDao {
 		}
 		return result;
 	}
-	public int closeSeat(String day, String period , String seatType) {
+	public int closeSeat(String bookdate, String period , String seatType) {
 		// TODO Auto-generated method stub
 		
-		Connection conn = ConnectDB.getConnectionSeat();
+		Connection conn = ConnectDB.getSeatConnection();
 		try{
 			PreparedStatement ps = null;
-			String sql = "update seat_table_" + day + " set period" + period + " = ?, ownerPeriod" + period + " = ?";
+			String sql = "update " + bookdate + " set period" + period + " = ?, ownerPeriod" + period + " = ?";
 			
 			ps = conn.prepareStatement(sql);
 			if (seatType.equals("0") || seatType.equals("1") || seatType.equals("2"))
@@ -485,12 +486,6 @@ public class SeatDao {
 				ConnectDB.closeConnection(conn);
 				return 0;
 			}
-//			else if(seatType.equals("2"))
-//			{
-//				ps.close();
-//				ConnectDB.closeConnection(conn);
-//				return 2;
-//			}
 			else if(seatType.equals("3"))
 			{
 				ps.setInt(1, 0);
