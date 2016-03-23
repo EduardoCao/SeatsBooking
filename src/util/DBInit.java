@@ -207,18 +207,36 @@ public class DBInit {
 		ConnectDB.closeConnection(conn);
 		return;
 	}
-
+	public static void createReasonTableUpdate()
+	{
+		Connection conn = ConnectDB.getGroupSeatConnection();
+		try{
+				String sql = "create event cleanReason on schedule every 1 day starts '2016-03-21 00:00:00' do delete from reason_table where flag = -1 ;";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.executeUpdate();
+				ps.close();
+		
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		ConnectDB.closeConnection(conn);
+		return;
+		
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		createUserDB();
 //		createUserTable();
+//		createCloseUser();
 //		createSeatDB();
 //		createSeatTable();
 //		createGroupSeatDB();
 //		createGroupSeatTable();
-//		createCloseUser();
 //		createReasonTable();
+		createReasonTableUpdate();
 	}
 
 }

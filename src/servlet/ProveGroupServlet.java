@@ -29,7 +29,6 @@ public class ProveGroupServlet extends HttpServlet{
 		int provegroup = Integer.parseInt(request.getParameter("provegroup"));
 		ArrayList<String> allGroupInfo = new ArrayList<String>();
 	 	allGroupInfo = (ArrayList<String>) request.getSession().getAttribute("allGroupInfo");
-//	 	System.out.println(allGroupInfo.get(provegroup));
 	 	String args[] = allGroupInfo.get(provegroup).split("##");
 	 	String flag = args[5].substring(5);
 	 	String studentnum = args[2].substring(11);
@@ -53,7 +52,7 @@ public class ProveGroupServlet extends HttpServlet{
 	 		}
 	 		else if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "亲，这个座位并没有被成功批准~请重试~ Cannot prove this group seat!");
+	 			request.setAttribute("info",  "申请人刚刚撤销了这个申请呢~不用审批了~ Cannot prove this group seat!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)

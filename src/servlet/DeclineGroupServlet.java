@@ -45,20 +45,13 @@ public class DeclineGroupServlet extends HttpServlet{
 	 	else
 	 	{
 	 		int tag = groupseatDao.declineGroup(studentnum , bookdate , seat , period);
-	 		if(tag == -4)
+	 		if(tag == -2)
 	 		{
-	 			request.setAttribute("info",  "Cannot decline this group seat!");
-				request.getRequestDispatcher("message.jsp").forward(request, response);
-	 		}
-	 		else if(tag == -2)
-	 		{
-	 			request.setAttribute("info",  "拒绝失败了呢:(重新试试看 Cannot decline this group seat!");
+	 			request.setAttribute("info",  "申请人刚刚撤销了申请，不用拒绝了呢~ Cannot decline this group seat!");
 	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 		}
 	 		else if(tag == 0)
 	 		{
-//	 			request.setAttribute("info",  "OK! This group is declined!");
-//	 			request.getRequestDispatcher("message.jsp").forward(request, response);
 	 			GroupSeatDao groupSeatDao = new GroupSeatDao();
 	 			allGroupInfo = new ArrayList<String>();
 	 			allGroupInfo = groupSeatDao.getAllGroupInfo();

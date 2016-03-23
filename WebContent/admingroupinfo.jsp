@@ -69,7 +69,7 @@
           <ul class="nav navbar-nav">
             <li><a href="./admin_message.jsp">管理员界面</a></li>
             <li class="active"><a href="./AdminGroupServlet">团体座位管理</a></li>
-            <li><a href="./adminaddgroup.jsp">添加团体座位预定</a></li>
+            <li><a href="./adminaddgroup.jsp">添加团体座位预订</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
@@ -204,8 +204,8 @@
 			<%}}} %>
 		   </tbody>
 		</table>
-		<input type="submit" class="btn btn-success" value="批 准" onclick="form1.action='ProveGroupServlet';form1.submit();if(!confirm('确定批准该申请？'))return false;">
-		<input type="submit" class="btn btn-success" value="拒 绝" onclick="form1.action='DeclineGroupServlet';form1.submit();if(!confirm('确定拒绝该申请？'))return false;">
+		<input type="submit" class="btn btn-success" value="批 准" onclick="form1.action='ProveGroupServlet';if(!confirm('确定批准该申请？'))return false;">
+		<input type="submit" class="btn btn-success" value="拒 绝" onclick="form1.action='DeclineGroupServlet';if(!confirm('确定拒绝该申请？'))return false;">
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>

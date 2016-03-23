@@ -70,7 +70,7 @@
           <ul class="nav navbar-nav">
             <li><a href="./admin_message.jsp">管理员界面</a></li>
             <li><a href="./AdminGroupServlet">团体座位管理</a></li>
-            <li class="active"><a href="./adminaddgroup.jsp">添加团体座位预定</a></li>
+            <li class="active"><a href="./adminaddgroup.jsp">添加团体座位预订</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
@@ -98,13 +98,13 @@
 	              <div class="col-sm-5">
 	                <div class="input-group">
 	                  <select class = "form-control" name="bookdate">
-		    				<option selected value = "6"> <%=DateManager.getFormatDate(6) %> </option>
-		    				<option selected value = "5"> <%=DateManager.getFormatDate(5) %> </option>
-		    				<option selected value = "4"> <%=DateManager.getFormatDate(4) %> </option>
-		    				<option selected value = "3"> <%=DateManager.getFormatDate(3) %> </option>
-		    				<option selected value = "2"> <%=DateManager.getFormatDate(2) %> </option>
-		    				<option selected value = "1"> <%=DateManager.getFormatDate(1) %> </option>
-		    				<option selected value = "0"> <%=DateManager.getFormatDate(0) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(6) %>> <%=DateManager.getFormatDate(6) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(5) %>> <%=DateManager.getFormatDate(5) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(4) %>> <%=DateManager.getFormatDate(4) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(3) %>> <%=DateManager.getFormatDate(3) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(2) %>> <%=DateManager.getFormatDate(2) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(1) %>> <%=DateManager.getFormatDate(1) %> </option>
+		    				<option selected value = <%=DateManager.getFormatCompleteDate(0) %>> <%=DateManager.getFormatDate(0) %> </option>
 					  </select>
 	            	</div>
 	              </div>
@@ -121,10 +121,9 @@
  	 Seats[] seats = new Seats[2];
   	 seats = (Seats[])session.getAttribute("groupseats");
   	 String date = (String) session.getAttribute("bookdate");
-  	int ddate = 0;
+	 String bookdate = (String) session.getAttribute("bookdate"); 
   	if(date != null){
-  	  ddate = Integer.parseInt(date);
-  	 ddate += 1;
+  	  date = date.substring(5).replace("_" , "-");
   	}
 
 if(seats != null){ 
@@ -132,17 +131,15 @@ if(seats != null){
 
     <div class="container">
 	<form action="./AddGroupServlet" method="post" onsubmit="return reg(this);" >
-	<%
-	int a = Integer.valueOf((String)session.getAttribute("bookdate"));
-	%>
-    <div ><h1>添加团体座位预订&nbsp;<%=DateManager.getFormatDate(a) %></h1></div>
+
+    <div ><h1>添加团体座位预订&nbsp;<%=date %></h1></div>
     
     
 	<div class="form-group" style="float:left;">
-	              <label for="authcode" class="col-sm-3 control-label" style="width:200px;font-size:19px" >用户：</label>
+	              <label for="authcode" class="col-sm-3 control-label" style="width:230px;font-size:19px" >用户：</label>
 	              <div class="col-sm-5">
 	                <div class="input-group">
-   			<select name="bookuser" class = "form-control" style="width:100px;">
+   			<select name="bookuser" class = "form-control" style="width:110px;">
    			<%
    			ArrayList<User> showallusers = (ArrayList<User>)session.getAttribute("showallusers");
    			for (int j = 0 ; j < showallusers.size() ; j ++)

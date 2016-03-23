@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import util.DateManager;
 import util.Seats;
@@ -222,12 +225,61 @@ public class GroupSeatDao {
 		
 		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
-		
-			String sql = "select * from reason_table";
+			
+			String currentdate = DateManager.getFormatCompleteDate(0);
+			
+			String sql = "";
+			
+			sql = "select * from reason_table";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
+			HashSet<String> delDate = new HashSet<String>();
 			while(rs.next())
 			{
+				String tmp = rs.getString("bookdate") ;
+				if (DateManager.compareDate(currentdate , tmp ) > 0)
+				{
+					delDate.add(tmp);
+				}
+			}
+			Iterator<String> iterator=delDate.iterator();
+			while(iterator.hasNext()){
+				sql = "delete from reason_table where bookdate = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, iterator.next());
+				ps.executeUpdate();
+			}
+			
+			sql = "select * from reason_table";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				if(rs.getString("bookdate").equals(DateManager.getFormatCompleteDate(0)))
+				{
+					int j = Integer.parseInt(rs.getString("period"));
+					
+					if (j == 0 && DateManager.compareTime(DateManager.currentTime(),"10:00:00") > 0)
+					{
+						continue;
+					}
+					else if (j == 1 && DateManager.compareTime(DateManager.currentTime(),"12:00:00") > 0)
+					{
+						continue;
+					}
+					else if (j == 2 && DateManager.compareTime(DateManager.currentTime(),"15:00:00") > 0)
+					{
+						continue;
+					}
+					else if (j == 3 && DateManager.compareTime(DateManager.currentTime(),"17:00:00") > 0)
+					{
+						continue;
+					}
+					else if (j == 4 && DateManager.compareTime(DateManager.currentTime(),"21:00:00") > 0)
+					{
+						continue;
+					}
+				}
 				String tmp = "bookdate_" + rs.getString("bookdate") ;
 				
 				tmp += "##period_" + rs.getString("period");
@@ -260,15 +312,14 @@ public class GroupSeatDao {
 		return res;
 	}
 	public int proveGroup(String studentnum, String bookdate, String seat, String period) {
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 		
-			String sql = "update group_seat_table_"+ bookdate + " set period"+period+ " = 1 , ownerPeriod"+period+" = ? where seatnum = ? and (period"+period +" = ? or period"+period +" = ?)";
+			String sql = "update "+ bookdate + " set period"+period+ " = 1 , ownerPeriod"+period+" = ? where seatnum = ? and period"+period +" = ? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1 , studentnum);
 			ps.setString(2, seat);
 			ps.setInt(3 , 0);
-			ps.setInt(4 , 2);
 			if (ps.executeUpdate() == 0)
 			{
 				ps.close();	
@@ -276,14 +327,15 @@ public class GroupSeatDao {
 			}
 			else
 			{
-				sql = "update reason_table set flag = 1 where studentnum = ? and bookdate = ? and seat_period = ? and flag = 0";
+				sql = "update reason_table set flag = 1 where studentnum = ? and bookdate = ? and seat = ? and period = ? and flag = 0";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, studentnum);
-				ps.setInt(2 , Integer.parseInt(bookdate));
-				ps.setString(3, seat+"_" + period);
+				ps.setString(2 , bookdate);
+				ps.setString(3, seat);
+				ps.setString(4, period);
 				if (ps.executeUpdate() == 0)
 				{
-					sql = "update group_seat_table_"+ bookdate + " set period"+period+ " = 0 , ownerPeriod"+period+" = ? where seatnum = ?";
+					sql = "update "+ bookdate + " set period"+period+ " = 0 , ownerPeriod"+period+" = ? where seatnum = ?";
 					ps = conn.prepareStatement(sql);
 					ps.setString(1 , null);
 					ps.setString(2, seat);
@@ -291,11 +343,12 @@ public class GroupSeatDao {
 					ps.close();	
 					return -2;
 				}
-				sql = "update reason_table set flag = -1 where bookdate = ? and seat_period = ? and flag = ?";
+				sql = "update reason_table set flag = -1 where bookdate = ? and seat = ? and period = ? and flag = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1 , Integer.parseInt(bookdate));
-				ps.setString(2, seat+"_" + period);
-				ps.setInt(3 , 0);
+				ps.setString(1 , bookdate);
+				ps.setString(2, seat);
+				ps.setString(3, period);
+				ps.setInt(4 , 0);
 				ps.executeUpdate();
 				ps.close();
 			}
@@ -310,10 +363,10 @@ public class GroupSeatDao {
 		return 0;
 	}
 	public int adminDelGroup(String studentnum, String bookdate, String seat, String period) {
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 		
-			String sql = "update group_seat_table_"+ bookdate + " set period"+period+ " = 0 , ownerPeriod"+period+" = ? where seatnum = ? and ownerPeriod"+period+" = ?";
+			String sql = "update "+ bookdate + " set period"+period+ " = 0 , ownerPeriod"+period+" = ? where seatnum = ? and ownerPeriod"+period+" = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1 , null);
 			ps.setString(2, seat);
@@ -326,12 +379,13 @@ public class GroupSeatDao {
 			}
 			else
 			{
-				sql = "update reason_table set flag = -1 where studentnum = ? and bookdate = ? and seat_period = ? and flag = ?";
+				sql = "update reason_table set flag = -1 where studentnum = ? and bookdate = ? and seat = ? and period = ? and flag = ?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, studentnum);
-				ps.setInt(2 , Integer.parseInt(bookdate));
-				ps.setString(3, seat+"_" + period);
-				ps.setInt(4, 1);
+				ps.setString(2 , bookdate);
+				ps.setString(3, seat );
+				ps.setString(4, period);
+				ps.setInt(5 , 1);
 				if (ps.executeUpdate() == 0)
 				{
 					ps.close();	
@@ -350,14 +404,15 @@ public class GroupSeatDao {
 		return 0;
 	}
 	public int declineGroup(String studentnum, String bookdate, String seat, String period) {
-		Connection conn = ConnectDB.getConnectionGroupSeat();
+		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 		
-			String sql = "update reason_table set flag = -1 where studentnum = ? and bookdate = ? and seat_period = ?";
+			String sql = "update reason_table set flag = -1 where studentnum = ? and bookdate = ? and seat = ? and period = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, studentnum);
-			ps.setInt(2 , Integer.parseInt(bookdate));
-			ps.setString(3, seat+"_" + period);
+			ps.setString(2 , bookdate);
+			ps.setString(3, seat);
+			ps.setString(4, period);
 			if (ps.executeUpdate() == 0)
 			{
 				ps.close();	

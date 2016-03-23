@@ -85,10 +85,20 @@ public class DateManager {
         	return -1;
         
     }
+    public static int compareDate(String DATE1, String DATE2) {
+        if (DATE1.compareTo(DATE2) > 0)
+        	return 1;
+        else if (DATE1.compareTo(DATE2) == 0)
+        	return 0;
+        else 
+        	return -1;
+        
+    }
 	public static void main(String args[]) {
 		System.out.println(getFormatCompleteDate(0));
 		System.out.println(currentTime());
 		System.out.println(compareTime(currentTime(),"09:38:01"));
+		System.out.println(compareDate(getFormatCompleteDate(0),"2016_03_21"));
 		
 	}
 }
