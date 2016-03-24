@@ -69,6 +69,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+            <li><a href="./AdminUserServlet">管理员界面</a></li>
             <li><a href="./AdminUserServlet">管理用户</a></li>
             <li><a href="./adminseat.jsp">个人座位预订</a></li>
             <li><a href="./AdminGroupServlet">团体预订</a></li>
