@@ -69,10 +69,10 @@
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
             <li><a href="./admin_message.jsp">管理员页面</a></li>
-            <li><a href="./reg.jsp">管理用户</a></li>
+            <!-- <li><a href="./reg.jsp">管理用户</a></li> -->
             <li class = "active"><a href="./adminseat.jsp">个人座位预订</a></li>
-            <li><a href="./AdminGroupServlet">团体预订</a></li>
-            <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
+            <!-- <li><a href="./AdminGroupServlet">团体预订</a></li>
+            <li><a href="./SetAccessServlet">管理时间段开放权限</a></li> -->
             
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">

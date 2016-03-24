@@ -40,6 +40,7 @@ public class RegServlet extends HttpServlet{
 			{
 				request.setAttribute("info", "哎哎哎，这个用户名已经存在了呦喂！Sorry, the studentnum is oppucied!" );
 				request.getRequestDispatcher("message.jsp").forward(request, response);
+				return;
 			}
 		}
 		

@@ -67,9 +67,9 @@
           if (user.getUserType() == 0 || user.getUserType() == -1) {
           %>
           	<li><a href="<%=ref%>"><%=tag %></a></li>
-            <li><a href="./seatsbooking.jsp">个人座位预订</a></li>
+            <!-- <li><a href="./seatsbooking.jsp">个人座位预订</a></li> -->
             <li><a href="./groupbooking.jsp">集体座位预订</a></li>
-            <li><a href="./InfoServlet">查看个人座位预订</a></li>
+            <!-- <li><a href="./InfoServlet">查看个人座位预订</a></li> -->
             <li class="active"><a href="./GroupInfoServlet">查看集体座位预订</a></li>
           <%
           } else { 

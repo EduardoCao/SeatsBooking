@@ -92,8 +92,9 @@
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
             <li><a href="./admin_message.jsp">管理员界面</a></li>
-            <li class="active"><a href="./reg.jsp">用户注册</a></li>
             <li><a href="./AdminUserServlet">用户状态</a></li>
+            <li class="active"><a href="./reg.jsp">用户注册</a></li>
+            
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
