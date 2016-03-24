@@ -17,7 +17,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>待处理团体预订信息-教室预订系统</title>
+    <title>个人团体座位预订信息-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -26,32 +26,8 @@
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-            <script type="text/javascript">
-	    	function reg(form){
-	        	if(form.studentnum.value == ""){
-	        		alert("学生证号不能为空！");
-	        		return false;
-	        	}
-	        	if(form.password.value == ""){
-	        		alert("密码不能为空！");
-	        		return false;
-	        	}
-	        	if(form.repassword.value == ""){
-	        		alert("确认密码不能为空！");
-	        		return false;
-	        	}
-	        	if(form.password.value != form.repassword.value){
-	        		alert("两次密码输入不一致！");
-	        		return false;
-	        	}
-	        	if(form.email.value == ""){
-	        		alert("电子邮箱不能为空！");
-	        		return false;
-	        	}
 
-	    	}
-	    </script>
+           
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -63,7 +39,7 @@
   <body>
 	<% 
 		User user = (User)session.getAttribute("user");
-    	boolean isAdmin = false;
+    	
 	%>
     
     
@@ -92,14 +68,14 @@
         	} else {
         		tag = "管理员界面";
         		ref = "./admin_message.jsp";
-        		isAdmin = true;
+        		
         	}
         }
 
        	%>
          <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./admin_message.jsp">管理员界面</a></li>
+            <!-- <li><a href="./admin_message.jsp">管理员界面</a></li> -->
             <!-- <li><a href="./AdminGroupServlet">团体座位管理</a></li>
             <li><a href="./adminaddgroup.jsp">添加团体座位预订</a></li> -->
             
@@ -122,34 +98,30 @@
       </div>
     </div>
 
-	<%if(isAdmin) {%>
+	
 	
 	<br><br><br>
     <div class="container">
     
-    <h1 align="center">待处理团体预订信息</h1>
+    <h1 align="center">个人团体座位预订信息</h1>
     <br>
     <%
-			 ArrayList<String> allGroupInfo = new ArrayList<String>();
-		 	 allGroupInfo = (ArrayList<String>) session.getAttribute("allGroupInfo");
-		 	ArrayList<User> showallusers = (ArrayList<User>) session.getAttribute("showallusers");
+			 ArrayList<String> onesGroupInfo = new ArrayList<String>();
+             onesGroupInfo = (ArrayList<String>) session.getAttribute("onesGroupInfo");
+		 	
 		 	 String sid = request.getParameter("groupid");
 		 	 int id = Integer.valueOf(sid);
-		 	 String[] list = allGroupInfo.get(id).trim().split("##");
-    		String users = list[3].substring(11, list[3].length());
-    		String name = "";
-    		String bookd = list[0].substring(9).replaceAll("_", "-");
-    		String seats = list[2].substring(5, list[2].length());
+		 	String str = onesGroupInfo.get(id);
+    		String[] list = str.split("##");
+    		String users = list[2].substring(11, list[2].length());
+    		String bookd = list[0].substring(9).substring(5).replaceAll("_" , "-");
+    		String bookdate = list[0].substring(9);
+    		String weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
+    		String seats = list[3].substring(5, list[3].length());
+    		int seat = Integer.parseInt(seats);
     		int per = Integer.valueOf(list[1].substring(7, 8));
     		String reason = list[4].substring(7, list[4].length());
-    		for (User u : showallusers)
-    		{
-    			if (u.getStudentnum().equals(users))
-    			{
-    				name = u.getName();
-    				break;
-    			}
-    		}
+    		
 	%>
 		<table class="table table-striped">
 		   <thead>
@@ -159,10 +131,7 @@
 		   	 <td >学号</td>
 		   	 <td ><%=users %></td>
 		   </tr>
-		   <tr>
-		   	 <td>姓名</td>
-		   	 <td><%=name %></td>
-		   </tr>
+	
 		   <tr>
 		   	 <td >日期</td>
 		   	 <td ><%=bookd %></td>
@@ -182,15 +151,12 @@
 		   </tbody>
 		</table>
 		
-		 <a class="btn btn-primary btn-lg" href="AdminGroupServlet" role="button">返回 &raquo;</a>
+		 <a class="btn btn-primary btn-lg" href="GroupInfoServlet" role="button">返回 &raquo;</a>
 
 	  </div>
 	
 	
-	<%} else {%>
-	<br><br><br>
-	<h1 align="center">您没有权限查看此页面。</h1>
-	<%} %>
+	
     <div class="container">
       <hr>
       <footer>

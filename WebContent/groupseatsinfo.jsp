@@ -154,7 +154,11 @@
 	    		<td><%=weekX %></td>
 	    		<td><%=seat+1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
+	    		<%if(reason.length() < 10) {%>
 	    		<td><%=reason %></td>
+	    		<%} else {%>
+	    		<td><%=reason.substring(0, 10) + "..." %><a href="./groupdetail.jsp?groupid=<%=i%>">详细信息</a></td>
+	    		<%} %>
 	    	</tr>
 			
 			
@@ -212,7 +216,11 @@
 	    		<td><%=weekX %></td>
 	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
+	    		<%if(reason.length() < 10) {%>
 	    		<td><%=reason %></td>
+	    		<%} else {%>
+	    		<td><%=reason.substring(0, 10) + "..." %><a href="./groupdetail.jsp?groupid=<%=i%>">详细信息</a></td>
+	    		<%} %>
 	    	</tr>
 			
 			
@@ -264,7 +272,11 @@
 	    		<td><%=weekX %></td>
 	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
+	    		<%if(reason.length() < 10) {%>
 	    		<td><%=reason %></td>
+	    		<%} else {%>
+	    		<td><%=reason.substring(0, 10) + "..." %><a href="./groupdetail.jsp?groupid=<%=i%>">详细信息</a></td>
+	    		<%} %>
 	    	</tr>
 			
 			

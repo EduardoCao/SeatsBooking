@@ -35,6 +35,10 @@
   <body>
 	<% 
 		User user = (User)session.getAttribute("user");
+    		String username = "";
+        	if(user!= null){
+        	username = user.getName();
+        	}
 	%>
     
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -96,6 +100,9 @@
    <!--  <div class="jumbotron"> -->
       <div class="container">
         <h1>你好</h1>
+        <br>
+        <p><%=username %></p>
+        <br>
         <p>欢迎使用教研院教室预订系统</p>
         
       </div>

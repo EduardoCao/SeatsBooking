@@ -109,7 +109,7 @@
 		      	 <th >用户名</th>
 		      	 <th >姓名</th>
 		         <th>邮箱</th>
-		         <th>id</th>
+		         <th>用户类型</th>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -127,7 +127,23 @@
 		         <td><%=showallusers.get(i).getStudentnum() %></td>
 		         <td><%=showallusers.get(i).getName() %></td>
 		         <td><%=showallusers.get(i).getEmail() %></td>
-		         <td><%=showallusers.get(i).getUserType() %></td>
+		         <%if (showallusers.get(i).getUserType() == 0)
+		        	 {%>
+		         <td><%="学生" %></td>
+		         <%}
+		         else if (showallusers.get(i).getUserType() == 1)
+		         {
+		        	 %>
+		        	 <td><%="教师" %></td>
+		        	 <% 
+		         }
+		         else if (showallusers.get(i).getUserType() < 0 )
+		         {
+		        	 %>
+		        	 <td><%="关禁闭" %></td>
+		        	 <% 
+		         }
+		         %>
 		      </tr>
 		      <%} } %>
 		   </tbody>
@@ -150,7 +166,7 @@
 		      	 <th >用户名</th>
 		      	 <th >姓名</th>
 		         <th>邮箱</th>
-		         <th>id</th>
+		         <th>用户类型</th>
 		         <th>关闭时间</th>
 		      </tr>
 		   </thead>
@@ -171,7 +187,17 @@
 		         <td><%=showallusers.get(i).getStudentnum() %></td>
 		         <td><%=showallusers.get(i).getName() %></td>
 		         <td><%=showallusers.get(i).getEmail() %></td>
-		         <td><%=showallusers.get(i).getUserType() %></td>
+		         <%if (showallusers.get(i).getUserType() == -1)
+		        	 {%>
+		         <td><%="学生" %></td>
+		         <%}
+		         else if (showallusers.get(i).getUserType() == -2)
+		         {
+		        	 %>
+		        	 <td><%="教师" %></td>
+		        	 <% 
+		         }
+		         %>
 		         <td><%=closetime.get(showallusers.get(i).getStudentnum()).replaceAll("_", "-") %></td>
 		      </tr>
 		      <%} }} %>
