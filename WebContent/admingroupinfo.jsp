@@ -230,7 +230,9 @@
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
-
+<%} else {%>
+	<h1 align="center">您没有权限查看此页面。</h1>
+<%} %>
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
@@ -245,7 +247,7 @@
       </footer>
     </div> <!-- /container -->
 
-<%} %>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

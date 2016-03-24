@@ -98,18 +98,6 @@
 
     <div class="container">
       <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <!-- <p>一段描述</p> -->
-        </div>
-      </div>
-      </div>
-	<%} else { %>
-		<br><br><br>
-		<h1 align="center">您没有权限查看此页面。</h1>
-	<%} %>
-
-<div class="container">
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
@@ -123,6 +111,13 @@
           
           <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
         </div>
+      </div>
+	<%} else { %>
+		<br><br><br>
+		<h1 align="center">您没有权限查看此页面。</h1>
+	<%} %>
+
+
         
 
   	<div class="container">

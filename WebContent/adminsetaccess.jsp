@@ -17,7 +17,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>显示用户-教室预订系统</title>
+    <title>管理时间段开放权限-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@
         		isAdmin = true;
         	}
         }
-        if (isAdmin){		
+        		
        	%>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
@@ -95,6 +95,7 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <br><br><br>
+    <%if (isAdmin){ %>
     <div class="container">
     <form action="ClosePeriodServlet" method="post" onSubmit="return login(this);">
     <h1>关闭时间段</h1>
@@ -251,7 +252,9 @@
 		<input type="reset" class="btn btn-success" value="重 置">
 		</form>
 	  </div>
-	  
+	  <%} else { %>
+	<h1 align="center">您没有权限查看此页面。</h1>
+	  <%} %>
 	 
 	  
     <div class="container">
@@ -268,7 +271,6 @@
       </footer>
     </div> <!-- /container -->
 
-	<%} %>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
