@@ -143,11 +143,12 @@
 	    		String users = list[2].substring(11, list[2].length());
 	    		String bookd = list[0].substring(9).substring(5).replaceAll("_" , "-");
 	    		String seats = list[3].substring(5, list[3].length());
+	    		int seat = Integer.parseInt(seats);
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=bookd %></td>
-	    		<td><%=seats %></td>
+	    		<td><%=seat+1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>
 	    	</tr>
@@ -196,11 +197,12 @@
 	    		String users = list[2].substring(11, list[2].length());
 	    		String bookd = list[0].substring(9).substring(5).replaceAll("_" , "-");
 	    		String seats = list[3].substring(5, list[3].length());
+	    		int seat = Integer.parseInt(seats);
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=bookd %></td>
-	    		<td><%=seats %></td>
+	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>
 	    	</tr>
@@ -243,11 +245,12 @@
 	    		String users = list[2].substring(11, list[2].length());
 	    		String bookd = list[0].substring(9).substring(5).replaceAll("_" , "-");
 	    		String seats = list[3].substring(5, list[3].length());
+	    		int seat = Integer.parseInt(seats);
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=bookd %></td>
-	    		<td><%=seats %></td>
+	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>
 	    	</tr>

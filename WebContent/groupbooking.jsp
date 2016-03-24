@@ -119,13 +119,41 @@
 	              <div class="col-sm-5">
 	                <div class="input-group">
 	                  <select class = "form-control" name="bookdate">
+	                   <% if (DateManager.getWeekOfDate(6) == 1 || DateManager.getWeekOfDate(6) == 3 || DateManager.getWeekOfDate(6) == 4)
+	                   {%>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(6) %>> <%=DateManager.getFormatDate(6) %> </option>
+		    				
+		    			<%}
+	                   if (DateManager.getWeekOfDate(5) == 1 || DateManager.getWeekOfDate(5) == 3 || DateManager.getWeekOfDate(5) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(5) %>> <%=DateManager.getFormatDate(5) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(4) == 1 || DateManager.getWeekOfDate(4) == 3 || DateManager.getWeekOfDate(4) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(4) %>> <%=DateManager.getFormatDate(4) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(3) == 1 || DateManager.getWeekOfDate(3) == 3 || DateManager.getWeekOfDate(3) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(3) %>> <%=DateManager.getFormatDate(3) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(2) == 1 || DateManager.getWeekOfDate(2) == 3 || DateManager.getWeekOfDate(2) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(2) %>> <%=DateManager.getFormatDate(2) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(1) == 1 || DateManager.getWeekOfDate(1) == 3 || DateManager.getWeekOfDate(1) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(1) %>> <%=DateManager.getFormatDate(1) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(0) == 1 || DateManager.getWeekOfDate(0) == 3 || DateManager.getWeekOfDate(0) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(0) %>> <%=DateManager.getFormatDate(0) %> </option>
+		    			<%} %>
 					  </select>
 	            	</div>
 	              </div>
@@ -142,17 +170,19 @@
  	 Seats[] seats = new Seats[2];
   	 seats = (Seats[])session.getAttribute("groupseats");
   	 String date = (String) session.getAttribute("bookdate");
+  	 String weekX = "";
   	 String bookdate = (String) session.getAttribute("bookdate"); 
   	if(date != null){
 	  	  date = date.substring(5).replace("_" , "-");
+	  	  weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
   	}
-	if(seats != null && seats[0] != null && seats[1] != null) { 
+	if(seats != null && seats[0] != null && seats[1] != null && bookdate != null && (DateManager.getWeek(bookdate) == 1 || DateManager.getWeek(bookdate) == 3  || DateManager.getWeek(bookdate) == 4)) { 
 	%>
 
     <div class="container">
 	<form action="./GroupBookServlet" method="post" onsubmit="return reg(this);">
 
-    <div ><h1>团体座位预定&nbsp;<%=date%></h1></div>
+    <div ><h1>团体座位预定&nbsp;<%=date + " " + weekX%></h1></div>
     
     
 
@@ -160,11 +190,11 @@
 		   <thead>
 		      <tr>
 		      	 <th align="right">座位号</th>
-		      	 <th ><%=DateManager.getPeroid(0) %></th>
-		         <th><%=DateManager.getPeroid(1) %></th>
+		      	 <%-- <th ><%=DateManager.getPeroid(0) %></th>
+		         <th><%=DateManager.getPeroid(1) %></th> --%>
 		         <th><%=DateManager.getPeroid(2) %></th>
 		         <th><%=DateManager.getPeroid(3) %></th>
-		         <th><%=DateManager.getPeroid(4) %></th>
+		         <%-- <th><%=DateManager.getPeroid(4) %></th> --%>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -176,14 +206,14 @@
 				
 				<tr>
 				
-				<td><%="座位"+i%></td>
+				<td><%="座位"+(i+1)%></td>
 				  
-				<%
+				<%-- <%
 					if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "07:00:00") > 0 && seats[i].getPeroid0() != 3 )
 				 	{
 				 	%>
 	  				<td bgcolor="yellow">
-					<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
+						<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
 							已过时
 						</input>
 	  				</td>
@@ -207,14 +237,14 @@
     			 	<td bgcolor="yellow">关闭时间段</td>
     			 	<%
     			 	}
-    			 	%>
-				
+    			 	%> --%>
+				<%-- 
 				<%
 					if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "09:00:00") > 0 && seats[i].getPeroid1() != 3 )
 				 	{
 				 	%>
 	  				<td bgcolor="yellow">
-					<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
+						<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
 							已过时
 						</input>
 	  				</td>
@@ -238,13 +268,13 @@
     			 	<td bgcolor="yellow">关闭时间段</td>
     			 	<%
     			 	}
-    			 	%>
+    			 	%> --%>
 				
 				<%
 					if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "12:00:00") > 0 && seats[i].getPeroid2() != 3 )
 				 	{
 				 	%>
-	  				<td bgcolor="yellow">
+	  				<td bgcolor="#FFFFE0">
 					<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 							已过时
 						</input>
@@ -254,19 +284,19 @@
 					else if (seats[i].getPeroid2() == 0)
     			 	{	
     			 	%>
-    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>2' value = '<%=i %>_2'>可预约</td>
+    			 	<td bgcolor="#5cb85c"><input type = "radio" name = "groupSeat" id = '<%=i %>2' value = '<%=i %>_2'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid2() == 1)
     			 	{
     			 	%>
-    			 	<td bgcolor="yellow">已占用</td>  
+    			 	<td bgcolor="#FFFFE0">已占用</td>  
     			 	<%
 					}
     			 	else if(seats[i].getPeroid2() == 3)
     			 	{
     			 	%>
-    			 	<td bgcolor="yellow">关闭时间段</td>
+    			 	<td bgcolor="#FFFFE0">关闭时间段</td>
     			 	<%
     			 	}
     			 	%>
@@ -275,7 +305,7 @@
 					if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "14:00:00") > 0 && seats[i].getPeroid3() != 3 )
 				 	{
 				 	%>
-	  				<td bgcolor="yellow">
+	  				<td bgcolor="#FFFFE0">
 <%-- 					 	<input type = "radio" name = "groupSeat" id = '<%=i %>3' value = '<%=i %>_3'>  --%>
 							已过时
 						</input>
@@ -285,29 +315,29 @@
 					else if (seats[i].getPeroid3() == 0)
     			 	{	
     			 	%>
-    			 	<td bgcolor="green"><input type = "radio" name = "groupSeat" id = '<%=i %>3' value = '<%=i %>_3'>可预约</td>
+    			 	<td bgcolor="#5cb85c"><input type = "radio" name = "groupSeat" id = '<%=i %>3' value = '<%=i %>_3'>可预约</td>
     			 	<%
     			 	}
     			 	else if (seats[i].getPeroid3() == 1)
     			 	{
     			 	%>
-    			 	<td bgcolor="yellow">已占用</td>  
+    			 	<td bgcolor="#FFFFE0">已占用</td>  
     			 	<%
 					}
     			 	else if(seats[i].getPeroid3() == 3)
     			 	{
     			 	%>
-    			 	<td bgcolor="yellow">关闭时间段</td>
+    			 	<td bgcolor="#FFFFE0">关闭时间段</td>
     			 	<%
     			 	}
     			 	%>
 				
-				<%
+				<%-- <%
 					if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "18:00:00") > 0 && seats[i].getPeroid4() != 3 )
 				 	{
 				 	%>
 	  				<td bgcolor="yellow">
-  						<%-- <input type = "radio" name = "groupSeat" id = '<%=i %>4' value = '<%=i %>_4'>  --%>
+  						<input type = "radio" name = "groupSeat" id = '<%=i %>4' value = '<%=i %>_4'> 
 							已过时
 						</input>
 	  				</td>
@@ -331,7 +361,7 @@
     			 	<td bgcolor="yellow">关闭时间段</td>
     			 	<%
     			 	}
-    			 	%>
+    			 	%> --%>
 				
 				</tr>
 				 <%} %>

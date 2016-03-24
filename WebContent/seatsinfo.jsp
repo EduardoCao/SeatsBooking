@@ -140,7 +140,7 @@
 	    		int time = Integer.valueOf(times);
 	    		%>
 	    		<td><%=day %></td>
-	    		<td><%=seat %></td>
+	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(time) %></td>
 	    	</tr>
 	    <%}}%>
