@@ -147,6 +147,7 @@
 		      <tr>
 		      	 <th align="right">选择</th>
 		      	 <th >用户名</th>
+		      	 <th >姓名</th>
 		         <th>邮箱</th>
 		         <th>id</th>
 		         <th>关闭时间</th>
@@ -167,9 +168,10 @@
 		      <tr>
 		      	 <td align="center"><input type = "radio" name = "openUser" id = <%=i %> value = <%=i %>></td>
 		         <td><%=showallusers.get(i).getStudentnum() %></td>
+		         <td><%=showallusers.get(i).getName() %></td>
 		         <td><%=showallusers.get(i).getEmail() %></td>
 		         <td><%=showallusers.get(i).getUserType() %></td>
-		         <td><%=closetime.get(showallusers.get(i).getStudentnum()) %></td>
+		         <td><%=closetime.get(showallusers.get(i).getStudentnum()).replaceAll("_", "-") %></td>
 		      </tr>
 		      <%} }} %>
 		   </tbody>
