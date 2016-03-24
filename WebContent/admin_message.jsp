@@ -55,13 +55,18 @@
         
 	%>
     
-<div class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <a class="navbar-brand hidden-sm" href=#>教室预订系统</a>
         </div>
-        <div class="navbar-collapse collapse" role="navigation">
+        <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="./AdminUserServlet">管理用户</a></li>
             <li><a href="./adminseat.jsp">个人座位预订</a></li>
@@ -69,14 +74,15 @@
             <li><a href="./SetAccessServlet">管理时间段开放权限</a></li>
             
           </ul>
-          <ul class="nav navbar-nav navbar-right hidden-sm">
+			<ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
 			<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li style="text-align:center;"><a href="#"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a><%=user.getStudentnum()%></a></li>
                 <li style="text-align:center;"><a href="changepw.jsp">修改个人信息</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
+                
               </ul>
             </li>
               <%} else { %>
@@ -85,7 +91,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
 <%if (isAdmin) { %>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
