@@ -14,7 +14,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>教师界面-教室预定系统</title>
+    <title>教师界面-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -68,6 +68,7 @@
        	%>
          <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+            <li><a href="./teacher_message.jsp">教师界面</a></li>
             <li><a href="./groupbooking.jsp">集体座位预订</a></li>
             <li><a href="./GroupInfoServlet">查看集体座位预订</a></li>
 			
@@ -91,6 +92,7 @@
     </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
     <div class="jumbotron">
       <div class="container">
         <h1>你好</h1>

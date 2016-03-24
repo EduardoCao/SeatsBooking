@@ -173,7 +173,7 @@
 	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "07:00:00") > 0 && seats[i].getPeroid0() != 3 )
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
@@ -184,7 +184,7 @@
 	    			 	else if (seats[i].getPeroid0() == 0)
 	    			 	{	
 	    			 	%>
-		  				<td bgcolor="#5cb85c">
+		  				<td bgcolor="#5CB85C">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
 								可预约
 							</input>
@@ -194,7 +194,7 @@
 	    			 	else if (seats[i].getPeroid0() == 1)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
@@ -205,7 +205,7 @@
 	    			 	else if(seats[i].getPeroid0() == 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								关闭时间段
 							</input>
@@ -222,7 +222,7 @@
 	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "09:00:00") > 0 && seats[i].getPeroid1() != 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
@@ -232,7 +232,7 @@
 	    			 	else if (seats[i].getPeroid1() == 0)
 	    			 	{	
 	    			 	%>
-		  				<td bgcolor="#5cb85c">
+		  				<td bgcolor="#5CB85C">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
 								可预约
 							</input>
@@ -242,7 +242,7 @@
 	    			 	else if (seats[i].getPeroid1() == 1)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
@@ -253,7 +253,7 @@
 	    			 	else if(seats[i].getPeroid1() == 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								关闭时间段
 							</input>
@@ -268,7 +268,7 @@
 	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "12:00:00") > 0 && seats[i].getPeroid2() != 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
@@ -278,7 +278,7 @@
 	    			 	else if (seats[i].getPeroid2() == 0)
 	    			 	{	
 	    			 	%>
-		  				<td bgcolor="#5cb85c">
+		  				<td bgcolor="#5CB85C">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
 								可预约
 							</input>
@@ -288,7 +288,7 @@
 	    			 	else if (seats[i].getPeroid2() == 1)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
@@ -299,7 +299,7 @@
 	    			 	else if(seats[i].getPeroid2() == 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								关闭时间段
 							</input>
@@ -314,7 +314,7 @@
 	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "14:00:00") > 0 && seats[i].getPeroid3() != 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
@@ -324,7 +324,7 @@
 	    			 	else if (seats[i].getPeroid3() == 0)
 	    			 	{	
 	    			 	%>
-		  				<td bgcolor="#5cb85c">
+		  				<td bgcolor="#5CB85C">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
 								可预约
 							</input>
@@ -334,7 +334,7 @@
 	    			 	else if (seats[i].getPeroid3() == 1)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
@@ -344,7 +344,7 @@
 	    			 	else if(seats[i].getPeroid3() == 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								关闭时间段
 							</input>
@@ -359,7 +359,7 @@
 	    			 	if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , "18:00:00") > 0 && seats[i].getPeroid4() != 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 						<%-- 	<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已过时
 							</input>
@@ -369,7 +369,7 @@
 	    			 	else if (seats[i].getPeroid4() == 0)
 	    			 	{	
 	    			 	%>
-		  				<td bgcolor="#5cb85c">
+		  				<td bgcolor="#5CB85C">
 							<input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> 
 								可预约
 							</input>
@@ -379,7 +379,7 @@
 	    			 	else if (seats[i].getPeroid4() == 1)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'>  --%>
 								已占用 
 							</input>
@@ -389,7 +389,7 @@
 	    			 	else if(seats[i].getPeroid4() == 3)
 	    			 	{
 	    			 	%>
-		  				<td bgcolor="#FFFFE0">
+		  				<td bgcolor="#ffff99">
 							<%-- <input type = "radio" name = "seat" id = '<%=i %><%=x %>' value = '<%=i %>_<%=x %>'> --%> 
 								关闭时间段
 							</input>

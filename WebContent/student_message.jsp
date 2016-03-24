@@ -75,6 +75,7 @@
        	%>
          <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+            <li><a href="./student_message.jsp">学生界面</a></li>
             <li><a href="./seatsbooking.jsp">个人座位预订</a></li>
             <li><a href="./groupbooking.jsp">集体座位预订</a></li>
             <li><a href="./InfoServlet">查看个人座位预订</a></li>

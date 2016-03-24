@@ -436,7 +436,12 @@ public class SeatDao {
 					for(int j = 0 ; j < 5 ; j ++)
 					{
 						int period = rs.getInt("period"+j);
-						if (i == 0 &&  DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(j)) > 0)
+						if(period == 3)
+						{
+							String tmp =  bookdate + "#" + j +"#" + 3;
+							result.add(tmp);
+						}
+						else if (i == 0 &&  DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(j)) > 0)
 						{
 							String tmp =  bookdate + "#" + j +"#" + 2;
 							result.add(tmp);
@@ -446,11 +451,7 @@ public class SeatDao {
 							String tmp =  bookdate + "#" + j +"#" + 0;
 							result.add(tmp);
 						}
-						else if(period == 3)
-						{
-							String tmp =  bookdate + "#" + j +"#" + 3;
-							result.add(tmp);
-						}
+						 
 					}
 				}	
 			}

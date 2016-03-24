@@ -115,6 +115,7 @@
 		      <tr>
 		      	 <th align="right">选择</th>
 		      	 <th >预订日期</th>
+		      	 <th >星期</th>
 		      	 <th>座位号</th>
 		      	 <th>时间段</th>
 		      </tr>
@@ -134,12 +135,15 @@
 	    		String s = onesseats.get(i);
 	    		String[] slist = s.split(" ");
 	    		String day = slist[0].substring(5).replaceAll("_", "-");
+	    		String bookdate = slist[0];
+	    		String weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
 	    		String seats = slist[1].substring(7);
 	    		int seat = Integer.valueOf(seats);
 	    		String times = slist[2].substring(6);
 	    		int time = Integer.valueOf(times);
 	    		%>
-	    		<td><%=day %></td>
+	    		<td><%=day%></td>
+	    		<td><%=weekX%></td>
 	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(time) %></td>
 	    	</tr>
