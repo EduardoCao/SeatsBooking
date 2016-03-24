@@ -83,6 +83,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li style="text-align:center;"><a href="./admin_message.jsp"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="changepw.jsp">修改个人信息</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>
@@ -166,85 +167,7 @@
 		</form>
 	  </div>
 	  
-	  
-    <div class="container">
-    <form action="" name="form1" method="post" onSubmit="return login(this);">
-    <br><br><br>
-    <h1>测试表格</h1>
 
-		<table class="table table-striped">
-		   <thead>
-		      <tr>
-			  <th>选择</th>
-		  	  <th>学号</th>
-		  	  <th>姓名</th>
-		  	  <th>日期</th>
-		  	  <th>座位号</th>
-		  	  <th>时间段</th>
-		  	  <th>申请理由</th>
-		      </tr>
-		   </thead>
-		   <tbody>
- <%
- 	 //ArrayList<String> allGroupInfo = new ArrayList<String>();
- 	 allGroupInfo = (ArrayList<String>) session.getAttribute("allGroupInfo");
-  	 
-	if(allGroupInfo != null && allGroupInfo.size() > 0){
-		for (int i = 0 ; i < allGroupInfo.size() ; i ++)
-		{
-			String flag = allGroupInfo.get(i).split("##")[5];
-			if(flag.equals("flag_0"))
-			{
-	%>
-			
-					<tr>
-						<td>
-	    					<input type = "radio" name = "provegroup" id = <%=i %> value = <%=i %>>
-	    				</td>
-	    		<%
-	    		
-	    		String str = allGroupInfo.get(i);
-	    		String[] list = str.split("##");
-	    		String users = list[3].substring(11, list[3].length());
-	    		String name = "";
-	    		String bookd = list[0].substring(9).replaceAll("_", "-");
-	    		String seats = list[2].substring(5, list[2].length());
-	    		int per = Integer.valueOf(list[1].substring(7, 8));
-	    		String reason = list[4].substring(7, list[4].length());
-	    		for (User u : showallusers)
-	    		{
-	    			if (u.getStudentnum().equals(users))
-	    			{
-	    				name = u.getName();
-	    				break;
-	    			}
-	    		}
-	    		%>
-	    		<td><%=users %></td>
-	    		<td><%=name %></td>
-	    		<td><%=bookd %></td>
-	    		<td><%=seats %></td>
-	    		<td><%=DateManager.getPeroid(per) %>
-	    		<td>
-	    		<% if(reason.length() > 10) {
-	    			session.setAttribute("checknum", i);%>
-	    			<%=reason.substring(0, 10)+"..."%><a href="./admingroupdetail.jsp">查看详细</a>
-	    		<%} else { %>
-	    			<%=reason %>
-	    		<%} %>
-	    		</td>
-	    	</tr>
-			
-			
-			<%}}} %>
-		   </tbody>
-		</table>
-		<input type="submit" class="btn btn-success" value="批 准" onclick="form1.action='ProveGroupServlet';if(!confirm('确定批准该申请？'))return false;">
-		<input type="submit" class="btn btn-success" value="拒 绝" onclick="form1.action='DeclineGroupServlet';if(!confirm('确定拒绝该申请？'))return false;">
-		<input type="reset" class="btn btn-success" value="重 置">
-		</form>
-	  </div>
-	  
 	  
     <div class="container">
     <form action="" name="form1" method="post" onSubmit="return login(this);">
