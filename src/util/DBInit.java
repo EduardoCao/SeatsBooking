@@ -127,7 +127,7 @@ public class DBInit {
 		Connection conn = ConnectDB.getSeatConnection();
 		try{
 			Date d1 = new SimpleDateFormat("yyyy_MM_dd").parse("2016_03_20");//定义起始日期
-			Date d2 = new SimpleDateFormat("yyyy_MM_dd").parse("2018_04_01");//定义结束日期
+			Date d2 = new SimpleDateFormat("yyyy_MM_dd").parse("2021_04_01");//定义结束日期
 			Calendar dd = Calendar.getInstance();//定义日期实例
 			dd.setTime(d1);//设置日期起始时间
 			while(dd.getTime().before(d2)){//判断是否到结束日期
@@ -179,7 +179,7 @@ public class DBInit {
 		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
 			Date d1 = new SimpleDateFormat("yyyy_MM_dd").parse("2016_03_20");//定义起始日期
-			Date d2 = new SimpleDateFormat("yyyy_MM_dd").parse("2018_04_01");//定义结束日期
+			Date d2 = new SimpleDateFormat("yyyy_MM_dd").parse("2021_04_01");//定义结束日期
 			Calendar dd = Calendar.getInstance();//定义日期实例
 			dd.setTime(d1);//设置日期起始时间
 			while(dd.getTime().before(d2)){//判断是否到结束日期
@@ -211,7 +211,7 @@ public class DBInit {
 	{
 		Connection conn = ConnectDB.getGroupSeatConnection();
 		try{
-				String sql = "create event cleanReason on schedule every 1 day starts '2016-03-21 00:00:00' do delete from reason_table where flag = -1 ;";
+				String sql = "create event if not exists cleanReason on schedule every 1 day starts '2016-03-21 00:00:00' do delete from reason_table where flag = -1 ;";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.executeUpdate();
 				ps.close();
@@ -231,11 +231,11 @@ public class DBInit {
 //		createUserDB();
 //		createUserTable();
 //		createCloseUser();
-//		createSeatDB();
-//		createSeatTable();
-//		createGroupSeatDB();
-//		createGroupSeatTable();
-//		createReasonTable();
+		createSeatDB();
+		createSeatTable();
+		createGroupSeatDB();
+		createGroupSeatTable();
+		createReasonTable();
 		createReasonTableUpdate();
 	}
 
