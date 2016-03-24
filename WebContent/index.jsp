@@ -34,19 +34,41 @@
   </head>
 
   <body>
+<% 
+		User user = (User)session.getAttribute("user");
+    		boolean isAdmin = false;
+    		%>
 	<div>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
-          <a class="navbar-brand" href="#">教室预订系统</a>
+          <a class="navbar-brand hidden-sm" href=#>教室预订系统</a>
         </div>
         
-        <div style="float:right;">
-          <div class="navbar-form navbar-right">
-            <button type="button" onclick="javascript:location.href='./login.jsp'" class="btn btn-success">用户登录</button>
-          </div>
-        </div><!--/.navbar-collapse -->
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-sm">
+          	<%if (user != null) { %>
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li style="text-align:center;"><a href="./admin_message.jsp"><%=user.getStudentnum()%></a></li>
+                <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
+              </ul>
+            </li>
+              <%} else { %>
+              <li><a href="./login.jsp"><%="尚未登录" %></a></li>
+              <%} %>
+          </ul>
+        </div>
       </div>
     </nav>
     </div>
