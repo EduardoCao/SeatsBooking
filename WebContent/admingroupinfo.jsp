@@ -227,7 +227,12 @@
 	    		<td><%=bookd %></td>
 	    		<td><%=seats %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
+	    		<%if(reason.length() < 10) {%>
 	    		<td><%=reason %></td>
+	    		<%} else {%>
+	    		<td><%=reason.substring(0, 10) + "..." %><a href="./admingroupdetail.jsp?groupid=<%=i%>">详细信息</a></td>
+	    		<%} %>
+	    		
 	    	</tr>
 			
 			
