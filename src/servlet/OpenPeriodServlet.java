@@ -43,9 +43,8 @@ public class OpenPeriodServlet extends HttpServlet{
 			{
 				SeatDao seatDao = new SeatDao();
 				int tag = seatDao.closeSeat(bookdate , period , seatType);
-				GroupSeatDao groupseatDao = new GroupSeatDao();
-				int tag2 = groupseatDao.closeSeat(bookdate , period , seatType);
-				if(tag == 0 && tag2 == 0)
+				
+				if(tag == 0)
 				{
 //					request.setAttribute("info",  "OK! Open this period!");
 //					request.getRequestDispatcher("message.jsp").forward(request, response);
@@ -56,7 +55,7 @@ public class OpenPeriodServlet extends HttpServlet{
 					request.getSession().removeAttribute("groupseats");
 					request.getRequestDispatcher("./adminsetaccess.jsp").forward(request, response);
 				}
-				else if(tag == 2 && tag2 == 2)
+				else if(tag == 2)
 				{
 					request.setAttribute("info",  "这个时间段已经超时~ Cannot open timeout period!");
 					request.getRequestDispatcher("message.jsp").forward(request, response);

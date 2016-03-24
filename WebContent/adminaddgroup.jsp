@@ -77,6 +77,7 @@
             <li><a href="./admin_message.jsp">管理员界面</a></li>
             <li><a href="./AdminGroupServlet">团体座位管理</a></li>
             <li class="active"><a href="./adminaddgroup.jsp">添加团体座位预订</a></li>
+            <li><a href="./SetGroupAccessServlet">团体座位时段开放权限</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
@@ -101,17 +102,45 @@
     <div class="container">
     <form action="./AdminGroupInfoServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
 	            <div class="form-group">
-	              <label for="authcode" class="col-sm-3 control-label" style="width:100px;">查询日期：</label>
+	              <label for="authcode" class="col-sm-3 control-label" style="width:120px;">查询日期：</label>
 	              <div class="col-sm-5">
 	                <div class="input-group">
 	                  <select class = "form-control" name="bookdate">
+		    		<% if (DateManager.getWeekOfDate(6) == 1 || DateManager.getWeekOfDate(6) == 3 || DateManager.getWeekOfDate(6) == 4)
+	                   {%>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(6) %>> <%=DateManager.getFormatDate(6) %> </option>
+		    				
+		    			<%}
+	                   if (DateManager.getWeekOfDate(5) == 1 || DateManager.getWeekOfDate(5) == 3 || DateManager.getWeekOfDate(5) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(5) %>> <%=DateManager.getFormatDate(5) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(4) == 1 || DateManager.getWeekOfDate(4) == 3 || DateManager.getWeekOfDate(4) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(4) %>> <%=DateManager.getFormatDate(4) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(3) == 1 || DateManager.getWeekOfDate(3) == 3 || DateManager.getWeekOfDate(3) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(3) %>> <%=DateManager.getFormatDate(3) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(2) == 1 || DateManager.getWeekOfDate(2) == 3 || DateManager.getWeekOfDate(2) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(2) %>> <%=DateManager.getFormatDate(2) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(1) == 1 || DateManager.getWeekOfDate(1) == 3 || DateManager.getWeekOfDate(1) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(1) %>> <%=DateManager.getFormatDate(1) %> </option>
+		    			<%}
+	                   if (DateManager.getWeekOfDate(0) == 1 || DateManager.getWeekOfDate(0) == 3 || DateManager.getWeekOfDate(0) == 4)
+		    			{
+	                   %>
 		    				<option selected value = <%=DateManager.getFormatCompleteDate(0) %>> <%=DateManager.getFormatDate(0) %> </option>
+		    			<%} %>
 					  </select>
 	            	</div>
 	              </div>
@@ -128,9 +157,11 @@
  	 Seats[] seats = new Seats[2];
   	 seats = (Seats[])session.getAttribute("groupseats");
   	 String date = (String) session.getAttribute("bookdate");
+  	 String weekX = "";
 	 String bookdate = (String) session.getAttribute("bookdate"); 
   	if(date != null){
   	  date = date.substring(5).replace("_" , "-");
+  	  weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
   	}
 
 if(seats != null){ 
@@ -139,14 +170,14 @@ if(seats != null){
     <div class="container">
 	<form action="./AddGroupServlet" method="post" onsubmit="return reg(this);" >
 
-    <div ><h1>添加团体座位预订&nbsp;<%=date %></h1></div>
+    <div ><h1>添加团体座位预订&nbsp;<%=date + " " + weekX%></h1></div>
     
     
 	<div class="form-group" style="float:left;">
 	              <label for="authcode" class="col-sm-3 control-label" style="width:230px;font-size:19px" >用户：</label>
 	              <div class="col-sm-5">
 	                <div class="input-group">
-   			<select name="bookuser" class = "form-control" style="width:110px;">
+   			<select name="bookuser" class = "form-control" style="width:130px;">
    			<%
    			ArrayList<User> showallusers = (ArrayList<User>)session.getAttribute("showallusers");
    			for (int j = 0 ; j < showallusers.size() ; j ++)
@@ -167,11 +198,11 @@ if(seats != null){
 		   <thead>
 		      <tr>
 		      	 <th align="right">座位号</th>
-		      	 <th ><%=DateManager.getPeroid(0) %></th>
-		         <th><%=DateManager.getPeroid(1) %></th>
+		      	 <%-- <th ><%=DateManager.getPeroid(0) %></th>
+		         <th><%=DateManager.getPeroid(1) %></th> --%>
 		         <th><%=DateManager.getPeroid(2) %></th>
 		         <th><%=DateManager.getPeroid(3) %></th>
-		         <th><%=DateManager.getPeroid(4) %></th>
+		         <%-- <th><%=DateManager.getPeroid(4) %></th> --%>
 		      </tr>
 		   </thead>
 		   <tbody>
@@ -183,33 +214,33 @@ if(seats != null){
 				
 				<tr>
 				
-				<td><%="座位"+i%></td>
-	  			<%
+				<td><%="座位"+(i+1)%></td>
+	  			<%-- <%
 	  			if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getDDL(0)) > 0 && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(0)) < 0 && seats[i].getPeroid0() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				
 	  				<%
 	  				if (seats[i].getOwnerPeroid0() != null)
 	  				{
 	  				%>
-		  			<%=seats[i].getOwnerPeroid0() %>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid0() %></td>
 	  				<%
 	  				}
 	  				else
 	  				{
 	  				%>
-	  				<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>已过期
+	  				<td bgcolor="#5cb85c"><input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>空闲</td>
 	  				<%
 	  				}
 	  				%>
-	  				</td>
+	  				
 			 	<%
 			 	}
 	  			else if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(0)) > 0 && seats[i].getPeroid0() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				<td bgcolor="#ffff99">
 	  				<%
 	  				if (seats[i].getOwnerPeroid0() != null)
 	  				{
@@ -219,7 +250,7 @@ if(seats != null){
 	  				}
 	  				else
 	  				{
-	  				%>已过期<%
+	  				%>已过时<%
 	  				}
 	  				%>
 	  				</td>
@@ -228,17 +259,17 @@ if(seats != null){
 	  			else if( seats[i].getPeroid0()==1 )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><%=seats[i].getOwnerPeroid0() %></td>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid0() %></td>
 		  			<%
 	  			} 
 	  			else if ( seats[i].getPeroid0()==0 ){
-	  				%><td bgcolor="green">
+	  				%><td bgcolor="#5cb85c">
 	  				<input type = "radio" name = "addGroup" id = <%=i + "_0" %> value = <%=i + "_0" %>>
 	  				空闲
 	  				</td><%
 	  			}
 	  			else if ( seats[i].getPeroid0()==3 ) {
-	  				%><td bgcolor="yellow">座位被关闭</td><%
+	  				%><td bgcolor="#ffff99">座位被关闭</td><%
 	  			}
 	  			%>
 
@@ -247,28 +278,28 @@ if(seats != null){
 	  			if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getDDL(1)) > 0 && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(1)) < 0 && seats[i].getPeroid1() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				
 	  				<%
 	  				if (seats[i].getOwnerPeroid1() != null)
 	  				{
 	  				%>
-		  			<%=seats[i].getOwnerPeroid1() %>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid1() %></td>
 	  				<%
 	  				}
 	  				else
 	  				{
 	  				%>
-	  				<input type = "radio" name = "addGroup" id = <%=i + "_1" %> value = <%=i + "_1" %>>已过期
+	  				<td bgcolor="#5cb85c"><input type = "radio" name = "addGroup" id = <%=i + "_1" %> value = <%=i + "_1" %>>空闲</td>
 	  				<%
 	  				}
 	  				%>
-	  				</td>
+	  				
 			 	<%
 			 	}
 	  			else if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(1)) > 0 && seats[i].getPeroid1() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				<td bgcolor="#ffff99">
 	  				<%
 	  				if (seats[i].getOwnerPeroid1() != null)
 	  				{
@@ -279,7 +310,7 @@ if(seats != null){
 	  				else
 	  				{
 	  				%>
-	  				已过期
+	  				已过时
 	  				<%
 	  				}
 	  				%>
@@ -289,47 +320,47 @@ if(seats != null){
 	  			else if( seats[i].getPeroid1()==1 )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><%=seats[i].getOwnerPeroid1() %></td>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid1() %></td>
 		  		<%
 	  			} 
 	  			else if ( seats[i].getPeroid1()==0 ){
-	  				%><td bgcolor="green">
+	  				%><td bgcolor="#5cb85c">
 	  				<input type = "radio" name = "addGroup" id = <%=i + "_1" %> value = <%=i + "_1" %>>
 	  				空闲
 	  				</td><%
 	  			}
 	  			else if ( seats[i].getPeroid1()==3 ) {
-	  				%><td bgcolor="yellow">座位被关闭</td><%
+	  				%><td bgcolor="#ffff99">座位被关闭</td><%
 	  			}
-	  			%>
+	  			%> --%>
 				
 				
 	  			<%
 	  			if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getDDL(2)) > 0 && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(2)) < 0 && seats[i].getPeroid2() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				
 	  				<%
 	  				if (seats[i].getOwnerPeroid2() != null)
 	  				{
 	  				%>
-		  			<%=seats[i].getOwnerPeroid2() %>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid2() %></td>
 	  				<%
 	  				}
 	  				else
 	  				{
 	  				%>
-	  				<input type = "radio" name = "addGroup" id = <%=i + "_2" %> value = <%=i + "_2" %>>已过期
+	  				<td bgcolor="#5cb85c"><input type = "radio" name = "addGroup" id = <%=i + "_2" %> value = <%=i + "_2" %>>空闲</td>
 	  				<%
 	  				}
 	  				%>
-	  				</td>
+	  				
 			 	<%
 			 	}
 	  			else if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(2)) > 0 && seats[i].getPeroid2() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				<td bgcolor="#ffff99">
 	  				<%
 	  				if (seats[i].getOwnerPeroid2() != null)
 	  				{
@@ -340,7 +371,7 @@ if(seats != null){
 	  				else
 	  				{
 	  				%>
-	  				已过期
+	  				已过时
 	  				<%
 	  				}
 	  				%>
@@ -350,17 +381,17 @@ if(seats != null){
 	  			else if( seats[i].getPeroid2()==1 )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><%=seats[i].getOwnerPeroid2() %></td>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid2() %></td>
 		  		<%
 	  			} 
 	  			else if ( seats[i].getPeroid2()==0 ){
-	  				%><td bgcolor="green">
+	  				%><td bgcolor="#5cb85c">
 	  				<input type = "radio" name = "addGroup" id = <%=i + "_2" %> value = <%=i + "_2" %>>
 	  				空闲
 	  				</td><%
 	  			}
 	  			else if ( seats[i].getPeroid2()==3 ) {
-	  				%><td bgcolor="yellow">座位被关闭</td><%
+	  				%><td bgcolor="#ffff99">座位被关闭</td><%
 	  			}
 	  			%>
 				
@@ -369,28 +400,28 @@ if(seats != null){
 	  			if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getDDL(3)) > 0 && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(3)) < 0 && seats[i].getPeroid3() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				
 	  				<%
 	  				if (seats[i].getOwnerPeroid3() != null)
 	  				{
 	  				%>
-		  			<%=seats[i].getOwnerPeroid3() %>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid3() %></td>
 	  				<%
 	  				}
 	  				else
 	  				{
 	  				%>
-	  				<input type = "radio" name = "addGroup" id = <%=i + "_3" %> value = <%=i + "_3" %>>已过期
+	  				<td bgcolor="#5cb85c"><input type = "radio" name = "addGroup" id = <%=i + "_3" %> value = <%=i + "_3" %>>空闲</td>
 	  				<%
 	  				}
 	  				%>
-	  				</td>
+	  				
 			 	<%
 			 	}
 	  			else if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(3)) > 0 && seats[i].getPeroid3() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				<td bgcolor="#ffff99">
 	  				<%
 	  				if (seats[i].getOwnerPeroid3() != null)
 	  				{
@@ -401,7 +432,7 @@ if(seats != null){
 	  				else
 	  				{
 	  				%>
-	  				已过期
+	  				已过时
 	  				<%
 	  				}
 	  				%>
@@ -411,47 +442,46 @@ if(seats != null){
 	  			else if( seats[i].getPeroid3()==1 )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><%=seats[i].getOwnerPeroid3() %></td>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid3() %></td>
 		  		<%
 	  			} 
 	  			else if ( seats[i].getPeroid3()==0 ){
-	  				%><td bgcolor="green">
+	  				%><td bgcolor="#5cb85c">
 	  				<input type = "radio" name = "addGroup" id = <%=i + "_3" %> value = <%=i + "_3" %>>
 	  				空闲
 	  				</td><%
 	  			}
 	  			else if ( seats[i].getPeroid3()==3 ) {
-	  				%><td bgcolor="yellow">座位被关闭</td><%
+	  				%><td bgcolor="#ffff99">座位被关闭</td><%
 	  			}
 	  			%>
 				
 				
-	  			<%
+	  			<%-- <%
 	  			if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getDDL(4)) > 0 && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(4)) < 0 && seats[i].getPeroid4() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				
 	  				<%
 	  				if (seats[i].getOwnerPeroid4() != null)
 	  				{
 	  				%>
-		  			<%=seats[i].getOwnerPeroid4() %>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid4() %></td>
 	  				<%
 	  				}
 	  				else
 	  				{
 	  				%>
-	  				<input type = "radio" name = "addGroup" id = <%=i + "_4" %> value = <%=i + "_4" %>>已过期
+	  				<td bgcolor="#5cb85c"><input type = "radio" name = "addGroup" id = <%=i + "_4" %> value = <%=i + "_4" %>>空闲</td>
 	  				<%
 	  				}
 	  				%>
-	  				</td>
 			 	<%
 			 	}
 	  			else if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(4)) > 0 && seats[i].getPeroid4() != 3 )
 			 	{
 			 	%>
-  				<td bgcolor="yellow">
+  				<td bgcolor="#ffff99">
 	  				<%
 	  				if (seats[i].getOwnerPeroid4() != null)
 	  				{
@@ -462,7 +492,7 @@ if(seats != null){
 	  				else
 	  				{
 	  				%>
-	  				已过期
+	  				已过时
 	  				<%
 	  				}
 	  				%>
@@ -472,18 +502,18 @@ if(seats != null){
 	  			else if( seats[i].getPeroid4()==1 )
 	  			{
 		  			%>
-		  			<td bgcolor="yellow"><%=seats[i].getOwnerPeroid4() %></td>
+		  			<td bgcolor="#ffff99"><%=seats[i].getOwnerPeroid4() %></td>
 		  		<%
 	  			} else if ( seats[i].getPeroid4()==0 ){
-	  				%><td bgcolor="green">
+	  				%><td bgcolor="#5cb85c">
 	  				<input type = "radio" name = "addGroup" id = <%=i + "_4" %> value = <%=i + "_4" %>>
 	  				空闲
 	  				</td><%
 	  			}
 	  			else if ( seats[i].getPeroid4()==3 ) {
-	  				%><td bgcolor="yellow">座位被关闭</td><%
+	  				%><td bgcolor="#ffff99">座位被关闭</td><%
 	  			}
-	  			%>
+	  			%> --%>
 				
 				</tr>
 				<%

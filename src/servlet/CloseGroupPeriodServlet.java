@@ -12,7 +12,7 @@ import dao.GroupSeatDao;
 import dao.SeatDao;
 
 
-public class ClosePeriodServlet extends HttpServlet{
+public class CloseGroupPeriodServlet extends HttpServlet{
 
 	/**
 	 * 
@@ -42,19 +42,18 @@ public class ClosePeriodServlet extends HttpServlet{
 			}
 			else
 			{
-				SeatDao seatDao = new SeatDao();
-				int tag = seatDao.closeSeat(bookdate , period , seatType);
+				GroupSeatDao groupSeatDao = new GroupSeatDao();
+				int tag = groupSeatDao.closeSeat(bookdate , period , seatType);
 				
 				if(tag == 0)
 				{
-//					request.setAttribute("info",  "OK! Close this period!");
-//					request.getRequestDispatcher("message.jsp").forward(request, response);
-					ArrayList<String> seatAccess = seatDao.getSeatAccess();
-					request.getSession().setAttribute("seataccess" , seatAccess);
+
+					ArrayList<String> seatAccess = groupSeatDao.getGroupSeatAccess();
+					request.getSession().setAttribute("groupseataccess" , seatAccess);
 					request.getSession().removeAttribute("seats");
 					request.getSession().removeAttribute("allGroupInfo");
 					request.getSession().removeAttribute("groupseats");
-					request.getRequestDispatcher("./adminsetaccess.jsp").forward(request, response);
+					request.getRequestDispatcher("./adminsetgroupaccess.jsp").forward(request, response);
 				}
 				else if(tag == 2)
 				{

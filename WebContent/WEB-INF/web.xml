@@ -127,6 +127,18 @@
         <servlet-name>ChangeEmailServlet</servlet-name>
         <servlet-class>servlet.ChangeEmailServlet</servlet-class>
     </servlet>
+	<servlet>
+        <servlet-name>SetGroupAccessServlet</servlet-name>
+        <servlet-class>servlet.SetGroupAccessServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OpenGroupPeriodServlet</servlet-name>
+        <servlet-class>servlet.OpenGroupPeriodServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CloseGroupPeriodServlet</servlet-name>
+        <servlet-class>servlet.CloseGroupPeriodServlet</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -251,6 +263,18 @@
     <servlet-mapping>
         <servlet-name>ChangeEmailServlet</servlet-name>
         <url-pattern>/ChangeEmailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetGroupAccessServlet</servlet-name>
+        <url-pattern>/SetGroupAccessServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OpenGroupPeriodServlet</servlet-name>
+        <url-pattern>/OpenGroupPeriodServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CloseGroupPeriodServlet</servlet-name>
+        <url-pattern>/CloseGroupPeriodServlet</url-pattern>
     </servlet-mapping>
 
 	<welcome-file-list>

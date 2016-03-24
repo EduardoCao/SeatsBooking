@@ -176,6 +176,7 @@
 		      <tr>
 		      <th>选择</th>
 		  	  <th>日期</th>
+		  	  <th>星期</th>
 		  	  <th>座位号</th>
 		  	  <th>时间段</th>
 		  	  <th>申请理由</th>
@@ -200,12 +201,15 @@
 	    		String[] list = str.split("##");
 	    		String users = list[2].substring(11, list[2].length());
 	    		String bookd = list[0].substring(9).substring(5).replaceAll("_" , "-");
+	    		String bookdate = list[0].substring(9);
+	    		String weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
 	    		String seats = list[3].substring(5, list[3].length());
 	    		int seat = Integer.parseInt(seats);
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=bookd %></td>
+	    		<td><%=weekX %></td>
 	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>
@@ -225,6 +229,7 @@
 		   <thead>
 		      <tr>
 		  	  <th>日期</th>
+		  	  <th>星期</th>
 		  	  <th>座位号</th>
 		  	  <th>时间段</th>
 		  	  <th>申请理由</th>
@@ -248,12 +253,15 @@
 	    		String[] list = str.split("##");
 	    		String users = list[2].substring(11, list[2].length());
 	    		String bookd = list[0].substring(9).substring(5).replaceAll("_" , "-");
+	    		String bookdate = list[0].substring(9);
+	    		String weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
 	    		String seats = list[3].substring(5, list[3].length());
 	    		int seat = Integer.parseInt(seats);
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		%>
 	    		<td><%=bookd %></td>
+	    		<td><%=weekX %></td>
 	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<td><%=reason %></td>

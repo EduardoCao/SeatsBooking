@@ -17,7 +17,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>管理个人座位时间段开放权限-教室预订系统</title>
+    <title>管理团体座位时间段开放权限-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -73,11 +73,10 @@
        	%>
          <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./admin_message.jsp">管理员页面</a></li>
-            <!-- <li><a href="./reg.jsp">管理用户</a></li> -->
-            <li><a href="./adminseat.jsp">个人座位预订</a></li>
-           <!--  <li><a href="./AdminGroupServlet">团体预订</a></li> -->
-            <li class = "active"><a href="./SetAccessServlet">个人座位时段开放权限</a></li>
+            <li><a href="./admin_message.jsp">管理员界面</a></li>
+            <li><a href="./AdminGroupServlet">团体座位管理</a></li>
+            <li><a href="./adminaddgroup.jsp">添加团体座位预订</a></li>
+            <li class="active"><a href="./SetGroupAccessServlet">团体座位时段开放权限</a></li>
             
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
@@ -103,24 +102,24 @@
     <br><br><br>
     <%if (isAdmin){ %>
     <div class="container">
-    <form action="ClosePeriodServlet" method="post" onSubmit="return login(this);">
+    <form action="CloseGroupPeriodServlet" method="post" onSubmit="return login(this);">
     <h1>关闭时间段</h1>
 
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
 		      	 <th>日期</th>
-		      	 <th ><%=DateManager.getPeroid(0) %></th>
-		         <th><%=DateManager.getPeroid(1) %></th>
+		      	 <%-- <th ><%=DateManager.getPeroid(0) %></th>
+		         <th><%=DateManager.getPeroid(1) %></th> --%>
 		         <th><%=DateManager.getPeroid(2) %></th>
 		         <th><%=DateManager.getPeroid(3) %></th>
-		         <th><%=DateManager.getPeroid(4) %></th>
+		         <%-- <th><%=DateManager.getPeroid(4) %></th> --%>
 		      </tr>
 		   </thead>
 		   <tbody>
 		   
 				<%
-					ArrayList<String> seataccess = (ArrayList<String>)session.getAttribute("seataccess");
+					ArrayList<String> seataccess = (ArrayList<String>)session.getAttribute("groupseataccess");
 					int tmp = 0;
 					if (seataccess != null && seataccess.size() > 0)
 					{
@@ -135,14 +134,20 @@
 						{
 							continue;
 						}
+						if(DateManager.getWeek(seataccess.get(i).split("#")[0]) != 1 &&  DateManager.getWeek(seataccess.get(i).split("#")[0]) != 3 && DateManager.getWeek(seataccess.get(i).split("#")[0]) != 4 )
+						{
+							
+							continue;
+							
+						}
 						if(seataccess.get(i).split("#")[2].equals("0"))
 						{
 							tmp += 1;
-						if (i%5 == 0) {
+						if (i%2 == 0) {
 				%>
 		   
 				      <tr>
-				      	 <td><%=seataccess.get(i).split("#")[0].substring(5).replace("_" , "-") %></td>
+				      	 <td><%=seataccess.get(i).split("#")[0].substring(5).replaceAll("_" , "-") %></td>
 				      	 
 				         <% 
 				         row ++;
@@ -155,17 +160,17 @@
 				         %>
 				         <td bgcolor="#5cb85c"><input type = "radio" name = "closeSeat" id = <%=seataccess.get(i) %> value = <%=seataccess.get(i) %>></td>
 				         <%
-				         if (i % 5 == 4) {
+				         if (i % 2 == 1) {
 				         %>
 				         </tr>
-		      <%} }   else if(seataccess.get(i).split("#")[2].equals("2"))
+		      <%} } else if(seataccess.get(i).split("#")[2].equals("2"))
 				{
 					tmp += 1;
-				if (i%5 == 0)	 {
+				if (i%2 == 0)	 {
 		%>
  
 		      <tr>
-		      	 <td><%=seataccess.get(i).split("#")[0].substring(5).replace("_" , "-")  %></td>
+		      	 <td><%=seataccess.get(i).split("#")[0].substring(5).replaceAll("_" , "-") %></td>
 		      	 
 		         <% 
 		         row ++;
@@ -178,15 +183,15 @@
 		         %>
 		          <td bgcolor="#ffff99">已过时</td>
 		         <%
-		         if (i % 5 == 4) {
+		         if (i % 2 == 1) {
 		         %>
 		         </tr>
     <%} }      else {
-		    	  if (i%5 == 0)	 {
+		    	  if (i%2 == 0)	 {
 				%>
 		   
 				      <tr>
-				      	 <td><%=seataccess.get(i).split("#")[0].substring(5).replace("_" , "-") %></td>
+				      	 <td><%=seataccess.get(i).split("#")[0].substring(5).replaceAll("_" , "-") %></td>
 				      	 
 				         <% 
 				         row ++;
@@ -199,7 +204,7 @@
 				         %>
 				         <td bgcolor="#ffff99">已关闭</td>
 				         <%
-				         if (i % 5 == 4) {
+				         if (i % 2 == 1) {
 				         %>
 				         </tr>
 		      <%}
@@ -214,7 +219,7 @@
 	  
 	  
     <div class="container">
-    <form action="OpenPeriodServlet" method="post" onSubmit="return login(this);">
+    <form action="OpenGroupPeriodServlet" method="post" onSubmit="return login(this);">
     <h1>开启时间段</h1>
 
 		<table class="table table-striped">

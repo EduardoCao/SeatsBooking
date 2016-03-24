@@ -76,6 +76,7 @@
             <li><a href="./admin_message.jsp">管理员界面</a></li>
             <li class="active"><a href="./AdminGroupServlet">团体座位管理</a></li>
             <li><a href="./adminaddgroup.jsp">添加团体座位预订</a></li>
+            <li><a href="./SetGroupAccessServlet">团体座位时段开放权限</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
@@ -109,6 +110,7 @@
 		  	  <th>学号</th>
 		  	  <th>姓名</th>
 		  	  <th>日期</th>
+		  	  <th>星期</th>
 		  	  <th>座位号</th>
 		  	  <th>时间段</th>
 		  	  <th>申请理由</th>
@@ -137,7 +139,10 @@
 	    		String users = list[3].substring(11, list[3].length()).trim();
 	    		String name = "";		
 	    		String bookd = list[0].substring(9).replaceAll("_", "-");
+	    		String bookdate = list[0].substring(9);
+	    		String weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
 	    		String seats = list[2].substring(5, list[2].length());
+	    		int seat = Integer.parseInt(seats);
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		for (User u : showallusers)
@@ -152,9 +157,14 @@
 	    		<td><%=users %></td>
 	    		<td><%=name %></td>
 	    		<td><%=bookd %></td>
-	    		<td><%=seats %></td>
+	    		<td><%=weekX %></td>
+	    		<td><%=seat + 1 %></td>
 	    		<td><%=DateManager.getPeroid(per) %>
+	    		<%if(reason.length() < 10) {%>
 	    		<td><%=reason %></td>
+	    		<%} else {%>
+	    		<td><%=reason.substring(0, 10) + "..." %><a href="./admingroupdetail.jsp?groupid=<%=i%>">详细信息</a></td>
+	    		<%} %>
 	    	</tr>
 			
 			
@@ -181,6 +191,7 @@
 		  	  <th>学号</th>
 		  	  <th>姓名</th>
 		  	  <th>日期</th>
+		  	  <th>星期</th>
 		  	  <th>座位号</th>
 		  	  <th>时间段</th>
 		  	  <th>申请理由</th>
@@ -210,7 +221,10 @@
 	    		String users = list[3].substring(11, list[3].length());
 	    		String name = "";
 	    		String bookd = list[0].substring(9).replaceAll("_", "-");
+	    		String bookdate = list[0].substring(9);
+	    		String weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
 	    		String seats = list[2].substring(5, list[2].length());
+	    		int seat = Integer.parseInt(seats);
 	    		int per = Integer.valueOf(list[1].substring(7, 8));
 	    		String reason = list[4].substring(7, list[4].length());
 	    		for (User u : showallusers)
@@ -225,7 +239,8 @@
 	    		<td><%=users %></td>
 	    		<td><%=name %></td>
 	    		<td><%=bookd %></td>
-	    		<td><%=seats %></td>
+	    		<td><%=weekX %></td>
+	    		<td><%=seat + 1%></td>
 	    		<td><%=DateManager.getPeroid(per) %>
 	    		<%if(reason.length() < 10) {%>
 	    		<td><%=reason %></td>

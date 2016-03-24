@@ -77,6 +77,7 @@
             <li><a href="./admin_message.jsp">管理员页面</a></li>
             <!-- <li><a href="./reg.jsp">管理用户</a></li> -->
             <li class = "active"><a href="./adminseat.jsp">个人座位预订</a></li>
+            <li><a href="./SetAccessServlet">个人座位时段开放权限</a></li>
             <!-- <li><a href="./AdminGroupServlet">团体预订</a></li>
             <li><a href="./SetAccessServlet">管理时间段开放权限</a></li> -->
             
@@ -103,9 +104,11 @@
  	 Seats[] seats = new Seats[12];
   	 seats = (Seats[])session.getAttribute("seats");
   	 String bookdate = (String) session.getAttribute("bookdate");
+  	 String weekX = "";
   	 String date = new String();
   	if(bookdate != null){
   	  date = bookdate.substring(5).replaceAll("_","-");
+  	  weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
   	}
 %>
         <br><br><br>
@@ -113,7 +116,7 @@
     <div class="container">
     <form action="./PersonalSeatsServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
 	            <div class="form-group">
-	              <label for="authcode" class="col-sm-3 control-label" style="width:100px;">查询日期：</label>
+	              <label for="authcode" class="col-sm-3 control-label" style="width:120px;">查询日期：</label>
 	              <div class="col-sm-5">
 	                <div class="input-group">
 	                  <select class = "form-control" name="bookdate">
@@ -146,7 +149,7 @@
     <div class="container">
     <form action="./DelSeatServlet" method="post" onsubmit="return reg(this);">
 
-    <h1>取消个人座位预订&nbsp;<%=date %></h1>
+    <h1>取消个人座位预订&nbsp;<%=date + " " + weekX %></h1>
 		<table class="table table-striped">
 		   <thead>
 		      <tr>
@@ -481,14 +484,14 @@ if(seats != null) {
     <div class="container">
     <form action="./AddSeatServlet" method="post" onsubmit="return reg(this);">
 
-    <div style="float:left;"><h1>添加个人座位预订&nbsp;<%=date %></h1></div>
+    <div style="float:left;"><h1>添加个人座位预订&nbsp;<%=date + " " + weekX %></h1></div>
     <div style="float:right;">
         <div class="container">
 	            <div class="form-group">
 	              <label for="authcode" class="col-sm-3 control-label" style="width:100px;">用户：</label>
 	              <div class="col-sm-5">
 	                <div class="input-group">
-	                  <select class = "form-control" name="bookuser">
+	                  <select class = "form-control" name="bookuser" style="width:130px;">
 						<%
 			   			ArrayList<User> showallusers = (ArrayList<User>)session.getAttribute("showallusers");
 			   			for (int j = 0 ; j < showallusers.size() ; j ++)
@@ -527,7 +530,7 @@ if(seats != null) {
 		   {
 		   %>
 		   <tr>
-		   <td><%="座位"+i %></td>
+		   <td><%="座位"+(i+1) %></td>
 		   
 	  			<%
 	  			if( bookdate.equals(DateManager.getFormatCompleteDate(0)) && DateManager.compareTime(DateManager.currentTime() , DateManager.getDDL(0)) > 0 && DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(0)) < 0 && seats[i].getPeroid0() != 3 )

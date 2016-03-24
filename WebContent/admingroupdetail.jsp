@@ -17,7 +17,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>待处理团体预定信息-教室预订系统</title>
+    <title>待处理团体预订信息-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -100,8 +100,8 @@
          <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="./admin_message.jsp">管理员界面</a></li>
-            <li><a href="./AdminGroupServlet">团体座位管理</a></li>
-            <li><a href="./adminaddgroup.jsp">添加团体座位预定</a></li>
+            <!-- <li><a href="./AdminGroupServlet">团体座位管理</a></li>
+            <li><a href="./adminaddgroup.jsp">添加团体座位预订</a></li> -->
             
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
@@ -126,8 +126,8 @@
 	
 	<br><br><br>
     <div class="container">
-    <form action="AdminDelGroupServlet" method="post" onSubmit="return login(this);">
-    <h1 align="center">待处理团体预定信息</h1>
+    
+    <h1 align="center">待处理团体预订信息</h1>
     <br>
     <%
 			 ArrayList<String> allGroupInfo = new ArrayList<String>();
@@ -156,35 +156,34 @@
 		   </thead>
 		   <tbody>
 		   <tr>
-		   	 <td align="right" width="100px">学号</td>
-		   	 <td align="left" width="100px"><%=users %></td>
+		   	 <td >学号</td>
+		   	 <td ><%=users %></td>
 		   <tr>
 		   <tr>
-		   	 <td align="right">姓名</td>
-		   	 <td align="left"><%=name %></td>
+		   	 <td>姓名</td>
+		   	 <td><%=name %></td>
 		   <tr>
 		   <tr>
-		   	 <td align="right">日期</td>
-		   	 <td align="left"><%=bookd %></td>
+		   	 <td >日期</td>
+		   	 <td ><%=bookd %></td>
 		   <tr>
 		   <tr>
-		   	 <td align="right">座位号</td>
-		   	 <td align="left"><%=seats %></td>
+		   	 <td >座位号</td>
+		   	 <td><%=seats %></td>
 		   <tr>
 		   <tr>
-		   	 <td align="right">时间段</td>
-		   	 <td align="left"><%=DateManager.getPeroid(per) %></td>
+		   	 <td >时间段</td>
+		   	 <td><%=DateManager.getPeroid(per) %></td>
 		   <tr>
 		   <tr>
-		   	 <td align="right" height="50px">申请理由</td>
-		   	 <td align="left" height="50px"><%=reason %></td>
+		   	 <td >申请理由</td>
+		   	 <td><%=reason %></td>
 		   <tr>
 		   </tbody>
 		</table>
 		
-		<input type="submit" class="btn btn-success" value="删除预订" onclick="if(!confirm('确定删除？'))return false;">
-		<input type="reset" class="btn btn-success" value="重 置">
-		</form>
+		 <a class="btn btn-primary btn-lg" href="AdminGroupServlet" role="button">返回 &raquo;</a>
+
 	  </div>
 	
 	

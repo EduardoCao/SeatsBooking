@@ -499,6 +499,15 @@ public class GroupSeatDao {
 				ps.setString(3, period);
 				ps.setInt(4 , 0);
 				ps.executeUpdate();
+				
+				sql = "update reason_table set flag = -1 where bookdate = ? and studentnum = ? and period = ?  and flag = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1 , bookdate);
+				ps.setString(2, studentnum);
+				ps.setString(3, period);
+				ps.setInt(4 , 0);
+				ps.executeUpdate();
+				
 				ps.close();
 			}
 			
@@ -552,6 +561,59 @@ public class GroupSeatDao {
 			return -1;
 		}
 		return -1;
+	}
+	
+	public ArrayList<String> getGroupSeatAccess() {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		Connection conn = ConnectDB.getGroupSeatConnection();
+		try{
+			PreparedStatement ps = null;
+			ResultSet rs = null ;
+			for (int i = 0 ; i < 8 ; i ++)
+			{
+				String bookdate = DateManager.getFormatCompleteDate(i);
+				String sql = "select * from " + bookdate + " where seatnum = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, 0);
+				rs = ps.executeQuery();
+				if(rs.next())
+				{
+					for(int j = 2 ; j < 4 ; j ++)
+					{
+						int period = rs.getInt("period"+j);
+						if(period == 3)
+						{
+							String tmp =  bookdate + "#" + j +"#" + 3;
+							result.add(tmp);
+						}
+						else if (i == 0 &&  DateManager.compareTime(DateManager.currentTime() , DateManager.getEndDDL(j)) > 0)
+						{
+							String tmp =  bookdate + "#" + j +"#" + 2;
+							result.add(tmp);
+						}
+						else if (period == 0 || period == 1)
+						{
+							String tmp =  bookdate + "#" + j +"#" + 0;
+							result.add(tmp);
+						}
+						 
+					}
+				}	
+			}
+			rs.close();
+			ps.close();
+			
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}finally
+		{
+			ConnectDB.closeConnection(conn);
+		}
+		return result;
 	}
 
 }
