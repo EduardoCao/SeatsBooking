@@ -136,9 +136,15 @@
 		   	 <td >日期</td>
 		   	 <td ><%=bookd %></td>
 		   </tr>
+		   
+		   <tr>
+		   	 <td >星期</td>
+		   	 <td ><%=weekX %></td>
+		   </tr>
+		   
 		   <tr>
 		   	 <td >座位号</td>
-		   	 <td><%=seats %></td>
+		   	 <td><%=seat + 1 %></td>
 		   </tr>
 		   <tr>
 		   	 <td >时间段</td>

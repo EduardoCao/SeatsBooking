@@ -139,7 +139,10 @@
     		String users = list[3].substring(11, list[3].length());
     		String name = "";
     		String bookd = list[0].substring(9).replaceAll("_", "-");
+    		String bookdate = list[0].substring(9);
+    		String weekX = DateManager.getWeekX(DateManager.getWeek(bookdate) - 1);
     		String seats = list[2].substring(5, list[2].length());
+    		int seat = Integer.parseInt(seats);
     		int per = Integer.valueOf(list[1].substring(7, 8));
     		String reason = list[4].substring(7, list[4].length());
     		for (User u : showallusers)
@@ -168,8 +171,12 @@
 		   	 <td ><%=bookd %></td>
 		   </tr>
 		   <tr>
+		   	 <td >星期</td>
+		   	 <td ><%=weekX %></td>
+		   </tr>
+		   <tr>
 		   	 <td >座位号</td>
-		   	 <td><%=seats %></td>
+		   	 <td><%=seat+1 %></td>
 		   </tr>
 		   <tr>
 		   	 <td >时间段</td>
