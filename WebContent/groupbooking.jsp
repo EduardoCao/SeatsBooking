@@ -115,7 +115,7 @@
     <div class="container">
     <form action="./GroupSeatsServlet" method="post" onsubmit="return reg(this);" class="form-horizontal">
 	            <div class="form-group">
-	              <label for="authcode" class="col-sm-3 control-label" style="width:100px;">查询日期：</label>
+	              <label for="authcode" class="col-sm-3 control-label" style="width:120px;">查询日期：</label>
 	              <div class="col-sm-5">
 	                <div class="input-group">
 	                  <select class = "form-control" name="bookdate">
