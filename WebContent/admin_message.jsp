@@ -64,6 +64,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
           <a class="navbar-brand hidden-sm" href=#>教室预订系统</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">

@@ -43,7 +43,7 @@
     		%>
     
     
-<div class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
@@ -87,7 +87,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
     
         <br><br><br>
     <%if (isAdmin) { %>
