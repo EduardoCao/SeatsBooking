@@ -96,7 +96,7 @@
     </nav>
 <%if (isAdmin) { %>
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron" style="height:500px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
+    <div class="jumbotron" style="height:600px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
       <div class="container">
         <h1>你好</h1>
         <p>欢迎进入管理员界面</p>
