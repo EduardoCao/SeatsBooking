@@ -92,6 +92,7 @@ public class BatchAddUsers {
 				String studentnum = numbers.get(i);
 				String name = names.get(i);
 				UserDao userDao = new UserDao();
+				String password = map.get(studentnum);
 				if (studentnum != null && !studentnum.isEmpty())
 				{
 					if(userDao.userIsExist(studentnum))
@@ -99,6 +100,7 @@ public class BatchAddUsers {
 						User user = new User();
 						user.setStudentnum(studentnum);
 						user.setName(name);
+						user.setPassword(password);
 						user.setUserType(0);
 						userDao.saveUser(user);
 						writer.write(numbers.get(i) + "," + map.get(numbers.get(i)) + "\n");
