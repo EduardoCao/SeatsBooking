@@ -33,6 +33,7 @@ public class RegServlet extends HttpServlet{
 				user.setPassword(password);
 				user.setEmail(email);
 				user.setUserType(Integer.parseInt(userType));
+				System.out.println("Type:" + userType);
 				userDao.saveUser(user);
 				request.setAttribute("info", "恭喜你！成功注册！Congratulation! Registration succeed!");
 				
