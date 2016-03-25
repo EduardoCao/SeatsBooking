@@ -68,6 +68,7 @@ public class BookServlet extends HttpServlet {
 					else
 					{
 						SeatDao seatDao = new SeatDao();
+						ArrayList<String> onesSeatold = seatDao.getOnesSeats(owner);
 						
 						String info = seatDao.bookSeat(owner , bookdate , bookseat);
 						//System.out.println(info);
@@ -79,9 +80,31 @@ public class BookServlet extends HttpServlet {
 						else
 						{
 							ArrayList<String> onesSeat = seatDao.getOnesSeats(owner);
-							request.getSession().setAttribute("seats" , null);
-							request.getSession().setAttribute("onesSeats", onesSeat);
-							request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
+							if(onesSeat.size() == onesSeatold.size())
+							{
+								for (int i = 0 ; i < onesSeat.size(); i ++)
+								{
+									if(!onesSeat.get(i).equals(onesSeatold))
+									{
+										request.getSession().setAttribute("seats" , null);
+										request.getSession().setAttribute("onesSeats", onesSeat);
+										request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
+										return;
+									}
+								}
+								request.getSession().setAttribute("onesSeats", null);
+								request.setAttribute("info", "对不起，刚刚座位没有抢上~ Sorry, the seat is occupied...");
+								request.getRequestDispatcher("./message.jsp").forward(request, response);
+								return;
+									
+							}
+							else
+							{
+								request.getSession().setAttribute("seats" , null);
+								request.getSession().setAttribute("onesSeats", onesSeat);
+								request.getRequestDispatcher("./seatsinfo.jsp").forward(request, response);
+							}
+							
 							
 						}
 					}
