@@ -16,7 +16,7 @@ public class ConnectDB {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306";
-			conn = DriverManager.getConnection(url, "root", "root");
+			conn = DriverManager.getConnection(url, "root", "rootioe");
 		}catch (Exception e)
 		{
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class ConnectDB {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/userDB";
-			conn = DriverManager.getConnection(url, "root", "root");
+			conn = DriverManager.getConnection(url, "root", "rootioe");
 		}catch (Exception e)
 		{
 			e.printStackTrace();
@@ -44,7 +44,7 @@ public class ConnectDB {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/seatDB";
-			conn = DriverManager.getConnection(url, "root", "root");
+			conn = DriverManager.getConnection(url, "root", "rootioe");
 		}catch (Exception e)
 		{
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class ConnectDB {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/groupSeatDB";
-			conn = DriverManager.getConnection(url, "root", "root");
+			conn = DriverManager.getConnection(url, "root", "rootioe");
 		}catch (Exception e)
 		{
 			e.printStackTrace();
