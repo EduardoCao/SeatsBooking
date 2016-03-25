@@ -30,7 +30,10 @@ public class BatchAddUsers {
 			String tmp = "";
 			while ((tmp = br.readLine()) != null) {
 				tmp = tmp.trim();
-				
+				// 开头应该以井号，忽略
+				if (tmp.startsWith("#")) {
+					continue;
+				}
 				if (!tmp.contains(",")) { // 判断是否有逗号
 					formatFalse = true;
 					break;
