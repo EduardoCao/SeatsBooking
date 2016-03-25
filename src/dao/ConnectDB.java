@@ -9,14 +9,14 @@ import java.sql.SQLException;
  *
  */
 public class ConnectDB {
-
+	public static String pw = "root";
 	public static Connection getConnection_root()
 	{
 		Connection conn = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306";
-			conn = DriverManager.getConnection(url, "root", "rootioe");
+			conn = DriverManager.getConnection(url, "root", pw);
 		}catch (Exception e)
 		{
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class ConnectDB {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/userDB";
-			conn = DriverManager.getConnection(url, "root", "rootioe");
+			conn = DriverManager.getConnection(url, "root", pw);
 		}catch (Exception e)
 		{
 			e.printStackTrace();
@@ -44,7 +44,7 @@ public class ConnectDB {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/seatDB";
-			conn = DriverManager.getConnection(url, "root", "rootioe");
+			conn = DriverManager.getConnection(url, "root", pw);
 		}catch (Exception e)
 		{
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class ConnectDB {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/groupSeatDB";
-			conn = DriverManager.getConnection(url, "root", "rootioe");
+			conn = DriverManager.getConnection(url, "root", pw);
 		}catch (Exception e)
 		{
 			e.printStackTrace();
