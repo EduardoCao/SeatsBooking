@@ -124,6 +124,13 @@
       <div class="container">
       <!-- Example row of columns -->
       <div class="row">
+      
+        <div class="col-md-4">
+          <h2>公告栏</h2>
+          <!-- <p>内容</p> -->
+          <p><a class="btn btn-default" href="./AnnouncementServlet" role="button">View details &raquo;</a></p>
+        </div>
+        
         <div class="col-md-4">
           <h2>座位预定说明</h2>
           <!-- <p>内容</p> -->

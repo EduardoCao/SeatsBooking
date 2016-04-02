@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8"
     import="util.User"%>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-  
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 	<link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 
-    <title>教室预订系统</title>
+    <title>公告栏-教室预订系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -31,15 +31,23 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<style>
+            .table th, .table td { 
+				text-align: center; 
+				height:38px;
+			}
+        </style>
   </head>
 
   <body>
-<% 
-		User user = (User)session.getAttribute("user");
-    		boolean isAdmin = false;
-    		%>
+    <%
+    User user = (User)session.getAttribute("user");
+    
+    %>
 	<div>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+	
+	
+<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -51,97 +59,120 @@
           <img style="width:55px;height:51px;" src="./img/logo.jpg"/>
           <a class="navbar-brand hidden-sm" href=#>教室预订系统</a>
         </div>
-        <% 
-        String tag = "";
-    	String ref = "";
+        <%
         if (user != null) { 
-        	
+        	String tag = "";
+        	String ref = "";
+        	String msghref = "";
         	if (user.getUserType() == 0 || user.getUserType() == -1) {
         		tag = "学生界面";
         		ref = "./student_message.jsp";
+        		msghref = "./student_message.jsp";
         	} else if (user.getUserType() == 1 || user.getUserType() == -2) {
         		tag = "教师界面";
         		ref = "./teacher_message.jsp";
-        		
+        		msghref = "./teacher_message.jsp";
         	} else {
         		tag = "管理员界面";
         		ref = "./admin_message.jsp";
-        		
+        		msghref = "admin_message.jsp";
         	}
-        }
-        %>	
-       
-        <div id="navbar" class="collapse navbar-collapse">
+        
+        		
+       	%>
+       	
+ <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-          <li><a href="<%=ref%>"><%=tag %></a></li>
+
+          	<li><a href="<%=ref%>"><%=tag %></a></li>
+          	
+            
+            
+         
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
           	<%if (user != null) { %>
 			<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-              <%if (user.getUserType() == 0 || user.getUserType() == -1) {%>
-              <li style="text-align:center;"><a href="./student_message.jsp"><%=user.getStudentnum()%></a></li>
-              <%} 
-              else if (user.getUserType() == 1 || user.getUserType() == -2) {%>
-                <li style="text-align:center;"><a href="./teacher_message.jsp"><%=user.getStudentnum()%></a></li>
-               <%} 
-              else if (user.getUserType() == 2){%>
-              <li style="text-align:center;"><a href="./admin_message.jsp"><%=user.getStudentnum()%></a></li>
-              <%
-          		}
-              %> 
+                <li style="text-align:center;"><a href="#"><%=user.getStudentnum()%></a></li>
                 <li style="text-align:center;"><a href="changepw.jsp">修改个人信息</a></li>
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>
               <%} else { %>
-              <li><a href="./login.jsp"><%="尚未登录" %></a></li>
+              <li><a href="login.jsp"><%="尚未登录" %></a></li>
               <%} %>
           </ul>
         </div>
       </div>
-    </nav>
+    </div>
     </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron" style="height:600px;background:url('./img/classroom.jpg') no-repeat center top; background-size: cover;">
-      <div class="container">
-        <h1>你好</h1>
-        <p>欢迎使用教研院教室预订系统</p>
-      </div>
-    </div>
+<br><br><br>
+<div class="container">
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-      
-        <div class="col-md-4">
-          <h2>公告栏</h2>
-          <!-- <p>内容</p> -->
-          <p><a class="btn btn-default" href="./AnnouncementServlet" role="button">View details &raquo;</a></p>
-        </div>
-        
-        <div class="col-md-4">
-          <h2>座位预订说明</h2>
-          <!-- <p>内容</p> -->
-          <p><a class="btn btn-default" href="./description.jsp" role="button">View details &raquo;</a></p>
-        </div>
-
-        <div class="col-md-4">
-          <h2>寻求帮助</h2>
-          <!-- <p>内容</p> -->
-          <p><a class="btn btn-default" href="./help.jsp" role="button">View details &raquo;</a></p>
-        </div>
-        
-        
-
-        
-      </div>
+<h1 style="text-align:center; height:60px">公告栏</h1>
+	  <table class="table table-striped" >
+		   <thead>
+      <tr>
+         <th>发布时间</th>
+         <th>公告内容</th>
+      </tr>
+   </thead>
+   
+   
+		   <tbody >
+		   
+		   <%
+					ArrayList<String> announce = (ArrayList<String>)session.getAttribute("announcement");
+					if (announce != null && announce.size() > 0)
+					{
+					for (int i = 0 ; i < announce.size() ; i ++)
+					{
+					
+					
+				%>
+		   <tr >
+		        <td width = "20%"><%=announce.get(i).split("####")[0].replaceAll("_","-") %></td>
+	    		<%
+	    		if(announce.get(i).split("####")[1].length() < 40)
+	    		{
+	    		%>
+	    		<td width = "20%"><%=announce.get(i).split("####")[1]%></td>
+	    		<%
+	    		}
+	    		else
+	    		{
+	    		%>
+	    			<td width = "40%"><%=announce.get(i).split("####")[1].substring(0,40) + "..."%><a href="./announcedetail.jsp?groupid=<%=i%>">详细信息</a></td>
+	    		<%}
+	    		%>
+	    		
+	    		
+	    	</tr>
+	    	
+	    	<%
+	    			}
+					}
+	    	%>
+	    	
+	    	</tbody>
+	  </table>
+    	
+    
+</div>
+    <div class="container" style="position:fixed; bottom:0px;">
 
       <hr>
+<%}
+        else 
+        {%>
+        	<li><a href="login.jsp"><%="尚未登录" %></a></li>
+        <%}
+ %>
 
       <footer>
         <p align="center">&copy; 2016 IOE, Tsinghua University</p>

@@ -139,6 +139,22 @@
         <servlet-name>CloseGroupPeriodServlet</servlet-name>
         <servlet-class>servlet.CloseGroupPeriodServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminAnnouncementServlet</servlet-name>
+        <servlet-class>servlet.AdminAnnouncementServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnnouncementServlet</servlet-name>
+        <servlet-class>servlet.AnnouncementServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DelAnnounceServlet</servlet-name>
+        <servlet-class>servlet.DelAnnounceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetAnnounceServlet</servlet-name>
+        <servlet-class>servlet.SetAnnounceServlet</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -275,6 +291,22 @@
     <servlet-mapping>
         <servlet-name>CloseGroupPeriodServlet</servlet-name>
         <url-pattern>/CloseGroupPeriodServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAnnouncementServlet</servlet-name>
+        <url-pattern>/AdminAnnouncementServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnnouncementServlet</servlet-name>
+        <url-pattern>/AnnouncementServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DelAnnounceServlet</servlet-name>
+        <url-pattern>/DelAnnounceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetAnnounceServlet</servlet-name>
+        <url-pattern>/SetAnnounceServlet</url-pattern>
     </servlet-mapping>
 
 	<welcome-file-list>

@@ -37,6 +37,24 @@ public class DBInit {
 		ConnectDB.closeConnection(conn);
 		return;
 	}
+	public static void createAnnouncementDB()
+	{
+		Connection conn = ConnectDB.getConnection_root();
+		
+		try{
+			
+			String sql="create database if not exists announcementDB";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			ps.close();
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		ConnectDB.closeConnection(conn);
+		return;
+	}
 	public static void createCloseUser()
 	{
 		Connection conn = ConnectDB.getUserConnection();
@@ -44,6 +62,35 @@ public class DBInit {
 			String sql = "create table if not exists close_user_table(studentnum varchar(20) , closetime varchar(12) , UNIQUE (studentnum) )";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.executeUpdate();
+			ps.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		ConnectDB.closeConnection(conn);
+		return;
+	}
+	public static void createAnnouncement()
+	{
+		Connection conn = ConnectDB.getAnnouncementConnection();
+		try{
+			String sql = "create table if not exists announcement_table(announcement varchar(1000) COLLATE utf8_unicode_ci NOT NULL , pubtime varchar(12)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			sql = "insert into announcement_table values('欢迎大家使用教研院教室预订系统' , '2016_03_29')";
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			sql = "insert into announcement_table values('再次欢迎大家使用教研院教室预订系统' , '2016_03_28')";
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			sql = "insert into announcement_table values('热烈欢迎大家使用教研院教室预订系统' , '2016_03_30')";
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
 			ps.close();
 		}
 		catch(Exception e)
@@ -231,12 +278,14 @@ public class DBInit {
 //		createUserDB();
 //		createUserTable();
 //		createCloseUser();
-		createSeatDB();
-		createSeatTable();
-		createGroupSeatDB();
-		createGroupSeatTable();
-		createReasonTable();
-		createReasonTableUpdate();
+//		createSeatDB();
+//		createSeatTable();
+//		createGroupSeatDB();
+//		createGroupSeatTable();
+//		createReasonTable();
+//		createReasonTableUpdate();
+//		createAnnouncementDB();
+//		createAnnouncement();
 	}
 
 }
