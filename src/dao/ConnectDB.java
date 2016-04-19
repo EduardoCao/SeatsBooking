@@ -9,7 +9,7 @@ import java.sql.SQLException;
  *
  */
 public class ConnectDB {
-	public static String pw = "rootioe";
+	public static String pw = "root";
 	public static Connection getConnection_root()
 	{
 		Connection conn = null;

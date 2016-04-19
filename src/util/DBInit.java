@@ -275,17 +275,17 @@ public class DBInit {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		createUserDB();
-//		createUserTable();
-//		createCloseUser();
-//		createSeatDB();
-//		createSeatTable();
-//		createGroupSeatDB();
-//		createGroupSeatTable();
-//		createReasonTable();
-//		createReasonTableUpdate();
-//		createAnnouncementDB();
-//		createAnnouncement();
+		createUserDB();
+		createUserTable();
+		createCloseUser();
+		createSeatDB();
+		createSeatTable();
+		createGroupSeatDB();
+		createGroupSeatTable();
+		createReasonTable();
+		createReasonTableUpdate();
+		createAnnouncementDB();
+		createAnnouncement();
 	}
 
 }
