@@ -95,8 +95,10 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
+   
     <div class="jumbotron" style="height:800px;">
       <div class="container">
+       <br>
         <h3>个人座位预订说明</h3>
         
         <p>	1) 个人座位共12个，每天五个时间段，采取先到先得的预订办法，可预约一周内的座位。</p>
@@ -122,12 +124,19 @@
 
 
 
-      <hr>
+	<div class="container" bottom="0px">
+	<hr>
+      <!-- Example row of columns -->
+      <!-- Example row of columns -->
+      <div class="row">
+
+
 
       <footer>
-        <p>&copy; 版权所有 教研院</p>
+        <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>
     </div> <!-- /container -->
+
 
 
     <!-- Bootstrap core JavaScript

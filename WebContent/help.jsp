@@ -106,12 +106,16 @@
       </div>
     </div>
 
+	<div class="container" bottom="0px">
+	<hr>
+      <!-- Example row of columns -->
+      <!-- Example row of columns -->
+      <div class="row">
 
 
-      <hr>
 
       <footer>
-        <p>&copy; 版权所有 教研院</p>
+        <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>
     </div> <!-- /container -->
 

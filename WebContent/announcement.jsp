@@ -78,6 +78,7 @@
         		msghref = "admin_message.jsp";
         	}
         
+        
         		
        	%>
        	
@@ -100,11 +101,24 @@
                 <li style="text-align:center;"><a href="./ExitServlet">退出</a></li>
               </ul>
             </li>
-              <%} else { %>
+          <%} else { %>
               <li><a href="login.jsp"><%="尚未登录" %></a></li>
               <%} %>
           </ul>
         </div>
+        <%} else {%>
+ <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-sm">
+          	<%if (user != null) { %>
+          <%} else { %>
+              <li><a href="login.jsp"><%="尚未登录" %></a></li>
+              <%} %>
+          </ul>
+        </div>
+        <%} %>
       </div>
     </div>
     </div>
@@ -164,16 +178,18 @@
     	
     
 </div>
-    <div class="container" style="position:fixed; bottom:0px;">
+<br><br><br><br><br>
+<div class="container" bottom="0px">
+      <!-- Example row of columns -->
+      <!-- Example row of columns -->
+      <div class="row">
 
-      <hr>
-<%}
-        else 
-        {%>
-        	<li><a href="login.jsp"><%="尚未登录" %></a></li>
-        <%}
- %>
 
+        
+
+  	<div class="container">
+      <hr>      
+      </div>
       <footer>
         <p align="center">&copy; 2016 IOE, Tsinghua University</p>
       </footer>
